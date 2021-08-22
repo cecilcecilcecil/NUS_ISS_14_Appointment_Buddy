@@ -4,4 +4,10 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="AWSSDK.KeyManagementService" Version="3.3.104.1" />
+    <PackageReference Include="AWSSDK.S3" Version="3.3.109" />
+    <PackageReference Include="BouncyCastle.NetCore" Version="1.8.5" />
+  </ItemGroup>
+
 </Project>

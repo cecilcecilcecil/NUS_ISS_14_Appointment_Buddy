@@ -12,4 +12,13 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.8" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\AppointmentBuddy.Core.Common\AppointmentBuddy.Core.Common.csproj" />
+    <ProjectReference Include="..\AppointmentBuddy.Core.Model.Appointment\AppointmentBuddy.Core.Model.Appointment.csproj" />
+    <ProjectReference Include="..\AppointmentBuddy.Core.Model\AppointmentBuddy.Core.Model.csproj" />
+    <ProjectReference Include="..\AppointmentBuddy.Infrastructure.Repository\AppointmentBuddy.Infrastructure.Repository.csproj" />
+    <ProjectReference Include="..\AppointmentBuddy.Service.Appointment.API.Core\AppointmentBuddy.Service.Appointment.API.Core.csproj" />
+    <ProjectReference Include="..\AppointmentBuddy.Service.Appointment.API.Infrastructure\AppointmentBuddy.Service.Appointment.API.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>

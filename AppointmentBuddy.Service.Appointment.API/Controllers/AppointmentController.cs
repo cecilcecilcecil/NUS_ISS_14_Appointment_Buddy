@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AppointmentBuddy.Service.Appointment.API.Core.Interface;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -6,6 +7,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using M = AppointmentBuddy.Core.Model;
 
 namespace AppointmentBuddy.Service.Appointment.API.Controllers
 {
@@ -15,11 +17,13 @@ namespace AppointmentBuddy.Service.Appointment.API.Controllers
     [Authorize]
     public class AppointmentController : Controller
     {
+        private readonly IAppointmentService _appointmentService;
         private readonly ILogger<AppointmentController> _logger;
 
-        public AppointmentController(ILogger<AppointmentController> logger)
+        public AppointmentController(IAppointmentService appointmentService, ILogger<AppointmentController> logger)
         {
             _logger = logger;
+            _appointmentService = appointmentService;
         }
 
         [HttpGet]
@@ -28,6 +32,17 @@ namespace AppointmentBuddy.Service.Appointment.API.Controllers
         public IActionResult Health()
         {
             return Ok(DateTime.Now.ToString());
+        }
+
+        [Route("appointment/{appointmentId}")]
+        [HttpGet]
+        public async Task<M.Appointment> GetAppointmentByAppointmentId(string appointmentId)
+        {
+            M.Appointment response;
+
+            response = await _appointmentService.GetAppointmentByAppointmentId(appointmentId);
+
+            return response;
         }
     }
 }
