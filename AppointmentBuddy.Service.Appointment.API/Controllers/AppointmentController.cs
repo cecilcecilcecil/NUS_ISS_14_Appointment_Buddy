@@ -1,4 +1,4 @@
-﻿using AppointmentBuddy.Service.Appointment.API.Models;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -9,6 +9,10 @@ using System.Threading.Tasks;
 
 namespace AppointmentBuddy.Service.Appointment.API.Controllers
 {
+    [ApiVersion("1.0")]
+    [Route("v{v:apiVersion}/api/[controller]")]
+    [ApiController]
+    [Authorize]
     public class AppointmentController : Controller
     {
         private readonly ILogger<AppointmentController> _logger;
@@ -18,20 +22,12 @@ namespace AppointmentBuddy.Service.Appointment.API.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        [HttpGet]
+        [AllowAnonymous]
+        [Route("health")]
+        public IActionResult Health()
         {
-            return View();
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return Ok(DateTime.Now.ToString());
         }
     }
 }
