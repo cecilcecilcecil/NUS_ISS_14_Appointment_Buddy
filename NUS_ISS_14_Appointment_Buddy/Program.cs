@@ -11,6 +11,9 @@ namespace NUS_ISS_14_Appointment_Buddy
 {
     public class Program
     {
+        public static readonly string Namespace = typeof(Program).Namespace;
+        public static readonly string AppName = Namespace.Split('.')[0];
+
         public static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();
