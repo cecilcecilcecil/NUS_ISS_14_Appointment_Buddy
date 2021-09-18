@@ -1,0 +1,52 @@
+﻿@model AppointmentBuddy.WEB.Models.Account.LoginViewModel
+
+@{
+    ViewData["Title"] = "Staff Login";
+}
+
+@using (Html.BeginForm("StaffMockSignIn", "Account", FormMethod.Post, new { @id = "ADloginForm", @class = "_page-wrapper stepping" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="_page-essentials">
+        <div class="page active-page">
+            <div class="_step-body">
+                <div class="_content" style="position: relative;">
+                    <div class="_project-content">
+                        <h3>Staff Login</h3>
+                        <div class="bids-width">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="input-holder">
+                                        <label>Username</label>
+                                        @Html.TextBoxFor(model => model.UserName)
+                                        @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="input-holder">
+                                        <label>Password</label>
+                                        @Html.TextBoxFor(model => model.Password, new { type = "password", @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="autosave-container">
+                                        <div class="autosave-wrapper">
+                                            <div class="_nxt-prv">
+                                                <button type="submit" id="loginButton">Login</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

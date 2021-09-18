@@ -1,0 +1,214 @@
+._custom-modal {
+    padding: 0 15px;
+
+    .modal-dialog {
+        max-width: 500px;
+
+        ._modal-top {
+            ._mod-up {
+                display: flex;
+                align-items: baseline;
+                justify-content: space-between;
+
+                .modal-left {
+                    p {
+                        font-size: 30px;
+                        color: #000000;
+                        font-weight: bold;
+                        text-transform: uppercase;
+
+                        img {
+                            margin-right: 10px;
+                        }
+                    }
+                }
+
+                .modal-right {
+                    position: relative;
+
+                    input[type="search"] {
+                        border: 1px solid #e0e3e6;
+                        border-radius: 5px;
+                        font-size: 15px;
+                        padding: 10px;
+                        width: 300px;
+
+                        &:focus {
+                            outline: 0;
+                        }
+                    }
+
+                    button {
+                        border: 0;
+                        background: transparent;
+                        position: absolute;
+                        top: 10px;
+                        right: 0;
+                        margin-right: 5px;
+
+                        .fa-search {
+                            color: #d22f3a;
+                        }
+
+                        &:hover {
+                            cursor: pointer;
+                        }
+                    }
+                }
+            }
+        }
+
+        .modal-body {
+            padding: 20px;
+        }
+    }
+}
+
+.modal-middle {
+    margin-top: 20px;
+    border-bottom: 1px solid #d8dce0;
+    padding-bottom: 40px;
+}
+
+._preview {
+    /*border: 1px solid #d8dce0;*/
+    border-radius: 5px;
+
+    .prev {
+        display: flex;
+        /*align-items: center;*/
+        .video-details {
+            padding: 15px 15px 15px 30px;
+
+            h3 {
+                font-size: 17px;
+                color: #000000;
+                font-weight: bold;
+                text-transform: uppercase;
+                margin-bottom: 10px;
+            }
+
+            p {
+                margin-bottom: 0;
+                font-size: 15px;
+                color: #c8010f;
+            }
+        }
+    }
+}
+
+.video-inner {
+    border-right: 1px solid #d8dce0;
+    border-top: 1px solid #d8dce0;
+    border-bottom: 1px solid #d8dce0;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.modal-below {
+    margin-top: 36px;
+}
+
+._faq {
+    h3 {
+        font-size: 20px;
+        color: #000000;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
+    .faqs {
+        ul {
+            li {
+                color: #c8010f;
+
+                &:not(:last-child) {
+                    margin-bottom: 15px;
+                }
+
+                a {
+                    font-size: 16px;
+                    color: #c8010f;
+                }
+            }
+        }
+    }
+}
+
+.modal-footerz {
+    /*background: #fcf2f3;*/
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /*padding: 20px 15px;*/
+    /*padding: 40px;*/
+    padding: 18px;
+
+    ._btn-left {
+        background: transparent;
+        border: 1px solid #c8010f;
+        border-radius: 5px;
+        color: #c8010f;
+        font-size: 12px;
+        font-weight: bold;
+        text-transform: uppercase;
+        padding: 12px;
+        width: 30%;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    ._btn-right {
+        border: 1px solid #c8010f;
+        background: #c8010f;
+        color: #fff;
+        text-transform: uppercase;
+        font-size: 12px;
+        font-weight: bold;
+        padding: 12px;
+        border-radius: 5px;
+        width: 30%;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}
+
+.modal-click {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 15px;
+    position: fixed;
+    z-index: 99999;
+
+    .click-container {
+        img {
+            position: absolute;
+            bottom: -70px;
+            margin-right: -60px;
+            right: 0;
+            display: none;
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+._xPos {
+    float: right;
+    display: none;
+}
+
+.withdaw-teext p {
+    text-align: center;
+    margin-top: 15px;
+    display: block;
+}

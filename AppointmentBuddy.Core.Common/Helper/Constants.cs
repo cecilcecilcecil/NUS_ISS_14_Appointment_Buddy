@@ -11,7 +11,24 @@ namespace AppointmentBuddy.Core.Common.Helper
             public const string AccessToken = "ApptBuddyToken";
             public const string ClaimTypeName = "ApptBuddyClaimType";
             public const string Id = "ApptBuddyId";
+            public const string Sub = "Sub";
             public const string UserType = "ApptBuddyUserType";
+        }
+
+        public static class ErrorCodes
+        {
+            public const int Failure = 0;
+            public const int Success = 1;
+            public const int ConcurrencyError = 2;
+            public const int NotAuthorized = 3;
+
+            //File Error Codes
+            public const int FileZero = 0;
+            public const int FileSize = 1;
+            public const int FileExtension = 2;
+            public const int FileName = 3;
+            public const int FileCharacter = 4;
+            public const int NoError = 5;
         }
 
         public static class General

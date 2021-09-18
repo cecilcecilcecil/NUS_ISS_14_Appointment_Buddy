@@ -9,6 +9,7 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Amazon.S3.Transfer;
+using AppointmentBuddy.Core.Model;
 
 namespace AppointmentBuddy.Core.Common.Helper
 {
@@ -40,6 +41,22 @@ namespace AppointmentBuddy.Core.Common.Helper
             }
 
             return null;
+        }
+
+        public async Task<Stream> Decrypt(FileDecryptDto dto)
+        {
+            AmazonKeyManagementServiceClient client = new AmazonKeyManagementServiceClient();
+
+            var memoryStream = new MemoryStream();
+            dto.FileStream.CopyTo(memoryStream);
+
+            var response = await client.DecryptAsync(new DecryptRequest
+            {
+                KeyId = dto.KeyId,  //"80f63bf1-db61-4407-a1a6-ebd9687f0a8f",
+                CiphertextBlob = memoryStream // The encrypted data (ciphertext).
+            });
+
+            return response.Plaintext;
         }
     }
 }

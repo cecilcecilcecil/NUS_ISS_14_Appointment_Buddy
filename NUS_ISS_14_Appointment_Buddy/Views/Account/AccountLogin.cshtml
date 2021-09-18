@@ -1,0 +1,33 @@
+﻿@model AppointmentBuddy.WEB.Models.Account.LoginViewModel
+
+@{
+    ViewData["Title"] = "Login";
+}
+@Html.AntiForgeryToken()
+<div class="_page-essentials">
+    <div class="page active-page" id="Step1">
+        <div class="_step-body">
+            <div class="_content" style="position: relative;">
+                <div class="_project-content">
+                    <h3>Login</h3>
+                    <div class="bids-width">
+                        @using (Html.BeginForm("StaffGoToLogin", "Account", FormMethod.Post, new { @id = "commonLoginForm", @class = "_page-wrapper stepping" }))
+                        {
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="autosave-container">
+                                        <div class="autosave-wrapper">
+                                            <div class="_nxt-prv">
+                                                <button type="submit" id="adButton">Login</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

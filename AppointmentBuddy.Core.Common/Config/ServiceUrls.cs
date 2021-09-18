@@ -10,5 +10,10 @@ namespace AppointmentBuddy.Core.Common.Config
         public string AppointmentAPIVersion { get; set; }
 
         public string AppointmentAPI_GetAppointmentByAppointmentId { get; set; }
+
+        public string IdentityAPI { get; set; }
+        public string IdentityAPIVersion { get; set; }
+
+        public string IdentityAPI_Authenticate { get; set; }
     }
 }

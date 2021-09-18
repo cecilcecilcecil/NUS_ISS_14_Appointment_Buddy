@@ -1,0 +1,41 @@
+﻿@using AppointmentBuddy.Core.Common.Helper
+@model AppointmentBuddy.WEB.Models.Account.LoginViewModel
+@{
+    ViewData["Title"] = "Staff Landing Page";
+}
+
+@using (Html.BeginForm("", "", FormMethod.Post, new { @id = "adlandingPageForm", @class = "_page-wrapper stepping" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(x => x.UserName)
+    @Html.HiddenFor(x => x.Password)
+    <partial name="_LoadingModal" />
+}
+
+<script nonce="@ViewData["Nonce"]">
+    $(document).ready(function () {
+        var loadingModal = document.getElementById('loadingInProgress');
+        loadingModal.style.display = 'block';
+
+        var x = 1;
+        var y = null; // To keep under proper scope
+
+        var formData = $('#adlandingPageForm').serializeArray();
+            $.ajax({
+                type: 'POST',
+                    url: '@Url.Action("ProcessStaffLogin", "Account")',
+                    data: formData,
+                    success: function (result) {
+                        if (result.result == @Constants.ErrorCodes.Success) {
+                            window.location.href = "../";
+                        }
+                        else {
+                            window.location.href = "../Home/NoAuthorization";
+                        }
+                    },
+                    error: function (result) {
+                        window.location.href = "/"
+                    }
+            })
+    });
+</script>

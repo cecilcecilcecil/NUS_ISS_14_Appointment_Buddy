@@ -1,0 +1,18 @@
+﻿@using AppointmentBuddy.Core.Common.Helper
+
+@{
+    ViewData["Title"] = "No Authorization";
+}
+@Html.AntiForgeryToken()
+<div class="_page-wrapper stepping">
+    <div>
+        <i class="fas fa-exclamation-triangle fa-10x centered"></i>
+        <br />
+        <span class="centered-relative">
+            <br />
+            <b>
+                Not Authorized
+            </b>
+        </span>
+    </div>
+</div>

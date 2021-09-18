@@ -1,5 +1,6 @@
 ﻿using AppointmentBuddy.Core.Common.Helper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -43,6 +44,13 @@ namespace NUS_ISS_14_Appointment_Buddy
                 claimValue = claims.FirstOrDefault(x => x.Type == type)?.Value;
 
             return claimValue;
+        }
+
+        public override void OnActionExecuted(ActionExecutedContext filterContext)
+        {
+            ViewData["Nonce"] = "Z2VtczIwMjBjc3Bub25jZQ==";
+
+            base.OnActionExecuted(filterContext);
         }
     }
 }

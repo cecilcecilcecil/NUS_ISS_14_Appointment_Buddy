@@ -1,0 +1,1589 @@
+@media only screen and (max-width: 9999px) {
+    .mobile-menu,
+    .mobile-table,
+    ._mobile-pick,
+    .mobilePrice {
+        display: none;
+    }
+
+    .mobileMode {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 9999px) and (min-width: 2561px) {
+    .footer-mobile {
+        display: block;
+    }
+
+    .footer1 {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 2560px) {
+    .mobile-menu,
+    .mobile-table,
+    .footer-mobile,
+    ._mobile-pick,
+    .mobilePrice {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 1920px) {
+    .mobile-menu,
+    .footer-mobile,
+    .side-container,
+    .__mobile-search,
+    ._mobile-pick {
+        display: none;
+    }
+
+    .table-box,
+    .mobilePrice {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 1366px) {
+}
+
+@media only screen and (max-width: 1280px) {
+}
+
+@media only screen and (max-width: 1200px) {
+}
+
+@media only screen and (max-width: 1140px) {
+}
+
+@media only screen and (max-width: 1024px) {
+    .selectedVendors {
+        max-width: 100%;
+        flex: 0 0 100%;
+        width: 100%;
+    }
+
+    .eval-line {
+        .buttonBid {
+            &:not(:last-child) {
+                margin-bottom: 10px;
+            }
+
+            button {
+                width: 30%;
+                display: block;
+                margin: 0 auto;
+            }
+        }
+    }
+
+    .hero-links {
+        .col-md-5,
+        .col-md-7 {
+            max-width: 100%;
+            flex: 0 0 100%;
+        }
+    }
+
+    .quikie {
+        margin-top: 20px;
+    }
+
+    ._alert-container {
+        .alert-main {
+            p {
+                padding: 0 15px !important;
+                margin-left: 0 !important;
+            }
+        }
+    }
+
+    .mid-footer {
+        ul {
+            li {
+                &:not(:first-child) {
+                    padding-left: 9px !important;
+                }
+            }
+        }
+    }
+
+    .for-notif {
+        .drops-notif {
+            left: -140px;
+
+            &:before {
+                left: 132px;
+            }
+        }
+    }
+
+    .admin-panel {
+        .admin-drops {
+            top: 75px;
+            left: -110px;
+
+            &:before {
+                left: 80%
+            }
+        }
+    }
+
+    .modal-click .click-container img {
+        margin-right: 0;
+        padding-right: 30px;
+    }
+
+    ._parent1 {
+        display: none;
+    }
+
+    .pad2 {
+        display: block;
+    }
+
+    ._mobile-pick .cols ._conts h4 {
+        font-size: 15px;
+    }
+
+    ._notifications-task {
+        .task-text {
+            margin-left: -30px !important;
+        }
+
+        .view-bids {
+            a {
+                text-align: center !important;
+            }
+        }
+    }
+
+    .full .gro-text {
+        margin-left: 0 !important;
+    }
+}
+
+@media only screen and (max-width: 991px) {
+    .tasks-content {
+        .task-bar {
+            .flexes {
+                .view-bids {
+                    a {
+                        font-size: 12px !important;
+                    }
+                }
+            }
+        }
+
+        .task-text {
+            margin-left: -35px !important;
+        }
+    }
+
+    .notifications-button {
+        .tender-buttons .ui-tabs-tab {
+            border: 0 !important;
+        }
+    }
+
+    .pagi {
+        padding-top: 20px;
+    }
+
+    .pAd {
+        padding-left: 0 !important;
+    }
+
+    .x-tender {
+        max-width: none !important;
+        max-height: 30px !important;
+        margin-left: -14px !important;
+    }
+
+    ._my-tender-body ._content ._project-content #tender-tabs .tender-buttons .ui-tabs-tab:last-child {
+        border-right: 0;
+    }
+
+    .container-plus .view-container:before {
+        left: -95px;
+    }
+
+    .award-inner {
+        .content-right {
+            .content-param {
+                .itq-details {
+                    .itq-container:nth-of-type(1) {
+                        margin-right: 0;
+                        width: 50%;
+                    }
+
+                    .itq-container:nth-of-type(2) {
+                        padding-left: 40px;
+                        width: 50%;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 980px) {
+}
+
+@media only screen and (max-width: 960px) {
+}
+
+@media only screen and (max-width: 822px) {
+    .break-822 {
+        display: block;
+
+        ._4set {
+            padding-top: 10px;
+        }
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    .tasks-content {
+        .task-text {
+            margin-left: 0 !important;
+        }
+
+        .task-bar {
+            .flexes {
+                .view-bids {
+                    a {
+                        text-align: center;
+                    }
+                }
+            }
+        }
+    }
+
+    .mid-footer {
+        ul {
+            li {
+                a {
+                    font-size: 14px !important;
+                }
+            }
+        }
+    }
+
+    .nottif-bids {
+        width: 27% !important;
+    }
+}
+
+@media only screen and (max-width: 769px) {
+    .top-header,
+    .mid-header,
+    .below-header,
+    .footer1,
+    .toDislay,
+    .createGoodstables {
+        display: block;
+    }
+
+    .mobile-menu,
+    .footer-mobile,
+    .side-container,
+    .withdrawTablemobile,
+    .mobileGoods {
+        display: none;
+    }
+
+
+    .withdraw-table {
+        display: block;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .new-cv .row:not(:first-child) .input-holder input,
+    .new-cv .row .slect {
+        width: 100%;
+    }
+
+    ._selected-vendors ._selected p,
+    .selectedVendors {
+        max-width: 100%;
+        flex: 0 0 100%;
+        width: 100%;
+    }
+
+    .is_timeentry {
+        width: 50% !important;
+    }
+
+    .itq-select ._hiding {
+        padding-bottom: 30px;
+    }
+
+    .withdraw-table,
+    .createGoodstables {
+        display: none;
+    }
+
+    .top-header,
+    .mid-header,
+    .below-header,
+    .footer1,
+    ._xPos,
+    .toDislay {
+        display: none;
+    }
+
+    .mobile-menu,
+    .footer-mobile,
+    .amountMobile,
+    .bids-unique,
+    .withdrawTablemobile,
+    .mobileGoods {
+        display: block;
+    }
+
+    ._step-body ._content ._project-content .bids-container p:last-child {
+        font-size: 23px;
+    }
+
+    ._gathered-info h5 {
+        margin-left: 0;
+    }
+
+    ._preview {
+        .prev {
+            display: block;
+
+            .video-prev {
+                img {
+                    width: 100%;
+                }
+            }
+        }
+    }
+
+    .postal {
+        width: 100%;
+    }
+
+    .list-container {
+        padding: 50px 30px 415px 30px;
+    }
+
+    ._xs {
+        max-width: 50%;
+        flex: 0 0 50%;
+    }
+
+    .tender-tender {
+        li {
+            max-width: none !important;
+        }
+    }
+
+    .stars-position {
+        img {
+            max-width: 35%;
+        }
+
+        span {
+            font-size: 14px;
+            padding-left: 10px;
+        }
+    }
+
+    .adding-wrapper p,
+    .adding-wrapper ._check label {
+        font-size: 16px;
+    }
+
+    .adding-wrapper p {
+        padding-right: 0;
+    }
+
+    .adding-wrapper ._check input {
+        transform: scale(1.2);
+    }
+
+    .adding-wrapper {
+        display: block;
+    }
+
+    .container-plus .view-container:before {
+        left: -65px;
+    }
+
+    .award-inner .steps-start {
+        margin-bottom: 15px;
+    }
+
+    .deliveryOrder {
+        .col-md-4 {
+            &:last-child {
+                width: 100%;
+                flex: 0 0 100%;
+                max-width: 100%;
+            }
+        }
+    }
+
+    .amendMobile {
+        margin-top: 20px;
+    }
+
+    .eval-line2 {
+        display: block;
+
+        .bidHeader {
+            width: 100%;
+            padding-right: 20px;
+        }
+
+        .buttonBid {
+            button {
+                width: 50%;
+                margin: 15px auto;
+            }
+        }
+    }
+
+    .bidsAction .nice-select,
+    .bidsAction .nice-select .list {
+        width: 100%;
+    }
+
+    .cgr {
+        .col-md-4 {
+            flex: 0 0 50%;
+            max-width: 50%;
+        }
+    }
+
+    .scoreTable {
+        display: block;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .price-sched-001 {
+        &:first-child {
+            margin-top: 15px;
+        }
+    }
+
+    .bids-unique,
+    .table-extract {
+        display: none;
+    }
+
+    .award-inner .container-plus {
+        width: 100%;
+    }
+
+    ._contact-details {
+        .row {
+            &:not(:last-child) {
+                padding-bottom: 0;
+            }
+        }
+    }
+
+    .award-inner,
+    .table-box,
+    .mobile-table {
+        display: block;
+    }
+
+    .award-inner .steps-start:before,
+    .scoreTable {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 737px) {
+    .bids-table,
+    .input-score {
+        display: block;
+    }
+}
+
+@media only screen and (max-width: 736px) {
+    ._selected-vendors ._selected p {
+        max-width: 50%;
+        flex: 0 0 50%;
+        width: 50%;
+    }
+
+    .flex-content .active {
+        margin-bottom: 20px;
+    }
+
+    .is_timeentry,
+    .email-address {
+        width: 100% !important;
+    }
+
+    ._email-up {
+        margin-top: -15px;
+    }
+
+    ._telep {
+        padding-top: 10px !important;
+    }
+
+    .full {
+        max-width: 100%;
+        flex: 0 0 100%;
+    }
+
+    .table-box {
+        display: block;
+    }
+
+    .input-score {
+        display: none;
+    }
+
+    .bids-table,
+    .halfWidth {
+        display: none;
+    }
+
+    ._calendar2 {
+        width: 100% !important;
+    }
+}
+
+@media only screen and (max-width: 735px) {
+    /*.bids-table,
+    .input-score{
+    display: block;
+  }*/
+    .display,
+    .desktopView {
+        display: block;
+    }
+
+    .mobileMode {
+        display: none;
+    }
+
+    .desktopMode {
+        display: block;
+    }
+}
+
+@media only screen and (max-width: 734px) {
+    ._selected-vendors ._selected p {
+        max-width: 50%;
+        flex: 0 0 50%;
+        width: 50%;
+    }
+
+    .mobileMode {
+        display: block;
+    }
+
+    .desktopMode {
+        display: none;
+    }
+
+    .x-width .cols ._conts p {
+        font-size: 15px;
+    }
+
+    .display {
+        display: none;
+    }
+
+    .flex-content .active {
+        margin-bottom: 20px;
+    }
+
+    ._validity,
+    .is_timeentry {
+        width: 100% !important;
+    }
+
+    .item-container ._sn,
+    ._parent1,
+    .sn-content {
+        display: none !important;
+    }
+
+    ._mobile-pick {
+        display: block;
+        width: 100%;
+        padding: 10px 0px;
+    }
+
+    .break_734 {
+        display: none;
+    }
+
+    .bids-table,
+    .input-score,
+    .desktopView {
+        display: none;
+    }
+
+    .evaluation {
+        width: 100%;
+
+        button {
+            width: 100%;
+        }
+    }
+
+    .awardees {
+        .col-md-4,
+        .col-md-2 {
+            margin-bottom: 15px;
+        }
+
+        .col-md-4 {
+            &:first-child {
+                margin-top: 15px;
+            }
+        }
+
+        .row:not(:last-child) {
+            padding-bottom: 0 !important;
+        }
+    }
+
+    .variation-mobile .cols ._conts h4 {
+        text-transform: capitalize;
+    }
+    // .award-inner .content-right .content-param .itq-details .itq-container:nth-of-type(1) {
+    //   width: 100%;
+    // }
+
+    .masterHead {
+        margin-bottom: 15px;
+    }
+
+    .fixedValue {
+        input[type="text"] {
+            width: 100%;
+        }
+    }
+}
+
+@media only screen and (max-width: 690px) {
+    ._award ._view-container a {
+        text-align: center;
+    }
+}
+
+@media only screen and (max-width: 668px) {
+    .item-container ._sn,
+    ._parent1 {
+        display: none;
+    }
+
+    ._mobile-pick {
+        display: block;
+    }
+}
+
+@media only screen and (max-width: 667px) {
+    .time-container input[type="text"] {
+        width: 25% !important;
+    }
+
+    .fullWidth1 {
+        width: 100% !important;
+        margin-bottom: 15px;
+    }
+
+    .hero-container {
+        .quick-boxes {
+            a {
+                ._box {
+                    p {
+                        font-size: 15px !important;
+                    }
+                }
+            }
+        }
+    }
+
+    ._steps {
+        .container {
+            max-width: 100%;
+        }
+    }
+
+    ._steps ._step-inner h3 {
+        font-size: 12px !important;
+    }
+
+    ._steps ._step-inner .step-circle .circle {
+        width: 60px;
+        height: 60px;
+    }
+
+    ._steps ._step-inner .step-circle .circle p {
+        font-size: 19px;
+    }
+
+    ._step-body ._content ._project-content .bids-container {
+        margin-bottom: 15px;
+    }
+
+    .input-holder label {
+        margin-top: 10px;
+    }
+
+    ._project-content .row .category-container ._form-group {
+        width: 100% !important;
+    }
+
+    .category-container {
+        display: block !important;
+    }
+
+    .category-container ._form-group:not(:last-child) ._category {
+        margin-bottom: 10px !important;
+    }
+
+    ._project-content .row .category-container ._form-group:first-child {
+        margin-right: 0;
+    }
+
+    .mb-3 {
+        width: 100%;
+    }
+
+    .postal input[type="text"] {
+        width: 100%;
+        position: relative;
+    }
+
+    ._separator {
+        margin-bottom: 15px;
+    }
+
+    ._step-body ._content ._project-content h3 {
+        /*display: flex;
+    align-items: center;*/
+    }
+
+    .fa-question-circle,
+    .fa-pen {
+        margin-left: 10px;
+    }
+
+    .autosave-wrapper {
+        display: block;
+        width: 100%;
+
+        ._nxt-prv {
+            text-align: center;
+            padding-top: 15px;
+            width: 100%;
+
+            ._transparent {
+                margin: 0 auto;
+                display: block;
+                margin-bottom: 10px;
+                width: 100%;
+            }
+
+            ._full {
+                width: 100%;
+                margin-left: 0;
+            }
+        }
+
+        .__mobile-search .top-level .search-input input[type="search"] {
+            width: 400px;
+        }
+
+        h4 {
+            text-align: center;
+        }
+    }
+
+    .modal-middle .col-md-6:not(:last-child) ._preview {
+        margin-bottom: 15px;
+    }
+
+    .pad1 {
+        padding: 10px 15px;
+    }
+
+    ._contact-details {
+        .row {
+            &:not(:last-child) {
+                padding-bottom: 0;
+            }
+        }
+    }
+
+    .pad2 {
+        display: none;
+    }
+
+    .button-step3 {
+        margin-top: -15px !important;
+    }
+
+    .amendMobile {
+        padding-top: 15px;
+    }
+
+    .add-person {
+        margin-top: 20px;
+    }
+
+    ._no-pads {
+        padding-top: 15px;
+    }
+
+    .adding-wrapper p {
+        top: 0;
+    }
+
+    ._filedrop p:not(:last-child) {
+        padding-right: 30px;
+    }
+
+    ._fullWidth {
+        max-width: 100%;
+        flex: 0 0 100%;
+
+        .flexing {
+            margin: 0 auto;
+            padding-bottom: 20px;
+        }
+
+        .view-bids {
+            margin: 0 auto;
+            padding-top: 20px;
+        }
+    }
+
+    .notifications-button {
+        .tender-buttons {
+            max-width: 100%;
+
+            .slick-track {
+                width: 100% !important;
+
+                li {
+                    /*white-space: normal !important;
+          height: auto !important;
+          width: 100% !important;*/
+                    a {
+                        width: auto !important;
+                    }
+                }
+            }
+        }
+    }
+
+    .niceFull {
+        max-width: 100%;
+        flex: 0 0 100%;
+    }
+
+    .niceFull {
+        &:not(:last-child) {
+            margin-bottom: 15px;
+        }
+    }
+
+    .bids-closing ._content .bids-action .action-wrapper {
+        display: block;
+    }
+
+    .bids-closing ._content .bids-action .action-wrapper .bids-text {
+        margin-bottom: 15px;
+    }
+
+    .accor-table {
+        overflow-x: scroll;
+    }
+
+    .accor-table thead tr th,
+    .accor-table tbody tr th td {
+        white-space: nowrap;
+    }
+
+    .halfWidth {
+        width: 50%;
+    }
+
+    #vendor-reviews h3 {
+        display: block !important;
+    }
+
+    // .award-inner {
+    //   display: block;
+    // }
+
+    .container-plus,
+    .award-inner .steps-start {
+        width: 100%;
+    }
+
+    // .award-inner .content-right:after {
+    //   display: none;
+    // }
+
+    .steps-start {
+        position: relative;
+    }
+
+    .steps-circle {
+        .circle-number {
+            // margin: 0 auto;
+            margin-bottom: 20px;
+        }
+    }
+
+    .header-part {
+        width: 75%;
+        padding-right: 15px;
+    }
+
+    .deliveryOrder {
+        margin-top: -35px;
+    }
+
+    .cvButton {
+        width: 100%;
+    }
+
+    .cgr {
+        .col-md-4 {
+            flex: 0 0 100%;
+            max-width: 100%;
+        }
+    }
+
+    .withdrawB {
+        margin-bottom: 10px;
+    }
+}
+
+@media only screen and (max-width: 648px) {
+    .width648 {
+        margin-bottom: -15px;
+    }
+}
+
+@media only screen and (max-width: 640px) {
+
+    .steps-circle {
+        .circle-number {
+            /*margin: 0 auto;*/
+        }
+    }
+}
+
+@media only screen and (max-width: 576px) {
+    ._selected-vendors ._selected p {
+        max-width: 100%;
+        flex: 0 0 100%;
+        width: 100%;
+    }
+
+    ._reviews-button {
+        margin-bottom: 20px;
+    }
+
+    .mobilePrice {
+        display: none;
+    }
+
+    .hidePrice {
+        display: block;
+    }
+
+    .award-inner {
+        .content-right {
+            .content-param {
+                .itq-details {
+                    .itq-container:nth-of-type(2) {
+                        padding-left: 0;
+                    }
+                }
+            }
+        }
+    }
+
+    .itq-details {
+        display: block !important;
+    }
+
+    .award-inner .content-right .content-param .itq-details .itq-container:nth-of-type(1),
+    .award-inner .content-right .content-param .itq-details .itq-container:nth-of-type(2) {
+        width: 100%;
+    }
+
+    .award-inner .content-right .content-param .itq-details .itq-container p {
+        text-align: center;
+        font-style: italic;
+    }
+
+    .award-inner .content-right .content-param .itq-details .itq-container button {
+        margin: 0 auto 5px;
+        max-width: 180px;
+    }
+
+    .award-inner .content-right .content-param .itq-details {
+        text-align: center;
+    }
+}
+
+@media only screen and (max-width: 575px) {
+    ._xs,
+    .toFull {
+        width: 50%;
+    }
+
+    ._award ._view-container {
+        justify-content: flex-start;
+    }
+
+    ._vendor-rating {
+        float: left;
+    }
+
+    #vendor-reviews h3,
+    .mobilePrice {
+        display: block !important;
+    }
+
+    .hidePrice {
+        display: none;
+    }
+
+    ._step-body ._content ._project-content h3 {
+        font-size: 28px;
+    }
+}
+/*@media only screen and (max-width: 568px) {
+  .bids-table {
+    display: block;
+  }
+  .table-box,
+  ._total{
+    display: none;
+  }
+}
+@media only screen and (max-width: 568px) {
+  .bids-table {
+    display: none;
+  }
+  .table-box {
+    display: block;
+  }
+}*/
+@media only screen and (max-width: 480px) {
+    ._steps ._step-inner h3 {
+        font-size: 11px;
+    }
+
+    ._step-inner:nth-child(1) .step-circle {
+        padding-left: 20% !important;
+    }
+
+    ._step-inner:nth-child(4) .step-circle {
+        padding-right: 20% !important;
+    }
+
+    ._steps ._step-inner .step-circle .circle {
+        width: 40px;
+        height: 40px;
+    }
+
+    ._steps ._step-inner .step-circle .circle p {
+        margin-top: 5px;
+    }
+    //End ken Changes
+    .cols {
+        ._conts {
+            h4,
+            p {
+                font-size: 12px !important;
+            }
+        }
+    }
+
+    .ave-ratings .rating-stars img {
+        max-width: 40%;
+    }
+
+    .ave-ratings .rating-stars span {
+        font-size: 12px;
+    }
+}
+
+@media only screen and (max-width: 450px) {
+    .m-container .m-notif {
+        margin-left: -80px;
+    }
+
+    .m-container .m-notif:after {
+        right: 110px;
+    }
+}
+
+@media only screen and (max-width: 425px) {
+    .well ._content h2 {
+        font-family: 'Roboto';
+        /*font-size: 24px;*/
+        font-weight: normal;
+    }
+
+    .bids-unique {
+        display: none;
+    }
+
+    .width648 {
+        margin-bottom: 0;
+    }
+
+    .hero-container {
+        .quick-boxes {
+            .row {
+                &:not(:last-child) {
+                    margin-bottom: 0 !important;
+                }
+
+                a {
+                    ._box {
+                        margin-bottom: 10px;
+                    }
+                }
+            }
+        }
+    }
+
+    .task-bar {
+        .flexing {
+            justify-content: center !important;
+
+            .circle {
+                margin-bottom: 25px;
+            }
+        }
+
+        .flexes {
+            justify-content: center !important;
+            margin-top: 25px;
+        }
+    }
+
+    .tasks-content {
+        ._title {
+            p {
+                font-size: 20px !important;
+            }
+        }
+    }
+
+    ._selected-vendors ._selected p {
+        width: 100%;
+    }
+
+    .time-container input[type="text"],
+    .email-address,
+    ._custom-modal .modal-dialog ._modal-top ._mod-up .modal-right input[type="search"] {
+        width: 100% !important;
+    }
+
+    .autosave-wrapper h4 {
+        margin-bottom: 10px;
+    }
+
+    ._custom-modal .modal-dialog ._modal-top ._mod-up {
+        display: block;
+    }
+
+    ._custom-modal .modal-dialog ._modal-top ._mod-up .modal-left p {
+        text-align: center;
+    }
+
+    .__mobile-search .top-level .search-input input[type="search"] {
+        width: 250px;
+    }
+
+    ._filedrop p {
+        font-size: 12px;
+    }
+
+    .item-container {
+        padding: 15px;
+    }
+
+    .downZip {
+        display: block;
+        margin-bottom: 20px;
+
+        button {
+            font-size: 12px;
+        }
+    }
+
+    ._file a {
+        display: block;
+        margin-top: 5px;
+    }
+
+    .x-tender {
+        li {
+            a {
+                white-space: normal !important;
+            }
+        }
+    }
+
+    .crumbs-line {
+        display: block;
+
+        .create-receipt {
+            button {
+                /*display: block;*/
+                margin: 18px auto 0;
+            }
+        }
+    }
+
+    .disBlock {
+        display: block !important;
+
+        ._conts {
+            width: 100% !important;
+
+            .input-holder {
+                input[type="text"] {
+                    margin-top: 15px;
+                }
+            }
+        }
+    }
+
+    .addNew {
+        margin-top: 0px !important;
+    }
+}
+
+@media only screen and (max-width: 420px) {
+}
+
+@media only screen and (max-width: 425px) {
+    .price-sched-001 .pricez-container h4 {
+        font-size: 15px;
+    }
+
+    .contevt-view p {
+        &:first-child {
+            font-size: 14px !important;
+        }
+    }
+
+    ._filedrop p:not(:last-child) {
+        padding-right: 10px;
+    }
+
+    ._sn ._form-group .nice-select,
+    .input-holder {
+        margin-bottom: 10px;
+    }
+
+    .autosave-wrapper {
+        display: block;
+    }
+
+    ._nXt {
+        display: inline-block !important;
+    }
+
+    ._nXt ._conts {
+        width: 100% !important;
+    }
+
+    ._vendor-details ul li {
+        font-size: 14px;
+    }
+
+    .img-stars {
+        max-width: 40%;
+    }
+
+    ._vendor-details ul li .fa-chevron-right {
+        margin: 0 5px;
+        font-size: 10px;
+    }
+
+    .profile-x {
+        display: block;
+    }
+
+    .profile-x img {
+        margin: 0 auto;
+        display: block;
+    }
+
+    ._vendor-data {
+        margin-left: 0 !important;
+    }
+
+    ._vendor-data h4 {
+        text-align: left;
+    }
+
+    .stars-review {
+        display: block;
+        margin-left: 0 !important;
+        margin-top: 10px;
+    }
+
+    .x-tender {
+        max-width: 100%;
+        max-height: none !important;
+
+        li {
+            height: auto !important;
+
+            a {
+                /*white-space: pre !important;
+        /*padding: 0 !important;*/
+                /*text-align: left !important;*/
+            }
+        }
+    }
+
+    .x-content {
+        padding: 15px !important;
+    }
+
+    .x_step {
+        .container {
+            padding: 0 !important;
+        }
+    }
+
+    .supported {
+        padding-left: 25px;
+    }
+
+    .openBlock {
+        ._conts {
+            p {
+                /*text-align: right;*/
+            }
+        }
+    }
+
+    .x-width {
+        .cols {
+            ._conts {
+                &:first-child {
+                    width: 70%;
+                }
+
+                &:last-child {
+                    width: 30%;
+                }
+
+                h4 {
+                    font-size: 15px !important;
+                }
+
+                p {
+                    font-size: 15px !important;
+                }
+            }
+        }
+    }
+}
+
+@media only screen and(max-width: 414px) {
+    .list-container {
+        padding: 50px 30px 158px 30px;
+    }
+
+    .button-step3 {
+        margin-top: -15px;
+    }
+
+    .amendMobile {
+        padding-top: 15px;
+    }
+}
+
+@media only screen and (max-width: 412px) {
+    .list-container {
+        padding: 50px 30px 147px 30px;
+    }
+
+    .space412 {
+        margin-top: 20px;
+    }
+}
+
+@media only screen and (max-width: 375px) {
+    ._step-body ._content ._project-content {
+        padding: 25px;
+    }
+
+    .tasks-content ._title p {
+        font-size: 16px !important;
+    }
+
+    .m-notif {
+        position: absolute;
+        top: -245px !important;
+        min-width: 250px !important;
+        display: block;
+        margin-left: 20px !important;
+
+        .unread {
+            padding: 10px 10px 0 10px;
+        }
+
+        .read .drops-content {
+            padding: 0 10px 10px 10px;
+        }
+    }
+
+    .m-notif .drops-content .notif-text p {
+        font-size: 12px !important;
+    }
+
+    .list-container {
+        padding: 50px 30px 89px 30px;
+    }
+
+    .ven-profile {
+        .pAd {
+            padding-left: 0 !important;
+
+            li {
+                font-size: 9px;
+            }
+        }
+
+        .black {
+            li {
+                font-size: 9px;
+            }
+        }
+
+        .gray {
+            li {
+                font-size: 9px;
+            }
+        }
+    }
+
+    ._steps ._step-inner h3 {
+        font-size: 11px !important;
+    }
+}
+
+@media only screen and (max-width: 357px) {
+    ._tasks-container ._content .tasks-content .task-text .task-header ._main-title p {
+        font-size: 12px;
+    }
+}
+
+@media only screen and (max-width: 375px) and (max-height: 812px) {
+    .list-container {
+        padding: 50px 30px 170px 30px !important;
+    }
+
+    ._tasks-container ._content .tasks-content .task-text .task-header ._main-title p {
+        font-size: 15px;
+    }
+}
+
+@media only screen and (max-width: 375px) and (max-height: 667px) {
+    .list-container {
+        padding: 50px 30px 89px 30px !important;
+    }
+
+    ._tasks-container ._content .tasks-content .task-text .task-header ._main-title p {
+        font-size: 15px;
+    }
+}
+
+@media only screen and (max-width: 320px) {
+    .align-middle h3 {
+        text-align: center;
+    }
+
+    .nice-select {
+        font-size: 12px;
+    }
+
+    .input-holder input[type="text"],
+    ._contact-details .row:nth-of-type(2) input[type="email"],
+    ._contact-tel input[type="tel"] {
+        font-size: 12px;
+    }
+
+    ._steps ._step-inner .step-circle .circle {
+        width: 50px;
+        height: 50px;
+    }
+
+    ._steps ._step-inner .step-circle .circle p {
+        font-size: 15px;
+        margin-top: 13px;
+    }
+
+    ._steps ._step-inner h3 {
+        font-size: 14px; //Ken Changes
+    }
+
+    ._step-body ._content ._project-content h3 {
+        font-size: 25px;
+    }
+
+    ._nxt-prv button:not(:first-child) {
+        margin-left: 0;
+    }
+
+    .autosave-wrapper button {
+        font-size: 10px;
+        padding: 7px 5px;
+    }
+
+    .__mobile-search .top-level .search-input input[type="search"] {
+        width: 200px;
+    }
+
+    ._step-body ._content ._project-content {
+        padding: 15px !important;
+    }
+
+    .modal-footerz {
+        display: block;
+
+        button {
+            width: 100% !important;
+
+            &:first-child {
+                margin-bottom: 15px;
+            }
+        }
+    }
+
+    .attach-container .attach-icon {
+        padding: 20px;
+    }
+
+    .attach-container .attach-file-container {
+        padding: 15px;
+    }
+}

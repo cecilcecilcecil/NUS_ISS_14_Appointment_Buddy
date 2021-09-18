@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NUS_ISS_14_Appointment_Buddy", "NUS_ISS_14_Appointment_Buddy\NUS_ISS_14_Appointment_Buddy.csproj", "{98E9D09A-EF4C-44B9-958B-8730A9C79D0A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NUS_ISS_14_Appointment_Buddy", "NUS_ISS_14_Appointment_Buddy\NUS_ISS_14_Appointment_Buddy.csproj", "{98E9D09A-EF4C-44B9-958B-8730A9C79D0A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DB", "DB", "{1EF212AA-C925-4EFC-A43B-BA8ECF9826BC}"
 EndProject
@@ -21,22 +21,26 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Management.API", "Managemen
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Appointment.API", "Appointment.API", "{81D728A1-4C1B-4047-A350-AF42B879E880}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppointmentBuddy.Service.Appointment.API", "AppointmentBuddy.Service.Appointment.API\AppointmentBuddy.Service.Appointment.API.csproj", "{091C09D7-4922-4D1D-9E9A-11F3574011AE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppointmentBuddy.Service.Appointment.API", "AppointmentBuddy.Service.Appointment.API\AppointmentBuddy.Service.Appointment.API.csproj", "{091C09D7-4922-4D1D-9E9A-11F3574011AE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppointmentBuddy.Service.Appointment.API.Core", "AppointmentBuddy.Service.Appointment.API.Core\AppointmentBuddy.Service.Appointment.API.Core.csproj", "{F3330439-19E8-42AD-99D5-63BC0A32387E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppointmentBuddy.Service.Appointment.API.Core", "AppointmentBuddy.Service.Appointment.API.Core\AppointmentBuddy.Service.Appointment.API.Core.csproj", "{F3330439-19E8-42AD-99D5-63BC0A32387E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppointmentBuddy.Service.Appointment.API.Infrastructure", "AppointmentBuddy.Service.Appointment.API.Infrastructure\AppointmentBuddy.Service.Appointment.API.Infrastructure.csproj", "{4C9840DF-C930-475B-B9A7-F501F361B7FE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppointmentBuddy.Service.Appointment.API.Infrastructure", "AppointmentBuddy.Service.Appointment.API.Infrastructure\AppointmentBuddy.Service.Appointment.API.Infrastructure.csproj", "{4C9840DF-C930-475B-B9A7-F501F361B7FE}"
 	ProjectSection(ProjectDependencies) = postProject
 		{F3330439-19E8-42AD-99D5-63BC0A32387E} = {F3330439-19E8-42AD-99D5-63BC0A32387E}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppointmentBuddy.Core.Common", "AppointmentBuddy.Core.Common\AppointmentBuddy.Core.Common.csproj", "{1D901426-6852-45E4-9853-6D6097433134}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppointmentBuddy.Core.Common", "AppointmentBuddy.Core.Common\AppointmentBuddy.Core.Common.csproj", "{1D901426-6852-45E4-9853-6D6097433134}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppointmentBuddy.Infrastructure.Repository", "AppointmentBuddy.Infrastructure.Repository\AppointmentBuddy.Infrastructure.Repository.csproj", "{8BE9EE62-5967-40C8-A02E-CD2A49ABACEF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppointmentBuddy.Infrastructure.Repository", "AppointmentBuddy.Infrastructure.Repository\AppointmentBuddy.Infrastructure.Repository.csproj", "{8BE9EE62-5967-40C8-A02E-CD2A49ABACEF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppointmentBuddy.Core.Model", "AppointmentBuddy.Core.Model\AppointmentBuddy.Core.Model.csproj", "{F08E4159-7EEF-48DE-B1D1-3DE821281E9E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppointmentBuddy.Core.Model", "AppointmentBuddy.Core.Model\AppointmentBuddy.Core.Model.csproj", "{F08E4159-7EEF-48DE-B1D1-3DE821281E9E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppointmentBuddy.Core.Model.Appointment", "AppointmentBuddy.Core.Model.Appointment\AppointmentBuddy.Core.Model.Appointment.csproj", "{3E14CFAD-2407-42A8-8F61-39393EA2F2D2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppointmentBuddy.Core.Model.Appointment", "AppointmentBuddy.Core.Model.Appointment\AppointmentBuddy.Core.Model.Appointment.csproj", "{3E14CFAD-2407-42A8-8F61-39393EA2F2D2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppointmentBuddy.Core.Model.Identity", "AppointmentBuddy.Core.Model.Identity\AppointmentBuddy.Core.Model.Identity.csproj", "{0B0B2590-F3BD-4638-A17D-CD5BF6648059}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppointmentBuddy.Core.Model.AccessControl", "AppointmentBuddy.Core.Model.AccessControl\AppointmentBuddy.Core.Model.AccessControl.csproj", "{091B4374-0362-4EC8-8332-CCB3B0CC8497}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -82,6 +86,14 @@ Global
 		{3E14CFAD-2407-42A8-8F61-39393EA2F2D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3E14CFAD-2407-42A8-8F61-39393EA2F2D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3E14CFAD-2407-42A8-8F61-39393EA2F2D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B0B2590-F3BD-4638-A17D-CD5BF6648059}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B0B2590-F3BD-4638-A17D-CD5BF6648059}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B0B2590-F3BD-4638-A17D-CD5BF6648059}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B0B2590-F3BD-4638-A17D-CD5BF6648059}.Release|Any CPU.Build.0 = Release|Any CPU
+		{091B4374-0362-4EC8-8332-CCB3B0CC8497}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{091B4374-0362-4EC8-8332-CCB3B0CC8497}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{091B4374-0362-4EC8-8332-CCB3B0CC8497}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{091B4374-0362-4EC8-8332-CCB3B0CC8497}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -99,6 +111,8 @@ Global
 		{8BE9EE62-5967-40C8-A02E-CD2A49ABACEF} = {2E4C82DD-0E4D-4625-BFB9-1A0B29B43CBF}
 		{F08E4159-7EEF-48DE-B1D1-3DE821281E9E} = {2E4C82DD-0E4D-4625-BFB9-1A0B29B43CBF}
 		{3E14CFAD-2407-42A8-8F61-39393EA2F2D2} = {2E4C82DD-0E4D-4625-BFB9-1A0B29B43CBF}
+		{0B0B2590-F3BD-4638-A17D-CD5BF6648059} = {2E4C82DD-0E4D-4625-BFB9-1A0B29B43CBF}
+		{091B4374-0362-4EC8-8332-CCB3B0CC8497} = {2E4C82DD-0E4D-4625-BFB9-1A0B29B43CBF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5B9C8BC4-B338-4D55-A524-91CADA4736BC}

@@ -1,5 +1,6 @@
 using AppointmentBuddy.Core.Common.Config;
 using AppointmentBuddy.Core.Common.Http;
+using CF = NUS_ISS_14_Appointment_Buddy.WEB.Config;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.DataProtection;
@@ -37,6 +38,7 @@ namespace NUS_ISS_14_Appointment_Buddy
             services.AddHealthChecks();
 
             services.Configure<ServiceUrls>(Configuration.GetSection("ServiceUrls"));
+            services.Configure<CF.AppSettings>(Configuration.GetSection("AppSettings"));
 
             services.AddAntiforgery(o =>
             {
@@ -48,6 +50,11 @@ namespace NUS_ISS_14_Appointment_Buddy
                 options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                 options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            })
+            .AddCookie(options =>
+            {
+                options.LoginPath = "/account/login";
+                options.LogoutPath = "/account/logout";
             });
 
             services.AddHttpClientServices(Configuration);
@@ -95,6 +102,7 @@ namespace NUS_ISS_14_Appointment_Buddy
             services.AddHttpContextAccessor();
             services.AddTransient<StandardHeaderHandler>();
             services.AddHttpClient<IAppointmentService, AppointmentService>().AddHttpMessageHandler<StandardHeaderHandler>();
+            services.AddHttpClient<IIdentityService, IdentityService>().AddHttpMessageHandler<StandardHeaderHandler>();
 
             return services;
         }
