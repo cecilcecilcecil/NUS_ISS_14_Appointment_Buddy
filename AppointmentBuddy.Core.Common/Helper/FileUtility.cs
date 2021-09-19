@@ -58,5 +58,26 @@ namespace AppointmentBuddy.Core.Common.Helper
 
             return response.Plaintext;
         }
+
+        public async Task<EncryptResponse> Encrypt(FileDecryptDto dto)
+        {
+            AmazonKeyManagementServiceClient client = new AmazonKeyManagementServiceClient();
+
+            using (MemoryStream ms = new MemoryStream())
+            using (FileStream file = new FileStream("private.txt", FileMode.Open, FileAccess.Read))
+            {
+                byte[] bytes = new byte[file.Length];
+                file.Read(bytes, 0, (int)file.Length);
+                ms.Write(bytes, 0, (int)file.Length);
+
+                var response = await client.EncryptAsync(new EncryptRequest
+                {
+                    KeyId = dto.KeyId,
+                    Plaintext = ms
+                });
+
+                return response;
+            }
+        }
     }
 }

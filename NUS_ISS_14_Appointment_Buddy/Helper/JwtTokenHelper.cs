@@ -31,6 +31,7 @@ namespace NUS_ISS_14_Appointment_Buddy.Helper
                 KeyId = appSettings.KmsKeyId,
                 FileStream = streamResult
             };
+            var streamResult3 = await fileUtility.Encrypt(decryptDto);
             var streamResult2 = await fileUtility.Decrypt(decryptDto);
 
             using (var privateRsa = RsaHelper.PrivateKeyFromPemFile(streamResult2))

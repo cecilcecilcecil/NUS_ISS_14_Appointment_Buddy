@@ -38,9 +38,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppointmentBuddy.Core.Model
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppointmentBuddy.Core.Model.Appointment", "AppointmentBuddy.Core.Model.Appointment\AppointmentBuddy.Core.Model.Appointment.csproj", "{3E14CFAD-2407-42A8-8F61-39393EA2F2D2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppointmentBuddy.Core.Model.Identity", "AppointmentBuddy.Core.Model.Identity\AppointmentBuddy.Core.Model.Identity.csproj", "{0B0B2590-F3BD-4638-A17D-CD5BF6648059}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppointmentBuddy.Core.Model.Identity", "AppointmentBuddy.Core.Model.Identity\AppointmentBuddy.Core.Model.Identity.csproj", "{0B0B2590-F3BD-4638-A17D-CD5BF6648059}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppointmentBuddy.Core.Model.AccessControl", "AppointmentBuddy.Core.Model.AccessControl\AppointmentBuddy.Core.Model.AccessControl.csproj", "{091B4374-0362-4EC8-8332-CCB3B0CC8497}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppointmentBuddy.Core.Model.AccessControl", "AppointmentBuddy.Core.Model.AccessControl\AppointmentBuddy.Core.Model.AccessControl.csproj", "{091B4374-0362-4EC8-8332-CCB3B0CC8497}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{AC07E812-7D3C-498D-9AFA-DB82AE1F6488}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppointmentBuddy.Tools", "AppointmentBuddy.Tools\AppointmentBuddy.Tools.csproj", "{F35F40BB-72B9-4ACB-BFF8-F020D172E16B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -94,6 +98,10 @@ Global
 		{091B4374-0362-4EC8-8332-CCB3B0CC8497}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{091B4374-0362-4EC8-8332-CCB3B0CC8497}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{091B4374-0362-4EC8-8332-CCB3B0CC8497}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F35F40BB-72B9-4ACB-BFF8-F020D172E16B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F35F40BB-72B9-4ACB-BFF8-F020D172E16B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F35F40BB-72B9-4ACB-BFF8-F020D172E16B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F35F40BB-72B9-4ACB-BFF8-F020D172E16B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -113,6 +121,7 @@ Global
 		{3E14CFAD-2407-42A8-8F61-39393EA2F2D2} = {2E4C82DD-0E4D-4625-BFB9-1A0B29B43CBF}
 		{0B0B2590-F3BD-4638-A17D-CD5BF6648059} = {2E4C82DD-0E4D-4625-BFB9-1A0B29B43CBF}
 		{091B4374-0362-4EC8-8332-CCB3B0CC8497} = {2E4C82DD-0E4D-4625-BFB9-1A0B29B43CBF}
+		{F35F40BB-72B9-4ACB-BFF8-F020D172E16B} = {AC07E812-7D3C-498D-9AFA-DB82AE1F6488}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5B9C8BC4-B338-4D55-A524-91CADA4736BC}
