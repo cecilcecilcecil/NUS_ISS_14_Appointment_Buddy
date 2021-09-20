@@ -10,6 +10,13 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Amazon.S3.Transfer;
 using AppointmentBuddy.Core.Model;
+using Org.BouncyCastle.OpenSsl;
+using Org.BouncyCastle.Crypto;
+using Org.BouncyCastle.Crypto.Generators;
+using Org.BouncyCastle.Crypto.Parameters;
+using Org.BouncyCastle.Asn1.Sec;
+using Org.BouncyCastle.Security;
+using System.Numerics;
 
 namespace AppointmentBuddy.Core.Common.Helper
 {
@@ -64,7 +71,7 @@ namespace AppointmentBuddy.Core.Common.Helper
             AmazonKeyManagementServiceClient client = new AmazonKeyManagementServiceClient();
 
             using (MemoryStream ms = new MemoryStream())
-            using (FileStream file = new FileStream("private.txt", FileMode.Open, FileAccess.Read))
+            using (FileStream file = new FileStream("private.pem", FileMode.Open, FileAccess.Read))
             {
                 byte[] bytes = new byte[file.Length];
                 file.Read(bytes, 0, (int)file.Length);
@@ -76,8 +83,42 @@ namespace AppointmentBuddy.Core.Common.Helper
                     Plaintext = ms
                 });
 
+                string path = @"D:\private.pem";
+                TextWriter textWriter = new StreamWriter(path);
+                PemWriter pemWriter = new PemWriter(textWriter);
+
+                var test = response.CiphertextBlob.ToArray();
+
+                //File.WriteAllBytes(path, test);
+
+                FileStream fs = new FileStream("D:\\private1.pem", FileMode.Create, FileAccess.Write);
+                response.CiphertextBlob.WriteTo(fs);
+                fs.Close();
+
+                file.Flush();
+                file.Close();
+
                 return response;
             }
+        }
+
+        public string ConvertPrivateKeyToPem()
+        {
+            var ecKeyPairGenerator = new RsaKeyPairGenerator();
+            Org.BouncyCastle.Math.BigInteger publicExponent = new Org.BouncyCastle.Math.BigInteger("65537");
+            RsaKeyGenerationParameters ecKeyGenParams = new RsaKeyGenerationParameters(publicExponent, new SecureRandom(), 2048, 25);
+            ecKeyPairGenerator.Init(ecKeyGenParams);
+            AsymmetricCipherKeyPair pair = ecKeyPairGenerator.GenerateKeyPair();
+
+            string path = @"D:\private.pem";
+            TextWriter textWriter = new StreamWriter(path);
+            PemWriter pemWriter = new PemWriter(textWriter);
+            // passing pair results in the private key being written out
+            pemWriter.WriteObject(pair);
+            pemWriter.Writer.Flush();
+            pemWriter.Writer.Close();
+
+            return "";
         }
     }
 }

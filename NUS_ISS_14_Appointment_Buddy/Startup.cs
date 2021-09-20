@@ -16,6 +16,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.IdentityModel.Logging;
 
 namespace NUS_ISS_14_Appointment_Buddy
 {
@@ -70,6 +71,8 @@ namespace NUS_ISS_14_Appointment_Buddy
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+
+                IdentityModelEventSource.ShowPII = true;
             }
             else
             {

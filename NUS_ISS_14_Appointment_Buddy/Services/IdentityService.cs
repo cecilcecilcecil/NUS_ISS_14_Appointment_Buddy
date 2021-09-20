@@ -40,25 +40,25 @@ namespace NUS_ISS_14_Appointment_Buddy.Services
             UrlConfig.Appointment.BaseURI = _serviceUrls.AppointmentAPI;
             UrlConfig.Appointment.APIVersion = _serviceUrls.AppointmentAPIVersion;
 
-            var s3KeyStoreBucketName = Environment.GetEnvironmentVariable("GEMS2_S3_KeyStoreBucketName");
+            var s3KeyStoreBucketName = Environment.GetEnvironmentVariable("APPTBUDDY_S3_KeyStoreBucketName");
             if (!String.IsNullOrEmpty(s3KeyStoreBucketName))
             {
                 _appSettings.S3KeyStoreBucketName = s3KeyStoreBucketName;
             }
 
-            var s3KeyStoreFilePath = Environment.GetEnvironmentVariable("GEMS2_S3_KeyStoreFilePath");
+            var s3KeyStoreFilePath = Environment.GetEnvironmentVariable("APPTBUDDY_S3_KeyStoreFilePath");
             if (!String.IsNullOrEmpty(s3KeyStoreFilePath))
             {
                 _appSettings.S3KeyStoreFilePath = s3KeyStoreFilePath;
             }
 
-            var publicKeyName = Environment.GetEnvironmentVariable("GEMS2_S3_PublicKeyName");
+            var publicKeyName = Environment.GetEnvironmentVariable("APPTBUDDY_S3_PublicKeyName");
             if (!String.IsNullOrEmpty(publicKeyName))
             {
                 _appSettings.PublicKeyName = publicKeyName;
             }
 
-            var privateKeyName = Environment.GetEnvironmentVariable("GEMS2_S3_PrivateKeyName");
+            var privateKeyName = Environment.GetEnvironmentVariable("APPTBUDDY_S3_PrivateKeyName");
             if (!String.IsNullOrEmpty(privateKeyName))
             {
                 _appSettings.PrivateKeyName = privateKeyName;
