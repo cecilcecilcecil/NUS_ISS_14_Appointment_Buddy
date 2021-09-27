@@ -35,7 +35,7 @@ namespace AppointmentBuddy.Service.Appointment.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var connectionString = Configuration["GEMS2_DB_CONNECTION_STRING"];
+            var connectionString = Configuration["APPTBUDDY_DB_CONNECTION_STRING"];
             if (string.IsNullOrEmpty(connectionString))
             {
                 connectionString = Configuration.GetConnectionString("ApptBddyDB");
@@ -72,7 +72,7 @@ namespace AppointmentBuddy.Service.Appointment.API
                 appSettings.S3KeyStoreFilePath = s3KeyStoreFilePath;
             }
 
-            var publicKeyName = Configuration["GEMS2_S3_PublicKeyName"];
+            var publicKeyName = Configuration["AppointmentBuddy_S3_PublicKeyName"];
             if (!String.IsNullOrEmpty(s3KeyStoreBucketName))
             {
                 appSettings.PublicKeyName = publicKeyName;

@@ -65,5 +65,19 @@ namespace AppointmentBuddy.Core.Common.Helper
             public const string IsURL = "^https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\\+.~#?&//=]*)$";
             public const string DomainNames = "^(((?!-))(xn--|_{1,1})?[a-z0-9-]{0,61}[a-z0-9]{1,1}\\.)*(xn--)?([a-z0-9][a-z0-9\\-]{0,60}|[a-z0-9-]{1,30}\\.[a-z]{2,})$";
         }
+
+        public static class RoleType
+        {
+            public const string Admin = "FA9DDCE8-387B-4018-B10C-A2C690B71B9F";
+            public const string Patient = "8F0CD491-06CB-43EC-B874-F492C768E9EB";
+            public const string Staff = "9B660716-4E47-4C17-A28D-09B66B44B6D6";
+        }
+
+        public static class UserType
+        {
+            public const string Admin = "F06EC0F3-D16F-4B9E-9261-05857F28B32D";
+            public const string Patient = "D939D14A-53B3-4479-A384-7C2278543A56";
+            public const string Staff = "005FB465-9E78-4FEE-BDD2-888C4890D462";
+        }
     }
 }

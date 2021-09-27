@@ -44,7 +44,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppointmentBuddy.Core.Model
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{AC07E812-7D3C-498D-9AFA-DB82AE1F6488}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppointmentBuddy.Tools", "AppointmentBuddy.Tools\AppointmentBuddy.Tools.csproj", "{F35F40BB-72B9-4ACB-BFF8-F020D172E16B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppointmentBuddy.Tools", "AppointmentBuddy.Tools\AppointmentBuddy.Tools.csproj", "{F35F40BB-72B9-4ACB-BFF8-F020D172E16B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppointmentBuddy.Service.Identity.API", "AppointmentBuddy.Service.Identity.API\AppointmentBuddy.Service.Identity.API.csproj", "{5520E11F-3901-4A98-A998-6781E0BC08A9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppointmentBuddy.Service.Identity.API.Core", "AppointmentBuddy.Service.Identity.API.Core\AppointmentBuddy.Service.Identity.API.Core.csproj", "{5E748C2C-A75B-4651-804F-AE7ED1A43EED}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppointmentBuddy.Service.Identity.API.Infrastructure", "AppointmentBuddy.Service.Identity.API.Infrastructure\AppointmentBuddy.Service.Identity.API.Infrastructure.csproj", "{9DA460BA-CF46-44A1-B776-011EAB9BD690}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppointmentBuddy.Core.Model.CodeTable", "AppointmentBuddy.Core.Model.CodeTable\AppointmentBuddy.Core.Model.CodeTable.csproj", "{1026A7CB-EF1F-4393-B674-74AD6DA7D515}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -102,6 +110,22 @@ Global
 		{F35F40BB-72B9-4ACB-BFF8-F020D172E16B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F35F40BB-72B9-4ACB-BFF8-F020D172E16B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F35F40BB-72B9-4ACB-BFF8-F020D172E16B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5520E11F-3901-4A98-A998-6781E0BC08A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5520E11F-3901-4A98-A998-6781E0BC08A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5520E11F-3901-4A98-A998-6781E0BC08A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5520E11F-3901-4A98-A998-6781E0BC08A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E748C2C-A75B-4651-804F-AE7ED1A43EED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E748C2C-A75B-4651-804F-AE7ED1A43EED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E748C2C-A75B-4651-804F-AE7ED1A43EED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E748C2C-A75B-4651-804F-AE7ED1A43EED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9DA460BA-CF46-44A1-B776-011EAB9BD690}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9DA460BA-CF46-44A1-B776-011EAB9BD690}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9DA460BA-CF46-44A1-B776-011EAB9BD690}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9DA460BA-CF46-44A1-B776-011EAB9BD690}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1026A7CB-EF1F-4393-B674-74AD6DA7D515}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1026A7CB-EF1F-4393-B674-74AD6DA7D515}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1026A7CB-EF1F-4393-B674-74AD6DA7D515}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1026A7CB-EF1F-4393-B674-74AD6DA7D515}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -122,6 +146,10 @@ Global
 		{0B0B2590-F3BD-4638-A17D-CD5BF6648059} = {2E4C82DD-0E4D-4625-BFB9-1A0B29B43CBF}
 		{091B4374-0362-4EC8-8332-CCB3B0CC8497} = {2E4C82DD-0E4D-4625-BFB9-1A0B29B43CBF}
 		{F35F40BB-72B9-4ACB-BFF8-F020D172E16B} = {AC07E812-7D3C-498D-9AFA-DB82AE1F6488}
+		{5520E11F-3901-4A98-A998-6781E0BC08A9} = {1249C5F3-FE06-4B7C-9AD5-BA9AF6C1533D}
+		{5E748C2C-A75B-4651-804F-AE7ED1A43EED} = {1249C5F3-FE06-4B7C-9AD5-BA9AF6C1533D}
+		{9DA460BA-CF46-44A1-B776-011EAB9BD690} = {1249C5F3-FE06-4B7C-9AD5-BA9AF6C1533D}
+		{1026A7CB-EF1F-4393-B674-74AD6DA7D515} = {2E4C82DD-0E4D-4625-BFB9-1A0B29B43CBF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5B9C8BC4-B338-4D55-A524-91CADA4736BC}

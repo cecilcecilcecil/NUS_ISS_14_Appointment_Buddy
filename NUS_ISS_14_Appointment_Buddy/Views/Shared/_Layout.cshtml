@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@using NUS_ISS_14_Appointment_Buddy.Helper
+@using AppointmentBuddy.Core.Common.Helper
+@using System.Security.Claims
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -54,25 +58,19 @@
 </head>
 <body id="content" style="font-size: 16px">
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">NUS_ISS_14_Appointment_Buddy</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+        @if (IdentityHelper.HasRole((ClaimsIdentity)User.Identity, Constants.RoleType.Admin)
+            || IdentityHelper.HasRole((ClaimsIdentity)User.Identity, Constants.RoleType.Staff))
+        {
+            <partial name="_AdminHeader" />
+        }
+        else if (IdentityHelper.HasRole((ClaimsIdentity)User.Identity, Constants.RoleType.Patient))
+        {
+            <partial name="_Header" />
+        }
+        else
+        {
+            <partial name="_DefaultHeader" />
+        }
     </header>
     <div class="_page-wrapper">
         <main role="main" class="pb-3">

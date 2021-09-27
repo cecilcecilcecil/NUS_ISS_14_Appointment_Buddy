@@ -17,6 +17,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.IdentityModel.Logging;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.ResponseCompression;
+using System.Net;
+using System.Net.Security;
+using Microsoft.AspNetCore.CookiePolicy;
+using StackExchange.Redis;
 
 namespace NUS_ISS_14_Appointment_Buddy
 {
@@ -32,11 +38,45 @@ namespace NUS_ISS_14_Appointment_Buddy
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var redisConnectionString = Configuration["AB_REDIS_CONNECTION_STRING"];
+            if (string.IsNullOrEmpty(redisConnectionString))
+            {
+                redisConnectionString = Configuration.GetConnectionString("ApptBddyREDIS");
+            }
+            if (!string.IsNullOrEmpty(redisConnectionString))
+            {
+                ConfigurationOptions option = new ConfigurationOptions
+                {
+                    AbortOnConnectFail = false,
+                    EndPoints = { redisConnectionString }
+                };
+                services.AddSingleton<IConnectionMultiplexer>(ConnectionMultiplexer.Connect(option));
+            }
+
+            string loginPath = Environment.GetEnvironmentVariable("GEMS2_LOGIN_PATH");
+            string logoutPath = Environment.GetEnvironmentVariable("GEMS2_LOGOUT_PATH");
+            var cookieSecurePolicy = String.IsNullOrEmpty(loginPath) ? CookieSecurePolicy.None : CookieSecurePolicy.Always;
+
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                options.CheckConsentNeeded = context => false;
+                options.MinimumSameSitePolicy = SameSiteMode.Strict;
+                options.Secure = cookieSecurePolicy;
+            });
+
+            services.AddResponseCompression(options =>
+            {
+                options.Providers.Add<BrotliCompressionProvider>();
+                options.Providers.Add<GzipCompressionProvider>();
+            });
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
                     .AddXmlSerializerFormatters()
                     .AddXmlDataContractSerializerFormatters();
 
             services.AddHealthChecks();
+
+            services.AddRazorPages().AddRazorRuntimeCompilation();
 
             services.Configure<ServiceUrls>(Configuration.GetSection("ServiceUrls"));
             services.Configure<CF.AppSettings>(Configuration.GetSection("AppSettings"));
@@ -54,8 +94,54 @@ namespace NUS_ISS_14_Appointment_Buddy
             })
             .AddCookie(options =>
             {
-                options.LoginPath = "/account/login";
-                options.LogoutPath = "/account/logout";
+                if (string.IsNullOrEmpty(loginPath) && string.IsNullOrEmpty(logoutPath))
+                {
+                    options.LoginPath = "/account/login";
+                    options.LogoutPath = "/account/logout";
+                }
+                else
+                {
+                    options.Events.OnRedirectToLogin = (context) =>
+                    {
+                        if (!string.IsNullOrEmpty(loginPath))
+                        {
+                            context.RedirectUri = loginPath;
+
+                            if (IsAjaxRequest(context.Request))
+                            {
+                                context.Response.Headers["Location"] = context.RedirectUri;
+                                context.Response.StatusCode = 401;
+                            }
+                            else
+                            {
+                                context.Response.Redirect(context.RedirectUri);
+                            }
+                        }
+
+                        return Task.CompletedTask;
+                    };
+                    options.Events.OnRedirectToLogout = (context) =>
+                    {
+                        if (!string.IsNullOrEmpty(logoutPath))
+                        {
+                            context.RedirectUri = logoutPath;
+
+                            if (IsAjaxRequest(context.Request))
+                            {
+                                context.Response.Headers["Location"] = context.RedirectUri;
+                                context.Response.StatusCode = 401;
+                            }
+                            else
+                            {
+                                context.Response.Redirect(context.RedirectUri);
+                            }
+                        }
+
+                        return Task.CompletedTask;
+                    };
+                    options.LoginPath = "/account/login";
+                    options.LogoutPath = "/account/logout";
+                }
             });
 
             services.AddHttpClientServices(Configuration);
@@ -65,23 +151,57 @@ namespace NUS_ISS_14_Appointment_Buddy
             .DisableAutomaticKeyGeneration();
         }
 
+        private static bool IsAjaxRequest(HttpRequest request)
+        {
+            if (!string.Equals(request.Query["X-Requested-With"], "XMLHttpRequest", StringComparison.Ordinal))
+            {
+                return string.Equals(request.Headers["X-Requested-With"], "XMLHttpRequest", StringComparison.Ordinal);
+            }
+
+            return true;
+        }
+
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            ServicePointManager.ServerCertificateValidationCallback = (sender, cert, chain, errors) =>
+            {
+                if (env.IsDevelopment())
+                {
+                    return true;
+                }
+
+                return errors == SslPolicyErrors.None
+                || errors == SslPolicyErrors.RemoteCertificateNotAvailable
+                || errors == SslPolicyErrors.RemoteCertificateNameMismatch
+                || errors == SslPolicyErrors.RemoteCertificateChainErrors;
+            };
+
+            var cookieSecurePolicy = CookieSecurePolicy.None;
+
+            app.UseCookiePolicy(new CookiePolicyOptions()
+            {
+                MinimumSameSitePolicy = SameSiteMode.Strict,
+                HttpOnly = HttpOnlyPolicy.Always,
+                Secure = cookieSecurePolicy,
+            });
+
+            IdentityModelEventSource.ShowPII = true;
+
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
-
-                IdentityModelEventSource.ShowPII = true;
+                app.UseExceptionHandler("/Home/Error");
             }
             else
             {
                 app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
             }
+            app.UseStatusCodePagesWithReExecute("/Home/Error/{0}");
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
+            app.UseAuthentication();
 
             app.UseRouting();
 

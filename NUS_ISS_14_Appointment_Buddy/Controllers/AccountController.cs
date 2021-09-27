@@ -90,6 +90,13 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
             identity.AddClaim(new Claim(Constants.AppClaimTypes.Id, identityDto.UserInfo.User.UserId));
             identity.AddClaim(new Claim(Constants.AppClaimTypes.UserType, identityDto.UserInfo.User.UserTypeId));
 
+            switch (identityDto.UserInfo.User.UserTypeId)
+            {
+                case Constants.UserType.Staff:
+                    identity.AddClaim(new Claim(ClaimTypes.Role, identityDto.UserInfo.Role.RoleTypeId));
+                    break;
+            }
+
             identity.AddClaim(new Claim(AppClaimTypes.AccessToken, identityDto.Token));
 
             await HttpContext.SignInAsync(

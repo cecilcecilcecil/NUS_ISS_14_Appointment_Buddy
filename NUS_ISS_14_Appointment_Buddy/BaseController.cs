@@ -20,6 +20,23 @@ namespace NUS_ISS_14_Appointment_Buddy
             _logger = logger;
         }
 
+        protected string UserName
+        {
+            get
+            {
+                string userName = null;
+
+                var identity = User.Identity;
+
+                if (identity != null && identity.IsAuthenticated)
+                {
+                    userName = identity.Name;
+                }
+
+                return userName ?? "";
+            }
+        }
+
         protected string AccessToken
         {
             get
@@ -32,6 +49,38 @@ namespace NUS_ISS_14_Appointment_Buddy
                 }
 
                 return _accessToken;
+            }
+        }
+
+        protected string UserId
+        {
+            get
+            {
+                var claims = User.Claims;
+                string userId = "";
+
+                if (claims != null)
+                {
+                    userId = GetClaimValue(Constants.AppClaimTypes.Id);
+                }
+
+                return userId;
+            }
+        }
+
+        protected string UserType
+        {
+            get
+            {
+                var claims = User.Claims;
+                string userType = "";
+
+                if (claims != null)
+                {
+                    userType = GetClaimValue(Constants.AppClaimTypes.UserType);
+                }
+
+                return userType;
             }
         }
 

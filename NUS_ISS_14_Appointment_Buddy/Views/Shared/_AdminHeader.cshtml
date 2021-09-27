@@ -1,0 +1,181 @@
+﻿@using NUS_ISS_14_Appointment_Buddy.Helper
+@using AppointmentBuddy.Core.Common.Helper
+@using System.Security.Claims
+
+@{ 
+    bool isAdmin = IdentityHelper.HasRole((ClaimsIdentity)User.Identity, Constants.RoleType.Admin);
+}
+
+<div class="top-header">
+    <div class="_content">
+        <div class="sing-container">
+            <a href="https://www.gov.sg" target="_blank" style="text-decoration: none;">
+                <img src="~/img/merlion.png" alt="merlion" />
+                <label><span>A Singapore Government Agency Website</span></label>
+            </a>
+        </div>
+    </div>
+</div>
+<div class="__mobile-search">
+    <div class="x-search">
+        <div class="top-level">
+            <i class="fas fa-times closing quick-pad-small-left"></i>
+            <div class="search-input">
+                <input style="width: 400px;" type="search" name="search-input" placeholder="Type in keyword in title or reference no. of ITQ/ITT/RFQ" />
+                <button type="submit" id="mobheaderSearchBtn"><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--end of search button-->
+<div class="_sidenav">
+    <div class="side-container">
+        <div class="side-admin">
+            <div class="menu-admin">
+                <div class="left-admin">
+                    <p>
+                        @User.Identity.Name <br>
+                        <span>XXX Hospital</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="list-container">
+            <div class="menu-list">
+                <ul>
+                    <li>@Html.ActionLink("Dashboard", "Index", "Staff", null, new { id = "dashboardMenu" })</li>
+                    <li><a href="javascript:void(0)" id="mobsetup">Administration</a></li>
+                    <li class="quick-pad-right mobsetupcontent content">
+                        @Html.ActionLink("Appointments", "Index", "Appointment", null, new { id = "mobApptMenu" })
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="mobile-admin-tool">
+            <div class="_tool-wrapper">
+                @Html.ActionLink("Logout", "SignOut", "Account", new { }, new { @id = "mobSignout" })
+            </div>
+        </div>
+    </div>
+</div>
+<div class="mobile-menu">
+    <div class="mob-top-header">
+        <div class="_content">
+            <div class="sing-container">
+                <a href="https://www.gov.sg" target="_blank" style="text-decoration: none; color: #000">
+                    <img src="~/img/merlion.png" alt="merlion" />
+                    <label><span>A Singapore Government Agency Website</span></label>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="_content">
+        <div class="mobile-master">
+            <div id="mobile-search-bar" class="mobile-search" data-visible="false">
+                <button type="submit"><i id="ms-icon" class="fas fa-search"></i></button>
+            </div>
+            <div class="icon-image">
+                <a href="@Url.Action("Index", "Staff")"><img src="~/img/GEMS-Logo.png" alt="Gems" /> </a>
+            </div>
+            <div id="menu-icon" class="burger-holder" data-visible="false">
+                <div class="burger-icon">
+                    <i id="cross-icon" class="fas fa-times cross-icon"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<section>
+    <header>
+        <div class="mid-header">
+            <div class="_content">
+                <div class="anc-container">
+                    <a href="@Url.Action("Index", "Staff")">
+                        <img src="~/img/GEMS-Logo.png" alt="GEMS" />
+                    </a>
+                    <h4></h4>
+                    <h4></h4>
+                    <h4></h4>
+                    <h4></h4>
+                    <h4></h4>
+                    <h4></h4>
+                </div>
+            </div>
+        </div>
+        <div class="below-header">
+            <div class="_content">
+                <div class="master-menu">
+                    <div class="master-left">
+                        <ul>
+                            <li><img src="~/img/gems-footer.png" alt="GEMS" /></li>
+                            <li>@Html.ActionLink("Dashboard", "Index", "Home", null, new { @id = "webDashboardMenu" })</li>
+                            <li class="_has-dropdown itq">
+                                <a href="javascript:void(0)">
+                                    Appointments <i class="fas fa-caret-down"></i>
+                                </a>
+                                <div class="master-menu-sub itq-drops">
+                                    <div class="_sub-menu">
+                                        @Html.ActionLink("Appointments", "Index", "Appointment", null, new { id = "mobApptMenu" })
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="master-right">
+                        <div class="admin-tools">
+                            <ul>
+                                <li class="header-icon">
+                                    <div id="search-bar" class="search-bar" data-visible="false">
+                                        <button type="submit" class="search-icon"><i id="s-icon" class="fas fa-search"></i></button>
+                                    </div>
+                                </li>
+                                <li class="hover">
+                                    <a href="@Url.Action("Index", "FAQ")">
+                                        <img src="~/img/icon-help.png" alt="Help" data-html="true" data-toggle="setting" data-placement="bottom" title="<span >Help & Support</span><br>Get some help from our support." />
+                                    </a>
+                                </li>
+                                <li>
+                                    <div class="admin-panel" id="adminPanel">
+                                        <h3>
+                                            @User.Identity.Name<br>
+                                            <span>XXX Hospital</span>
+                                        </h3>
+                                        <div class="admin-drops">
+                                            <div class="admin-wrapper">
+                                                <ul class="quick-logout-right">
+                                                    <li>@Html.ActionLink("Logout", "SignOut", "Account", new { }, new { @id = "signout" })</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="search-header content">
+            <div class="_content">
+                <div class="anc-container">
+                    <div class="new-search-container">
+                        <input type="search" class="admin-search" id="headerSearchKeyword" name="searching" placeholder="Type in keyword in title or reference number of ITQ/ITT/RFQ" />
+                        <button type="submit" id="headerSearchBtn"><i class="fas fa-search"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+</section>
+
+<script nonce="@ViewData["Nonce"]">
+    $("#headerSearchBtn, #mobheaderSearchBtn").click(function (e) {
+        e.preventDefault();
+        var searchKeyword = document.getElementById('headerSearchKeyword').value;
+        $.post('@Url.Action("Search", "SearchTender")', { searchString: searchKeyword, category: "", committee: "", co: "", '__RequestVerificationToken': $('input[name="__RequestVerificationToken"]').val() }, function (data) {
+                window.location = data.redirectUrl;
+            });
+    });
+
+    $.ajaxSetup({ cache: false });
+</script>

@@ -10,5 +10,8 @@ namespace AppointmentBuddy.Infrastructure.Repository
         }
 
         public DbSet<M.Appointment> Appointment { get; set; }
+        public DbSet<M.Role> Role { get; set; }
+        public DbSet<M.User> User { get; set; }
+        public DbSet<M.UserRole> UserRole { get; set; }
     }
 }

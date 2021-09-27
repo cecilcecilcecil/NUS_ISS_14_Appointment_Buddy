@@ -35,10 +35,10 @@ namespace NUS_ISS_14_Appointment_Buddy.Services
             var _api = Environment.GetEnvironmentVariable("APPTBUDDY_EXTERNAL_DNS_OR_IP");
             if (!string.IsNullOrEmpty(_api))
             {
-                _serviceUrls.AppointmentAPI = _api;
+                _serviceUrls.IdentityAPI = _api;
             }
-            UrlConfig.Appointment.BaseURI = _serviceUrls.AppointmentAPI;
-            UrlConfig.Appointment.APIVersion = _serviceUrls.AppointmentAPIVersion;
+            UrlConfig.Identity.BaseURI = _serviceUrls.IdentityAPI;
+            UrlConfig.Identity.APIVersion = _serviceUrls.IdentityAPIVersion;
 
             var s3KeyStoreBucketName = Environment.GetEnvironmentVariable("APPTBUDDY_S3_KeyStoreBucketName");
             if (!String.IsNullOrEmpty(s3KeyStoreBucketName))
