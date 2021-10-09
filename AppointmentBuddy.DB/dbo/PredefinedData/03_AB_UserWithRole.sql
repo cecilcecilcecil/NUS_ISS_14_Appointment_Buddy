@@ -51,3 +51,57 @@ INSERT INTO [dbo].[UserRole]
            , 'System'
            , getdate())
 END
+
+IF NOT EXISTS (SELECT 1 FROM [dbo].[User] where [USERID] = 'D8B3EC50-23E0-4317-B243-36A5935DE344' )
+BEGIN
+INSERT INTO [dbo].[User]
+           ([UserId]
+           ,[UserLogin]
+           ,[UserTypeId]
+           ,[Name]
+           ,[Email]
+           ,[PhoneNo]
+           ,[IsDeleted]
+           ,[VersionNo]
+           ,[CreatedBy]
+           ,[CreatedDate]
+           ,[LastUpdatedBy]
+           ,[LastUpdatedDate])
+     VALUES
+           ('D8B3EC50-23E0-4317-B243-36A5935DE344'
+           ,'abjw'
+           ,'005FB465-9E78-4FEE-BDD2-888C4890D462'
+           ,'See Jun Wei'
+           , 'see.see@ncs.com.sg'
+           , '97282643'
+           , 0
+           , 1
+           , 'System'
+           , getdate()
+           , 'System'
+           , getdate())
+END
+
+IF NOT EXISTS (SELECT 1 FROM [dbo].[UserRole] where [UserRoleId] = '40B3BC80-AB35-40A5-B454-878B0DB0D6A1' )
+BEGIN
+INSERT INTO [dbo].[UserRole]
+           ([UserRoleId]
+           ,[UserId]
+           ,[RoleId]
+           ,[IsDeleted]
+           ,[VersionNo]
+           ,[CreatedBy]
+           ,[CreatedDate]
+           ,[LastUpdatedBy]
+           ,[LastUpdatedDate])
+     VALUES
+           ( '40B3BC80-AB35-40A5-B454-878B0DB0D6A1'
+           , 'D8B3EC50-23E0-4317-B243-36A5935DE344'
+           , '17592BC0-A36F-4BB0-BF65-416278E4AE5B'
+           , 0
+           , 1
+           , 'System'
+           , getdate()
+           , 'System'
+           , getdate())
+END

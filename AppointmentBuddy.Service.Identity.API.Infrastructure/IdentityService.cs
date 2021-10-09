@@ -91,7 +91,8 @@ namespace AppointmentBuddy.Service.Identity.API.Infrastructure.Service
                 var userInfo = new M.UserInfo();
                 userInfo.User = user;
 
-                if (user.UserTypeId == Constants.UserType.Admin)
+                if (user.UserTypeId == Constants.UserType.Admin
+                    || user.UserTypeId == Constants.UserType.Staff)
                 {
                     userInfo.UserRole = await _repository.GetUserRoleByUserId(user.UserId);
                     userInfo.Role = await _repository.GetRoleByUserId(user.UserId);

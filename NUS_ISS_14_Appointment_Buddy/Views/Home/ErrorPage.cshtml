@@ -1,0 +1,17 @@
+﻿@{
+    ViewData["Title"] = "Error";
+}
+@Html.AntiForgeryToken()
+<style>
+    .centered-relative {
+        top: 75% !important;
+    }
+</style>
+<div class="_page-wrapper stepping">
+    <div>
+        <i class="fas fa-exclamation-triangle fa-10x centered"></i>
+        <br />
+        <br />
+        <span class="centered-relative"><b>A system error has occurred, please report the issue to Service Desk.</b></span>
+    </div>
+</div>

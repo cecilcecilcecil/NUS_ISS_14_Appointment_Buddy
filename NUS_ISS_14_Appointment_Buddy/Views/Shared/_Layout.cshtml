@@ -59,7 +59,7 @@
 <body id="content" style="font-size: 16px">
     <header>
         @if (IdentityHelper.HasRole((ClaimsIdentity)User.Identity, Constants.RoleType.Admin)
-            || IdentityHelper.HasRole((ClaimsIdentity)User.Identity, Constants.RoleType.Staff))
+           || IdentityHelper.HasRole((ClaimsIdentity)User.Identity, Constants.RoleType.Staff))
         {
             <partial name="_AdminHeader" />
         }
@@ -77,11 +77,8 @@
             @RenderBody()
         </main>
     </div>
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2021 - NUS_ISS_14_Appointment_Buddy - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
+    <footer class="footer">
+        <partial name="_Footer" />
     </footer>
 </body>
 </html>

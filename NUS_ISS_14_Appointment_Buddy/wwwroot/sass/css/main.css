@@ -35,7 +35,7 @@
             font-weight: 500; }
             .admin-panel .admin-drops .admin-wrapper ul li a:hover {
               text-decoration: none;
-              color: #c8010f !important; }
+              color: #117c37 !important; }
     .admin-panel .admin-drops ._switch {
       background: #f5fbf7;
       padding: 15px; }
@@ -74,7 +74,7 @@
     .for-notif .drops-notif .drops-content {
       display: flex; }
       .for-notif .drops-notif .drops-content .fa-bell {
-        color: #c8010f !important; }
+        color: #117c37 !important; }
       .for-notif .drops-notif .drops-content .notif-text {
         padding-left: 15px; }
         .for-notif .drops-notif .drops-content .notif-text p {
@@ -85,7 +85,7 @@
             font-size: 12px; }
         .for-notif .drops-notif .drops-content .notif-text:hover p {
           transition: all 0.3s ease;
-          color: #c8010f; }
+          color: #117c37; }
       .for-notif .drops-notif .drops-content:first-child .notif-text {
         border-bottom: 1px solid #dce0e3;
         padding-bottom: 12px; }
@@ -116,7 +116,7 @@
       text-transform: capitalize !important;
       display: block !important; }
       ._has-dropdown .master-menu-sub a:hover {
-        color: #c8010f !important;
+        color: #117c37 !important;
         background: transparent !important; }
     ._has-dropdown .master-menu-sub:before {
       content: url("../img/pointer.png");
@@ -135,7 +135,7 @@
   opacity: 1; }
 
 .tooltip > .tooltip-inner > span {
-  color: #c8010f;
+  color: #117c37;
   font-size: 17px;
   font-weight: 600;
   padding-bottom: 30px; }
@@ -181,7 +181,7 @@
         top: 10px;
         right: 10px; }
         ._my-tender-body ._content ._search-and-filter-content .search-by-keyword button .fa-search {
-          color: #c8010f; }
+          color: #117c37; }
           ._my-tender-body ._content ._search-and-filter-content .search-by-keyword button .fa-search:hover {
             cursor: pointer; }
         ._my-tender-body ._content ._search-and-filter-content .search-by-keyword button:focus {
@@ -191,9 +191,9 @@
       padding-top: 5px; }
     ._my-tender-body ._content ._search-and-filter-content .white-btn {
       background: transparent;
-      border: 1px solid #c8010f;
+      border: 1px solid #117c37;
       border-radius: 5px;
-      color: #c8010f;
+      color: #117c37;
       font-size: 12px;
       max-height: 50px;
       min-width: 120px;
@@ -203,7 +203,7 @@
       ._my-tender-body ._content ._search-and-filter-content .white-btn:hover {
         cursor: pointer; }
     ._my-tender-body ._content ._search-and-filter-content .red-btn {
-      background: #c8010f;
+      background: #117c37;
       border: 0;
       border-radius: 5px;
       color: #fff;
@@ -220,7 +220,7 @@
     border-left: 2px solid #e3e7ec;
     border-right: 2px solid #e3e7ec;
     border-bottom: 2px solid #e3e7ec;
-    border-top: 5px solid #c8010f;
+    border-top: 5px solid #117c37;
     padding: 35px; }
     ._my-tender-body ._content ._project-content h3 {
       font-size: 30px;
@@ -248,12 +248,12 @@
         background: none; }
       ._my-tender-body ._content ._project-content #tender-tabs .tender-buttons .ui-tabs-active.ui-state-active {
         background: none;
-        border-bottom: 3px solid #c8010f;
+        border-bottom: 3px solid #117c37;
         border-radius: 0; }
         ._my-tender-body ._content ._project-content #tender-tabs .tender-buttons .ui-tabs-active.ui-state-active a {
-          color: #c8010f; }
+          color: #117c37; }
     ._my-tender-body ._content ._project-content #tender-tabs .results-text span {
-      color: #c8010f;
+      color: #117c37;
       font-weight: bold; }
     ._my-tender-body ._content ._project-content #tender-tabs .results-frame {
       align-items: stretch;
@@ -305,7 +305,7 @@
           ._my-tender-body ._content ._project-content #tender-tabs .results-frame ul li svg {
             font-size: 12px;
             margin: 0 5px;
-            color: #c8010f; }
+            color: #117c37; }
       ._my-tender-body ._content ._project-content #tender-tabs .results-frame .gray {
         opacity: 0.7; }
       ._my-tender-body ._content ._project-content #tender-tabs .results-frame .black {
@@ -360,7 +360,7 @@
           ._my-tender-body ._content ._project-content #tender-tabs .results-pagination ul li a:hover {
             text-decoration: none; }
         ._my-tender-body ._content ._project-content #tender-tabs .results-pagination ul li.active {
-          background: #c8010f; }
+          background: #117c37; }
           ._my-tender-body ._content ._project-content #tender-tabs .results-pagination ul li.active a {
             opacity: 1;
             color: #fff; }
@@ -479,10 +479,10 @@
 
 .add-person {
   background: transparent;
-  border: 1px solid #c8010f;
+  border: 1px solid #117c37;
   border-radius: 5px;
   padding: 15px;
-  color: #c8010f;
+  color: #117c37;
   text-transform: capitalize; }
 
 ._project-content .fa-question-circle, .fa-pen {
@@ -557,7 +557,7 @@ span {
 
 /*Below Header*/
 .below-header {
-  background: #c8010f;
+  background: #117c37;
   padding: 10px 0; }
   .below-header ._content .master-menu {
     display: flex;
@@ -727,7 +727,7 @@ span {
       .hero-container .hero-links .welcome-hero .welcome-content {
         padding: 35px 40px; }
         .hero-container .hero-links .welcome-hero .welcome-content ._dates p {
-          color: #c8010f;
+          color: #117c37;
           font-size: 13px;
           text-transform: uppercase; }
           .hero-container .hero-links .welcome-hero .welcome-content ._dates p .fa-calendar-alt {
@@ -785,7 +785,7 @@ span {
       font-weight: bold;
       text-transform: capitalize; }
     ._tasks-container ._content .tasks-content ._title a {
-      color: #c8010f;
+      color: #117c37;
       font-size: 15px;
       font-weight: bold; }
   ._tasks-container ._content .tasks-content .task-bar {
@@ -817,7 +817,7 @@ span {
         display: flex;
         justify-content: flex-end; }
         ._tasks-container ._content .tasks-content .task-bar .flexes .view-bids a {
-          color: #c8010f;
+          color: #117c37;
           font-size: 14px;
           text-transform: uppercase;
           font-weight: bold;
@@ -825,11 +825,11 @@ span {
           -moz-border-radius: 5px;
           -ms-border-radius: 5px;
           border-radius: 5px;
-          border: 2px solid #c8010f;
+          border: 2px solid #117c37;
           padding: 15px; }
           ._tasks-container ._content .tasks-content .task-bar .flexes .view-bids a:hover {
             text-decoration: none;
-            background: #c8010f;
+            background: #117c37;
             color: #fff;
             transition: all 0.3s ease; }
   ._tasks-container ._content .tasks-content .task-text {
@@ -862,9 +862,9 @@ span {
       color: #000;
       margin-bottom: 0; }
       ._tasks-container ._content .tasks-content .task-text .text-body span {
-        color: #c8010f; }
+        color: #117c37; }
         ._tasks-container ._content .tasks-content .task-text .text-body span a {
-          color: #c8010f; }
+          color: #117c37; }
 
 /*Latest Update Section*/
 .latest-updates {
@@ -878,7 +878,7 @@ span {
 
 /*Mobile Menu*/
 .mobile-menu {
-  background: #c8010f;
+  background: #117c37;
   padding: 20px 0; }
   .mobile-menu ._content .mobile-master {
     display: flex;
@@ -1049,7 +1049,7 @@ span {
           text-decoration: none; }
         .list-container .menu-list ul li a .fa-angle-down {
           font-size: 20px;
-          color: #c8010f; }
+          color: #117c37; }
       .list-container .menu-list ul li:not(:last-child) {
         margin-bottom: 25px; }
       .list-container .menu-list ul li .mobile-sub {
@@ -1063,7 +1063,7 @@ span {
         .list-container .menu-list ul li .mobile-sub li:not(:last-child) {
           margin-top: 25px; }
     .list-container .menu-list ul .active a {
-      color: #c8010f; }
+      color: #117c37; }
     .list-container .menu-list ul .open {
       background: #fff;
       border-radius: 5px;
@@ -1102,7 +1102,7 @@ span {
     list-style: none;
     display: inline-block; }
     ._breadcrumbs ul li a {
-      color: #c8010f;
+      color: #117c37;
       font-size: 15px;
       text-transform: capitalize; }
       ._breadcrumbs ul li a:hover:last-child {
@@ -1162,12 +1162,12 @@ span {
       width: 80px;
       height: 80px;
       background: #ffffff;
-      border: 2px solid #c8010f;
+      border: 2px solid #117c37;
       border-radius: 50%;
       margin: 0 auto; }
       ._steps ._step-inner .step-circle .circle p {
         margin-bottom: 0;
-        color: #c8010f;
+        color: #117c37;
         font-weight: 600;
         font-size: 30px;
         text-align: center;
@@ -1180,7 +1180,7 @@ span {
     margin-bottom: 0; }
 
 ._step-inner.active .circle {
-  background: #c8010f !important;
+  background: #117c37 !important;
   color: #fff !important;
   border: 2px solid #fff !important; }
   ._step-inner.active .circle p {
@@ -1227,7 +1227,7 @@ span {
     border-left: 2px solid #e3e7ec;
     border-right: 2px solid #e3e7ec;
     border-bottom: 2px solid #e3e7ec;
-    border-top: 5px solid #c8010f;
+    border-top: 5px solid #117c37;
     padding: 35px; }
     ._step-body ._content ._project-content h3 {
       font-size: 30px;
@@ -1239,7 +1239,7 @@ span {
       padding: 40px 12px 12px 12px; }
       ._step-body ._content ._project-content .bids-container p {
         font-size: 22px;
-        color: #c8010f;
+        color: #117c37;
         text-transform: uppercase;
         margin-bottom: 0; }
         ._step-body ._content ._project-content .bids-container p:last-child {
@@ -1248,8 +1248,8 @@ span {
           margin-bottom: 0; }
       ._step-body ._content ._project-content .bids-container:hover {
         transition: all 0.3s ease;
-        background: #c8010f;
-        border: 2px solid #c8010f;
+        background: #117c37;
+        border: 2px solid #117c37;
         cursor: pointer; }
       ._step-body ._content ._project-content .bids-container:hover p, ._step-body ._content ._project-content .bids-container:hover p:last-child {
         color: #fff !important; }
@@ -1261,8 +1261,8 @@ span {
   margin: 0 auto; }
 
 .flex-content .active {
-  background: #c8010f;
-  border: 2px solid #c8010f;
+  background: #117c37;
+  border: 2px solid #117c37;
   pointer-events: none; }
   .flex-content .active p,
   .flex-content .active .amount {
@@ -1277,7 +1277,7 @@ span {
     color: #fff !important; }
 
 .active.itq-select p:first-child {
-  color: #c8010f !important; }
+  color: #117c37 !important; }
 
 .input-holder label {
   display: block;
@@ -1319,7 +1319,7 @@ span {
   width: 60%; }
   .mb-3 .input-group-text {
     background: #f9e5e7;
-    color: #c8010f; }
+    color: #117c37; }
   .mb-3 input[type="text"]:focus {
     outline: none;
     -webkit-box-shadow: none;
@@ -1371,7 +1371,7 @@ span {
     top: 10px;
     left: 385px; }
     .postal button .fa-search {
-      color: #c8010f; }
+      color: #117c37; }
       .postal button .fa-search:hover {
         cursor: pointer; }
     .postal button:focus {
@@ -1398,7 +1398,7 @@ span {
     margin-bottom: 0px; }
   .autosave-wrapper button {
     border: 0;
-    background: #c8010f;
+    background: #117c37;
     padding: 7px 15px;
     color: #fff;
     border-radius: 5px;
@@ -1452,10 +1452,10 @@ span {
   margin-left: 5px; }
 
 .dropzone {
-  border: 2px dotted #c8010f;
+  border: 2px dotted #117c37;
   border-radius: 5px;
   padding: 70px;
-  color: #c8010f;
+  color: #117c37;
   text-align: center; }
 
 ._filedrop {
@@ -1491,6 +1491,6 @@ span {
   line-height: 1.8; }
 
 .red-color p {
-  color: #c8010f !important; }
+  color: #117c37 !important; }
 
 /*# sourceMappingURL=main.css.map */

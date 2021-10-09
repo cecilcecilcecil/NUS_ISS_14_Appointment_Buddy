@@ -95,6 +95,9 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
                 case Constants.UserType.Staff:
                     identity.AddClaim(new Claim(ClaimTypes.Role, identityDto.UserInfo.Role.RoleTypeId));
                     break;
+                case Constants.UserType.Admin:
+                    identity.AddClaim(new Claim(ClaimTypes.Role, Constants.RoleType.Admin));
+                    break;
             }
 
             identity.AddClaim(new Claim(AppClaimTypes.AccessToken, identityDto.Token));

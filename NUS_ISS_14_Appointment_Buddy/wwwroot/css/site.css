@@ -172,7 +172,7 @@ body {
     padding-top: 7%;
     padding-left: 8%;
     font-size: 2vw;
-    color: #c8010f;
+    color: #117c37;
 }
 
 .quick-text {
@@ -188,7 +188,7 @@ body {
     top: 48%;
     text-align: center;
     font-size: 2.1vw;
-    color: #c8010f;
+    color: #117c37;
 }
 
 .quick-right-text {
@@ -292,7 +292,7 @@ body {
 .quick-pad-icon-red-down {
     position: relative;
     bottom: 10%;
-    color: #c8010f !important;
+    color: #117c37 !important;
 }
 
     .quick-pad-down {
@@ -376,7 +376,7 @@ body {
     .quick-document-text {
         position: relative;
         left: 1%;
-        color: #c8010f;
+        color: #117c37;
         font-size: 1.25vw;
     }
     .quick-document-box .quick-document-name {
@@ -393,7 +393,7 @@ body {
         width: 32vw;
         text-align: center;
         line-height: 3.75vw;
-        background: #c8010f;
+        background: #117c37;
         color: #fff;
         font-size: 1.1vw;
         border-radius: 5px;
@@ -409,9 +409,9 @@ body {
         text-align: center;
         line-height: 3.75vw;
         background: transparent;
-        color: #c8010f;
+        color: #117c37;
         font-size: 1.1vw;
-        border: 1px solid #c8010f;
+        border: 1px solid #117c37;
         border-radius: 5px;
         text-transform: uppercase;
         cursor: pointer;
@@ -435,7 +435,7 @@ body {
     }
     .logo-parent .gen-info .table-title {
         font-size: 1.75vw;
-        color: #c8010f;
+        color: #117c37;
     }
         .logo-parent .gen-info .gen-info-table {
             position: relative;
@@ -794,7 +794,7 @@ textarea.form-control {
             .light-bulb-content .light-header .video-border .video-h3 .vid-time {
                 font-size: 80%;
                 font-family: 'Roboto Bold';
-                color: #c8010f;
+                color: #117c37;
                 text-transform: uppercase;
             }
             .light-bulb-content .light-header .repli-h3 .faq-h3 {
@@ -806,19 +806,19 @@ textarea.form-control {
             display: list-item;
             list-style-type: disc;
             list-style-position: inside;
-            color: #c8010f;
+            color: #117c37;
             font-size: 120%;
         }
 
         .light-bulb-content .light-header .faq-ans-img {
-            color: #c8010f;
+            color: #117c37;
             font-size: 120%;
         }
 
             .light-bulb-content .light-header .faq-qn-list:hover,
             .light-bulb-content .light-header .faq-ans-img:hover {
                 text-decoration: underline;
-                color: #c8010f;
+                color: #117c37;
                 cursor: pointer;
             }
 
@@ -881,7 +881,7 @@ textarea.form-control {
     }
 
         .search-by-faq button .fa-search {
-            color: #c8010f;
+            color: #117c37;
         }
 
             .search-by-faq button .fa-search:hover {
@@ -920,13 +920,13 @@ textarea.form-control {
         display: list-item;
         list-style-type: disc;
         list-style-position: inside;
-        color: #c8010f;
+        color: #117c37;
         font-size: 85%;
         width: 90%;
     }
 
     .light-bulb-content .light-header .faq-ans-img{
-        color: #c8010f;
+        color: #117c37;
         font-size: 85%;
         width: 90%;
     }
@@ -1016,8 +1016,8 @@ textarea.form-control {
 
 ._transparent-faq {
     background: #fff !important;
-    border: 1px solid #c8010f !important;
-    color: #c8010f !important;
+    border: 1px solid #117c37 !important;
+    color: #117c37 !important;
 }
 
 .light-img {
@@ -1033,7 +1033,7 @@ textarea.form-control {
     position: relative;
     left: 85%;
     font-size: 50%;
-    color: #c8010f;
+    color: #117c37;
     font-family: 'Roboto Bold';
     cursor: pointer;
 }
@@ -1062,16 +1062,16 @@ textarea.form-control {
 }
 
 .faq-href {
-    color: #c8010f;
+    color: #117c37;
     font-family: 'Roboto Bold';
 }
     .faq-href:visited {
-        color: #c8010f;
+        color: #117c37;
     }
 
 .fade-text {
     border: solid;
-    background-color: #c8010f;
+    background-color: #117c37;
     color: #fff;
     text-align: center;
     opacity: 0;
@@ -1180,7 +1180,7 @@ textarea.form-control {
 
 .nice-select .list::-webkit-scrollbar-thumb {
     width: 1px;
-    background-color: #c8010f;
+    background-color: #117c37;
     border-radius: 10px;
 }
 
@@ -1190,7 +1190,7 @@ textarea.form-control {
 
 ::-webkit-scrollbar-thumb {
     width: 1px;
-    background-color: #c8010f;
+    background-color: #117c37;
     border-radius: 5px;
 }
 
@@ -1252,9 +1252,9 @@ textarea.form-control {
 
 .disclaimer {
     padding-left: 20px;
-    border: 2px solid #c8010f ;
+    border: 2px solid #117c37 ;
     border-radius: 5px;
-    /*color: #c8010f;*/
+    /*color: #117c37;*/
 }
 
 .half-width {
@@ -1307,7 +1307,7 @@ body {
 
 /* When the checkbox is checked, add a blue background */
 .container input:checked ~ .checkmark {
-    background-color: #c8010f;
+    background-color: #117c37;
 }
 
 .container input:disabled ~ .checkmark {
@@ -1346,7 +1346,7 @@ body {
 }
 
 .tbl-awd-lbl {
-    background-color: #c8010f;
+    background-color: #117c37;
     max-width: 10%;
     border-left: 5px solid;
     border-color: #a70a15;
