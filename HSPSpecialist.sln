@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31624.102
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HSPSpecialist", "HSPSpecialist\HSPSpecialist.csproj", "{48F8562A-BF8E-41C8-AC5F-E58A07E6CF8A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HSP_Specialist_Web_API_test", "HSP_Specialist_Web_API_test\HSP_Specialist_Web_API_test.csproj", "{351921A2-DC67-4A0E-8F39-9E3D5F20A581}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{48F8562A-BF8E-41C8-AC5F-E58A07E6CF8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48F8562A-BF8E-41C8-AC5F-E58A07E6CF8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48F8562A-BF8E-41C8-AC5F-E58A07E6CF8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48F8562A-BF8E-41C8-AC5F-E58A07E6CF8A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{351921A2-DC67-4A0E-8F39-9E3D5F20A581}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{351921A2-DC67-4A0E-8F39-9E3D5F20A581}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{351921A2-DC67-4A0E-8F39-9E3D5F20A581}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{351921A2-DC67-4A0E-8F39-9E3D5F20A581}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9A9BE4C7-CDB1-4B57-8F51-9E51A4B2983D}
+	EndGlobalSection
+EndGlobal
