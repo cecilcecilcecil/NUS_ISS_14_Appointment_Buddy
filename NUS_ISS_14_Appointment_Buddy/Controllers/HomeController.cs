@@ -34,7 +34,7 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
         [Route("home/index")]
         public IActionResult Index()
         {
-            if (UserType == Constants.UserType.Admin)
+            if (UserType == Constants.UserType.Admin || UserType == Constants.UserType.Staff)
             {
                 return RedirectToAction("Index", "Admin");
             }

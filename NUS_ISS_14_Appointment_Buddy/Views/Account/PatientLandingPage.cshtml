@@ -1,0 +1,38 @@
+﻿@using AppointmentBuddy.Core.Common.Helper
+@model AppointmentBuddy.WEB.Models.Account.LoginViewModel
+@{
+    ViewData["Title"] = "SingPass Landing Page";
+}
+
+@using (Html.BeginForm("", "", FormMethod.Post, new { @id = "splandingPageForm", @class = "_page-wrapper stepping" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(x => x.UserName)
+    @Html.HiddenFor(x => x.Password)
+    <partial name="_LoadingModal" />
+}
+
+<script nonce="@ViewData["Nonce"]">
+    $(document).ready(function () {
+        var loadingModal = document.getElementById('loadingInProgress');
+        loadingModal.style.display = 'block';
+
+        var formData = $('#splandingPageForm').serializeArray();
+            $.ajax({
+                type: 'POST',
+                    url: '@Url.Action("ProcessPatientLogin", "Account")',
+                    data: formData,
+                    success: function (result) {
+                        if (result.result == @Constants.ErrorCodes.Success) {
+                            window.location.href = "../";
+                        }
+                        else {
+                            window.location.href = "../Home/NoAuthorization";
+                        }
+                    },
+                    error: function (result) {
+                        window.location.href = "/"
+                    }
+                })
+    });
+</script>

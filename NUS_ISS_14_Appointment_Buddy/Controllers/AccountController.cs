@@ -109,6 +109,63 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
             return Json(new { result = ErrorCodes.Success });
         }
 
+        public async Task<IActionResult> PatientGoToLogin()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            return View("PatientLogin");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> PatientSignIn(LoginViewModel model)
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            return View("PatientLandingPage", model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ProcessPatientLogin(LoginViewModel model)
+        {
+            var identityDto = await _identityService.Authenticate(model.UserName, model.Password, "");
+
+            if (identityDto == null)
+            {
+                return Json(new { result = Constants.ErrorCodes.NotAuthorized });
+            }
+
+            var identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme);
+            identity.AddClaim(new Claim(ClaimTypes.Name, identityDto.UserInfo.User.Name));
+            identity.AddClaim(new Claim(Constants.AppClaimTypes.Id, identityDto.UserInfo.User.UserId));
+            identity.AddClaim(new Claim(Constants.AppClaimTypes.UserType, identityDto.UserInfo.User.UserTypeId));
+
+            if (identityDto.UserInfo.User.UserTypeId != Constants.UserType.Patient)
+            {
+                return Json(new { result = Constants.ErrorCodes.NotAuthorized });
+            }
+            switch (identityDto.UserInfo.User.UserTypeId)
+            {
+                case Constants.UserType.Patient:
+                    identity.AddClaim(new Claim(ClaimTypes.Role, Constants.RoleType.Patient));
+                    break;
+            }
+
+            identity.AddClaim(new Claim(AppClaimTypes.AccessToken, identityDto.Token));
+
+            await HttpContext.SignInAsync(
+            CookieAuthenticationDefaults.AuthenticationScheme,
+            new ClaimsPrincipal(identity)).ConfigureAwait(false);
+
+            return Json(new { result = Constants.ErrorCodes.Success });
+        }
+
         [HttpGet]
         public async Task<IActionResult> SignOut()
         {

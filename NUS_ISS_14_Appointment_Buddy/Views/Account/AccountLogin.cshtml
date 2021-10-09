@@ -18,7 +18,21 @@
                                     <div class="autosave-container">
                                         <div class="autosave-wrapper">
                                             <div class="_nxt-prv">
-                                                <button type="submit" id="adButton">Login</button>
+                                                <button type="submit" id="adButton">Staff Login</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        @using (Html.BeginForm("PatientGoToLogin", "Account", FormMethod.Post, new { @id = "commonLoginForm", @class = "_page-wrapper stepping" }))
+                        {
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="autosave-container">
+                                        <div class="autosave-wrapper">
+                                            <div class="_nxt-prv">
+                                                <button type="submit" id="spButton">Patient Login</button>
                                             </div>
                                         </div>
                                     </div>

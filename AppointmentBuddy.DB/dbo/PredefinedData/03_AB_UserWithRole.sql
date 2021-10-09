@@ -105,3 +105,33 @@ INSERT INTO [dbo].[UserRole]
            , 'System'
            , getdate())
 END
+
+IF NOT EXISTS (SELECT 1 FROM [dbo].[User] where [USERID] = '6B2B669A-CAE7-4114-ABB5-20F4C1A736F9' )
+BEGIN
+INSERT INTO [dbo].[User]
+           ([UserId]
+           ,[UserLogin]
+           ,[UserTypeId]
+           ,[Name]
+           ,[Email]
+           ,[PhoneNo]
+           ,[IsDeleted]
+           ,[VersionNo]
+           ,[CreatedBy]
+           ,[CreatedDate]
+           ,[LastUpdatedBy]
+           ,[LastUpdatedDate])
+     VALUES
+           ('6B2B669A-CAE7-4114-ABB5-20F4C1A736F9'
+           ,'Patient01'
+           ,'D939D14A-53B3-4479-A384-7C2278543A56'
+           ,'Patient 01'
+           , 'see.see@ncs.com.sg'
+           , '97282643'
+           , 0
+           , 1
+           , 'System'
+           , getdate()
+           , 'System'
+           , getdate())
+END
