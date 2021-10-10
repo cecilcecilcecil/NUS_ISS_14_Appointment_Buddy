@@ -1,8 +1,48 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@using NUS_ISS_14_Appointment_Buddy.Helper
+@using AppointmentBuddy.Core.Common.Helper
+@using System.Security.Claims
+
+@{
+    ViewData["Title"] = "Home";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+@Html.AntiForgeryToken()
+<section class="pageid-999">
+    <div class="hero-container">
+        <div class="_content">
+            <div class="hero-links">
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="welcome-hero">
+                            <div class="welcome-content">
+                                <div class="_dates">
+                                    <p><i class="far fa-calendar-alt"></i>@(DateTime.Now.ToString("dddd, dd/MM/yyyy"))</p>
+                                </div>
+                                <div class="welcome-name">
+                                    <h3>Welcome back<br> @User.Identity.Name</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="quick-links">
+                            <p class="quikie">quick links</p>
+                            <div class="quick-boxes">
+                                <div class="row">
+                                    <div class="col-md-4 col-sm-4">
+                                        <a href="~/Appointment">
+                                            <div class="_box" id="apptBox">
+                                                <img src="~/img/icon1.png" alt="icon1" />
+                                                <p>view appointments</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
