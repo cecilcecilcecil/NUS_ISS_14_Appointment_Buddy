@@ -26,7 +26,7 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
 
         public async Task<IActionResult> Index(string apptId = "")
         {
-            var appt = await _roomService.GetRoomByRoomId("1B8FA93B-29E8-4E44-A0B3-A1AB5B8E1458", AccessToken);
+            var appt = await _roomService.GetRoomByRoomId(apptId, AccessToken);
 
             return View();
         }
