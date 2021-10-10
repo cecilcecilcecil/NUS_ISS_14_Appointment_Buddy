@@ -11,6 +11,7 @@
   <ItemGroup>
     <ProjectReference Include="..\AppointmentBuddy.Core.Model.AccessControl\AppointmentBuddy.Core.Model.AccessControl.csproj" />
     <ProjectReference Include="..\AppointmentBuddy.Core.Model.Appointment\AppointmentBuddy.Core.Model.Appointment.csproj" />
+    <ProjectReference Include="..\AppointmentBuddy.Core.Model.Room\AppointmentBuddy.Core.Model.Room.csproj" />
   </ItemGroup>
 
 </Project>
