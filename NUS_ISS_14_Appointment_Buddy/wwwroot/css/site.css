@@ -561,6 +561,11 @@ body {
         font: inherit;
     }
 
+.field-validation-green {
+    color: #117c37;
+    font-family: 'Roboto Bold';
+}
+
 .file-blue {
     color: #0f32d7;
     font-family: 'Roboto Bold';
