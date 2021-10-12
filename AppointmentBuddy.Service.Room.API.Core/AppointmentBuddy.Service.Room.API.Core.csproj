@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AppointmentBuddy.Core.Common\AppointmentBuddy.Core.Common.csproj" />
+    <ProjectReference Include="..\AppointmentBuddy.Core.Model.Room\AppointmentBuddy.Core.Model.Room.csproj" />
+  </ItemGroup>
+
+</Project>
