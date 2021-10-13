@@ -54,9 +54,12 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
         {
             var exceptionFeature = HttpContext.Features.Get<IExceptionHandlerPathFeature>();
 
-            if (exceptionFeature.Error is UserNotFoundException)
+            if (exceptionFeature != null)
             {
-                return View("NoAuthorization");
+                if (exceptionFeature.Error is UserNotFoundException)
+                {
+                    return View("NoAuthorization");
+                }
             }
 
             return View("ErrorPage");

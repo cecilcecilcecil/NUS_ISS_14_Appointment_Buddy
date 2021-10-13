@@ -102,7 +102,7 @@ namespace AppointmentBuddy.Service.Identity.API
                     {
                         sb.Append(Environment.NewLine);
                     }
-                    if (sb.Length >= 500)
+                    if (sb.Length >= 2000)
                     {
                         throw new Exception("input too long");
                     }

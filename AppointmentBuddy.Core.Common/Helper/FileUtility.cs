@@ -71,7 +71,7 @@ namespace AppointmentBuddy.Core.Common.Helper
             AmazonKeyManagementServiceClient client = new AmazonKeyManagementServiceClient();
 
             using (MemoryStream ms = new MemoryStream())
-            using (FileStream file = new FileStream("private.pem", FileMode.Open, FileAccess.Read))
+            using (FileStream file = new FileStream(@"D:\private.pem", FileMode.Open, FileAccess.Read))
             {
                 byte[] bytes = new byte[file.Length];
                 file.Read(bytes, 0, (int)file.Length);
@@ -83,13 +83,7 @@ namespace AppointmentBuddy.Core.Common.Helper
                     Plaintext = ms
                 });
 
-                string path = @"D:\private.pem";
-                TextWriter textWriter = new StreamWriter(path);
-                PemWriter pemWriter = new PemWriter(textWriter);
-
                 var test = response.CiphertextBlob.ToArray();
-
-                //File.WriteAllBytes(path, test);
 
                 FileStream fs = new FileStream("D:\\private1.pem", FileMode.Create, FileAccess.Write);
                 response.CiphertextBlob.WriteTo(fs);
@@ -114,9 +108,17 @@ namespace AppointmentBuddy.Core.Common.Helper
             TextWriter textWriter = new StreamWriter(path);
             PemWriter pemWriter = new PemWriter(textWriter);
             // passing pair results in the private key being written out
-            pemWriter.WriteObject(pair);
+            pemWriter.WriteObject(pair.Private);
             pemWriter.Writer.Flush();
             pemWriter.Writer.Close();
+
+            string path2 = @"D:\public.pem";
+            TextWriter textWriter2 = new StreamWriter(path2);
+            PemWriter pemWriter2 = new PemWriter(textWriter2);
+            // passing pair results in the private key being written out
+            pemWriter2.WriteObject(pair.Public);
+            pemWriter2.Writer.Flush();
+            pemWriter2.Writer.Close();
 
             return "";
         }

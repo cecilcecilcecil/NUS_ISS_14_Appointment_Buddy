@@ -28,7 +28,7 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
         {
             var appt = await _appointmentService.GetAppointmentByAppointmentId("1B8FA93B-29E8-4E44-A0B3-A1AB5B8E1458", AccessToken);
 
-            return View();
+            return View(appt);
         }
     }
 }

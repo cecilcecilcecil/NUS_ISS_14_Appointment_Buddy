@@ -11,6 +11,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using CF = NUS_ISS_14_Appointment_Buddy.WEB.Config;
 using M = AppointmentBuddy.Core.Model;
 
 namespace NUS_ISS_14_Appointment_Buddy.Services
@@ -19,13 +20,15 @@ namespace NUS_ISS_14_Appointment_Buddy.Services
     {
         private readonly IHttpClient _httpClient;
         private readonly ServiceUrls _serviceUrls;
+        private readonly CF.AppSettings _appSettings;
         private readonly ILogger<AppointmentService> _logger;
 
-        public AppointmentService(HttpClient httpClient, IOptions<ServiceUrls> config, ILogger<AppointmentService> logger)
+        public AppointmentService(HttpClient httpClient, IOptions<CF.AppSettings> appSettings, IOptions<ServiceUrls> config, ILogger<AppointmentService> logger)
         {
             _httpClient = new CustomHttpClient(httpClient, logger);
             _serviceUrls = config.Value;
             _logger = logger;
+            _appSettings = appSettings.Value;
 
             var _api1 = Environment.GetEnvironmentVariable("APPTBUDDY_APPT_EXTERNAL_DNS_OR_IP");
             if (!string.IsNullOrEmpty(_api1))
