@@ -50,5 +50,28 @@ namespace NUS_ISS_14_Appointment_Buddy.Services
 
             return !string.IsNullOrEmpty(responseString) ? JsonConvert.DeserializeObject<M.Appointment>(responseString) : null;
         }
+
+        public async Task<M.PaginatedResults<M.Appointment>> GetAllAppointments(string token, string dateFrom, string dateTo, int pageIndex, int pageSize)
+        {
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+            var parameter = "pageIndex=" + pageIndex + "&pageSize=" + pageSize;
+
+            var apiURL = UrlConfig.Appointment.AllAppointmentAPI(_serviceUrls.AppointmentAPI_GetAllAppointments, parameter);
+
+            if (!String.IsNullOrEmpty(dateFrom))
+            {
+                apiURL = apiURL + "&dateFrom=" + dateFrom.Replace("/", "");
+            }
+
+            if (!String.IsNullOrEmpty(dateTo))
+            {
+                apiURL = apiURL + "&dateTo=" + dateTo.Replace("/", "");
+            }
+
+            var responseString = await _httpClient.GetStringAsync(apiURL);
+
+            return !string.IsNullOrEmpty(responseString) ? JsonConvert.DeserializeObject<M.PaginatedResults<M.Appointment>>(responseString) : null;
+        }
     }
 }

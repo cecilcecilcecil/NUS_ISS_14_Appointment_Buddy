@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace GEMS2.Core.Model
+namespace AppointmentBuddy.Core.Model
 {
     public class PaginatedResults<TEntity> where TEntity : class
     {

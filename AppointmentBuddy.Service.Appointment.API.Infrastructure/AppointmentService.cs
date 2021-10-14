@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System.Net.Http;
+using System.Globalization;
+using System.Linq;
 
 namespace AppointmentBuddy.Service.Appointment.API.Infrastructure
 {
@@ -24,17 +26,33 @@ namespace AppointmentBuddy.Service.Appointment.API.Infrastructure
         {
             M.Appointment response;
 
-            //if (InternetZone)
-            //{
-            //    SetAuthenticationHeader(_apiClient);
-
-            //    var apiURL = ServiceEndpoint.CodeTables.ConfigurationsAPI(_serviceUrls.CodeTablesAPI_Configurations);
-            //    var _api_response = await _apiClient.GetStringAsync(apiURL);
-
-            //    response = !string.IsNullOrEmpty(_api_response) ? JsonConvert.DeserializeObject<IEnumerable<M.Appointment>>(_api_response) : null;
-            //}
-
             response = await _repository.GetAppointmentByAppointmentId(appointmentId);
+
+            return response;
+        }
+
+        public async Task<M.PaginatedResults<M.Appointment>> GetAllAppointments(string dateFrom, string dateTo, int page, int pageSize)
+        {
+            M.PaginatedResults<M.Appointment> response;
+
+            var data = await _repository.GetAllAppointments();
+
+            DateTime dtFrom;
+            if (!String.IsNullOrEmpty(dateFrom) && DateTime.TryParseExact(dateFrom, "ddMMyyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out dtFrom))
+            {
+                data = data.Where(t => t.AppointmentDate > dtFrom);
+            }
+
+            DateTime dtTo;
+            if (!String.IsNullOrEmpty(dateTo) && DateTime.TryParseExact(dateTo, "ddMMyyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out dtTo))
+            {
+                dtTo = dtTo.AddDays(1);
+                data = data.Where(t => t.AppointmentDate < dtTo);
+            }
+
+            data = data.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+
+            response = new M.PaginatedResults<M.Appointment>(page, pageSize, data.Count(), data);
 
             return response;
         }

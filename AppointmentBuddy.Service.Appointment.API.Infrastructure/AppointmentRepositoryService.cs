@@ -2,6 +2,8 @@
 using AppointmentBuddy.Service.Appointment.API.Core.Interface;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using M = AppointmentBuddy.Core.Model;
 
@@ -23,6 +25,11 @@ namespace AppointmentBuddy.Service.Appointment.API.Infrastructure
             M.Appointment dataItem;
             dataItem = await _context.Appointment.FirstOrDefaultAsync(s => s.AppointmentId == apptId);
             return dataItem;
+        }
+
+        public async Task<IEnumerable<M.Appointment>> GetAllAppointments()
+        {
+            return await _context.Appointment.Where(x => !x.IsDeleted).ToListAsync();
         }
     }
 }

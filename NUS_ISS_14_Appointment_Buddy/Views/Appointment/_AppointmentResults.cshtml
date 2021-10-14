@@ -1,0 +1,69 @@
+﻿@using AppointmentBuddy.Core.Model
+@model NUS_ISS_14_Appointment_Buddy.Models.ResultViewModel<Appointment>
+
+<div class="editQuan _goods">
+    <div class="display">
+        <div class="based-table view-goods _edit">
+            <table class="table" id="apptTable" style="overflow: auto !important; overflow-x: auto !important;">
+                <thead class="">
+                    <tr>
+                        <th scope="col">S/N</th>
+                        <th scope="col">Name</th>
+                        <th scope="col"s>Appointment Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{int count = 1;}
+                    @foreach (var appt in Model.ListItems)
+                    {
+                        <tr>
+                            <td>@count</td>
+                            <td>@appt.Name</td>
+                            <td>@appt.AppointmentDate.ToString("dd/MM/yyyy")</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="results-pagination">
+    <span>Page</span>
+    <ul>
+        @for (var i = Model.PaginationInfo.FirstPageNumber; i <= Model.PaginationInfo.LastPageNumber; i++)
+        {
+            <li class="page-item @(i == Model.PaginationInfo.PageNumber ? "active" : "")">
+                @if (i != Model.PaginationInfo.PageNumber)
+                {
+                    <a asp-controller="Appointment"
+                       asp-action="GetAppointmentPage"
+                       asp-route-page="@i"
+                       asp-route-dateFrom="@ViewData["DateFrom"]"
+                       asp-route-dateTo="@ViewData["DateTo"]"
+                       asp-route-partialV="_AppointmentResults"
+                       data-target="appts"
+                       class="paginationButton">
+                        @i
+                    </a>
+                }
+                else
+                {
+                    @i
+                }
+            </li>
+        }
+    </ul>
+</div>
+
+<script type="text/javascript" nonce="@ViewData["Nonce"]">
+    $(".paginationButton").click(function (e) {
+        e.preventDefault();
+        var _this = $(this);
+        $.get(_this.attr("href"), function (res) {
+            $('#' + _this.data("target")).html(res);
+        });
+
+        $(window).scrollTop(0);
+    });
+</script>

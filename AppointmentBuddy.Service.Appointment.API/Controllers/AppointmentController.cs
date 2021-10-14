@@ -44,5 +44,16 @@ namespace AppointmentBuddy.Service.Appointment.API.Controllers
 
             return response;
         }
+
+        [Route("all")]
+        [HttpGet]
+        public async Task<M.PaginatedResults<M.Appointment>> GetAllAppointments([FromQuery] string dateFrom = "", string dateTo = "", int pageIndex = 1, int pageSize = 10)
+        {
+            M.PaginatedResults<M.Appointment> response;
+
+            response = await _appointmentService.GetAllAppointments(dateFrom, dateTo, pageIndex, pageSize);
+
+            return response;
+        }
     }
 }

@@ -13,6 +13,7 @@ namespace NUS_ISS_14_Appointment_Buddy.Helper
             public static string APIVersion { get; set; }
 
             public static string AppointmentAPI(string api, string apptId) => $"{BaseURI}/v{APIVersion}{api}/{apptId}";
+            public static string AllAppointmentAPI(string api, string parameter) => $"{BaseURI}/v{APIVersion}{api}?{parameter}";
         }
 
         public static class Identity

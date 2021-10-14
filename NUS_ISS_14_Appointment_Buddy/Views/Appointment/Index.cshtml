@@ -1,3 +1,84 @@
-﻿@model AppointmentBuddy.Core.Model.Appointment
+﻿@using NUS_ISS_14_Appointment_Buddy.Helper
+@using AppointmentBuddy.Core.Common.Helper
+@using AppointmentBuddy.Core.Model
+@using System.Security.Claims
 
-test
+@model NUS_ISS_14_Appointment_Buddy.Models.ResultViewModel<Appointment>
+
+@{
+    ViewData["Title"] = "Manage Appointments";
+}
+
+<div class="_page-essentials">
+    @Html.AntiForgeryToken()
+    <div class="_my-tender-body">
+        <div class="_content">
+            <div class="_search-and-filter-content">
+                <div class="row ken-flex">
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                        <h3>Date From:</h3>
+                        <div class="input-group mb-5">
+                            <input id="DateFrom" data-toggle="datepicker" type="text" class="form-control" placeholder="dd/mm/yyyy" value="@ViewData["DateFrom"]" autocomplete="off" maxlength="10">
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="DateFromIcon"><i class="far fa-calendar-alt"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                        <h3>Date To:</h3>
+                        <div class="input-group mb-5">
+                            <input id="DateTo" data-toggle="datepicker" type="text" class="form-control" placeholder="dd/mm/yyyy" value="@ViewData["DateTo"]" autocomplete="off" maxlength="10">
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="DateToIcon"><i class="far fa-calendar-alt"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-12 col-sm-12">
+                    </div>
+                </div>
+                <br />
+                <div class="row ken-flex">
+                    <div class="col-lg-4 col-md-12 col-sm-12">
+                        <button class="white-btn" id="resetButton">Reset</button>
+                        <button class="red-btn" id="applyButton">Apply</button>
+                    </div>
+                </div>
+            </div>
+            <div class="_project-content" id="appts">
+                @await Html.PartialAsync("_AppointmentResults", Model)
+            </div>
+        </div>
+    </div>
+</div>
+
+<script nonce="@ViewData["Nonce"]">
+    $(function () {
+        $("#applyButton").click(function (e) {
+
+            e.preventDefault();
+
+            $.post('@Url.Action("Search")', { dateFrom: $('#DateFrom').val(), dateTo: $('#DateTo').val(), '__RequestVerificationToken': $('input[name="__RequestVerificationToken"]').val() }, function (data) {
+                window.location = data.redirectUrl;
+            });
+
+        });
+
+        $('#DateFromIcon').click(function () {
+            $('#DateFrom').focus();
+        });
+
+        $('#DateToIcon').click(function () {
+            $('#DateTo').focus();
+        });
+
+        $("#resetButton").click(function (e) {
+            e.preventDefault();
+            $('#DateFrom').val('');
+            $('#DateTo').val('');
+        });
+
+        $('#DateFrom, #DateTo').keypress(function (e) {
+            return isDate(this, e);
+        });
+    });
+</script>

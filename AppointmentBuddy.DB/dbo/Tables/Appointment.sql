@@ -1,6 +1,9 @@
 ﻿CREATE TABLE [dbo].[Appointment]
 (
 	[AppointmentId]			VARCHAR (50)		NOT NULL,
+    [UserId]                VARCHAR(50)         NULL,
+    [Name]                  VARCHAR(255)         NULL,
+    [AppointmentDate]		DATETIME            NULL,
 	[IsDeleted]			    BIT                 NULL, 
     [VersionNo]			    INT                 NULL        DEFAULT 1, 
     [CreatedById]		    VARCHAR(50)         NULL, 

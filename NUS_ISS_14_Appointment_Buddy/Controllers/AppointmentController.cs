@@ -3,10 +3,12 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using NUS_ISS_14_Appointment_Buddy.Interface;
 using NUS_ISS_14_Appointment_Buddy.WEB.Config;
+using M = AppointmentBuddy.Core.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using NUS_ISS_14_Appointment_Buddy.Models;
 
 namespace NUS_ISS_14_Appointment_Buddy.Controllers
 {
@@ -23,12 +25,48 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
             _appSettings = appSettings;
             _logger = logger;
         }
-
-        public async Task<IActionResult> Index(string apptId = "")
+        
+        [HttpGet]
+        public async Task<IActionResult> Index(string dateFrom, string dateTo)
         {
-            var appt = await _appointmentService.GetAppointmentByAppointmentId("1B8FA93B-29E8-4E44-A0B3-A1AB5B8E1458", AccessToken);
+            ViewData["DateFrom"] = dateFrom;
+            ViewData["DateTo"] = dateTo;
 
-            return View(appt);
+            var pageSize = _appSettings.Value.PageSize;
+            var page = 1;
+
+            M.PaginatedResults<M.Appointment> apptItems = await _appointmentService.GetAllAppointments(AccessToken, dateFrom, dateTo, page, pageSize);
+
+            var apptRvm = new ResultViewModel<M.Appointment>(apptItems.Data, apptItems.PageIndex, apptItems.PageSize, apptItems.Count);
+
+            return View(apptRvm);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Search(string dateFrom, string dateTo)
+        {
+            return Json(new
+            {
+                redirectUrl = Url.Action("Index", new { dateFrom = dateFrom, dateTo = dateTo })
+            });
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAppointmentPage(int page, string dateFrom, string dateTo, string partialV)
+        {
+            var pageSize = _appSettings.Value.PageSize;
+
+            var res = await _appointmentService.GetAllAppointments(AccessToken, dateFrom, dateTo, page, pageSize);
+
+            object vm = new object();
+
+            if (res != null)
+            {
+                vm = new ResultViewModel<M.Appointment>(res.Data, res.PageIndex, res.PageSize, res.Count);
+            }
+
+            return PartialView(partialV, vm);
         }
     }
 }
