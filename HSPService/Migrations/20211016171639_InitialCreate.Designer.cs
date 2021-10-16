@@ -10,15 +10,15 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HSPService.Migrations
 {
     [DbContext(typeof(ServiceContext))]
-    [Migration("20210911144132_intitalCreate")]
-    partial class intitalCreate
+    [Migration("20211016171639_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.8")
+                .HasAnnotation("ProductVersion", "5.0.9")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("HSPService.Models.Service", b =>
@@ -34,6 +34,9 @@ namespace HSPService.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -42,9 +45,6 @@ namespace HSPService.Migrations
 
                     b.Property<DateTime>("LastUpdatedDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("Services")
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -55,11 +55,11 @@ namespace HSPService.Migrations
                         {
                             Id = 1,
                             CreatedBy = "S1234567C",
-                            CreatedDate = new DateTime(2021, 9, 11, 22, 41, 32, 378, DateTimeKind.Local).AddTicks(3649),
+                            CreatedDate = new DateTime(2021, 10, 17, 1, 16, 39, 564, DateTimeKind.Local).AddTicks(140),
+                            Description = "testServices",
                             IsDeleted = false,
                             LastUpdatedBy = "S234567C",
-                            LastUpdatedDate = new DateTime(2021, 9, 11, 22, 41, 32, 379, DateTimeKind.Local).AddTicks(3669),
-                            Services = "testServices"
+                            LastUpdatedDate = new DateTime(2021, 10, 17, 1, 16, 39, 564, DateTimeKind.Local).AddTicks(8894)
                         });
                 });
 #pragma warning restore 612, 618

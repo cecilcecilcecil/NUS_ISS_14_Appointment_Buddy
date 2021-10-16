@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace HSPService.Migrations
 {
-    public partial class intitalCreate : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,7 +13,7 @@ namespace HSPService.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Services = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LastUpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -27,8 +27,8 @@ namespace HSPService.Migrations
 
             migrationBuilder.InsertData(
                 table: "Service",
-                columns: new[] { "Id", "CreatedBy", "CreatedDate", "IsDeleted", "LastUpdatedBy", "LastUpdatedDate", "Services" },
-                values: new object[] { 1, "S1234567C", new DateTime(2021, 9, 11, 22, 41, 32, 378, DateTimeKind.Local).AddTicks(3649), false, "S234567C", new DateTime(2021, 9, 11, 22, 41, 32, 379, DateTimeKind.Local).AddTicks(3669), "testServices" });
+                columns: new[] { "Id", "CreatedBy", "CreatedDate", "Description", "IsDeleted", "LastUpdatedBy", "LastUpdatedDate" },
+                values: new object[] { 1, "S1234567C", new DateTime(2021, 10, 17, 1, 16, 39, 564, DateTimeKind.Local).AddTicks(140), "testServices", false, "S234567C", new DateTime(2021, 10, 17, 1, 16, 39, 564, DateTimeKind.Local).AddTicks(8894) });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
