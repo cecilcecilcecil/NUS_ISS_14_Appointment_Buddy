@@ -25,14 +25,58 @@ namespace HSPSpecialist.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Specialist>>> GetSpecialist()
         {
-            return await _context.Specialist.ToListAsync();
+           // return await _context.Specialist.ToListAsync();
+            var result = await (from Spec in _context.Specialist
+                                join ser in _context.Service on Spec.Services equals ser.Id
+                                select new Specialist
+                                {
+                                    Id = Spec.Id,
+                                    Name = Spec.Name,
+                                    NRIC = Spec.NRIC,
+                                    Services = Spec.Services,
+                                    Contact = Spec.Contact,
+                                    Available = Spec.Available,
+                                    Address = Spec.Address,
+                                    Email = Spec.Email,
+                                    CreatedBy = Spec.CreatedBy,
+                                    CreatedDate = Spec.CreatedDate,
+                                    LastUpdatedBy = Spec.LastUpdatedBy,
+                                    LastUpdatedDate = Spec.LastUpdatedDate,
+                                    IsDeleted = Spec.IsDeleted,
+                                    ServiceDescription = ser.Description
+                                }
+                                ).ToListAsync();
+            return result;
         }
 
         // GET: api/Specialists/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Specialist>> GetSpecialist(int id)
+        public async Task<ActionResult<IEnumerable<Specialist>>> GetSpecialist(int id)
         {
-            var specialist = await _context.Specialist.FindAsync(id);
+            // var specialist = await _context.Specialist.FindAsync(id);
+
+            var specialist = await (from Spec in _context.Specialist
+                                join ser in _context.Service on Spec.Services equals ser.Id
+                                where Spec.Id == id
+                                select new Specialist
+                                {
+                                    Id = Spec.Id,
+                                    Name = Spec.Name,
+                                    NRIC = Spec.NRIC,
+                                    Services = Spec.Services,
+                                    Contact = Spec.Contact,
+                                    Available = Spec.Available,
+                                    Address = Spec.Address,
+                                    Email = Spec.Email,
+                                    CreatedBy = Spec.CreatedBy,
+                                    CreatedDate = Spec.CreatedDate,
+                                    LastUpdatedBy = Spec.LastUpdatedBy,
+                                    LastUpdatedDate = Spec.LastUpdatedDate,
+                                    IsDeleted = Spec.IsDeleted,
+                                    ServiceDescription = ser.Description
+                                }
+                                   ).ToListAsync();
+
 
             if (specialist == null)
             {

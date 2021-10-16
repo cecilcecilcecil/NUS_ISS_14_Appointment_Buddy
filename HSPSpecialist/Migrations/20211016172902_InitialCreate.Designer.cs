@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HSPSpecialist.Migrations
 {
     [DbContext(typeof(SpecialistContext))]
-    [Migration("20210912090952_InitialCreate")]
+    [Migration("20211016172902_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -18,8 +18,50 @@ namespace HSPSpecialist.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.9")
+                .HasAnnotation("ProductVersion", "5.0.8")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("HSPSpecialist.Models.Service", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("LastUpdatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("LastUpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Service");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 3,
+                            CreatedBy = "S1234567C",
+                            CreatedDate = new DateTime(2021, 10, 17, 1, 29, 2, 454, DateTimeKind.Local).AddTicks(2556),
+                            Description = "testServices",
+                            IsDeleted = false,
+                            LastUpdatedBy = "S234567C",
+                            LastUpdatedDate = new DateTime(2021, 10, 17, 1, 29, 2, 454, DateTimeKind.Local).AddTicks(2980)
+                        });
+                });
 
             modelBuilder.Entity("HSPSpecialist.Models.Specialist", b =>
                 {
@@ -61,6 +103,9 @@ namespace HSPSpecialist.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ServiceDescription")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("Services")
                         .HasColumnType("int");
 
@@ -76,11 +121,11 @@ namespace HSPSpecialist.Migrations
                             Available = true,
                             Contact = 7697807,
                             CreatedBy = "S1234567C",
-                            CreatedDate = new DateTime(2021, 9, 12, 17, 9, 51, 810, DateTimeKind.Local).AddTicks(7048),
+                            CreatedDate = new DateTime(2021, 10, 17, 1, 29, 2, 452, DateTimeKind.Local).AddTicks(2545),
                             Email = "test@singnet.com",
                             IsDeleted = false,
                             LastUpdatedBy = "S234567C",
-                            LastUpdatedDate = new DateTime(2021, 9, 12, 17, 9, 51, 811, DateTimeKind.Local).AddTicks(5327),
+                            LastUpdatedDate = new DateTime(2021, 10, 17, 1, 29, 2, 453, DateTimeKind.Local).AddTicks(1245),
                             NRIC = "S1234567C",
                             Name = "Milo",
                             Services = 3
