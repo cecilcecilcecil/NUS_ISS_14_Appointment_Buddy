@@ -20,5 +20,16 @@ namespace HSPSpecialist.Models
         public string LastUpdatedBy { get; set; }
         public DateTime LastUpdatedDate { get; set; }
         public Boolean IsDeleted { get; set; }
+        public string ServiceDescription { get; set; }
+    }
+    public class Service
+    {
+        public int Id { get; set; }
+        public string Description { get; set; }
+        public string CreatedBy { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public string LastUpdatedBy { get; set; }
+        public DateTime LastUpdatedDate { get; set; }
+        public Boolean IsDeleted { get; set; }
     }
 }

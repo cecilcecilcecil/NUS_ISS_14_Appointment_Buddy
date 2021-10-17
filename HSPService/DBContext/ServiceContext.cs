@@ -21,7 +21,7 @@ namespace HSPService.DBContext
                 new Service
                 {
                     Id = 1,
-                    Services = "testServices",
+                    Description = "testServices",
                     CreatedBy = "S1234567C",
                     CreatedDate = System.DateTime.Now,
                     LastUpdatedBy = "S234567C",

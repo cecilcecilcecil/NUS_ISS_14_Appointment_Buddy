@@ -12,7 +12,9 @@ namespace HSPSpecialist.DBContext
         public SpecialistContext(DbContextOptions<SpecialistContext> options) : base(options)
         {
         }
+
         public DbSet<Specialist> Specialist { get; set; }
+        public DbSet<Service> Service { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -27,6 +29,19 @@ namespace HSPSpecialist.DBContext
                     Available = true,
                     Address = "BLK221 PENDING ROAD #08-149",
                     Email = "test@singnet.com",
+                    CreatedBy = "S1234567C",
+                    CreatedDate = System.DateTime.Now,
+                    LastUpdatedBy = "S234567C",
+                    LastUpdatedDate = System.DateTime.Now,
+                    IsDeleted = false
+                }
+            );
+
+            modelBuilder.Entity<Service>().HasData(
+                new Service
+                {
+                    Id = 3,
+                    Description = "testServices",
                     CreatedBy = "S1234567C",
                     CreatedDate = System.DateTime.Now,
                     LastUpdatedBy = "S234567C",
