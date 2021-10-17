@@ -53,6 +53,24 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
         }
 
         [HttpGet]
+        public IActionResult LinkToAddAppointment()
+        {
+            return Json(new { redirectUrl = Url.Action("AddAppointment", "Appointment") });
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> AddAppointment()
+        {
+            M.Appointment model = new M.Appointment
+            {
+                AppointmentId = Guid.NewGuid().ToString(),
+
+            };
+           
+            return View("AddAppointment", model);
+        }
+
+        [HttpGet]
         public async Task<IActionResult> GetAppointmentPage(int page, string dateFrom, string dateTo, string partialV)
         {
             var pageSize = _appSettings.Value.PageSize;

@@ -2,6 +2,7 @@
 (
 	[UserId]                    VARCHAR(50)     NOT NULL, 
     [UserLogin]                 VARCHAR(255)    NULL, 
+    [Password]                  VARCHAR(16)     NULL,
     [UserTypeId]                VARCHAR(50)     NULL, 
 	[PersonnelNumber]           VARCHAR(255)    NULL, 
     [Name]                      VARCHAR(255)    NULL, 

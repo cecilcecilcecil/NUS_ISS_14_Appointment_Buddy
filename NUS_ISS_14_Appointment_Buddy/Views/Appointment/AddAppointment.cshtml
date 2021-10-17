@@ -1,0 +1,43 @@
+﻿@using AppointmentBuddy.Core.Model
+@model Appointment
+
+@{
+    ViewData["Title"] = "Create New Appointment";
+}
+@Html.AntiForgeryToken()
+
+<div class="_page-essentials">
+    <div class="_step-body">
+        <div class="_content">
+            <div class="_project-content">
+                <div class="bids-width">
+                    <div class="repli-h3">Create New Appointment</div>
+                    <br />
+                    <br />
+                    <br />
+                    <div class="row">
+                        <div class="col-md-4">
+                            Appointment Date:
+                        </div>
+                        <div class="col-md-4">
+                            <div class="_form-group _calendar">
+                                <div class="input-group mb-5">
+                                    <input id="apptDate" data-toggle="datepicker" type="text" class="form-control" placeholder="dd/mm/yyyy" asp-for="@Model.AppointmentDate" autocomplete="off" maxlength="10">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text" id="apptIcon"><i class="far fa-calendar-alt"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" nonce="@ViewData["Nonce"]">
+    $('#apptDate').keypress(function (e) { return isDate(this, e); });
+    $('#apptIcon').click(function () { $('#apptDate').focus(); });
+</script>
+
