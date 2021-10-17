@@ -53,11 +53,11 @@ namespace HSPSpecialist.Migrations
                         {
                             Id = 3,
                             CreatedBy = "S1234567C",
-                            CreatedDate = new DateTime(2021, 10, 17, 1, 29, 2, 454, DateTimeKind.Local).AddTicks(2556),
+                            CreatedDate = new DateTime(2021, 10, 17, 16, 6, 28, 886, DateTimeKind.Local).AddTicks(6130),
                             Description = "testServices",
                             IsDeleted = false,
                             LastUpdatedBy = "S234567C",
-                            LastUpdatedDate = new DateTime(2021, 10, 17, 1, 29, 2, 454, DateTimeKind.Local).AddTicks(2980)
+                            LastUpdatedDate = new DateTime(2021, 10, 17, 16, 6, 28, 886, DateTimeKind.Local).AddTicks(6573)
                         });
                 });
 
@@ -119,11 +119,11 @@ namespace HSPSpecialist.Migrations
                             Available = true,
                             Contact = 7697807,
                             CreatedBy = "S1234567C",
-                            CreatedDate = new DateTime(2021, 10, 17, 1, 29, 2, 452, DateTimeKind.Local).AddTicks(2545),
+                            CreatedDate = new DateTime(2021, 10, 17, 16, 6, 28, 884, DateTimeKind.Local).AddTicks(7847),
                             Email = "test@singnet.com",
                             IsDeleted = false,
                             LastUpdatedBy = "S234567C",
-                            LastUpdatedDate = new DateTime(2021, 10, 17, 1, 29, 2, 453, DateTimeKind.Local).AddTicks(1245),
+                            LastUpdatedDate = new DateTime(2021, 10, 17, 16, 6, 28, 885, DateTimeKind.Local).AddTicks(6072),
                             NRIC = "S1234567C",
                             Name = "Milo",
                             Services = 3

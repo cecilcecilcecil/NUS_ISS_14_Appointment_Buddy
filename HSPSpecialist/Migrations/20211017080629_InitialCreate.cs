@@ -53,12 +53,12 @@ namespace HSPSpecialist.Migrations
             migrationBuilder.InsertData(
                 table: "Service",
                 columns: new[] { "Id", "CreatedBy", "CreatedDate", "Description", "IsDeleted", "LastUpdatedBy", "LastUpdatedDate" },
-                values: new object[] { 3, "S1234567C", new DateTime(2021, 10, 17, 1, 29, 2, 454, DateTimeKind.Local).AddTicks(2556), "testServices", false, "S234567C", new DateTime(2021, 10, 17, 1, 29, 2, 454, DateTimeKind.Local).AddTicks(2980) });
+                values: new object[] { 3, "S1234567C", new DateTime(2021, 10, 17, 16, 6, 28, 886, DateTimeKind.Local).AddTicks(6130), "testServices", false, "S234567C", new DateTime(2021, 10, 17, 16, 6, 28, 886, DateTimeKind.Local).AddTicks(6573) });
 
             migrationBuilder.InsertData(
                 table: "Specialist",
                 columns: new[] { "Id", "Address", "Available", "Contact", "CreatedBy", "CreatedDate", "Email", "IsDeleted", "LastUpdatedBy", "LastUpdatedDate", "NRIC", "Name", "ServiceDescription", "Services" },
-                values: new object[] { 1, "BLK221 PENDING ROAD #08-149", true, 7697807, "S1234567C", new DateTime(2021, 10, 17, 1, 29, 2, 452, DateTimeKind.Local).AddTicks(2545), "test@singnet.com", false, "S234567C", new DateTime(2021, 10, 17, 1, 29, 2, 453, DateTimeKind.Local).AddTicks(1245), "S1234567C", "Milo", null, 3 });
+                values: new object[] { 1, "BLK221 PENDING ROAD #08-149", true, 7697807, "S1234567C", new DateTime(2021, 10, 17, 16, 6, 28, 884, DateTimeKind.Local).AddTicks(7847), "test@singnet.com", false, "S234567C", new DateTime(2021, 10, 17, 16, 6, 28, 885, DateTimeKind.Local).AddTicks(6072), "S1234567C", "Milo", null, 3 });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
