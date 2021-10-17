@@ -2,8 +2,9 @@
 (
 	[AppointmentId]			VARCHAR (50)		NOT NULL,
     [UserId]                VARCHAR(50)         NULL,
-    [Name]                  VARCHAR(255)         NULL,
+    [Name]                  VARCHAR(255)        NULL,
     [AppointmentDate]		DATETIME            NULL,
+    [AppointmentTime]       VARCHAR(10)         NULL,
 	[IsDeleted]			    BIT                 NULL, 
     [VersionNo]			    INT                 NULL        DEFAULT 1, 
     [CreatedById]		    VARCHAR(50)         NULL, 

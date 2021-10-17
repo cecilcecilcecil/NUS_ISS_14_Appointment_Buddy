@@ -29,7 +29,7 @@ namespace AppointmentBuddy.Service.Appointment.API.Infrastructure
 
         public async Task<IEnumerable<M.Appointment>> GetAllAppointments()
         {
-            return await _context.Appointment.Where(x => !x.IsDeleted).ToListAsync();
+            return await _context.Appointment.Where(x => !x.IsDeleted && x.UserId != null).ToListAsync();
         }
     }
 }

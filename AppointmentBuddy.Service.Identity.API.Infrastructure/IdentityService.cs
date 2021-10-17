@@ -80,7 +80,7 @@ namespace AppointmentBuddy.Service.Identity.API.Infrastructure.Service
 
             if (IsAuthenticated)
             {
-                var user = await _repository.GetUserByUserLogin(username, userTypeId);
+                var user = await _repository.GetUserByUserLogin(username, password, userTypeId);
 
                 // return null if user not found
                 if (user == null)

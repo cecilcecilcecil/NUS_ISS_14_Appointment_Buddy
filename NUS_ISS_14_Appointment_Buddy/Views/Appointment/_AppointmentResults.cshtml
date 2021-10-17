@@ -9,7 +9,7 @@
                     <tr>
                         <th scope="col">S/N</th>
                         <th scope="col">Name</th>
-                        <th scope="col"s>Appointment Date</th>
+                        <th scope="col">Appointment Date</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -19,7 +19,7 @@
                         <tr>
                             <td>@count</td>
                             <td>@appt.Name</td>
-                            <td>@appt.AppointmentDate.ToString("dd/MM/yyyy")</td>
+                            <td>@appt.AppointmentDate.GetValueOrDefault().ToString("dd/MM/yyyy")</td>
                         </tr>
                     }
                 </tbody>

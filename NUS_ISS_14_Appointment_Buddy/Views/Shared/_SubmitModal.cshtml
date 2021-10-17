@@ -1,0 +1,50 @@
+﻿<div id="submitSuccessBox" class="sub-dialog">
+    <div class="alert-dialog-content">
+        <h3 class="quick-red" id="succHeader">
+            <b>
+                Success
+            </b>
+        </h3>
+        <div class="quick-text" id="successText">
+        </div>
+        <div class="quick-name-text quick-small-gap" id="refVerifierName">
+        </div>
+        <div class="quick-ok-gap">
+            <div id="closeBox" class="quick-submit">
+                Proceed to Dashboard
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .quick-submit {
+        position: absolute;
+        left: 2.5%;
+        top: 77%;
+        height: 3.5vw;
+        width: 32vw;
+        text-align: center;
+        line-height: 3.75vw;
+        background: #c8010f;
+        color: #fff;
+        font-size: 1.1vw;
+        border-radius: 5px;
+        text-transform: uppercase;
+        cursor: pointer;
+    }
+
+    .sub-dialog {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        padding-top: 200px; /* Location of the box */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    }
+</style>
