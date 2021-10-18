@@ -7,5 +7,6 @@ namespace AppointmentBuddy.Service.Appointment.API.Core.Interface
     {
         Task<M.Appointment> GetAppointmentByAppointmentId(string apptId);
         Task<M.PaginatedResults<M.Appointment>> GetAllAppointments(string dateFrom, string dateTo, int page, int pageSize);
+        Task<int> SaveAppointment(M.Appointment appt);
     }
 }

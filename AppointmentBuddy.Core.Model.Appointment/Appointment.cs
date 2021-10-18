@@ -11,6 +11,8 @@ namespace AppointmentBuddy.Core.Model
         [Column(TypeName = "varchar(255)")]
         public string Name { get; set; }
         public DateTime? AppointmentDate { get; set; }
+        [Column(TypeName = "varchar(16)")]
+        public string AppointmentTime { get; set; }
         public bool IsDeleted { get; set; }
         public int? VersionNo { get; set; }
         [Column(TypeName = "varchar(50)")]
