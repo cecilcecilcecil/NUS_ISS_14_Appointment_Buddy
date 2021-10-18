@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using NUS_ISS_14_Appointment_Buddy.Models;
+using AppointmentBuddy.Core.Common.Helper;
 
 namespace NUS_ISS_14_Appointment_Buddy.Controllers
 {
@@ -59,13 +60,30 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> AddAppointment()
+        public async Task<IActionResult> AddAppointment(string apptId = "")
         {
-            M.Appointment model = new M.Appointment
-            {
-                AppointmentId = Guid.NewGuid().ToString(),
+            Appointment model;
 
-            };
+            if (!string.IsNullOrEmpty(apptId))
+            {
+                var appt = await _appointmentService.GetAppointmentByAppointmentId(apptId, AccessToken);
+
+                model = new Appointment
+                {
+                    AppointmentId = appt.AppointmentId,
+                    AppointmentDate = appt.AppointmentDate.GetValueOrDefault().ToString("dd/MM/yyyy"),
+                    AppointmentTime = appt.AppointmentTime,
+                    Name = appt.Name,
+                    UserId = appt.UserId
+                };
+            }
+            else
+            {
+                model = new Appointment
+                {
+                    AppointmentId = Guid.NewGuid().ToString(),
+                };
+            }
            
             return View("AddAppointment", model);
         }
@@ -85,6 +103,48 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
             }
 
             return PartialView(partialV, vm);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> SaveAppointment(Appointment appt)
+        {
+            string msgVal = "";
+
+            bool apptDateValid = DateTime.TryParse(appt.AppointmentDate, out DateTime apptDate);
+
+            M.Appointment coreAppt = new M.Appointment
+            {
+                AppointmentDate = apptDate,
+                AppointmentId = appt.AppointmentId,
+                AppointmentTime = appt.AppointmentTime,
+                Name = appt.Name,
+                UserId = appt.UserId,
+                LastUpdatedBy = UserName,
+                LastUpdatedById = UserId
+            };
+
+            var successValue = await _appointmentService.SaveAppointment(coreAppt, AccessToken);
+
+            if (successValue == Constants.ErrorCodes.Success)
+            {
+                msgVal = "";
+            }
+
+            else
+            {
+                if (successValue == Constants.ErrorCodes.ConcurrencyError)
+                {
+                    msgVal = Constants.ValidationMessages.Concurrency;
+                }
+
+                else
+                {
+                    msgVal = Constants.ValidationMessages.SystemUnavailable;
+                }
+            }
+
+            return Json(new { msgVal = msgVal, successVal = successValue });
         }
     }
 }
