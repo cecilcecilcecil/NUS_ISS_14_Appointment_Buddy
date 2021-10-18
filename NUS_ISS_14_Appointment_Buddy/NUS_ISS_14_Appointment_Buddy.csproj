@@ -36,8 +36,13 @@
     <ProjectReference Include="..\AppointmentBuddy.Core.Common\AppointmentBuddy.Core.Common.csproj" />
     <ProjectReference Include="..\AppointmentBuddy.Core.Model.AccessControl\AppointmentBuddy.Core.Model.AccessControl.csproj" />
     <ProjectReference Include="..\AppointmentBuddy.Core.Model.Appointment\AppointmentBuddy.Core.Model.Appointment.csproj" />
+    <ProjectReference Include="..\AppointmentBuddy.Core.Model.HSPSpecialist\AppointmentBuddy.Core.Model.HSPSpecialist.csproj" />
     <ProjectReference Include="..\AppointmentBuddy.Core.Model.Identity\AppointmentBuddy.Core.Model.Identity.csproj" />
     <ProjectReference Include="..\AppointmentBuddy.Core.Model\AppointmentBuddy.Core.Model.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\icon\" />
   </ItemGroup>
 
 </Project>
