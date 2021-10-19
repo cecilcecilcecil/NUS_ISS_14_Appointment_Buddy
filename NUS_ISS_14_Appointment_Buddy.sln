@@ -79,6 +79,7 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppointmentBuddy.Service.PatientInfo.API.Infrastructure", "AppointmentBuddy.Service.PatientInfo.API.Infrastructure\AppointmentBuddy.Service.PatientInfo.API.Infrastructure.csproj", "{B540C11B-B6C3-47DB-AD76-3CFF4E51316D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppointmentBuddy.Core.Model.PatientInfo", "AppointmentBuddy.Core.Model.PatientInfo\AppointmentBuddy.Core.Model.PatientInfo.csproj", "{E7E17054-F56D-43AE-9DFD-8262BD5605AC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppointmentBuddy.Core.Model.HSPSpecialist", "AppointmentBuddy.Core.Model.HSPSpecialist\AppointmentBuddy.Core.Model.HSPSpecialist.csproj", "{94052E86-812C-4E56-B79A-BB4058FAE484}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
