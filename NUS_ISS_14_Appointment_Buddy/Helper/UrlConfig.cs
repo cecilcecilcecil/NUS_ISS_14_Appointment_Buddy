@@ -23,6 +23,7 @@ namespace NUS_ISS_14_Appointment_Buddy.Helper
             public static string APIVersion { get; set; }
 
             public static string AuthenticateAPI(string api) => $"{BaseURI}/v{APIVersion}{api}";
+            public static string FilteredPatientsAPI(string api) => $"{BaseURI}/v{APIVersion}{api}";
         }
 
         public static class Room

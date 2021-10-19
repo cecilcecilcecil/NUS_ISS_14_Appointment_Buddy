@@ -17,6 +17,7 @@ namespace AppointmentBuddy.Core.Common.Config
         public string IdentityAPIVersion { get; set; }
 
         public string IdentityAPI_Authenticate { get; set; }
+        public string IdentityAPI_FilteredPatientsAPI { get; set; }
 
         public string RoomAPI { get; set; }
         public string RoomAPIVersion { get; set; }

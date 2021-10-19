@@ -14,15 +14,23 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @{int count = 1;}
+                    @{int count = 1 + (10 * (Model.PaginationInfo.PageNumber - 1));}
                     @foreach (var appt in Model.ListItems)
                     {
                         <tr>
                             <td>@count</td>
-                            <td>@appt.Name</td>
+                            @if (!string.IsNullOrEmpty(appt.Name))
+                            {
+                                <td><a href="@Url.ActionLink("UpdateAppointment", "Appointment", new { apptId = appt.AppointmentId })">@appt.Name</a></td>
+                            }
+                            else
+                            {
+                                <td><a href="@Url.ActionLink("UpdateAppointment", "Appointment", new { apptId = appt.AppointmentId })">Assign</a></td>
+                            }
                             <td>@appt.AppointmentDate.GetValueOrDefault().ToString("dd/MM/yyyy")</td>
                             <td>@appt.AppointmentTime</td>
                         </tr>
+                        count++;
                     }
                 </tbody>
             </table>

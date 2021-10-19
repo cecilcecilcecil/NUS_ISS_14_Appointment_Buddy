@@ -9,5 +9,6 @@ namespace NUS_ISS_14_Appointment_Buddy.Interface
     public interface IIdentityService
     {
         Task<M.IdentityDto> Authenticate(string username, string password, string userTypeId);
+        Task<IEnumerable<M.User>> GetAllUnassignedPatientsByDateTime(string date, string time, string token);
     }
 }

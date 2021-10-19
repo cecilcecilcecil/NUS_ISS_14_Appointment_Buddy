@@ -44,12 +44,6 @@
                             <button class="red-btn" id="createButton">Create</button>
                         </div>
                     }
-                    else @if (IdentityHelper.HasRole((ClaimsIdentity)User.Identity, Constants.RoleType.Staff))
-                    {
-                        <div class="col-lg-4 col-md-12 col-sm-12">
-                            <button class="red-btn" id="assignButton">Assign</button>
-                        </div>
-                    }
                     <div class="col-lg-4 col-md-12 col-sm-12">
                         <button class="white-btn" id="resetButton">Reset</button>
                         <button class="red-btn" id="applyButton">Apply</button>

@@ -30,7 +30,7 @@ namespace AppointmentBuddy.Service.Appointment.API.Infrastructure
 
         public async Task<IEnumerable<M.Appointment>> GetAllAppointments()
         {
-            return await _context.Appointment.Where(x => !x.IsDeleted && x.UserId != null).ToListAsync();
+            return await _context.Appointment.Where(x => !x.IsDeleted).ToListAsync();
         }
 
         public async Task<int> SaveAppointment(M.Appointment appt)

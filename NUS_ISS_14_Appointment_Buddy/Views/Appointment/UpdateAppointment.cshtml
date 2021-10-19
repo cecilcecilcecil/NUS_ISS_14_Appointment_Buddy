@@ -2,7 +2,7 @@
 @model NUS_ISS_14_Appointment_Buddy.Models.Appointment
 
 @{
-    ViewData["Title"] = "Create New Appointment";
+    ViewData["Title"] = "Assign Appointment";
 }
 @using (Html.BeginForm("SaveAppointment", "Appointment", FormMethod.Post, new { @id = "AppointmentForm" }))
 {
@@ -23,15 +23,7 @@
                                 Appointment Date:
                             </div>
                             <div class="col-md-4">
-                                <div class="_form-group _calendar">
-                                    <div class="input-group mb-5">
-                                        <input id="apptDate" data-toggle="datepicker" type="text" class="form-control" placeholder="dd/mm/yyyy" asp-for="@Model.AppointmentDate" autocomplete="off" maxlength="10">
-                                        <div class="input-group-append">
-                                            <span class="input-group-text" id="apptIcon"><i class="far fa-calendar-alt"></i></span>
-                                        </div>
-                                        <div>@Html.ValidationMessageFor(model => model.AppointmentDate)</div>
-                                    </div>
-                                </div>
+                                @Html.DisplayFor(x => x.AppointmentDate)
                             </div>
                         </div>
                         <div class="row">
@@ -39,14 +31,18 @@
                                 Appointment Time:
                             </div>
                             <div class="col-md-4">
-                                <div class="_form-group">
-                                    <div class="time-container">
-                                        <div class="input-holder">
-                                            @Html.TextBoxFor(model => model.AppointmentTime, new { @class = "is_timeentry", placeholder = "HH:MM", id = "apptTime" })
-                                        </div>
-                                        <div class="quick-sitetime-gap">
-                                            <div class="quick-small-gap">@Html.ValidationMessageFor(model => model.AppointmentTime)</div>
-                                        </div>
+                                @Html.DisplayFor(x => x.AppointmentTime)
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                Assigned Patient:
+                            </div>
+                            <div class="col-md-4">
+                                <div class="category-container">
+                                    <div class="_form-group _validity">
+                                        @Html.DropDownListFor(model => model.UserId, (IEnumerable<SelectListItem>)ViewBag.Patients, "Please Select Patient",
+                                        new { @class = "_category wide", id = "patientDrop" })
                                     </div>
                                 </div>
                             </div>
@@ -62,7 +58,7 @@
                                         <h4 class="autosave-msg"></h4>
                                         <div class="_nxt-prv">
                                             <button class="_transparent cancelBtn">cancel</button>
-                                            <button class="red-btn" id="saveBtn">save</button>
+                                            <button class="red-btn" id="assignBtn">assign</button>
                                         </div>
                                     </div>
                                 </div>
@@ -82,10 +78,6 @@
 
 <script type="text/javascript" nonce="@ViewData["Nonce"]">
     $(document).ready(function () {
-        $('#apptDate').keypress(function (e) { return isDate(this, e); });
-        $('#apptIcon').click(function () { $('#apptDate').focus(); });
-        $('#apptTime').keypress(function (e) { return isTime(this, e); });
-
         $('#AppointmentForm').submit(function (e) { e.preventDefault(); });
 
         $('#saveBtn').click(function () {

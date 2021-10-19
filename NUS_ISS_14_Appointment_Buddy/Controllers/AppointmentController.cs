@@ -16,13 +16,15 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
     public class AppointmentController : BaseController
     {
         private IAppointmentService _appointmentService;
+        private IIdentityService _identityService;
         private readonly IOptions<AppSettings> _appSettings;
         private readonly ILogger<AppointmentController> _logger;
 
-        public AppointmentController(IAppointmentService appointmentService, IOptions<AppSettings> appSettings, 
+        public AppointmentController(IAppointmentService appointmentService, IIdentityService identityService, IOptions<AppSettings> appSettings, 
             ILogger<AppointmentController> logger) : base(logger)
         {
             _appointmentService = appointmentService;
+            _identityService = identityService;
             _appSettings = appSettings;
             _logger = logger;
         }
@@ -85,6 +87,34 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
                 };
             }
            
+            return View("AddAppointment", model);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> UpdateAppointment(string apptId = "")
+        {
+            Appointment model;
+
+            if (string.IsNullOrEmpty(apptId))
+            {
+                return RedirectToAction("NoAuthorization", "Home");
+            }
+            else
+            {
+                var appt = await _appointmentService.GetAppointmentByAppointmentId(apptId, AccessToken);
+
+                model = new Appointment
+                {
+                    AppointmentId = appt.AppointmentId,
+                    AppointmentDate = appt.AppointmentDate.GetValueOrDefault().ToString("dd/MM/yyyy"),
+                    AppointmentTime = appt.AppointmentTime,
+                    Name = appt.Name,
+                    UserId = appt.UserId
+                };
+
+                ViewBag.Patients = await _identityService.GetAllUnassignedPatientsByDateTime(appt.AppointmentDate.GetValueOrDefault().ToString("dd/MM/yyyy"), appt.AppointmentTime, AccessToken);
+            }
+
             return View("AddAppointment", model);
         }
 
