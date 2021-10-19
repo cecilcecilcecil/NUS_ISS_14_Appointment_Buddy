@@ -1,0 +1,139 @@
+﻿@using NUS_ISS_14_Appointment_Buddy.Helper
+@using AppointmentBuddy.Core.Common.Helper
+@using M = AppointmentBuddy.Core.Model
+@using System.Security.Claims
+@model NUS_ISS_14_Appointment_Buddy.Models.PatientInfo
+
+@{
+    ViewData["Title"] = "Add/Update Patient Infomation";
+}
+
+<div class="_page-essentials">
+    @Html.AntiForgeryToken()
+    <div class="well">
+        <div class="_content">
+            <h2>Add/Update Patient Information</h2>
+        </div>
+    </div>
+    <div class="editQuan _goods">
+        <div class="display">
+            <div class="based-table view-goods _edit">
+                <table class="table" id="apptTable" style="overflow: auto !important; overflow-x: auto !important;">
+                    <tbody>
+                        <tr style="color:red">ViewBag.Info</tr>
+                        <tr>
+                            <td scope="col">Title:</td>
+                            <td></td>
+                            <td>
+                                @Html.DropDownListFor(model => model.Title, (IEnumerable<SelectListItem>)ViewBag.Titles, "Please select a title")
+                            </td>
+                        </tr>
+                        <tr>
+                            <td scope="col">Name:</td>
+                            <td style="color:red">*</td>
+                            <td>
+                                @Html.TextBoxFor(x => x.PatientName)
+                                @Html.ValidationMessageFor(x => x.PatientName, "", new { style = "color:red" })
+                            </td>
+                        </tr>
+                        <tr>
+                            <td scope="col">NRIC:</td>
+                            <td style="color:red">*</td>
+                            <td>
+                                @Html.TextBoxFor(x => x.NRIC)
+                                @Html.ValidationMessageFor(x => x.NRIC, "", new { style = "color:red" })
+                            </td>
+                        </tr>
+                        <tr>
+                            <td scope="col">Gender:</td>
+                            <td></td>
+                            <td>
+                                @Html.DropDownListFor(model => model.Gender, (IEnumerable<SelectListItem>)ViewBag.Genders, "Please select a gender")
+                            </td>
+                        </tr>
+                        <tr>
+                            <td scope="col">Birth Date:</td>
+                            <td></td>
+                            <td>
+                                <input id="BirthDate" data-toggle="datepicker" type="text" class="form-control" placeholder="dd/mm/yyyy" value="@Model.BirthDate" autocomplete="off" maxlength="10">
+                                <div class="input-group-append">
+                                    <span class="input-group-text" id="BirthDateIcon"><i class="far fa-calendar-alt"></i></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td scope="col">Contact Number:</td>
+                            <td></td>
+                            <td>
+                                @Html.TextBoxFor(x => x.ContactNumber)
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="_project-content">
+        <div class="bids-width _contact-details">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="autosave-container">
+                        <div class="autosave-wrapper">
+                            <h4 class="autosave-msg"></h4>
+                            <div class="_nxt-prv">
+                                <button class="_transparent cancelBtn" id="cancelBtn">cancel</button>
+                                <button class="_transparent savedraftbtn" id="saveBtn">save</button>
+                                <button class="_transparent delete-strikethrough" style="float:left">
+                                     @Html.ActionLink("Delete Department", "Delete", "Department",
+                                     new { confirm = true, patId = Model.PatientId},
+                                     new { Style = "color:White;", onclick = "return confirm('Are you sure to delete this patient?')" })
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script nonce="@ViewData["Nonce"]">
+
+    $('#saveBtn').click(function () { UpdatePatientInfo() });
+    $('#cancelBtn').click(function () { document.getElementById('confirmationBox').style.display = 'none'; });
+    $('#updateBtn').click(function () {
+        this.blur();
+        document.getElementById('confirmationBox').style.display = 'block';
+        });
+    $(function UpdatePatientInfo() {
+        var formData = $('#createForm').serializeArray();
+        $.ajax({
+                                type: 'POST',
+                                data: formData,
+                                dataType: 'json',
+                                url: '@Url.Action("UpdatePatientInfo", "PatientInfo")',
+                                success: function (result) {
+
+                                    savingModal.style.display = "none";
+
+                                    if (result.successVal == '@Constants.ErrorCodes.Success') {
+                                        document.getElementById('submitSuccessBox').style.display = 'block';
+                                        }
+                                    else {
+                                        $(window).scrollTop(0);
+                                        document.getElementById("errorMsgValue").innerHTML = result.autosaveDate;
+                                        document.getElementById("errorMsgBox").style.display = "block";
+                                    }
+                                },
+                                error: function () {
+                                    savingModal.style.display = "none";
+                                    document.getElementById("errorMsgBox").style.display = "block";
+                                }
+        });
+        $('#closeBox').click(function () {
+            document.getElementById('submitSuccessBox').style.display = "none";
+            window.onbeforeunload = null;
+            window.location.href = '@Url.Action("Index", "Home")';
+        });
+
+</script>

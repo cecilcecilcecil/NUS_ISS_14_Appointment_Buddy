@@ -1,0 +1,45 @@
+﻿@using AppointmentBuddy.Core.Model
+@model CollectionDataModel
+
+<h2>Add a Specialist</h2>
+<form asp-action="AddSpecialist" method="post">
+    <div class="form-group">
+        <label for="Name">Name:</label>
+        <input class="form-control" name="Name" />
+    </div>
+    <div class="form-group">
+        <label for="Name">NRIC:</label>
+        <input class="form-control" name="NRIC" />
+    </div>
+    <div class="form-group">
+        <label for="Name">Contact:</label>
+        <input class="form-control" name="Contact" />
+    </div>
+    <div class="form-group">
+        <label for="Name">Available:</label>
+        <select name="Available">
+            <option value="True">Yes</option>
+            <option value="false">No</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="Name">Services:</label>
+        <select name="Services">
+            @foreach (var service in Model.Service)
+            {
+                <option value=@service.Id>@service.Description</option>
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="Name">Address:</label>
+        <input class="form-control" name="Address" />
+    </div>
+    <div class="form-group">
+        <label for="Name">Email:</label>
+        <input class="form-control" name="Email" />
+    </div>
+    <div class="text-center panel-body">
+        <button type="submit" class="btn btn-sm btn-primary">Add</button>   <a asp-action="Index" class="btn btn-sm btn-secondary">Back</a>
+    </div>
+</form>
