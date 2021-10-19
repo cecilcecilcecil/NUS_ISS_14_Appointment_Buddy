@@ -13,6 +13,8 @@ namespace AppointmentBuddy.Core.Common.Config
         public string AppointmentAPI_GetAllAppointments { get; set; }
         public string AppointmentAPI_SaveAppointment { get; set; }
 
+        public string PatientInfoAPI_GetPatientInfoById { get; set; }
+
         public string IdentityAPI { get; set; }
         public string IdentityAPIVersion { get; set; }
 

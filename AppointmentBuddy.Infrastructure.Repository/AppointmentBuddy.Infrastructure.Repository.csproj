@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AppointmentBuddy.Core.Model.Appointment\AppointmentBuddy.Core.Model.Appointment.csproj" />
+    <ProjectReference Include="..\AppointmentBuddy.Core.Model.PatientInfo\AppointmentBuddy.Core.Model.PatientInfo.csproj" />
     <ProjectReference Include="..\AppointmentBuddy.Core.Model\AppointmentBuddy.Core.Model.csproj" />
   </ItemGroup>
 

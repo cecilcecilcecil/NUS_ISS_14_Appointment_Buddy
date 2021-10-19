@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AppointmentBuddy.Core.Model
 {
+    [Table("Appointment", Schema = "dbo")]
     public class Appointment
     {
         public string AppointmentId { get; set; }

@@ -69,6 +69,7 @@
     <Build Include="dbo\Tables\Code.sql" />
     <Build Include="dbo\Tables\Room.sql" />
     <None Include="dbo\PredefinedData\03_AB_UserWithRole.sql" />
+    <Build Include="dbo\Tables\PatientInfo.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="dbo\PredefinedData\01_AB_Role.sql" />

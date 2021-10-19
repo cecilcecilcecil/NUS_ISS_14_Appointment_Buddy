@@ -4,4 +4,9 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\AppointmentBuddy.Infrastructure.Repository\AppointmentBuddy.Infrastructure.Repository.csproj" />
+    <ProjectReference Include="..\AppointmentBuddy.Service.PatientInfo.API.Core\AppointmentBuddy.Service.PatientInfo.API.Core.csproj" />
+  </ItemGroup>
+
 </Project>

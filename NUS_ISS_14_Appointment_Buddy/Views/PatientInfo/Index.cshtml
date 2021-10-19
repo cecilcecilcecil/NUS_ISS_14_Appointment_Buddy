@@ -1,0 +1,84 @@
+﻿@using NUS_ISS_14_Appointment_Buddy.Helper
+@using AppointmentBuddy.Core.Common.Helper
+@using M = AppointmentBuddy.Core.Model
+@using System.Security.Claims
+
+@model NUS_ISS_14_Appointment_Buddy.Models.ResultViewModel<M.PatientInfo>
+
+@{
+    ViewData["Title"] = "Patient Infomation";
+}
+
+<div class="_page-essentials">
+    @Html.AntiForgeryToken()
+    <div class="_my-tender-body">
+        <div class="_content">
+            <div class="_search-and-filter-content">
+                <div class="row ken-flex">
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                        <h3>NRIC:</h3>
+                        <div class="input-group mb-5">,
+                            <input value="@ViewData["NRIC"]" class="form-control" id="NRIC"/>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                        <h3>Patient Name:</h3>
+                        <div class="input-group mb-5">
+                            <input value="@ViewData["PatientName"]" class="form-control" id="PatientName" />
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-12 col-sm-12">
+                    </div>
+                </div>
+                <br />
+                <div class="row ken-flex">
+                    <div class="col-lg-4 col-md-12 col-sm-12">
+                        <button class="white-btn" id="resetButton">Reset</button>
+                        <button class="red-btn" id="applyButton">Apply</button>
+                    </div>
+                </div>
+            </div>
+            <div class="_project-content" id="pats">
+                @await Html.PartialAsync("_PatientInfoResults", Model)
+            </div>
+            <div>
+                <div class="row ken-flex">
+                    <div class="col-lg-4 col-md-12 col-sm-12">
+                        <button class="white-btn" id="addButton">Add New Patient</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script nonce="@ViewData["Nonce"]">
+    $(function () {
+        $("#applyButton").click(function (e) {
+
+            e.preventDefault();
+
+            $.post('@Url.Action("Search")', { nric: $('#NRIC').val(), patName: $('#PatientName').val(), '__RequestVerificationToken': $('input[name="__RequestVerificationToken"]').val() }, function (data) {
+                window.location = data.redirectUrl;
+            });
+
+        });
+
+        $("#resetButton").click(function (e) {
+            e.preventDefault();
+            $('#NRIC').val('');
+            $('#PatientName').val('');
+        });
+
+        $("#addButton").click(function (e) {
+            e.preventDefault();
+            $.post('@Url.Action("UpdatePatientInfo")', {'__RequestVerificationToken': $('input[name="__RequestVerificationToken"]').val() }, function (data) {
+                window.location = data.redirectUrl;
+            });
+        });
+
+        $('#DateFrom, #DateTo').keypress(function (e) {
+            return isDate(this, e);
+        });
+    });
+</script>
