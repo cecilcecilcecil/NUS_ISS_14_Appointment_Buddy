@@ -8,6 +8,7 @@ using Microsoft.Extensions.Options;
 using System.Net.Http;
 using System.Globalization;
 using System.Linq;
+using AppointmentBuddy.Core.Common.Helper;
 
 namespace AppointmentBuddy.Service.Appointment.API.Infrastructure
 {
@@ -55,6 +56,33 @@ namespace AppointmentBuddy.Service.Appointment.API.Infrastructure
             response = new M.PaginatedResults<M.Appointment>(page, pageSize, data.Count(), data);
 
             return response;
+        }
+
+        public async Task<int> SaveAppointment(M.Appointment appt)
+        {
+            int success = Constants.ErrorCodes.Failure;
+
+            var dbAppt = await _repository.GetAppointmentByAppointmentId(appt.AppointmentId);
+
+            if (dbAppt == null)
+            {
+                appt.CreatedBy = appt.LastUpdatedBy;
+                appt.CreatedById = appt.LastUpdatedById;
+                appt.CreatedDate = DateTime.Now;
+                appt.LastUpdatedDate = DateTime.Now;
+                appt.VersionNo = 1;
+
+                success = await _repository.SaveAppointment(appt);
+            }
+            else
+            {
+                appt.LastUpdatedDate = DateTime.Now;
+                appt.VersionNo = dbAppt.VersionNo++;
+
+                success = await _repository.UpdateAppointment(appt);
+            }
+
+            return success;
         }
     }
 }

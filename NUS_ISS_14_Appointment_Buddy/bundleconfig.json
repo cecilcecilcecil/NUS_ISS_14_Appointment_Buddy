@@ -1,0 +1,152 @@
+// Configure bundling and minification for the project.
+// More info at https://go.microsoft.com/fwlink/?LinkId=808241
+[
+  {
+    "outputFileName": "wwwroot/css/combined.css",
+    // An array of relative input file paths. Globbing patterns supported
+    "inputFiles": [
+      "wwwroot/css/normalize.css",
+      "wwwroot/js/vendor/jquery-ui-1.12.1/jquery-ui.css",
+      "wwwroot/lib/bootstrap-4.3.1-dist/css/bootstrap.min.css",
+      "wwwroot/css/slick.css",
+      "wwwroot/lib/jquery.timeentry.package-2.0.1/jquery.timeentry.css",
+      "wwwroot/lib/fontawesome/css/all.css",
+      "wwwroot/lib/jquery-nice-select-1.1.0/css/nice-select.css",
+      "wwwroot/lib/toggle-switch/css/ui-toggle.css",
+      "wwwroot/lib/mcustomscrollbar/jquery.mCustomScrollbar.css",
+      "wwwroot/lib/jquery-flexdatalist-2.2.4/jquery.flexdatalist.css",
+      "wwwroot/css/main.css",
+      "wwwroot/css/responsive.css",
+      "wwwroot/css/site.css"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    "sourceMap": true
+  },
+  {
+    "outputFileName": "wwwroot/js/combined.js",
+    "inputFiles": [
+      "wwwroot/js/vendor/modernizr-3.6.0.min.js",
+      "wwwroot/lib/jquery/dist/jquery.js",
+      "wwwroot/js/vendor/jquery-3.4.1.min.js",
+      "wwwroot/js/webcomponentsjs/webcomponents-bundle.js",
+      "wwwroot/lib/jquery-validation/dist/jquery.validate.min.js",
+      "wwwroot/lib/jquery-validation/dist/additional-methods.min.js",
+      "wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js",
+      "wwwroot/lib/mcustomscrollbar/jquery.mCustomScrollbar.js",
+      "wwwroot/js/vendor/jquery-ui-1.12.1/jquery-ui.min.js",
+      "wwwroot/js/vendor/slick.min.js",
+      "wwwroot/lib/fontawesome/js/all.js",
+      "wwwroot/lib/jquery-nice-select-1.1.0/js/jquery.nice-select.min.js",
+      "wwwroot/lib/bootstrap-4.3.1-dist/js/popper.min.js",
+      "wwwroot/lib/bootstrap-4.3.1-dist/js/bootstrap.min.js",
+      "wwwroot/lib/toggle-switch/js/jquery.toggler.js",
+      "wwwroot/lib/textarea-wordcount/textcounter.js",
+      "wwwroot/lib/jquery-flexdatalist-2.2.4/jquery.flexdatalist.js",
+      "wwwroot/lib/jquery.timeentry.package-2.0.1/jquery.plugin.js",
+      "wwwroot/lib/jquery.timeentry.package-2.0.1/jquery.timeentry.js",
+      "wwwroot/js/pluginsMap.js",
+      "wwwroot/js/main.js",
+      "wwwroot/js/site.js",
+      "wwwroot/js/download.js",
+      "wwwroot/js/validation.js"
+    ],
+    // Optionally specify minification options
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    // Optionally generate .map file
+    "sourceMap": true
+  }
+  //{
+  //  "outputFileName": "wwwroot/js/core/core.min.js",
+  //  "inputFiles": [
+  //    "wwwroot/js/core/gfastcore.js",
+  //    "wwwroot/js/core/reportcore.js",
+  //    "wwwroot/js/core/renderercore.js"
+  //  ],
+  //  // Optionally specify minification options
+  //  "minify": {
+  //    "enabled": true,
+  //    "renameLocals": true
+  //  },
+  //  // Optionally generate .map file
+  //  "sourceMap": true
+  //},
+  //{
+  //  "outputFileName": "wwwroot/lib/jquery-bundle/jquerybundle.js",
+  //  "inputFiles": [
+  //    "wwwroot/lib/jquery/jquery.js",
+  //    "wwwroot/lib/jquery-ui-1.12.1.custom/jquery-ui.js",
+  //    "wwwroot/lib/jquery-validate/jquery.validate.js",
+  //    "wwwroot/lib/jquery-validate/additional-methods.js",
+  //    "wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"
+  //  ],
+  //  // Optionally specify minification options
+  //  "minify": {
+  //    "enabled": false,
+  //    "renameLocals": false
+  //  },
+  //  // Optionally generate .map file
+  //  "sourceMap": true
+  //},
+  //{
+  //  "outputFileName": "wwwroot/lib/jquery-bundle/jquerybundle.min.js",
+  //  "inputFiles": [
+  //    "wwwroot/lib/jquery/jquery.min.js",
+  //    "wwwroot/lib/jquery-ui-1.12.1.custom/jquery-ui.min.js",
+  //    "wwwroot/lib/jquery-validate/jquery.validate.min.js",
+  //    "wwwroot/lib/jquery-validate/additional-methods.min.js",
+  //    "wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"
+  //  ],
+  //  // Optionally specify minification options
+  //  "minify": {
+  //    "enabled": false,
+  //    "renameLocals": false
+  //  },
+  //  // Optionally generate .map file
+  //  "sourceMap": true
+  //},
+  //{
+  //  "outputFileName": "wwwroot/js/validation/validationbundle.js",
+  //  "inputFiles": [
+  //    "wwwroot/js/validation/expressive.annotations.validate.js"
+  //  ],
+  //  // Optionally specify minification options
+  //  "minify": {
+  //    "enabled": false,
+  //    "renameLocals": false
+  //  },
+  //  // Optionally generate .map file
+  //  "sourceMap": true
+  //},
+  //{
+  //  "outputFileName": "wwwroot/js/validation/validationbundle.min.js",
+  //  "inputFiles": [
+  //    "wwwroot/js/validation/expressive.annotations.validate.js"
+  //  ],
+  //  // Optionally specify minification options
+  //  "minify": {
+  //    "enabled": true,
+  //    "renameLocals": true
+  //  },
+  //  // Optionally generate .map file
+  //  "sourceMap": true
+  //},
+  //{
+  //  "outputFileName": "wwwroot/js/common/signalR_transaction.min.js",
+  //  "inputFiles": [
+  //    "wwwroot/js/common/signalR_transaction.js"
+  //  ],
+  //  // Optionally specify minification options
+  //  "minify": {
+  //    "enabled": true,
+  //    "renameLocals": true
+  //  },
+  //  // Optionally generate .map file
+  //  "sourceMap": true
+  //}
+]

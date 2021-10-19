@@ -1,4 +1,5 @@
 ﻿using AppointmentBuddy.Core.Common.Config;
+using AppointmentBuddy.Core.Common.Helper;
 using AppointmentBuddy.Core.Common.Http;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -72,6 +73,26 @@ namespace NUS_ISS_14_Appointment_Buddy.Services
             var responseString = await _httpClient.GetStringAsync(apiURL);
 
             return !string.IsNullOrEmpty(responseString) ? JsonConvert.DeserializeObject<M.PaginatedResults<M.Appointment>>(responseString) : null;
+        }
+
+        public async Task<int> SaveAppointment(M.Appointment appt, string token)
+        {
+            int status = Constants.ErrorCodes.Failure;
+
+            var requestContent = new StringContent(JsonConvert.SerializeObject(appt), System.Text.Encoding.UTF8, "application/json");
+
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Validator.CleanInput(token));
+
+            var apiURL = UrlConfig.Appointment.SaveAppointmentAPI(_serviceUrls.AppointmentAPI_SaveAppointment);
+
+            var response = await _httpClient.PostAsync(apiURL, requestContent);
+
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                status = int.Parse(response.Content.ReadAsStringAsync().Result);
+            }
+
+            return status;
         }
     }
 }

@@ -6,6 +6,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="bundleconfig.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="bundleconfig.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="bundleconfig.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="3.1.10" />
     <PackageReference Include="Microsoft.AspNetCore.DataProtection" Version="3.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.18" />
@@ -29,9 +41,14 @@
     <ProjectReference Include="..\AppointmentBuddy.Core.Common\AppointmentBuddy.Core.Common.csproj" />
     <ProjectReference Include="..\AppointmentBuddy.Core.Model.AccessControl\AppointmentBuddy.Core.Model.AccessControl.csproj" />
     <ProjectReference Include="..\AppointmentBuddy.Core.Model.Appointment\AppointmentBuddy.Core.Model.Appointment.csproj" />
+    <ProjectReference Include="..\AppointmentBuddy.Core.Model.HSPSpecialist\AppointmentBuddy.Core.Model.HSPSpecialist.csproj" />
     <ProjectReference Include="..\AppointmentBuddy.Core.Model.Identity\AppointmentBuddy.Core.Model.Identity.csproj" />
     <ProjectReference Include="..\AppointmentBuddy.Core.Model.PatientInfo\AppointmentBuddy.Core.Model.PatientInfo.csproj" />
     <ProjectReference Include="..\AppointmentBuddy.Core.Model\AppointmentBuddy.Core.Model.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\icon\" />
   </ItemGroup>
 
 </Project>

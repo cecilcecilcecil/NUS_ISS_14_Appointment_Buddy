@@ -1,0 +1,142 @@
+﻿@using AppointmentBuddy.Core.Common.Helper
+@model NUS_ISS_14_Appointment_Buddy.Models.Appointment
+
+@{
+    ViewData["Title"] = "Create New Appointment";
+}
+@using (Html.BeginForm("SaveAppointment", "Appointment", FormMethod.Post, new { @id = "AppointmentForm" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="_page-essentials">
+        <div class="well">
+            <div class="_content">
+                <h2>Create New Appointment</h2>
+            </div>
+        </div>
+        <div class="_step-body">
+            <div class="_content">
+                <div class="_project-content">
+                    <div class="bids-width">
+                        <div class="row">
+                            <div class="col-md-4">
+                                Appointment Date:
+                            </div>
+                            <div class="col-md-4">
+                                <div class="_form-group _calendar">
+                                    <div class="input-group mb-5">
+                                        <input id="apptDate" data-toggle="datepicker" type="text" class="form-control" placeholder="dd/mm/yyyy" asp-for="@Model.AppointmentDate" autocomplete="off" maxlength="10">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text" id="apptIcon"><i class="far fa-calendar-alt"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                Appointment Time:
+                            </div>
+                            <div class="col-md-4">
+                                <div class="_form-group">
+                                    <div class="time-container">
+                                        <div class="input-holder">
+                                            @Html.TextBoxFor(model => model.AppointmentTime, new { @class = "is_timeentry", placeholder = "HH:MM", id = "apptTime" })
+                                        </div>
+                                        <div class="quick-sitetime-gap">
+                                            <div class="quick-small-gap">@Html.ValidationMessageFor(model => model.AppointmentTime)</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="_project-content">
+                    <div class="bids-width _contact-details">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="autosave-container">
+                                    <div class="autosave-wrapper">
+                                        <h4 class="autosave-msg"></h4>
+                                        <div class="_nxt-prv">
+                                            <button class="_transparent cancelBtn">cancel</button>
+                                            <button class="red-btn" id="saveBtn">save</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <partial name="_ErrorModal" />
+            <partial name="_ConfirmModal" />
+            <partial name="_SubmitModal" />
+            <partial name="_SavingModal" />
+            @Html.HiddenFor(x => x.AppointmentId)
+        </div>
+    </div>
+}
+
+<script type="text/javascript" nonce="@ViewData["Nonce"]">
+    $(document).ready(function () {
+        $('#apptDate').keypress(function (e) { return isDate(this, e); });
+        $('#apptIcon').click(function () { $('#apptDate').focus(); });
+        $('#apptTime').keypress(function (e) { return isTime(this, e); });
+
+        $('#AppointmentForm').submit(function (e) { e.preventDefault(); });
+
+        $('#saveBtn').click(function () {
+            this.blur();
+
+            $('#cfmMsg').text('Saving Appointment');
+            document.getElementById('confirmationBox').style.display = 'block';
+        });
+
+        $('#confirmBox').click(function () {
+            document.getElementById('confirmationBox').style.display = 'none';
+            SaveAppointment();
+        });
+
+        $('#closeBox').click(function () {
+            document.getElementById('submitSuccessBox').style.display = "none";
+
+            window.location.href = '@Url.Action("Index", "Home")';
+        });
+
+        $('#closeErrorBox').click(function () { document.getElementById('errorMsgBox').style.display = 'none'; });
+
+    });
+
+    function SaveAppointment() {
+        var formData = $('#AppointmentForm').serializeArray();
+
+        var savingModal = document.getElementById("savingInProgress");
+        savingModal.style.display = "block";
+
+        $.ajax({
+            type: 'POST',
+            data: formData,
+            dataType: 'json',
+            url: '@Url.Action("SaveAppointment", "Appointment")',
+            success: function (result) {
+                savingModal.style.display = "none";
+
+                if (result.successVal == '@Constants.ErrorCodes.Success') {
+                    document.getElementById('submitSuccessBox').style.display = 'block';
+                }
+                else {
+                    $(window).scrollTop(0);
+                    document.getElementById("errorMsgValue").innerHTML = result.autosaveDate;
+                    document.getElementById("errorMsgBox").style.display = "block";
+                }
+            },
+            error: function () {
+                savingModal.style.display = "none";
+                document.getElementById("errorMsgBox").style.display = "block";
+            }
+        });
+    }
+</script>
+

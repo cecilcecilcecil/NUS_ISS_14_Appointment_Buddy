@@ -79,5 +79,14 @@ namespace AppointmentBuddy.Core.Common.Helper
             public const string Patient = "D939D14A-53B3-4479-A384-7C2278543A56";
             public const string Staff = "005FB465-9E78-4FEE-BDD2-888C4890D462";
         }
+
+        public static class ValidationMessages
+        {
+            public const string RequiredMessage = "The {0} is required";
+            public const string DateFormatMessage = "The {0} must be in date format.";
+            public const string TimeFormatMessage = "The {0} must be in HH:MM format.";
+            public const string Concurrency = "The record may be modified elsewhere, please refresh and try again.";
+            public const string SystemUnavailable = "System unavailable, please refresh or try again later.";
+        }
     }
 }

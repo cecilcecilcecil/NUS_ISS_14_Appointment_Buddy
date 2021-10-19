@@ -22,7 +22,7 @@ namespace AppointmentBuddy.Service.Identity.API.Infrastructure.Repository
             _logger = logger;
         }
 
-        public async Task<M.User> GetUserByUserLogin(string userLogin, string userTypeId = "")
+        public async Task<M.User> GetUserByUserLogin(string userLogin, string password, string userTypeId = "")
         {
             M.User user;
             if (String.IsNullOrEmpty(userLogin))
@@ -35,11 +35,11 @@ namespace AppointmentBuddy.Service.Identity.API.Infrastructure.Repository
                 _logger.LogInformation("Login as: " + userTypeId);
                 if (string.IsNullOrEmpty(userTypeId))
                 {
-                    user = await _context.User.FirstOrDefaultAsync(item => item.UserLogin == userLogin && item.IsDeleted == false);
+                    user = await _context.User.FirstOrDefaultAsync(item => item.UserLogin == userLogin && item.Password == password && item.IsDeleted == false);
                 }
                 else
                 {
-                    user = await _context.User.FirstOrDefaultAsync(item => item.UserLogin == userLogin && item.UserTypeId == userTypeId && item.IsDeleted == false);
+                    user = await _context.User.FirstOrDefaultAsync(item => item.UserLogin == userLogin && item.Password == password && item.UserTypeId == userTypeId && item.IsDeleted == false);
                 }
             }
 

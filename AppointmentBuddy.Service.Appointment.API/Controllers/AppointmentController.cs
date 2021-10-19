@@ -1,4 +1,5 @@
-﻿using AppointmentBuddy.Service.Appointment.API.Core.Interface;
+﻿using AppointmentBuddy.Core.Common.Helper;
+using AppointmentBuddy.Service.Appointment.API.Core.Interface;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -6,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using M = AppointmentBuddy.Core.Model;
 
@@ -54,6 +56,29 @@ namespace AppointmentBuddy.Service.Appointment.API.Controllers
             response = await _appointmentService.GetAllAppointments(dateFrom, dateTo, pageIndex, pageSize);
 
             return response;
+        }
+
+        [Route("save")]
+        [HttpPost]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.NoContent)]
+        public async Task<ActionResult<int>> SaveAppointment([FromBody] M.Appointment appt)
+        {
+            var success = Constants.ErrorCodes.Failure;
+
+            if (appt == null)
+            {
+                return BadRequest();
+            }
+
+            success = await _appointmentService.SaveAppointment(appt);
+
+            if (success == Constants.ErrorCodes.Failure)
+            {
+                return NoContent();
+            }
+
+            return success;
         }
     }
 }

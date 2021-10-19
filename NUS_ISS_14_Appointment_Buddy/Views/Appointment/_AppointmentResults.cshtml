@@ -1,5 +1,5 @@
-﻿@using AppointmentBuddy.Core.Model
-@model NUS_ISS_14_Appointment_Buddy.Models.ResultViewModel<Appointment>
+﻿@using M = AppointmentBuddy.Core.Model
+@model NUS_ISS_14_Appointment_Buddy.Models.ResultViewModel<M.Appointment>
 
 <div class="editQuan _goods">
     <div class="display">
@@ -9,7 +9,8 @@
                     <tr>
                         <th scope="col">S/N</th>
                         <th scope="col">Name</th>
-                        <th scope="col"s>Appointment Date</th>
+                        <th scope="col">Appointment Date</th>
+                        <th scope="col">Appointment Time</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -19,7 +20,8 @@
                         <tr>
                             <td>@count</td>
                             <td>@appt.Name</td>
-                            <td>@appt.AppointmentDate.ToString("dd/MM/yyyy")</td>
+                            <td>@appt.AppointmentDate.GetValueOrDefault().ToString("dd/MM/yyyy")</td>
+                            <td>@appt.AppointmentTime</td>
                         </tr>
                     }
                 </tbody>

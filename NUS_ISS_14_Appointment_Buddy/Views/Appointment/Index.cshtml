@@ -1,9 +1,9 @@
 ﻿@using NUS_ISS_14_Appointment_Buddy.Helper
 @using AppointmentBuddy.Core.Common.Helper
-@using AppointmentBuddy.Core.Model
+@using M = AppointmentBuddy.Core.Model
 @using System.Security.Claims
 
-@model NUS_ISS_14_Appointment_Buddy.Models.ResultViewModel<Appointment>
+@model NUS_ISS_14_Appointment_Buddy.Models.ResultViewModel<M.Appointment>
 
 @{
     ViewData["Title"] = "Manage Appointments";
@@ -38,6 +38,18 @@
                 </div>
                 <br />
                 <div class="row ken-flex">
+                    @if (IdentityHelper.HasRole((ClaimsIdentity)User.Identity, Constants.RoleType.Admin))
+                    {
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <button class="red-btn" id="createButton">Create</button>
+                        </div>
+                    }
+                    else @if (IdentityHelper.HasRole((ClaimsIdentity)User.Identity, Constants.RoleType.Staff))
+                    {
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <button class="red-btn" id="assignButton">Assign</button>
+                        </div>
+                    }
                     <div class="col-lg-4 col-md-12 col-sm-12">
                         <button class="white-btn" id="resetButton">Reset</button>
                         <button class="red-btn" id="applyButton">Apply</button>
@@ -79,6 +91,19 @@
 
         $('#DateFrom, #DateTo').keypress(function (e) {
             return isDate(this, e);
+        });
+
+        $("#createButton").click(function (e) {
+            e.preventDefault();
+
+            $.ajax({
+                type: 'GET',
+                dataType: 'json',
+                url: '@Url.Action("LinkToAddAppointment", "Appointment")',
+                success: function (result) {
+                    window.location.href = result.redirectUrl;
+                }
+            })
         });
     });
 </script>
