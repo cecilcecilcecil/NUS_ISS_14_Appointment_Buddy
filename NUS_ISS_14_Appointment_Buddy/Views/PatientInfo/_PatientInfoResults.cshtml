@@ -1,0 +1,76 @@
+﻿@using M = AppointmentBuddy.Core.Model
+@model NUS_ISS_14_Appointment_Buddy.Models.ResultViewModel<M.PatientInfo>
+
+<div class="editQuan _goods">
+    <div class="display">
+        <div class="based-table view-goods _edit">
+            <table class="table" id="apptTable" style="overflow: auto !important; overflow-x: auto !important;">
+                <thead class="">
+                    <tr>
+                        <th scope="col">S/N</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Patient Name</th>
+                        <th scope="col">Gender</th>
+                        <th scope="col">Birth Date</th>
+                        <th scope="col">Contact Number</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{int count = 1;}
+                    @foreach (var patInfo in Model.ListItems)
+                    {
+                    <tr>
+                        <td>@count</td>
+                        <td>@patInfo.Title</td>
+                        <td><a href="@Url.Action("Index", "UpdatePatientInfo")">@patInfo.PatientName</a></td>
+                        <td>@patInfo.NRIC</td>
+                        <td>@patInfo.Gender</td>
+                        <td>@patInfo.BirthDate.ToString("dd/MM/yyyy")</td>
+                        <td>@patInfo.ContactNumber</td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="results-pagination">
+    <span>Page</span>
+    <ul>
+        @for (var i = Model.PaginationInfo.FirstPageNumber; i <= Model.PaginationInfo.LastPageNumber; i++)
+        {
+            <li class="page-item @(i == Model.PaginationInfo.PageNumber ? "active" : "")">
+                @if (i != Model.PaginationInfo.PageNumber)
+                {
+                    <a asp-controller="PatientInfo"
+                       asp-action="GetPatientInfoPage"
+                       asp-route-page="@i"
+                       asp-route-nric="@ViewData["NRIC"]"
+                       asp-route-patName="@ViewData["PatientName"]"
+                       asp-route-partialV="_PatientInfoResults"
+                       data-target="pats"
+                       class="paginationButton">
+                        @i
+                    </a>
+                }
+                else
+                {
+                    @i
+                }
+            </li>
+        }
+    </ul>
+</div>
+
+<script type="text/javascript" nonce="@ViewData["Nonce"]">
+    $(".paginationButton").click(function (e) {
+        e.preventDefault();
+        var _this = $(this);
+        $.get(_this.attr("href"), function (res) {
+            $('#' + _this.data("target")).html(res);
+        });
+
+        $(window).scrollTop(0);
+    });
+</script>
