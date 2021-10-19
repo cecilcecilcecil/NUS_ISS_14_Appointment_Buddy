@@ -16,6 +16,7 @@ namespace AppointmentBuddy.Core.Model
         [Required]
         public string NRIC { get; set; }
         public string ServiceDescription { get; set; }
+        public int Services { get; set; }
         [Required]
         public string Contact { get; set; }
         [Required]
@@ -30,5 +31,22 @@ namespace AppointmentBuddy.Core.Model
         public DateTime LastUpdatedDate { get; set; } = DateTime.Now;
         [Required]
         public bool? IsDeleted { get; set; } = false;
+    }
+
+    public class Service
+    {
+        public int Id { get; set; }
+        public string Description { get; set; }
+        public string CreatedBy { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public string LastUpdatedBy { get; set; }
+        public DateTime LastUpdatedDate { get; set; }
+        public Boolean IsDeleted { get; set; }
+    }
+
+    public class CollectionDataModel
+    {
+        public List<Specialist> Specialist { get; set; }
+        public List<Service> Service { get; set; }
     }
 }

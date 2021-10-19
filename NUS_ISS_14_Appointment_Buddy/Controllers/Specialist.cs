@@ -47,21 +47,34 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
             }
         }
 
-        public ViewResult AddSpecialist() => View();
+        public async Task<IActionResult> AddSpecialist()
+        {
+            CollectionDataModel model = new CollectionDataModel();
+
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.GetAsync("http://localhost:63742/api/Services"))
+                {
+                    string apiResponse = await response.Content.ReadAsStringAsync();
+                    model.Service = JsonConvert.DeserializeObject<List<AppointmentBuddy.Core.Model.Service>>(apiResponse);
+                }
+            }
+            return View(model);
+        }
 
         [HttpPost]
-        public async Task<IActionResult> AddSpecialist(AppointmentBuddy.Core.Model.Specialist Specialist)
+        public async Task<IActionResult> AddSpecialist(CollectionDataModel collection)
         {
             using (var httpClient = new HttpClient())
             {
-                AppointmentBuddy.Core.Model.Specialist receivedSpecialist = new AppointmentBuddy.Core.Model.Specialist();
-                StringContent content = new StringContent(JsonConvert.SerializeObject(Specialist), Encoding.UTF8, "application/json");
+                CollectionDataModel receivedSpecialist = new CollectionDataModel();
+                StringContent content = new StringContent(JsonConvert.SerializeObject(collection.Specialist), Encoding.UTF8, "application/json");
 
                 using (var response = await httpClient.PostAsync("https://localhost:44341/api/Specialists", content))
                 {
                     string apiResponse = await response.Content.ReadAsStringAsync();
-                    receivedSpecialist = JsonConvert.DeserializeObject<AppointmentBuddy.Core.Model.Specialist>(apiResponse);
-                    return View("Specialist",receivedSpecialist);
+                    receivedSpecialist = JsonConvert.DeserializeObject<CollectionDataModel>(apiResponse);
+                    return View(receivedSpecialist);
                 }
             }
         }
