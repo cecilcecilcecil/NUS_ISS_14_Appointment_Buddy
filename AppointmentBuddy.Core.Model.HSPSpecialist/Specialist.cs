@@ -44,9 +44,25 @@ namespace AppointmentBuddy.Core.Model
         public Boolean IsDeleted { get; set; }
     }
 
+    public class Available
+    {
+        public string Value { get; set; }
+        public string Text { get; set; }
+
+    }
+
     public class CollectionDataModel
     {
-        public List<Specialist> Specialist { get; set; }
+        //public List<Specialist> Specialist { get; set; }
+        //public List<Service> Service { get; set; }
+        public Specialist modelSpec { get; set; }
+
         public List<Service> Service { get; set; }
+
+        public List<Available> Available { get; } = new List<Available>
+        {
+             new Available { Value = "true", Text = "Yes" },
+             new Available { Value = "false", Text = "No" }
+        };
     }
 }

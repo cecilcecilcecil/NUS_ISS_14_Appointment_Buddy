@@ -5,39 +5,31 @@
 <form asp-action="AddSpecialist" method="post">
     <div class="form-group">
         <label for="Name">Name:</label>
-        <input class="form-control" name="Name" />
+        @Html.TextBoxFor(x => x.modelSpec.Name)
     </div>
     <div class="form-group">
         <label for="Name">NRIC:</label>
-        <input class="form-control" name="NRIC" />
+        @Html.TextBoxFor(x => x.modelSpec.NRIC)
     </div>
     <div class="form-group">
         <label for="Name">Contact:</label>
-        <input class="form-control" name="Contact" />
+        @Html.TextBoxFor(x => x.modelSpec.Contact)
     </div>
     <div class="form-group">
         <label for="Name">Available:</label>
-        <select name="Available">
-            <option value="True">Yes</option>
-            <option value="false">No</option>
-        </select>
+        @Html.DropDownListFor(x => x.modelSpec.Available, new SelectList(Model.Available, "Value", "Text"))
     </div>
     <div class="form-group">
         <label for="Name">Services:</label>
-        <select name="Services">
-            @foreach (var service in Model.Service)
-            {
-                <option value=@service.Id>@service.Description</option>
-            }
-        </select>
+        @Html.DropDownListFor(x => x.modelSpec.Services, new SelectList(Model.Service, "Id", "Description"))
     </div>
     <div class="form-group">
         <label for="Name">Address:</label>
-        <input class="form-control" name="Address" />
+        @Html.TextBoxFor(x => x.modelSpec.Address)
     </div>
     <div class="form-group">
         <label for="Name">Email:</label>
-        <input class="form-control" name="Email" />
+        @Html.TextBoxFor(x => x.modelSpec.Email)
     </div>
     <div class="text-center panel-body">
         <button type="submit" class="btn btn-sm btn-primary">Add</button>   <a asp-action="Index" class="btn btn-sm btn-secondary">Back</a>
