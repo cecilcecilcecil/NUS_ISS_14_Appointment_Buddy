@@ -113,7 +113,7 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
                     UserId = appt.UserId
                 };
 
-                ViewBag.Patients = await GetFilteredPatients(appt.AppointmentDate.GetValueOrDefault(), appt.AppointmentTime);
+                ViewBag.Patients = await GetFilteredPatients(appt.AppointmentDate.GetValueOrDefault(), appt.AppointmentTime, appt.AppointmentId);
             }
 
             return View("UpdateAppointment", model);
@@ -178,7 +178,7 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
             return Json(new { msgVal = msgVal, successVal = successValue });
         }
 
-        public async Task<List<SelectListItem>> GetFilteredPatients(DateTime date, string time)
+        public async Task<List<SelectListItem>> GetFilteredPatients(DateTime date, string time, string apptId)
         {
             IEnumerable<M.User> patients = new List<M.User>();
 
@@ -189,7 +189,8 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
                 M.FilteredAppointment mf = new M.FilteredAppointment
                 {
                     AppointmentDate = date,
-                    AppointmentTime = time
+                    AppointmentTime = time,
+                    AppointmentId = apptId
                 };
 
                 var filteredIds = await _appointmentService.GetFilteredAppointmentsByPatientIds(mf, AccessToken);

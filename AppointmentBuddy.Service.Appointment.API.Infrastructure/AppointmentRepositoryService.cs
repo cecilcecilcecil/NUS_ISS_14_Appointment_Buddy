@@ -25,13 +25,13 @@ namespace AppointmentBuddy.Service.Appointment.API.Infrastructure
         public async Task<M.Appointment> GetAppointmentByAppointmentId(string apptId)
         {
             M.Appointment dataItem;
-            dataItem = await _context.Appointment.AsNoTracking().FirstOrDefaultAsync(s => s.AppointmentId == apptId);
+            dataItem = await _context.Appointment.AsNoTracking().FirstOrDefaultAsync(s => s.AppointmentId == apptId && !s.IsDeleted);
             return dataItem;
         }
 
         public async Task<List<string>> GetFilteredPatientIdsByDate(M.FilteredAppointment mf)
         {
-            var appts = await _context.Appointment.Where(x => x.AppointmentDate == mf.AppointmentDate).ToListAsync();
+            var appts = await _context.Appointment.Where(x => x.AppointmentDate == mf.AppointmentDate && x.AppointmentId != mf.AppointmentId && !x.IsDeleted).ToListAsync();
 
             var ts = TimeSpan.Parse(mf.AppointmentTime);
             var tsMax = ts.Add(new TimeSpan(0, 0, 1800));
@@ -46,7 +46,10 @@ namespace AppointmentBuddy.Service.Appointment.API.Infrastructure
 
         public async Task<IEnumerable<M.Appointment>> GetAllAppointments()
         {
-            return await _context.Appointment.AsNoTracking().Where(x => !x.IsDeleted).ToListAsync();
+            return await _context.Appointment.AsNoTracking()
+                .Where(x => !x.IsDeleted)
+                .OrderBy(x => x.AppointmentDate)
+                .ToListAsync();
         }
 
         public async Task<int> SaveAppointment(M.Appointment appt)
