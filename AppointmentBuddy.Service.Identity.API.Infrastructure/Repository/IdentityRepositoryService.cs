@@ -1,4 +1,5 @@
-﻿using AppointmentBuddy.Infrastructure.Repository;
+﻿using AppointmentBuddy.Core.Common.Helper;
+using AppointmentBuddy.Infrastructure.Repository;
 using AppointmentBuddy.Service.Identity.API.Core.Interface;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -73,6 +74,11 @@ namespace AppointmentBuddy.Service.Identity.API.Infrastructure.Repository
                                             .FirstOrDefaultAsync();
 
             return role;
+        }
+
+        public async Task<IEnumerable<M.User>> GetAllPatients()
+        {
+            return await _context.User.AsNoTracking().Where(x => x.UserTypeId == Constants.UserType.Patient).ToListAsync();
         }
     }
 }

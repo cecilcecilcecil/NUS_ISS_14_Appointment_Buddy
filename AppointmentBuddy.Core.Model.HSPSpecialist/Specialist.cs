@@ -37,16 +37,32 @@ namespace AppointmentBuddy.Core.Model
     {
         public int Id { get; set; }
         public string Description { get; set; }
-        public string CreatedBy { get; set; }
-        public DateTime CreatedDate { get; set; }
-        public string LastUpdatedBy { get; set; }
-        public DateTime LastUpdatedDate { get; set; }
+        public string CreatedBy { get; set; } = "System";
+        public DateTime CreatedDate { get; set; } = DateTime.Now;
+        public string LastUpdatedBy { get; set; } = "System";
+        public DateTime LastUpdatedDate { get; set; } = DateTime.Now;
         public Boolean IsDeleted { get; set; }
+    }
+
+    public class Available
+    {
+        public string Value { get; set; }
+        public string Text { get; set; }
+
     }
 
     public class CollectionDataModel
     {
-        public List<Specialist> Specialist { get; set; }
+        //public List<Specialist> Specialist { get; set; }
+        //public List<Service> Service { get; set; }
+        public Specialist modelSpec { get; set; }
+
         public List<Service> Service { get; set; }
+
+        public List<Available> Available { get; } = new List<Available>
+        {
+             new Available { Value = "true", Text = "Yes" },
+             new Available { Value = "false", Text = "No" }
+        };
     }
 }

@@ -32,6 +32,13 @@ namespace AppointmentBuddy.Service.Appointment.API.Infrastructure
             return response;
         }
 
+        public async Task<List<string>> GetFilteredPatientIdsByDate(M.FilteredAppointment mf)
+        {
+            var appts = await _repository.GetFilteredPatientIdsByDate(mf);
+
+            return appts;
+        }
+
         public async Task<M.PaginatedResults<M.Appointment>> GetAllAppointments(string dateFrom, string dateTo, int page, int pageSize)
         {
             M.PaginatedResults<M.Appointment> response;

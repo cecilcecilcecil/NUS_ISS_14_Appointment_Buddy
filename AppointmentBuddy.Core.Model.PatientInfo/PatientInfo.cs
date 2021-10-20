@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AppointmentBuddy.Core.Model
@@ -6,6 +7,7 @@ namespace AppointmentBuddy.Core.Model
     [Table("PatientInfo", Schema = "dbo")]
     public class PatientInfo
     {
+        [Key]
         public string PatientId { get; set; }
         public string NRIC { get; set; }
         public string PatientName { get; set; }
