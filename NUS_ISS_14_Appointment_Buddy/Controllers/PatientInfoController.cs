@@ -10,6 +10,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using NUS_ISS_14_Appointment_Buddy.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using AppointmentBuddy.Core.Common.Helper;
 
 namespace NUS_ISS_14_Appointment_Buddy.Controllers
 {
@@ -71,7 +72,7 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> UpdatePatientInfo(string patID)
+        public async Task<IActionResult> PatientInfoDetail(string patID)
         {
             M.PatientInfo patItem;
 
@@ -80,8 +81,9 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
                 patItem = await _patientInfoService.GetPatientInfoById(patID, AccessToken);
                 if (patItem.DeathDate != null)
                 {
-                    ViewBag.Info = "This patient has passed away.";
+                    ViewBag.Info = "This patient has passed away, death date is." + patItem.DeathDate.ToString("dd/MM/yyyy");
                 }
+                ViewData["patItem"] = patItem;
             }
             else
             {
@@ -94,18 +96,104 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
             ViewBag.Titles = GetTitles();
             ViewBag.Genders = GetGenders();
 
-            return View("Index");
+            return View();
         }
 
 
         [HttpGet]
-        public async Task<IActionResult> Delete(bool confirm, string patId)
+        public async Task<IActionResult> DeletePatientInfoById(bool confirm, string patId)
         {
+            string msgVal = "";
+            var successValue =  0;
             if (confirm)
             {
-                await _patientInfoService.DeletePatientInfoById(patId, AccessToken);
+                successValue = await _patientInfoService.DeletePatientInfoById(patId, AccessToken);
             }
-            return View("Index");
+            if (successValue == Constants.ErrorCodes.Success)
+            {
+                msgVal = "";
+            }
+
+            else
+            {
+                if (successValue == Constants.ErrorCodes.ConcurrencyError)
+                {
+                    msgVal = Constants.ValidationMessages.Concurrency;
+                }
+
+                else
+                {
+                    msgVal = Constants.ValidationMessages.SystemUnavailable;
+                }
+            }
+
+            return Json(new { msgVal = msgVal, successVal = successValue });
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> DeactivatePatientInfoById(bool confirm, string patId)
+        {
+            string msgVal = "";
+            var successValue = 0;
+            if (confirm)
+            {
+                successValue = await _patientInfoService.DeactivatePatientInfoById(patId, AccessToken);
+            }
+            if (successValue == Constants.ErrorCodes.Success)
+            {
+                msgVal = "";
+            }
+
+            else
+            {
+                if (successValue == Constants.ErrorCodes.ConcurrencyError)
+                {
+                    msgVal = Constants.ValidationMessages.Concurrency;
+                }
+
+                else
+                {
+                    msgVal = Constants.ValidationMessages.SystemUnavailable;
+                }
+            }
+            return Json(new { msgVal = msgVal, successVal = successValue });
+        }
+        [HttpGet]
+        public async Task<IActionResult> SavePatientInfoById(PatientInfo patInfo)
+        {
+            string msgVal = "";
+            M.PatientInfo corePatInfo = new M.PatientInfo
+            {
+                PatientId = patInfo.PatientId,
+                Title = patInfo.Title,
+                NRIC = patInfo.NRIC,
+                PatientName = patInfo.PatientName,
+                Gender = patInfo.Gender,
+                BirthDate = patInfo.BirthDate,
+                ContactNumber = patInfo.ContactNumber,
+                LastUpdatedBy = UserName,
+                LastUpdatedById = UserId
+            };
+            var successValue = await _patientInfoService.SavePatientInfo(corePatInfo, AccessToken);
+            if (successValue == Constants.ErrorCodes.Success)
+            {
+                msgVal = "";
+            }
+
+            else
+            {
+                if (successValue == Constants.ErrorCodes.ConcurrencyError)
+                {
+                    msgVal = Constants.ValidationMessages.Concurrency;
+                }
+
+                else
+                {
+                    msgVal = Constants.ValidationMessages.SystemUnavailable;
+                }
+            }
+
+            return Json(new { msgVal = msgVal, successVal = successValue });
         }
 
         List<SelectListItem> GetTitles()

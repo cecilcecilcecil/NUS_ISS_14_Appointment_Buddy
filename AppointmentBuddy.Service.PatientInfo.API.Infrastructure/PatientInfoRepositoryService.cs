@@ -1,4 +1,5 @@
-﻿using AppointmentBuddy.Infrastructure.Repository;
+﻿using AppointmentBuddy.Core.Common.Helper;
+using AppointmentBuddy.Infrastructure.Repository;
 using AppointmentBuddy.Service.PatientInfo.API.Core.Interface;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -37,22 +38,46 @@ namespace AppointmentBuddy.Service.PatientInfo.API.Infrastructure
             return await _context.PatientInfo.Where(x => x.NRIC == nric && x.PatientName.Contains(patName) && !x.IsDeleted).ToListAsync();
         }
 
-        public async Task<M.PatientInfo> UpdatePatientInfo(M.PatientInfo patInfo)
-        {
-            M.PatientInfo dataItem;
-            dataItem = await _context.PatientInfo.FirstOrDefaultAsync(s => s.PatientId == patInfo.PatientId);
-            dataItem.Title = patInfo.Title;
-            dataItem.NRIC = patInfo.NRIC;
-            return dataItem;
-        }
 
-        public async Task<M.PatientInfo> DeletePatientInfoById(string patId)
+        public async Task<int> DeletePatientInfoById(string patId)
         {
-            M.PatientInfo dataItem;
-            dataItem = await _context.PatientInfo.FirstOrDefaultAsync(s => s.PatientId == patId);
+            int success = Constants.ErrorCodes.Failure;
+            M.PatientInfo dataItem = await _context.PatientInfo.FirstOrDefaultAsync(s => s.PatientId == patId);
             dataItem.IsDeleted = true;
             _context.SaveChanges();
-            return dataItem;
+            return success;
         }
+
+        public async Task<int> DeactivatePatientInfofoById(string patId)
+        {
+            int success = Constants.ErrorCodes.Failure;
+            M.PatientInfo dataItem = await _context.PatientInfo.FirstOrDefaultAsync(s => s.PatientId == patId);
+            dataItem.DeathDate = System.DateTime.Now;
+            _context.SaveChanges();
+            return success;
+        }
+
+        public async Task<int> SavePatientInfo(M.PatientInfo patInfo)
+        {
+            int success = Constants.ErrorCodes.Failure;
+
+            _context.Add(patInfo);
+            success = await _context.SaveChangesAsync();
+
+            return success;
+        }
+
+        public async Task<int> UpdateAppointment(M.Appointment patInfo)
+        {
+            int success = Constants.ErrorCodes.Failure;
+
+            _context.Update(patInfo);
+            success = await _context.SaveChangesAsync();
+
+            return success;
+        }
+
+
+
     }
 }
