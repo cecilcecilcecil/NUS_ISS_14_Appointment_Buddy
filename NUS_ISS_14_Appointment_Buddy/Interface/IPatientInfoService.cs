@@ -7,7 +7,8 @@ namespace NUS_ISS_14_Appointment_Buddy.Interface
     {
         Task<M.PatientInfo> GetPatientInfoById(string patId, string token);
         Task<M.PaginatedResults<M.PatientInfo>> GetPatientInfoBySearch(string token, string nric, string patname, int page, int pageSize);
-        Task<M.PatientInfo> UpdatePatientInfo(M.PatientInfo patInfo, string token);
-        Task<M.PatientInfo> DeletePatientInfoById(string patId, string token);
+        Task<int> SavePatientInfo(M.PatientInfo patInfo, string token);
+        Task<int> DeletePatientInfoById(string patId, string token);
+        Task<int> DeactivatePatientInfoById(string patId, string token);
     }
 }

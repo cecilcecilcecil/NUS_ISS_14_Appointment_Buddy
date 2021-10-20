@@ -34,27 +34,36 @@ namespace NUS_ISS_14_Appointment_Buddy.Services
             return !string.IsNullOrEmpty(responseString) ? JsonConvert.DeserializeObject<M.PatientInfo>(responseString) : null;
         }
 
-        public async Task<M.PatientInfo> UpdatePatientInfo(M.PatientInfo patInfo, string token)
+        public async Task<M.PatientInfo> SavePatientInfo(M.PatientInfo patInfo, string token)
         {
-            //_httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
-            //var apiURL = UrlConfig.PatientInfo.PatientInfoAPI(_serviceUrls.PatientInfoAPI_GetPatientInfoById, patId);
+            var apiURL = UrlConfig.PatientInfo.PatientInfoAPI(_serviceUrls.PatientInfoAPI_SavePatientInfo, patInfo.PatientId);
 
-            //var responseString = await _httpClient.GetStringAsync(apiURL);
+            var responseString = await _httpClient.GetStringAsync(apiURL);
 
-            //return !string.IsNullOrEmpty(responseString) ? JsonConvert.DeserializeObject<M.PatientInfo>(responseString) : null;
-            return null;
+            return !string.IsNullOrEmpty(responseString) ? JsonConvert.DeserializeObject<M.PatientInfo>(responseString) : null;
         }
         public async Task<M.PatientInfo> DeletePatientInfoById(string patId, string token)
         {
-            //_httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
-            //var apiURL = UrlConfig.PatientInfo.PatientInfoAPI(_serviceUrls.PatientInfoAPI_GetPatientInfoById, patId);
+            var apiURL = UrlConfig.PatientInfo.PatientInfoAPI(_serviceUrls.PatientInfoAPI_DeletePatientInfoById, patId);
 
-            //var responseString = await _httpClient.GetStringAsync(apiURL);
+            var responseString = await _httpClient.GetStringAsync(apiURL);
 
-            //return !string.IsNullOrEmpty(responseString) ? JsonConvert.DeserializeObject<M.PatientInfo>(responseString) : null;
-            return null;
+            return !string.IsNullOrEmpty(responseString) ? JsonConvert.DeserializeObject<M.PatientInfo>(responseString) : null;
+        }
+
+        public async Task<M.PatientInfo> DeactivatePatientInfoById(string patId, string token)
+        {
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+            var apiURL = UrlConfig.PatientInfo.PatientInfoAPI(_serviceUrls.PatientInfoAPI_DeactivatePatientInfoById, patId);
+
+            var responseString = await _httpClient.GetStringAsync(apiURL);
+
+            return !string.IsNullOrEmpty(responseString) ? JsonConvert.DeserializeObject<M.PatientInfo>(responseString) : null;
         }
 
 
@@ -64,7 +73,7 @@ namespace NUS_ISS_14_Appointment_Buddy.Services
 
             var parameter = "pageIndex=" + pageIndex + "&pageSize=" + pageSize;
 
-            var apiURL = UrlConfig.Appointment.AllAppointmentAPI(_serviceUrls.AppointmentAPI_GetAllAppointments, parameter);
+            var apiURL = UrlConfig.PatientInfo.PatientInfoAPI(_serviceUrls.PatientInfoAPI_GetPatientInfoBySearch, parameter);
 
             if (!String.IsNullOrEmpty(dateFrom))
             {

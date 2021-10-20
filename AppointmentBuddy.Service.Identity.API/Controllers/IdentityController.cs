@@ -61,5 +61,16 @@ namespace AppointmentBuddy.Service.Identity.API.Controllers
 
             return identityDto;
         }
+
+        [Route("patients")]
+        [HttpGet]
+        public async Task<IEnumerable<M.User>> GetAllPatients()
+        {
+            IEnumerable<M.User> response;
+
+            response = await _identityService.GetAllPatients();
+
+            return response;
+        }
     }
 }

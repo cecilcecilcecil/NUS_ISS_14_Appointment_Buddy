@@ -52,6 +52,27 @@ namespace NUS_ISS_14_Appointment_Buddy.Services
             return !string.IsNullOrEmpty(responseString) ? JsonConvert.DeserializeObject<M.Appointment>(responseString) : null;
         }
 
+        public async Task<List<string>> GetFilteredAppointmentsByPatientIds(M.FilteredAppointment mf, string token)
+        {
+            List<string> data = new List<string>();
+
+            var requestContent = new StringContent(JsonConvert.SerializeObject(mf), System.Text.Encoding.UTF8, "application/json");
+
+            var apiURL = UrlConfig.Appointment.SearchAppointmentAPI(_serviceUrls.AppointmentAPI_GetFilteredAppointmentsByPatientIds);
+
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Validator.CleanInput(token));
+
+            var response = await _httpClient.PostAsync(apiURL, requestContent);
+
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                string jsonResult = response.Content.ReadAsStringAsync().Result;
+                data = !string.IsNullOrEmpty(jsonResult) ? JsonConvert.DeserializeObject<List<string>>(jsonResult) : null;
+            }
+
+            return data;
+        }
+
         public async Task<M.PaginatedResults<M.Appointment>> GetAllAppointments(string token, string dateFrom, string dateTo, int pageIndex, int pageSize)
         {
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);

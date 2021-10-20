@@ -38,7 +38,7 @@
                             <div class="col-md-4">
                                 Assigned Patient:
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-8">
                                 <div class="category-container">
                                     <div class="_form-group _validity">
                                         @Html.DropDownListFor(model => model.UserId, (IEnumerable<SelectListItem>)ViewBag.Patients, "Please Select Patient",
@@ -57,6 +57,7 @@
                                     <div class="autosave-wrapper">
                                         <h4 class="autosave-msg"></h4>
                                         <div class="_nxt-prv">
+                                            <button class="_transparent" id="deleteBtn">delete</button>
                                             <button class="_transparent cancelBtn">cancel</button>
                                             <button class="red-btn" id="assignBtn">assign</button>
                                         </div>
@@ -72,6 +73,10 @@
             <partial name="_SubmitModal" />
             <partial name="_SavingModal" />
             @Html.HiddenFor(x => x.AppointmentId)
+            @Html.HiddenFor(x => x.AppointmentDate)
+            @Html.HiddenFor(x => x.AppointmentTime)
+            @Html.HiddenFor(x => x.UserId)
+            @Html.HiddenFor(x => x.Name)
         </div>
     </div>
 }
@@ -80,16 +85,21 @@
     $(document).ready(function () {
         $('#AppointmentForm').submit(function (e) { e.preventDefault(); });
 
-        $('#saveBtn').click(function () {
+        $('#assignBtn').click(function () {
             this.blur();
 
             if ($('#apptDate').val() == '' || $('#apptTime').val() == '') {
 
             }
             else {
-                $('#cfmMsg').text('Saving Appointment');
+                $('#cfmMsg').text('Assigning Patient');
                 document.getElementById('confirmationBox').style.display = 'block';
             }
+        });
+
+        $('#patientDrop').change(function () {
+            $('#UserId').val(this.value);
+            $('#Name').val($("#patientDrop option:selected").text());
         });
 
         $('#confirmBox').click(function () {
@@ -100,7 +110,7 @@
         $('#closeBox').click(function () {
             document.getElementById('submitSuccessBox').style.display = "none";
 
-            window.location.href = '@Url.Action("Index", "Home")';
+            window.location.href = '@Url.Action("Index", "Appointment")';
         });
 
         $('.cancelBtn').click(function () {

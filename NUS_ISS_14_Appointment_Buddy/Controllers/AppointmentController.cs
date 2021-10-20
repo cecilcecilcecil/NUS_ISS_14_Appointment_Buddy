@@ -10,6 +10,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using NUS_ISS_14_Appointment_Buddy.Models;
 using AppointmentBuddy.Core.Common.Helper;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace NUS_ISS_14_Appointment_Buddy.Controllers
 {
@@ -112,10 +113,10 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
                     UserId = appt.UserId
                 };
 
-                ViewBag.Patients = await _identityService.GetAllUnassignedPatientsByDateTime(appt.AppointmentDate.GetValueOrDefault().ToString("dd/MM/yyyy"), appt.AppointmentTime, AccessToken);
+                ViewBag.Patients = await GetFilteredPatients(appt.AppointmentDate.GetValueOrDefault(), appt.AppointmentTime, appt.AppointmentId);
             }
 
-            return View("AddAppointment", model);
+            return View("UpdateAppointment", model);
         }
 
         [HttpGet]
@@ -175,6 +176,45 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
             }
 
             return Json(new { msgVal = msgVal, successVal = successValue });
+        }
+
+        public async Task<List<SelectListItem>> GetFilteredPatients(DateTime date, string time, string apptId)
+        {
+            IEnumerable<M.User> patients = new List<M.User>();
+
+            patients = await _identityService.GetAllPatients(AccessToken);
+
+            if (patients != null && patients.Count() > 0)
+            {
+                M.FilteredAppointment mf = new M.FilteredAppointment
+                {
+                    AppointmentDate = date,
+                    AppointmentTime = time,
+                    AppointmentId = apptId
+                };
+
+                var filteredIds = await _appointmentService.GetFilteredAppointmentsByPatientIds(mf, AccessToken);
+
+                if (filteredIds != null && filteredIds.Count() > 0)
+                {
+                    patients = patients.Where(y => !filteredIds.Contains(y.UserId)).ToList();
+                }
+            }
+
+            List<SelectListItem> selList = new List<SelectListItem>();
+
+            foreach (var pat in patients)
+            {
+                selList.Add(
+                    new SelectListItem
+                    {
+                        Text = pat.Name,
+                        Value = pat.UserId
+                    }
+                );
+            }
+
+            return selList;
         }
     }
 }

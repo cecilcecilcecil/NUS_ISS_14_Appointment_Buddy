@@ -8,6 +8,7 @@ using Microsoft.Extensions.Options;
 using System.Net.Http;
 using System.Globalization;
 using System.Linq;
+using AppointmentBuddy.Core.Common.Helper;
 
 namespace AppointmentBuddy.Service.PatientInfo.API.Infrastructure
 {
@@ -45,22 +46,45 @@ namespace AppointmentBuddy.Service.PatientInfo.API.Infrastructure
         }
 
 
-        public async Task<M.PatientInfo> UpdatePatientInfo(M.PatientInfo patInfo)
+        public async Task<int> UpdatePSavePatientInfoatientInfo(M.PatientInfo patInfo)
         {
-            M.PatientInfo response;
+            int success = Constants.ErrorCodes.Failure;
 
-            response = await _repository.UpdatePatientInfo(patInfo);
+            var dbpat = await _repository.GetPatientInfoById(patInfo.PatientId);
+            if (dbpat == null)
+            {
+                patInfo.CreatedBy = patInfo.LastUpdatedBy;
+                patInfo.CreatedById = patInfo.LastUpdatedById;
+                patInfo.CreatedDate = DateTime.Now;
+                patInfo.LastUpdatedDate = DateTime.Now;
 
-            return response;
+                success = await _repository.SavePatientInfo(patInfo);
+            }
+            else
+            {
+                patInfo.LastUpdatedDate = DateTime.Now;
+
+                success = await _repository.UpdatePatientInfo(patInfo);
+            }
+
+            return success;
         }
 
-        public async Task<M.PatientInfo> DeletePatientInfoById(string patId)
+        public async Task<int> DeletePatientInfoById(string patId)
         {
-            M.PatientInfo response;
+            int success = Constants.ErrorCodes.Failure;
 
-            response = await _repository.DeletePatientInfoById(patId);
+            success = await _repository.DeletePatientInfoById(patId);
 
-            return response;
+            return success;
+        }
+        public async Task<int> DeactivatePatientInfofoById(string patId)
+        {
+            int success = Constants.ErrorCodes.Failure;
+
+            success = await _repository.DeactivatePatientInfofoById(patId);
+
+            return success;
         }
     }
 }

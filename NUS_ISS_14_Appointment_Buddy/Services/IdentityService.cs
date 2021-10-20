@@ -91,21 +91,11 @@ namespace NUS_ISS_14_Appointment_Buddy.Services
             return String.IsNullOrEmpty(response) ? null : JsonConvert.DeserializeObject<M.IdentityDto>(response);
         }
 
-        public async Task<IEnumerable<M.User>> GetAllUnassignedPatientsByDateTime(string date, string time, string token)
+        public async Task<IEnumerable<M.User>> GetAllPatients(string token)
         {
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
-            var apiURL = UrlConfig.Identity.FilteredPatientsAPI(_serviceUrls.IdentityAPI_FilteredPatientsAPI);
-
-            if (!String.IsNullOrEmpty(date))
-            {
-                apiURL = apiURL + "&date=" + date.Replace("/", "");
-            }
-
-            if (!String.IsNullOrEmpty(time))
-            {
-                apiURL = apiURL + "&time=" + time;
-            }
+            var apiURL = UrlConfig.Identity.PatientsAPI(_serviceUrls.IdentityAPI_PatientsAPI);
 
             var responseString = await _httpClient.GetStringAsync(apiURL);
 
