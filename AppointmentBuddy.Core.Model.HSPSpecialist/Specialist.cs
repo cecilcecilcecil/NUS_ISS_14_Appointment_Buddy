@@ -37,10 +37,10 @@ namespace AppointmentBuddy.Core.Model
     {
         public int Id { get; set; }
         public string Description { get; set; }
-        public string CreatedBy { get; set; }
-        public DateTime CreatedDate { get; set; }
-        public string LastUpdatedBy { get; set; }
-        public DateTime LastUpdatedDate { get; set; }
+        public string CreatedBy { get; set; } = "System";
+        public DateTime CreatedDate { get; set; } = DateTime.Now;
+        public string LastUpdatedBy { get; set; } = "System";
+        public DateTime LastUpdatedDate { get; set; } = DateTime.Now;
         public Boolean IsDeleted { get; set; }
     }
 
