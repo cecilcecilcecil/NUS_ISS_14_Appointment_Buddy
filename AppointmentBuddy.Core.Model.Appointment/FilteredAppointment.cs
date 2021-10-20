@@ -11,5 +11,6 @@ namespace AppointmentBuddy.Core.Model
         public DateTime AppointmentDate { get; set; }
 
         public string AppointmentTime { get; set; }
+        public string AppointmentId { get; set; }
     }
 }
