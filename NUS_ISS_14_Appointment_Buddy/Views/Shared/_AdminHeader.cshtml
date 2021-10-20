@@ -24,7 +24,8 @@
                     <li>@Html.ActionLink("Dashboard", "Index", "Home", null, new { id = "dashboardMenu" })</li>
                     <li><a href="javascript:void(0)" id="mobsetup">Administration</a></li>
                     <li class="quick-pad-right mobsetupcontent content">
-                        @Html.ActionLink("Appointments", "Index", "Appointment", null, new { id = "mobApptMenu" })
+                        @Html.ActionLink("Manage Appointments", "Index", "Appointment", null, new { id = "mobApptMenu" })
+                        @Html.ActionLink("Create Appointment", "AddAppointment", "Appointment", null, new { id = "mobAddApptMenu" })
                     </li>
                 </ul>
             </div>
@@ -40,7 +41,7 @@
     <div class="_content">
         <div class="mobile-master">
             <div class="icon-image">
-                <a href="@Url.Action("Index", "Admin")"> </a>
+                <a href="@Url.Action("Index", "Admin")"> <img src="~/img/ablogo.PNG" alt="AB" /></a>
             </div>
             <div id="menu-icon" class="burger-holder" data-visible="false">
                 <div class="burger-icon">
@@ -56,7 +57,7 @@
             <div class="_content">
                 <div class="anc-container">
                     <a href="@Url.Action("Index", "Admin")">
-                        Appointment Buddy
+                        <img src="~/img/ablogo.PNG" alt="AB" />
                     </a>
                     <h4></h4>
                     <h4></h4>
@@ -79,17 +80,18 @@
                                 </a>
                                 <div class="master-menu-sub itq-drops">
                                     <div class="_sub-menu">
-                                        @Html.ActionLink("Appointments", "Index", "Appointment", null, new { id = "mobApptMenu" })
+                                        @Html.ActionLink("Manage Appointments", "Index", "Appointment", null, new { id = "apptMenu" })
+                                        @Html.ActionLink("Create Appointment", "AddAppointment", "Appointment", null, new { id = "addApptMenu" })
                                     </div>
                                 </div>
                             </li>
                             <li class="_has-dropdown itq">
                                 <a href="javascript:void(0)">
-                                    PatientInfo <i class="fas fa-caret-down"></i>
+                                    Patient Info <i class="fas fa-caret-down"></i>
                                 </a>
                                 <div class="master-menu-sub itq-drops">
                                     <div class="_sub-menu">
-                                        @Html.ActionLink("PatientInfo", "Index", "PatientInfo", null, new { id = "mobPatMenu" })
+                                        @Html.ActionLink("Create Patient", "Index", "PatientInfo", null, new { id = "patMenu" })
                                     </div>
                                 </div>
                             </li>

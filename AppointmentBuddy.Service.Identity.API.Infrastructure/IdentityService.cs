@@ -153,5 +153,11 @@ namespace AppointmentBuddy.Service.Identity.API.Infrastructure.Service
             return null;
         }
 
+        public async Task<IEnumerable<M.User>> GetAllPatients()
+        {
+            var users = await _repository.GetAllPatients();
+
+            return users;
+        }
     }
 }

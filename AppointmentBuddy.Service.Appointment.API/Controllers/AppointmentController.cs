@@ -58,6 +58,17 @@ namespace AppointmentBuddy.Service.Appointment.API.Controllers
             return response;
         }
 
+        [Route("filtered")]
+        [HttpPost]
+        public async Task<List<string>> GetFilteredAppointmentsByPatientIds([FromBody] M.FilteredAppointment mf)
+        {
+            List<string> response;
+
+            response = await _appointmentService.GetFilteredPatientIdsByDate(mf);
+
+            return response;
+        }
+
         [Route("save")]
         [HttpPost]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
