@@ -53,8 +53,8 @@ namespace AppointmentBuddy.Core.Model
 
     public class CollectionDataModel
     {
-        //public List<Specialist> Specialist { get; set; }
-        //public List<Service> Service { get; set; }
+        public List<Specialist> Specialist { get; set; }
+
         public Specialist modelSpec { get; set; }
 
         public List<Service> Service { get; set; }

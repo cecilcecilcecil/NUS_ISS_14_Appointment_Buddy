@@ -2,18 +2,20 @@
 @model CollectionDataModel
 
 <h2>Update Specialist Detail</h2>
-<form asp-action="UpdateSpecialist" method="post">
+<form asp-action="UpdateSpecialistDetail" method="post">
+ @foreach (var r in Model.Specialist)
+ {
     <div class="form-group">
         <label for="Name">Name:</label>
-        @Html.TextBoxFor(x => x.modelSpec.Name)
+        @Html.TextBox(Html.NameFor(p => p.modelSpec.Name).ToString(), r.Name)
     </div>
     <div class="form-group">
         <label for="Name">NRIC:</label>
-        @Html.TextBoxFor(x => x.modelSpec.NRIC)
+        @Html.TextBox(Html.NameFor(p => p.modelSpec.NRIC).ToString(), r.NRIC)
     </div>
     <div class="form-group">
         <label for="Name">Contact:</label>
-        @Html.TextBoxFor(x => x.modelSpec.Contact)
+        @Html.TextBox(Html.NameFor(p => p.modelSpec.Contact).ToString(), r.Contact)
     </div>
     <div class="form-group">
         <label for="Name">Available:</label>
@@ -26,47 +28,15 @@
     </div>
     <div class="form-group">
         <label for="Name">Address:</label>
-        @Html.TextBoxFor(x => x.modelSpec.Address)
+        @Html.TextBox(Html.NameFor(p => p.modelSpec.Address).ToString(), r.Address)
     </div>
     <div class="form-group">
         <label for="Name">Email:</label>
-        @Html.TextBoxFor(x => x.modelSpec.Email)
+        @Html.TextBox(Html.NameFor(p => p.modelSpec.Email).ToString(), r.Email)
     </div>
     <div class="text-center panel-body">
+        <input type="hidden" value="@r.Id" name="Id" />
         <button type="submit" class="btn btn-sm btn-primary">Update</button>   <a asp-action="Index" class="btn btn-sm btn-secondary">Back</a>
     </div>
-</form>
-
-@if (Model.modelSpec != null)
-{
-    <h2>Specialist</h2>
-    <table class="table table-sm table-striped table-bordered m-2">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>NRIC</th>
-                <th>Contact</th>
-                <th>Available</th>
-                <th>Address</th>
-                <th>Email</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>@Model.modelSpec.Name</td>
-                <td>@Model.modelSpec.NRIC</td>
-                <td>@Model.modelSpec.Contact</td>
-                @if (@Model.modelSpec.Available == true)
-                {
-                    <td>Yes</td>
-                }
-                else
-                {
-                    <td>No</td>
-                }
-                <td>@Model.modelSpec.Address</td>
-                <td>@Model.modelSpec.Email</td>
-            </tr>
-        </tbody>
-    </table>
 }
+</form>
