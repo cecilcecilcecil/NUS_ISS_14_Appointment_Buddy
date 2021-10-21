@@ -112,5 +112,50 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
             }
         }
 
+        public async Task<IActionResult> UpdateService(int Id)
+        {
+            List<AppointmentBuddy.Core.Model.Services> ServiceList = new List<AppointmentBuddy.Core.Model.Services>();
+
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.GetAsync("http://localhost:63742/api/Services/" + Id))
+                {
+                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        string apiResponse = await response.Content.ReadAsStringAsync();
+                        var apiResponseArray = "[" + apiResponse + "]";
+                        ServiceList = JsonConvert.DeserializeObject<List<AppointmentBuddy.Core.Model.Services>>(apiResponseArray);
+                    }
+                }
+            }
+
+            return View(ServiceList);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateServiceSubmit(AppointmentBuddy.Core.Model.Services Service)
+        {
+            using (var httpClient = new HttpClient())
+            {
+                List<AppointmentBuddy.Core.Model.Services> ServiceList = new List<AppointmentBuddy.Core.Model.Services>();
+
+                StringContent content = new StringContent(System.Text.Json.JsonSerializer.Serialize(Service), Encoding.UTF8, "application/json");
+
+                using (var response = await httpClient.PutAsync("http://localhost:63742/api/Services/" + Service.Id, content))
+                {
+                    string apiResponse = await response.Content.ReadAsStringAsync();
+                    ViewBag.Result = "Success";
+                }
+
+                using (var response = await httpClient.GetAsync("http://localhost:63742/api/Services"))
+                {
+                    string apiResponse = await response.Content.ReadAsStringAsync();
+                    ServiceList = JsonConvert.DeserializeObject<List<AppointmentBuddy.Core.Model.Services>>(apiResponse);
+                }
+
+                return View("Service", ServiceList);
+            }
+        }
+
     }
 }
