@@ -90,7 +90,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppointmentBuddy.Service.Sp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppointmentBuddy.Service.Specialist.Infrastructure", "AppointmentBuddy.Service.Specialist.Infrastructure\AppointmentBuddy.Service.Specialist.Infrastructure.csproj", "{A645D551-C1F4-4B51-9469-9CB39E34D9C5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppointmentBuddy.Core.Model.HSPService", "AppointmentBuddy.Core.Model.HSPService\AppointmentBuddy.Core.Model.HSPService.csproj", "{165F7E7D-6E66-4364-9202-71FF167BF70C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppointmentBuddy.Core.Model.HSPService", "AppointmentBuddy.Core.Model.HSPService\AppointmentBuddy.Core.Model.HSPService.csproj", "{165F7E7D-6E66-4364-9202-71FF167BF70C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HSPService", "HSPService\HSPService.csproj", "{93CD8D39-A8BB-48B6-B7B0-F3C5D709D4CF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HSPSpecialist", "HSPSpecialist\HSPSpecialist.csproj", "{6BA4DD64-2ACF-4411-B0AB-937D5580DEEA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -228,6 +232,14 @@ Global
 		{165F7E7D-6E66-4364-9202-71FF167BF70C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{165F7E7D-6E66-4364-9202-71FF167BF70C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{165F7E7D-6E66-4364-9202-71FF167BF70C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93CD8D39-A8BB-48B6-B7B0-F3C5D709D4CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93CD8D39-A8BB-48B6-B7B0-F3C5D709D4CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93CD8D39-A8BB-48B6-B7B0-F3C5D709D4CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93CD8D39-A8BB-48B6-B7B0-F3C5D709D4CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6BA4DD64-2ACF-4411-B0AB-937D5580DEEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6BA4DD64-2ACF-4411-B0AB-937D5580DEEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6BA4DD64-2ACF-4411-B0AB-937D5580DEEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6BA4DD64-2ACF-4411-B0AB-937D5580DEEA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
