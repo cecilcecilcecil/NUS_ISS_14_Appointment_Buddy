@@ -5,141 +5,173 @@
 @model NUS_ISS_14_Appointment_Buddy.Models.PatientInfo
 
 @{
-    ViewData["Title"] = "Add/Update Patient Infomation";
-    M.PatientInfo patInfo = (M.PatientInfo)ViewData["patItem"];
-    List<string> titles = (List<string>)ViewBag.Titles;
-    List<string> genders = (List<string>)ViewBag.Genders;
+    ViewData["Title"] = "Add / Update Patient Infomation";
 }
+
 @using (Html.BeginForm("SavePatientInfoById", "PatientInfo", FormMethod.Post, new { @id = "PatientInfoForm" }))
 {
     <div class="_page-essentials">
         @Html.AntiForgeryToken()
         <div class="well">
             <div class="_content">
-                <h2>Add/Update Patient Information</h2>
+                <h2>Add / Update Patient Information</h2>
             </div>
         </div>
-        <div>
-            <button class="_transparent delete-strikethrough" style="float:left">
-                @Html.ActionLink("Confirm Death", "DeactivatePatientInfoById", "PatientInfo",
-                new { confirm = true, patId = Model.PatientId },
-                new { Style = "color:White;", onclick = "return confirm('Are you confirm death of this patient?')" })
-            </button>
-        </div>
-        <div class="editQuan _goods">
-            <div class="display">
-                <div class="based-table view-goods _edit">
-                    <table class="table" id="apptTable" style="overflow: auto !important; overflow-x: auto !important;">
-                        <tbody>
-                            <tr style="color:red">@ViewBag.Info</tr>
-                            <tr>
-                                <td scope="col">Title:</td>
-                                <td></td>
-                                @*<td>
-                                    @Html.DropDownListFor(x => x.Title, (IEnumerable<SelectListItem>)ViewBag.Titles, "Please select a title");;
-                                </td>*@
-                                <td>
-                                    <div>
-                                        <select name="title" id="title">
-                                            @if (patInfo.Title != "")
-                                            {
-                                                <option>@patInfo.Title</option>
-                                            }
-                                            @foreach (string title in titles)
-                                            {
-                                                if (title != patInfo.Title)
-                                                {
-                                                    <option>@title</option>
-                                                }
-                                            }
-                                        </select>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td scope="col">Name:</td>
-                                <td style="color:red">*</td>
-                                <td>
-                                    @Html.TextBoxFor(x => x.PatientName, patInfo.PatientName)
-                                    @Html.ValidationMessageFor(x => x.PatientName, "", new { style = "color:red" })
-                                </td>
-                            </tr>
-                            <tr>
-                                <td scope="col">NRIC:</td>
-                                <td style="color:red">*</td>
-                                <td>
-                                    @Html.TextBoxFor(x => x.NRIC, patInfo.NRIC)
-                                    @Html.ValidationMessageFor(x => x.NRIC, "", new { style = "color:red" })
-                                </td>
-                            </tr>
-                            <tr>
-                                <td scope="col">Gender:</td>
-                                <td></td>
-                                @*<td>
-                                    @Html.DropDownListFor(x => x.Gender, (IEnumerable<SelectListItem>)ViewBag.Genders, "Please select a gender")
-                                </td>*@
-                                <td>
-                                    <div>
-                                        <select name="gender" id="gender">
-                                            @if (patInfo.Gender != "")
-                                            {
-                                                <option>@patInfo.Gender</option>
-                                            }
-                                            @foreach (string gender in genders)
-                                            {
-                                                if (gender != patInfo.Gender)
-                                                {
-                                                    <option>@gender</option>
-                                                }
-                                            }
-                                        </select>
-                                    </div>
-                            </tr>
-                            <tr>
-                                <td scope="col">Birth Date:</td>
-                                <td></td>
-                                <td>
-                                    <input id="BirthDate" data-toggle="datepicker" type="text" class="form-control" placeholder="dd/mm/yyyy" value="@patInfo.BirthDate" autocomplete="off" maxlength="10">
-                                    <div class="input-group-append">
-                                        <span class="input-group-text" id="BirthDateIcon"><i class="far fa-calendar-alt"></i></span>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td scope="col">Contact Number:</td>
-                                <td></td>
-                                <td>
-                                    @Html.TextBoxFor(x => x.ContactNumber, patInfo.ContactNumber)
-                                </td>
-                            </tr>
-                            @Html.HiddenFor(x => x.PatientId, patInfo.PatientId)
-                        </tbody>
-                    </table>
+        <div class="_step-body">
+            <div class="_content">
+                <div class="_project-content">
+                    <div class="editQuan _goods">
+                        <div class="display">
+                            <div class="based-table view-goods _edit">
+                                <table class="table" id="apptTable" style="overflow: auto !important; overflow-x: auto !important;">
+                                    <tbody>
+                                        <tr style="color:red">@ViewBag.Info</tr>
+                                        <tr>
+                                            <td scope="col">Title:</td>
+                                            <td>
+                                                @Html.DropDownListFor(x => x.Title, (IEnumerable<SelectListItem>)ViewBag.Titles, "Please select a title", new { @class = "_category wide", id = "titleDrop" })
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td scope="col">Name<span class="field-validation-error">*</span> :</td>
+                                            <td>
+                                                @Html.TextBoxFor(x => x.PatientName, new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(x => x.PatientName)
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td scope="col">NRIC<span class="field-validation-error">*</span> :</td>
+                                            <td>
+                                                @Html.TextBoxFor(x => x.NRIC, new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(x => x.NRIC)
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td scope="col">Gender:</td>
+                                            <td>
+                                                @Html.DropDownListFor(x => x.Gender, (IEnumerable<SelectListItem>)ViewBag.Genders, "Please select a gender", new { @class = "_category wide", id = "genderDrop" })
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            @{string bDate = Model.BirthDate != null ? Model.BirthDate.ToString("dd/MM/yyyy") : null;}
+                                            <td scope="col">Birth Date:</td>
+                                            <td>
+                                                <div class="row">
+                                                    <div class="col-md-10">
+                                                        <div class="_form-group _calendar">
+                                                            <div class="input-group mb-5">
+                                                                <input id="BirthDate" data-toggle="datepicker" type="text" class="form-control" placeholder="dd/mm/yyyy" asp-for="BirthDate" value="@bDate" autocomplete="off" maxlength="10">
+                                                                <div class="input-group-append">
+                                                                    <span class="input-group-text" id="BirthDateIcon"><i class="far fa-calendar-alt"></i></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td scope="col">Contact Number:</td>
+                                            <td>
+                                                @Html.TextBoxFor(x => x.ContactNumber, new { @class = "form-control" })
+                                            </td>
+                                        </tr>
+                                        @Html.HiddenFor(x => x.PatientId)
+                                        @Html.HiddenFor(x => x.DeathDate)
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-        <div class="_project-content">
-            <div class="bids-width _contact-details">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="autosave-container">
-                            <div class="autosave-wrapper">
-                                <h4 class="autosave-msg"></h4>
-                                <div class="_nxt-prv">
-                                    <button class="_transparent cancelBtn" id="calcelBtn" style="justify-content:center">cancel</button>
-                                    <input class="red-btn" type="submit" value="Save" style="float:right">
-                                    <button class="_transparent delete-strikethrough" style="float:left">
-                                        @Html.ActionLink("Delete Patient", "DeletePatientInfoById", "PatientInfo",
-                                         new { confirm = true, patId = Model.PatientId },
-                                         new { Style = "color:White;", onclick = "return confirm('Are you sure to delete this patient?')" })
-                                    </button>
+                <div class="_project-content">
+                    <div class="bids-width _contact-details">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="autosave-container">
+                                    <div class="autosave-wrapper">
+                                        <h4 class="autosave-msg"></h4>
+                                        <div class="_nxt-prv">
+                                            <button class="_transparent cancelBtn" id="cancelBtn">cancel</button>
+                                            <button class="_transparent" id="deleteBtn">delete</button>
+                                            <button class="red-btn" id="saveBtn">save</button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <partial name="_ErrorModal" />
+                <partial name="_ConfirmModal" />
+                <partial name="_SubmitModal" />
+                <partial name="_SavingModal" />
             </div>
         </div>
     </div>
 }
 
+<script type="text/javascript" nonce="@ViewData["Nonce"]">
+    $(document).ready(function () {
+        $('#BirthDate').keypress(function (e) { return isDate(this, e); });
+        $('#ContactNumber').keypress(function (e) { return isPhoneNumber(e); });
+
+        $('#PatientInfoForm').submit(function (e) { e.preventDefault(); });
+
+        $('#saveBtn').click(function () {
+            this.blur();
+
+            $('#cfmMsg').text('Saving Patient Info');
+            document.getElementById('confirmationBox').style.display = 'block';
+        });
+
+        $('#confirmBox').click(function () {
+            document.getElementById('confirmationBox').style.display = 'none';
+            SaveAppointment();
+        });
+
+        $('#closeBox').click(function () {
+            document.getElementById('submitSuccessBox').style.display = "none";
+
+            window.location.href = '@Url.Action("Index", "PatientInfo")';
+        });
+
+        $('.cancelBtn').click(function () {
+            window.location.href = '@Url.Action("Index", "PatientInfo")';
+        });
+
+        $('#closeErrorBox').click(function () { document.getElementById('errorMsgBox').style.display = 'none'; });
+        $('#cancelBox').click(function () { document.getElementById('confirmationBox').style.display = 'none'; });
+
+    });
+
+    function SaveAppointment() {
+        var formData = $('#PatientInfoForm').serializeArray();
+
+        var savingModal = document.getElementById("savingInProgress");
+        savingModal.style.display = "block";
+
+        $.ajax({
+            type: 'POST',
+            data: formData,
+            dataType: 'json',
+            url: '@Url.Action("SavePatientInfoById", "PatientInfo")',
+            success: function (result) {
+                savingModal.style.display = "none";
+
+                if (result.successVal == '@Constants.ErrorCodes.Success') {
+                    document.getElementById('submitSuccessBox').style.display = 'block';
+                }
+                else {
+                    $(window).scrollTop(0);
+                    document.getElementById("errorMsgValue").innerHTML = result.autosaveDate;
+                    document.getElementById("errorMsgBox").style.display = "block";
+                }
+            },
+            error: function () {
+                savingModal.style.display = "none";
+                document.getElementById("errorMsgBox").style.display = "block";
+            }
+        });
+    }
+</script>

@@ -1,5 +1,6 @@
 ﻿using M = AppointmentBuddy.Core.Model;
 using System.Threading.Tasks;
+using AppointmentBuddy.Core.Model;
 
 namespace AppointmentBuddy.Service.PatientInfo.API.Core.Interface
 {

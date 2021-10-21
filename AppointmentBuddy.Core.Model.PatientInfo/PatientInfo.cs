@@ -12,11 +12,12 @@ namespace AppointmentBuddy.Core.Model
         public string NRIC { get; set; }
         public string PatientName { get; set; }
         public DateTime BirthDate { get; set; }
-        public DateTime DeathDate { get; set; }
+        public DateTime? DeathDate { get; set; }
         public string Gender { get; set; }
         public string Title { get; set; }
         public string ContactNumber { get; set; }
         public bool IsDeleted { get; set; }
+        public int VersionNo { get; set; }
         public string CreatedById { get; set; }
         [Column(TypeName = "varchar(255)")]
         public string CreatedBy { get; set; }

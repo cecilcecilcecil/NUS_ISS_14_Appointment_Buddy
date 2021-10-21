@@ -91,7 +91,8 @@
                                 </a>
                                 <div class="master-menu-sub itq-drops">
                                     <div class="_sub-menu">
-                                        @Html.ActionLink("Create Patient", "Index", "PatientInfo", null, new { id = "patMenu" })
+                                        @Html.ActionLink("Manage Patients", "Index", "PatientInfo", null, new { id = "patMenu" })
+                                        @Html.ActionLink("Create Patient", "PatientInfoDetail", "PatientInfo", null, new { id = "patMenu" })
                                     </div>
                                 </div>
                             </li>

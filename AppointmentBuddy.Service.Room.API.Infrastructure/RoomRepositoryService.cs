@@ -1,6 +1,5 @@
 ﻿using AppointmentBuddy.Infrastructure.Repository;
 using AppointmentBuddy.Service.Room.API.Core.Interface;
-using AppointmentBuddy.Service.Room.API.Core.Interface;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
@@ -10,10 +9,10 @@ namespace AppointmentBuddy.Service.Room.API.Infrastructure
 {
     public class RoomRepositoryService : IRoomRepositoryService
     {
-        private readonly RoomBuddyDBContext _context;
+        private readonly AppointmentBuddyDBContext _context;
         private readonly ILogger<RoomRepositoryService> _logger;
 
-        public RoomRepositoryService(RoomBuddyDBContext context, ILogger<RoomRepositoryService> logger)
+        public RoomRepositoryService(AppointmentBuddyDBContext context, ILogger<RoomRepositoryService> logger)
         {
             _context = context;
             _logger = logger;
@@ -22,7 +21,8 @@ namespace AppointmentBuddy.Service.Room.API.Infrastructure
         public async Task<M.Room> GetRoomByRoomId(string roomId)
         {
             M.Room dataItem;
-            dataItem = await _context.Appointment.FirstOrDefaultAsync(s => s.RoomId == roomId);
+
+            dataItem = await _context.Room.FirstOrDefaultAsync(s => s.RoomId == roomId);
             return dataItem;
         }
     }

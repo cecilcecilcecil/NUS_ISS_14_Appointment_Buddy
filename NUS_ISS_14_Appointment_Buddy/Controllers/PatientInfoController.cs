@@ -72,35 +72,52 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
         }
 
         [HttpGet]
+        public IActionResult LinkToAddPatient()
+        {
+            return Json(new { redirectUrl = Url.Action("PatientInfoDetail", "PatientInfo") });
+        }
+
+        [HttpGet]
         public async Task<IActionResult> PatientInfoDetail(string patID)
         {
-            M.PatientInfo patItem;
+            PatientInfo patItem = new PatientInfo();
 
             if (!string.IsNullOrEmpty(patID))
             {
-                patItem = await _patientInfoService.GetPatientInfoById(patID, AccessToken);
-                if (patItem.DeathDate != null)
+                var patI = await _patientInfoService.GetPatientInfoById(patID, AccessToken);
+
+                if (patI != null)
                 {
-                    ViewBag.Info = "This patient has passed away, death date is." + patItem.DeathDate.ToString("dd/MM/yyyy");
+                    patItem = new PatientInfo
+                    {
+                        PatientId = patI.PatientId,
+                        PatientName = patI.PatientName,
+                        BirthDate = patI.BirthDate,
+                        ContactNumber = patI.ContactNumber,
+                        DeathDate = patI.DeathDate,
+                        Gender = patI.Gender,
+                        NRIC = patI.NRIC,
+                        Title = patI.Title
+                    };
                 }
-                ViewData["patItem"] = patItem;
             }
             else
             {
-                patItem = new M.PatientInfo
+                patItem = new PatientInfo
                 {
-                    PatientId = Guid.NewGuid().ToString()            
+                    PatientId = Guid.NewGuid().ToString(),
+                    DeathDate = null
                 };
             }
 
             ViewBag.Titles = GetTitles();
             ViewBag.Genders = GetGenders();
 
-            return View();
+            return View(patItem);
         }
 
 
-        [HttpGet]
+        [HttpPost]
         public async Task<IActionResult> DeletePatientInfoById(bool confirm, string patId)
         {
             string msgVal = "";
@@ -130,7 +147,7 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
             return Json(new { msgVal = msgVal, successVal = successValue });
         }
 
-        [HttpGet]
+        [HttpPost]
         public async Task<IActionResult> DeactivatePatientInfoById(bool confirm, string patId)
         {
             string msgVal = "";
@@ -158,10 +175,12 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
             }
             return Json(new { msgVal = msgVal, successVal = successValue });
         }
-        [HttpGet]
+        
+        [HttpPost]
         public async Task<IActionResult> SavePatientInfoById(PatientInfo patInfo)
         {
             string msgVal = "";
+
             M.PatientInfo corePatInfo = new M.PatientInfo
             {
                 PatientId = patInfo.PatientId,
@@ -174,7 +193,9 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
                 LastUpdatedBy = UserName,
                 LastUpdatedById = UserId
             };
+
             var successValue = await _patientInfoService.SavePatientInfo(corePatInfo, AccessToken);
+
             if (successValue == Constants.ErrorCodes.Success)
             {
                 msgVal = "";
@@ -196,10 +217,9 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
             return Json(new { msgVal = msgVal, successVal = successValue });
         }
 
-        List<SelectListItem> GetTitles()
+        public List<SelectListItem> GetTitles()
         {
             var returnList = new List<SelectListItem> { 
-                new SelectListItem { Text = "Please select a title", Value = "" },
                 new SelectListItem { Text = "Mr", Value = "Mr" },
                 new SelectListItem { Text = "Mrs", Value = "Mrs" },
                 new SelectListItem { Text = "Ms", Value = "Ms" },
@@ -207,13 +227,13 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
                 new SelectListItem { Text = "Doctor", Value = "Doctor" },
                 new SelectListItem { Text = "Lord", Value = "Lord" },
             };
+
             return returnList;
         }
 
-        List<SelectListItem> GetGenders()
+        public List<SelectListItem> GetGenders()
         {
             var returnList = new List<SelectListItem> {
-                new SelectListItem { Text = "Please select a gender", Value = "" },
                 new SelectListItem { Text = "Male", Value = "M" },
                 new SelectListItem { Text = "Female", Value = "F" },
             };

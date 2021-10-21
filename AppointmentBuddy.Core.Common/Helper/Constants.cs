@@ -85,6 +85,7 @@ namespace AppointmentBuddy.Core.Common.Helper
             public const string RequiredMessage = "The {0} is required";
             public const string DateFormatMessage = "The {0} must be in date format.";
             public const string TimeFormatMessage = "The {0} must be in HH:MM format.";
+            public const string PhoneFormatMessage = "Please enter a valid Singapore number.";
             public const string Concurrency = "The record may be modified elsewhere, please refresh and try again.";
             public const string SystemUnavailable = "System unavailable, please refresh or try again later.";
         }

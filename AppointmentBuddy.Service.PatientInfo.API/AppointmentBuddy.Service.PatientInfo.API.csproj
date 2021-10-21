@@ -27,6 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\AppointmentBuddy.Core.Common\AppointmentBuddy.Core.Common.csproj" />
     <ProjectReference Include="..\AppointmentBuddy.Core.Model.PatientInfo\AppointmentBuddy.Core.Model.PatientInfo.csproj" />
     <ProjectReference Include="..\AppointmentBuddy.Service.PatientInfo.API.Core\AppointmentBuddy.Service.PatientInfo.API.Core.csproj" />
     <ProjectReference Include="..\AppointmentBuddy.Service.PatientInfo.API.Infrastructure\AppointmentBuddy.Service.PatientInfo.API.Infrastructure.csproj" />

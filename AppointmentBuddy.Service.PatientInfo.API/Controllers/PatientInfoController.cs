@@ -1,4 +1,5 @@
-﻿using AppointmentBuddy.Service.PatientInfo.API.Core.Interface;
+﻿using AppointmentBuddy.Core.Common.Helper;
+using AppointmentBuddy.Service.PatientInfo.API.Core.Interface;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -6,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using M = AppointmentBuddy.Core.Model;
 
@@ -55,5 +57,27 @@ namespace AppointmentBuddy.Service.PatientInfo.API.Controllers
             return response;
         }
 
+        [Route("save")]
+        [HttpPost]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.NoContent)]
+        public async Task<ActionResult<int>> SavePatientInfo([FromBody] M.PatientInfo patinfo)
+        {
+            var success = Constants.ErrorCodes.Failure;
+
+            if (patinfo == null)
+            {
+                return BadRequest();
+            }
+
+            success = await _patientInfoService.SavePatientInfo(patinfo);
+
+            if (success == Constants.ErrorCodes.Failure)
+            {
+                return NoContent();
+            }
+
+            return success;
+        }
     }
 }

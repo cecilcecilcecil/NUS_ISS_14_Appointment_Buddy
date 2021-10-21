@@ -10,24 +10,26 @@
                         <th scope="col">S/N</th>
                         <th scope="col">Title</th>
                         <th scope="col">Patient Name</th>
+                        <th scope="col">NRIC / FIN</th>
                         <th scope="col">Gender</th>
                         <th scope="col">Birth Date</th>
                         <th scope="col">Contact Number</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @{int count = 1;}
+                    @{int count = 1 + (10 * (Model.PaginationInfo.PageNumber - 1));}
                     @foreach (var patInfo in Model.ListItems)
                     {
-                    <tr>
-                        <td>@count</td>
-                        <td>@patInfo.Title</td>
-                        <td><a href="@Url.Action("PatientInfoDetail", "PatientInfo")">@patInfo.PatientName</a></td>
-                        <td>@patInfo.NRIC</td>
-                        <td>@patInfo.Gender</td>
-                        <td>@patInfo.BirthDate.ToString("dd/MM/yyyy")</td>
-                        <td>@patInfo.ContactNumber</td>
-                    </tr>
+                        <tr>
+                            <td>@count</td>
+                            <td>@patInfo.Title</td>
+                            <td><a href="@Url.Action("PatientInfoDetail", "PatientInfo")">@patInfo.PatientName</a></td>
+                            <td>@patInfo.NRIC</td>
+                            <td>@patInfo.Gender</td>
+                            <td>@patInfo.BirthDate.ToString("dd/MM/yyyy")</td>
+                            <td>@patInfo.ContactNumber</td>
+                        </tr>
+                        count++;
                     }
                 </tbody>
             </table>

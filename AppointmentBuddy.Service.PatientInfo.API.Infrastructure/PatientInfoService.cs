@@ -50,19 +50,22 @@ namespace AppointmentBuddy.Service.PatientInfo.API.Infrastructure
         {
             int success = Constants.ErrorCodes.Failure;
 
-            var dbpat = await _repository.GetPatientInfoById(patInfo.PatientId);
-            if (dbpat == null)
+            var dbPat = await _repository.GetPatientInfoById(patInfo.PatientId);
+
+            if (dbPat == null)
             {
                 patInfo.CreatedBy = patInfo.LastUpdatedBy;
                 patInfo.CreatedById = patInfo.LastUpdatedById;
                 patInfo.CreatedDate = DateTime.Now;
                 patInfo.LastUpdatedDate = DateTime.Now;
+                patInfo.VersionNo = 1;
 
                 success = await _repository.SavePatientInfo(patInfo);
             }
             else
             {
                 patInfo.LastUpdatedDate = DateTime.Now;
+                patInfo.VersionNo = dbPat.VersionNo++;
 
                 success = await _repository.UpdatePatientInfo(patInfo);
             }
@@ -78,6 +81,7 @@ namespace AppointmentBuddy.Service.PatientInfo.API.Infrastructure
 
             return success;
         }
+
         public async Task<int> DeactivatePatientInfofoById(string patId)
         {
             int success = Constants.ErrorCodes.Failure;

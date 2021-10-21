@@ -70,10 +70,16 @@
         });
 
         $("#addButton").click(function (e) {
-            e.preventDefault();
-            $.post('@Url.Action("PatientInfoDetail" , "PatientInfo")', {'__RequestVerificationToken': $('input[name="__RequestVerificationToken"]').val() }, function (data) {
-                window.location = data.redirectUrl;
-            });
+        e.preventDefault();
+
+            $.ajax({
+                type: 'GET',
+                dataType: 'json',
+                url: '@Url.Action("LinkToAddPatient", "PatientInfo")',
+                success: function (result) {
+                    window.location.href = result.redirectUrl;
+                }
+            })
         });
 
         $('#DateFrom, #DateTo').keypress(function (e) {
