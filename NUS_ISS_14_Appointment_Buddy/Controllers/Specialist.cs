@@ -131,9 +131,9 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
             }
         }
 
-        public async Task<IActionResult> UpdateSpecialist(int Id)
+        public async Task<IActionResult> UpdateSpecialist(int Id, CollectionDataModel model)
         {
-            CollectionDataModel model = new CollectionDataModel();
+            List<CollectionDataModel> SpecialistList = new List<CollectionDataModel>();
 
             using (var httpClient = new HttpClient())
             {
@@ -145,25 +145,25 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
 
                 using (var response = await httpClient.GetAsync("https://localhost:44341/api/Specialists/" + Id))
                 {
-                    List<AppointmentBuddy.Core.Model.Specialist> SpecialistList = new List<AppointmentBuddy.Core.Model.Specialist>();
+                    //List<AppointmentBuddy.Core.Model.Specialist> SpecialistList = new List<AppointmentBuddy.Core.Model.Specialist>();
 
                     if (response.StatusCode == System.Net.HttpStatusCode.OK)
                     {
                         string apiResponse = await response.Content.ReadAsStringAsync();
-                        SpecialistList = JsonConvert.DeserializeObject<List<AppointmentBuddy.Core.Model.Specialist>>(apiResponse);
+                        SpecialistList = JsonConvert.DeserializeObject<List<CollectionDataModel>>(apiResponse);
 
-                        foreach (var r in SpecialistList) {
-                            model.modelSpec.Address = r.Address;
-                            model.modelSpec.Available = r.Available;
-                            model.modelSpec.Contact = r.Contact;
-                            model.modelSpec.Email = r.Email;
-                            model.modelSpec.IsDeleted = r.IsDeleted;
-                            model.modelSpec.Id = r.Id;
-                            model.modelSpec.Name = r.Name;
-                            model.modelSpec.NRIC = r.NRIC;
-                            model.modelSpec.ServiceDescription = r.ServiceDescription;
-                            model.modelSpec.Services = r.Services;
-                        }
+                        //foreach (var r in SpecialistList) {
+                          //  model.modelSpec.Address = r.Address;
+                            //model.modelSpec.Available = r.Available;
+                            //model.modelSpec.Contact = r.Contact;
+                            //model.modelSpec.Email = r.Email;
+                            //model.modelSpec.IsDeleted = r.IsDeleted;
+                            //model.modelSpec.Id = r.Id;
+                            //model.modelSpec.Name = r.Name;
+                            //model.modelSpec.NRIC = r.NRIC;
+                            //model.modelSpec.ServiceDescription = r.ServiceDescription;
+                            //model.modelSpec.Services = r.Services;
+                        //}
                     }
                 }
                 

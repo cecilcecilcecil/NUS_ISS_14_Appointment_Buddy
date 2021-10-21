@@ -46,5 +46,27 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
                 return View("Service", ServiceList);
             }
         }
+
+        public ViewResult AddService() => View();
+
+        [HttpPost]
+        public async Task<IActionResult> AddService(AppointmentBuddy.Core.Model.Services Service)
+        {
+            List<AppointmentBuddy.Core.Model.Services> ServiceList = new List<AppointmentBuddy.Core.Model.Services>();
+            StringContent content = new StringContent(System.Text.Json.JsonSerializer.Serialize(Service), Encoding.UTF8, "application/json");
+
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.PostAsync("http://localhost:63742/api/Services", content))
+                {
+                    string apiResponse = await response.Content.ReadAsStringAsync();
+
+                    var apiResponseArray = "[" + apiResponse + "]";
+                    ServiceList = JsonConvert.DeserializeObject<List<AppointmentBuddy.Core.Model.Services>>(apiResponseArray);
+                    return View(ServiceList);
+                }
+            }
+        }
+
     }
 }
