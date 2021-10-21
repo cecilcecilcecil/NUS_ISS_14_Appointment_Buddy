@@ -10,7 +10,7 @@ using M = AppointmentBuddy.Core.Model;
 
 namespace AppointmentBuddy.Service.PatientInfo.API.Infrastructure
 {
-    public class PatientInfoRepositoryService
+    public class PatientInfoRepositoryService : IPatientInfoRepositoryService
     {
         private readonly AppointmentBuddyDBContext _context;
         private readonly ILogger<PatientInfoRepositoryService> _logger;
@@ -28,7 +28,7 @@ namespace AppointmentBuddy.Service.PatientInfo.API.Infrastructure
             return dataItem;
         }
 
-        public async Task<IEnumerable<M.PatientInfo>> GetPatienInfoBySearch(string nric, string patName)
+        public async Task<IEnumerable<M.PatientInfo>> GetPatientInfoBySearch(string nric, string patName)
         {
             if (string.IsNullOrEmpty(nric))
             {
@@ -67,7 +67,7 @@ namespace AppointmentBuddy.Service.PatientInfo.API.Infrastructure
             return success;
         }
 
-        public async Task<int> UpdateAppointment(M.Appointment patInfo)
+        public async Task<int> UpdatePatientInfo(M.PatientInfo patInfo)
         {
             int success = Constants.ErrorCodes.Failure;
 

@@ -17,7 +17,7 @@
                 <div class="row ken-flex">
                     <div class="col-lg-4 col-md-6 col-sm-12">
                         <h3>NRIC:</h3>
-                        <div class="input-group mb-5">,
+                        <div class="input-group mb-5">
                             <input value="@ViewData["NRIC"]" class="form-control" id="NRIC"/>
                         </div>
                     </div>
@@ -32,6 +32,12 @@
                 </div>
                 <br />
                 <div class="row ken-flex">
+                    @if (IdentityHelper.HasRole((ClaimsIdentity)User.Identity, Constants.RoleType.Admin))
+                    {
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <button class="red-btn" id="addButton">Add New Patient</button>
+                        </div>
+                    }
                     <div class="col-lg-4 col-md-12 col-sm-12">
                         <button class="white-btn" id="resetButton">Reset</button>
                         <button class="red-btn" id="applyButton">Apply</button>
@@ -40,13 +46,6 @@
             </div>
             <div class="_project-content" id="pats">
                 @await Html.PartialAsync("_PatientInfoResults", Model)
-            </div>
-            <div>
-                <div class="row ken-flex">
-                    <div class="col-lg-4 col-md-12 col-sm-12">
-                        <button class="white-btn" id="addButton">Add New Patient</button>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -72,7 +71,7 @@
 
         $("#addButton").click(function (e) {
             e.preventDefault();
-            $.post('@Url.Action("UpdatePatientInfo")', {'__RequestVerificationToken': $('input[name="__RequestVerificationToken"]').val() }, function (data) {
+            $.post('@Url.Action("PatientInfoDetail" , "PatientInfo")', {'__RequestVerificationToken': $('input[name="__RequestVerificationToken"]').val() }, function (data) {
                 window.location = data.redirectUrl;
             });
         });

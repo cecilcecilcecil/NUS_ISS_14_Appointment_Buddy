@@ -16,7 +16,7 @@
         "ASPNETCORE_HOSTINGSTARTUPASSEMBLIES": "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation"
       }
     },
-    "AppointmentBuddy.Service.Appointment.API": {
+    "AppointmentBuddy.Service.PatientInfo.API": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "v1.0/api/patientinfo/health",

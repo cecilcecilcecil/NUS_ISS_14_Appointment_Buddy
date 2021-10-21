@@ -12,7 +12,7 @@ using AppointmentBuddy.Core.Common.Helper;
 
 namespace AppointmentBuddy.Service.PatientInfo.API.Infrastructure
 {
-    public class PatientInfoService
+    public class PatientInfoService : IPatientInfoService
     {
         private readonly IPatientInfoRepositoryService _repository;
         private readonly ILogger<PatientInfoService> _logger;
@@ -46,7 +46,7 @@ namespace AppointmentBuddy.Service.PatientInfo.API.Infrastructure
         }
 
 
-        public async Task<int> UpdatePSavePatientInfoatientInfo(M.PatientInfo patInfo)
+        public async Task<int> SavePatientInfo(M.PatientInfo patInfo)
         {
             int success = Constants.ErrorCodes.Failure;
 

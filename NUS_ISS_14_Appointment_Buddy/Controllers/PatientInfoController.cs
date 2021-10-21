@@ -39,9 +39,9 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
 
             M.PaginatedResults<M.PatientInfo> patItems = await _patientInfoService.GetPatientInfoBySearch(AccessToken, nric, patName, page, pageSize);
 
-            var apptRvm = new ResultViewModel<M.PatientInfo>(patItems.Data, patItems.PageIndex, patItems.PageSize, patItems.Count);
+            var patRvm = new ResultViewModel<M.PatientInfo>(patItems.Data, patItems.PageIndex, patItems.PageSize, patItems.Count);
 
-            return View(apptRvm);
+            return View(patRvm);
         }
 
         [HttpPost]
