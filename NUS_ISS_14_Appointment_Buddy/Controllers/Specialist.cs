@@ -131,11 +131,45 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
             }
         }
 
+        public async Task<IActionResult> UpdateSpecialist(int Id)
+        {
+            CollectionDataModel model = new CollectionDataModel();
 
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.GetAsync("http://localhost:63742/api/Services"))
+                {
+                    string apiResponse = await response.Content.ReadAsStringAsync();
+                    model.Service = JsonConvert.DeserializeObject<List<AppointmentBuddy.Core.Model.Service>>(apiResponse);
+                }
 
+                using (var response = await httpClient.GetAsync("https://localhost:44341/api/Specialists/" + Id))
+                {
+                    List<AppointmentBuddy.Core.Model.Specialist> SpecialistList = new List<AppointmentBuddy.Core.Model.Specialist>();
 
+                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        string apiResponse = await response.Content.ReadAsStringAsync();
+                        SpecialistList = JsonConvert.DeserializeObject<List<AppointmentBuddy.Core.Model.Specialist>>(apiResponse);
 
-
+                        foreach (var r in SpecialistList) {
+                            model.modelSpec.Address = r.Address;
+                            model.modelSpec.Available = r.Available;
+                            model.modelSpec.Contact = r.Contact;
+                            model.modelSpec.Email = r.Email;
+                            model.modelSpec.IsDeleted = r.IsDeleted;
+                            model.modelSpec.Id = r.Id;
+                            model.modelSpec.Name = r.Name;
+                            model.modelSpec.NRIC = r.NRIC;
+                            model.modelSpec.ServiceDescription = r.ServiceDescription;
+                            model.modelSpec.Services = r.Services;
+                        }
+                    }
+                }
+                
+            }
+            return View(model);
+        }
 
     }
 }
