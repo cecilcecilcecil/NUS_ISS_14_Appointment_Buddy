@@ -68,5 +68,49 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
             }
         }
 
+        [HttpPost]
+        public async Task<IActionResult> DeleteService(int ServiceId)
+        {
+            using (var httpClient = new HttpClient())
+            {
+                List<AppointmentBuddy.Core.Model.Services> ServiceList = new List<AppointmentBuddy.Core.Model.Services>();
+
+                using (var response = await httpClient.GetAsync("http://localhost:63742/api/Services/" + ServiceId))
+                {
+                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        string apiResponse = await response.Content.ReadAsStringAsync();
+                        var apiResponseArray = "[" + apiResponse + "]";
+                        ServiceList = JsonConvert.DeserializeObject<List<AppointmentBuddy.Core.Model.Services>>(apiResponseArray);
+                    }
+
+                    foreach (var r in ServiceList)
+                    {
+                        r.IsDeleted = true;
+
+                    }
+                }
+
+                var length = System.Text.Json.JsonSerializer.Serialize(ServiceList).Length;
+                var lengthAft = length - 2;
+                var test = System.Text.Json.JsonSerializer.Serialize(ServiceList).Substring(1, lengthAft);
+                StringContent content = new StringContent(test, Encoding.UTF8, "application/json");
+
+                using (var response = await httpClient.PutAsync("http://localhost:63742/api/Services/" + ServiceId, content))
+                {
+                    string apiResponse = await response.Content.ReadAsStringAsync();
+                    ViewBag.Result = "Success";
+                }
+
+                using (var response = await httpClient.GetAsync("http://localhost:63742/api/Services"))
+                {
+                    string apiResponse = await response.Content.ReadAsStringAsync();
+                    ServiceList = JsonConvert.DeserializeObject<List<AppointmentBuddy.Core.Model.Services>>(apiResponse);
+                }
+
+                return View("Service", ServiceList);
+            }
+        }
+
     }
 }
