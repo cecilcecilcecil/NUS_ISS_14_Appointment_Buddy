@@ -96,6 +96,17 @@
                                     </div>
                                 </div>
                             </li>
+                            <li class="_has-dropdown itq">
+                                <a href="javascript:void(0)">
+                                    Services and Specialist <i class="fas fa-caret-down"></i>
+                                </a>
+                                <div class="master-menu-sub itq-drops">
+                                    <div class="_sub-menu">
+                                        @Html.ActionLink("Manage Services", "Index", "Service", null, new { id = "scMenu" })
+                                        @Html.ActionLink("Manage Specialists", "Index", "Specialist", null, new { id = "spcMenu" })
+                                    </div>
+                                </div>
+                            </li>
                         </ul>
                     </div>
                     <div class="master-right">
