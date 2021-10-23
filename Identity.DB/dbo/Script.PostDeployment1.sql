@@ -11,5 +11,4 @@ Post-Deployment Script Template
 */
 
 :r .\PredefinedData\01_AB_Role.sql
-:r .\PredefinedData\02_AB_Code.sql
-:r .\PredefinedData\03_AB_UserWithRole.sql
+:r .\PredefinedData\02_AB_UserWithRole.sql
