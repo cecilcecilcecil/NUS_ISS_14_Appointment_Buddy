@@ -16,14 +16,14 @@
         "ASPNETCORE_HOSTINGSTARTUPASSEMBLIES": "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation"
       }
     },
-    "AppointmentBuddy.Service.Room.API": {
+    "AppointmentBuddy.Service.Services.API": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "v1.0/api/room/health",
+      "launchUrl": "v1.0/api/services/health",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "http://localhost:7004"
+      "applicationUrl": "http://localhost:7003"
     }
   }
 }

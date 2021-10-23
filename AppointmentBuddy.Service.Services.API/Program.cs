@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace AppointmentBuddy.Service.Specialist.API
+namespace AppointmentBuddy.Service.Services.API
 {
     public class Program
     {

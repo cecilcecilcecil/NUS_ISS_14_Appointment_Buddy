@@ -10,14 +10,13 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="4.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.8" />
   </ItemGroup>
-  
+
   <ItemGroup>
     <ProjectReference Include="..\AppointmentBuddy.Core.Common\AppointmentBuddy.Core.Common.csproj" />
-    <ProjectReference Include="..\AppointmentBuddy.Core.Model.HSPSpecialist\AppointmentBuddy.Core.Model.HSPSpecialist.csproj" />
     <ProjectReference Include="..\AppointmentBuddy.Core.Model\AppointmentBuddy.Core.Model.csproj" />
     <ProjectReference Include="..\AppointmentBuddy.Infrastructure.Repository\AppointmentBuddy.Infrastructure.Repository.csproj" />
-    <ProjectReference Include="..\AppointmentBuddy.Service.Specialist.API.Core\AppointmentBuddy.Service.Specialist.API.Core.csproj" />
-    <ProjectReference Include="..\AppointmentBuddy.Service.Specialist.Infrastructure\AppointmentBuddy.Service.Specialist.API.Infrastructure.csproj" />
+    <ProjectReference Include="..\AppointmentBuddy.Service.Services.API.Core\AppointmentBuddy.Service.Services.API.Core.csproj" />
+    <ProjectReference Include="..\AppointmentBuddy.Service.Services.API.Infrastructure\AppointmentBuddy.Service.Services.API.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

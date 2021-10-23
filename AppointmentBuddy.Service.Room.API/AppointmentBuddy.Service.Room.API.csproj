@@ -4,4 +4,18 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.18" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="4.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.8" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AppointmentBuddy.Core.Common\AppointmentBuddy.Core.Common.csproj" />
+    <ProjectReference Include="..\AppointmentBuddy.Core.Model\AppointmentBuddy.Core.Model.csproj" />
+    <ProjectReference Include="..\AppointmentBuddy.Service.Room.API.Core\AppointmentBuddy.Service.Room.API.Core.csproj" />
+    <ProjectReference Include="..\AppointmentBuddy.Service.Room.API.Infrastructure\AppointmentBuddy.Service.Room.API.Infrastructure.csproj" />
+  </ItemGroup>
+  
 </Project>

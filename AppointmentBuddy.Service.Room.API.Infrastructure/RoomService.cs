@@ -7,7 +7,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System.Net.Http;
 
-namespace AppointmentBuddy.Service.Appointment.API.Infrastructure
+namespace AppointmentBuddy.Service.Room.API.Infrastructure
 {
     public class RoomService : IRoomService
     {

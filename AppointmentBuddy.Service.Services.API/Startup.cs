@@ -7,8 +7,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using AppointmentBuddy.Infrastructure.Repository;
-using AppointmentBuddy.Service.Specialist.API.Core.Interface;
-using AppointmentBuddy.Service.Specialist.API.Infrastructure;
+using AppointmentBuddy.Service.Services.API.Core.Interface;
+using AppointmentBuddy.Service.Services.API.Infrastructure;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.Threading.Tasks;
 using System.IO;
@@ -21,7 +21,7 @@ using System.Security.Cryptography;
 using Org.BouncyCastle.Crypto.Parameters;
 using Org.BouncyCastle.OpenSsl;
 
-namespace AppointmentBuddy.Service.Specialist.API
+namespace AppointmentBuddy.Service.Services.API
 {
     public class Startup
     {
@@ -144,8 +144,8 @@ namespace AppointmentBuddy.Service.Specialist.API
                 o.DefaultApiVersion = new ApiVersion(1, 0);
             });
 
-            services.AddHttpClient<ISpecialistService, SpecialistService>();
-            services.AddTransient<ISpecialistRepositoryService, SpecialistRepositoryService>();
+            services.AddHttpClient<IServicesService, ServicesService>();
+            services.AddTransient<IServicesRepositoryService, ServicesRepositoryService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -5,16 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Models\**" />
     <Compile Remove="Views\**" />
     <Compile Remove="wwwroot\**" />
-    <Content Remove="Models\**" />
     <Content Remove="Views\**" />
     <Content Remove="wwwroot\**" />
-    <EmbeddedResource Remove="Models\**" />
     <EmbeddedResource Remove="Views\**" />
     <EmbeddedResource Remove="wwwroot\**" />
-    <None Remove="Models\**" />
     <None Remove="Views\**" />
     <None Remove="wwwroot\**" />
   </ItemGroup>
@@ -31,7 +27,6 @@
     <ProjectReference Include="..\AppointmentBuddy.Core.Model.PatientInfo\AppointmentBuddy.Core.Model.PatientInfo.csproj" />
     <ProjectReference Include="..\AppointmentBuddy.Service.PatientInfo.API.Core\AppointmentBuddy.Service.PatientInfo.API.Core.csproj" />
     <ProjectReference Include="..\AppointmentBuddy.Service.PatientInfo.API.Infrastructure\AppointmentBuddy.Service.PatientInfo.API.Infrastructure.csproj" />
-    <Compile Include="Models\ErrorViewModel.cs" />
   </ItemGroup>
 
 </Project>

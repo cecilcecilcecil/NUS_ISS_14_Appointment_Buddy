@@ -1,5 +1,5 @@
 ﻿using AppointmentBuddy.Core.Common.Helper;
-using AppointmentBuddy.Service.Room.API.Core.Interface;
+using AppointmentBuddy.Service.Services.API.Core.Interface;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -17,15 +17,15 @@ namespace AppointmentBuddy.Service.Specialist.API.Controllers
     [Route("v{v:apiVersion}/api/[controller]")]
     [ApiController]
     [Authorize]
-    public class RoomController : Controller
+    public class ServicesController : Controller
     {
-        private readonly IRoomService _roomService;
-        private readonly ILogger<RoomController> _logger;
+        private readonly IServicesService _specialistService;
+        private readonly ILogger<ServicesController> _logger;
 
-        public RoomController(IRoomService roomService, ILogger<RoomController> logger)
+        public ServicesController(IServicesService specialistService, ILogger<ServicesController> logger)
         {
             _logger = logger;
-            _roomService = roomService;
+            _specialistService = specialistService;
         }
 
         [HttpGet]
