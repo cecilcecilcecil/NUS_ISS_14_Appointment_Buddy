@@ -3,16 +3,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <Name>AppointmentBuddy.DB</Name>
+    <Name>Appointment.DB</Name>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
-    <ProjectGuid>{4e7fb483-f2b5-4f68-9670-571c215256a0}</ProjectGuid>
+    <ProjectGuid>{56135356-f4b1-46b1-8486-41e9f6e90bf4}</ProjectGuid>
     <DSP>Microsoft.Data.Tools.Schema.Sql.Sql130DatabaseSchemaProvider</DSP>
     <OutputType>Database</OutputType>
     <RootPath>
     </RootPath>
-    <RootNamespace>AppointmentBuddy.DB</RootNamespace>
-    <AssemblyName>AppointmentBuddy.DB</AssemblyName>
+    <RootNamespace>Appointment.DB</RootNamespace>
+    <AssemblyName>Appointment.DB</AssemblyName>
     <ModelCollation>1033, CI</ModelCollation>
     <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
     <DeployToDatabase>True</DeployToDatabase>
@@ -56,26 +56,11 @@
   <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
   <ItemGroup>
     <Folder Include="Properties" />
-    <Folder Include="Snapshots" />
     <Folder Include="dbo" />
     <Folder Include="dbo\Tables" />
-    <Folder Include="dbo\PredefinedData" />
+    <Folder Include="Snapshots" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\Appointment.sql" />
-    <Build Include="dbo\Tables\User.sql" />
-    <Build Include="dbo\Tables\Role.sql" />
-    <Build Include="dbo\Tables\UserRole.sql" />
-    <Build Include="dbo\Tables\Code.sql" />
-    <Build Include="dbo\Tables\Room.sql" />
-    <None Include="dbo\PredefinedData\03_AB_UserWithRole.sql" />
-    <Build Include="dbo\Tables\PatientInfo.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="dbo\PredefinedData\01_AB_Role.sql" />
-    <None Include="dbo\PredefinedData\02_AB_Code.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <PostDeploy Include="dbo\Script.PostDeployment1.sql" />
   </ItemGroup>
 </Project>
