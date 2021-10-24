@@ -12,11 +12,11 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
 {
     public class Service : Controller
     {
-        public async Task<IActionResult> IndexAsync(int id)
+        public async Task<IActionResult> IndexAsync(string Description)
         {
             List<AppointmentBuddy.Core.Model.Services> ServiceList = new List<AppointmentBuddy.Core.Model.Services>();
 
-            if (id == 0)
+            if (Description == null)
             {
                 using (var httpClient = new HttpClient())
                 {
@@ -32,7 +32,7 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
             {
                 using (var httpClient = new HttpClient())
                 {
-                    using (var response = await httpClient.GetAsync("http://localhost:63742/api/Services/" + id))
+                    using (var response = await httpClient.GetAsync("http://localhost:63742/api/Services/" + Description))
                     {
                         if (response.StatusCode == System.Net.HttpStatusCode.OK)
                         {
