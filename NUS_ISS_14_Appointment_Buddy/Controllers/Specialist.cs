@@ -12,11 +12,11 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
 {
     public class Specialist : Controller
     {
-        public async Task<IActionResult> IndexAsync(int id)
+        public async Task<IActionResult> IndexAsync(String Name)
         {
             List<AppointmentBuddy.Core.Model.Specialist> SpecialistList = new List<AppointmentBuddy.Core.Model.Specialist>();
 
-            if (id == 0)
+            if (Name == null)
             {
                 using (var httpClient = new HttpClient())
                 {
@@ -32,7 +32,7 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
             {
                 using (var httpClient = new HttpClient())
                 {
-                    using (var response = await httpClient.GetAsync("https://localhost:44341/api/Specialists/" + id))
+                    using (var response = await httpClient.GetAsync("https://localhost:44341/api/Specialists/" + Name))
                     {
                         if (response.StatusCode == System.Net.HttpStatusCode.OK)
                         {
