@@ -133,7 +133,7 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> UpdateServiceSubmit(AppointmentBuddy.Core.Model.Services Service)
+        public async Task<IActionResult> UpdateService(AppointmentBuddy.Core.Model.Services Service)
         {
             using (var httpClient = new HttpClient())
             {
@@ -147,13 +147,14 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
                     ViewBag.Result = "Success";
                 }
 
-                using (var response = await httpClient.GetAsync("http://localhost:63742/api/Services"))
+                using (var response = await httpClient.GetAsync("http://localhost:63742/api/Services/" + Service.Id))
                 {
                     string apiResponse = await response.Content.ReadAsStringAsync();
-                    ServiceList = JsonConvert.DeserializeObject<List<AppointmentBuddy.Core.Model.Services>>(apiResponse);
+                    var apiResponseF = "[" + apiResponse + "]";
+                    ServiceList = JsonConvert.DeserializeObject<List<AppointmentBuddy.Core.Model.Services>>(apiResponseF);
                 }
 
-                return View("Service", ServiceList);
+                return View(ServiceList);
             }
         }
 
