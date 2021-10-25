@@ -12,11 +12,11 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
 {
     public class Specialist : Controller
     {
-        public async Task<IActionResult> IndexAsync(int id)
+        public async Task<IActionResult> IndexAsync(String Name)
         {
             List<AppointmentBuddy.Core.Model.Specialist> SpecialistList = new List<AppointmentBuddy.Core.Model.Specialist>();
 
-            if (id == 0)
+            if (Name == null)
             {
                 using (var httpClient = new HttpClient())
                 {
@@ -32,7 +32,7 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
             {
                 using (var httpClient = new HttpClient())
                 {
-                    using (var response = await httpClient.GetAsync("https://localhost:44341/api/Specialists/" + id))
+                    using (var response = await httpClient.GetAsync("https://localhost:44341/api/Specialists/" + Name))
                     {
                         if (response.StatusCode == System.Net.HttpStatusCode.OK)
                         {
@@ -157,32 +157,26 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> UpdateSpecialistDetail(int Id, CollectionDataModel model)
+        public async Task<IActionResult> UpdateSpecialist(CollectionDataModel model)
         {
             using (var httpClient = new HttpClient())
             {
-                List<AppointmentBuddy.Core.Model.Specialist> SpecialistList = new List<AppointmentBuddy.Core.Model.Specialist>();
-
-                model.modelSpec.Id = Id;
-                
                 var json = System.Text.Json.JsonSerializer.Serialize(model.modelSpec);
 
                 StringContent content = new StringContent(System.Text.Json.JsonSerializer.Serialize(model.modelSpec), Encoding.UTF8, "application/json");
 
-                using (var response = await httpClient.PutAsync("https://localhost:44341/api/Specialists/" + Id, content))
+                using (var response = await httpClient.PutAsync("https://localhost:44341/api/Specialists/" + model.modelSpec.Id, content))
                 {
                     string apiResponse = await response.Content.ReadAsStringAsync();
-                    var apiResponseArray = "[" + apiResponse + "]";
-                    SpecialistList = JsonConvert.DeserializeObject<List<AppointmentBuddy.Core.Model.Specialist>>(apiResponseArray);
                 }
 
-                using (var response = await httpClient.GetAsync("https://localhost:44341/api/Specialists"))
+                using (var response = await httpClient.GetAsync("https://localhost:44341/api/Specialists/" + model.modelSpec.Id))
                 {
                     string apiResponse = await response.Content.ReadAsStringAsync();
-                    SpecialistList = JsonConvert.DeserializeObject<List<AppointmentBuddy.Core.Model.Specialist>>(apiResponse);
+                    model.Specialist = JsonConvert.DeserializeObject<List<AppointmentBuddy.Core.Model.Specialist>>(apiResponse);
                 }
 
-                return View("Specialist", SpecialistList);
+                return View(model);
             }
         }
 

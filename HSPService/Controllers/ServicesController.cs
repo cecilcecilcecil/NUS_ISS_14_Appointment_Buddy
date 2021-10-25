@@ -29,10 +29,23 @@ namespace HSPService.Controllers
         }
 
         // GET: api/Services/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Service>> GetService(int id)
+        [HttpGet("{Description}")]
+        public async Task<ActionResult<Service>> GetService(string Description)
         {
-            var service = await _context.Service.FindAsync(id);
+            // var service = await _context.Service.FindAsync(id);
+            var service = await (from Ser in _context.Service
+                                    where Ser.Description.ToUpper().Contains(Description.ToUpper())
+                                    select new Service
+                                    {
+                                        Id = Ser.Id,
+                                        Description = Ser.Description,
+                                        CreatedBy = Ser.CreatedBy,
+                                        CreatedDate = Ser.CreatedDate,
+                                        LastUpdatedBy = Ser.LastUpdatedBy,
+                                        LastUpdatedDate = Ser.LastUpdatedDate,
+                                        IsDeleted = Ser.IsDeleted
+                                    }
+                                   ).FirstAsync();
 
             if (service == null)
             {

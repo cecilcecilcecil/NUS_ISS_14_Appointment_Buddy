@@ -50,14 +50,14 @@ namespace HSPSpecialist.Controllers
         }
 
         // GET: api/Specialists/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<IEnumerable<Specialist>>> GetSpecialist(int id)
+        [HttpGet("{name}")]
+        public async Task<ActionResult<IEnumerable<Specialist>>> GetSpecialist(string name)
         {
             // var specialist = await _context.Specialist.FindAsync(id);
 
             var specialist = await (from Spec in _context.Specialist
                                 join ser in _context.Service on Spec.Services equals ser.Id
-                                where Spec.Id == id
+                                where Spec.Name.ToUpper().Contains(name.ToUpper())
                                 select new Specialist
                                 {
                                     Id = Spec.Id,
