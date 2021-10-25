@@ -26,7 +26,7 @@ namespace NUS_ISS_14_Appointment_Buddy.Services
             _serviceUrls = config.Value;
             _logger = logger;
 
-            var _api1 = Environment.GetEnvironmentVariable("APPTBUDDY_APPT_EXTERNAL_DNS_OR_IP");
+            var _api1 = Environment.GetEnvironmentVariable("APPTBUDDY_ROOM_EXTERNAL_DNS_OR_IP");
             if (!string.IsNullOrEmpty(_api1))
             {
                 _serviceUrls.RoomAPI = _api1;

@@ -31,7 +31,7 @@ namespace NUS_ISS_14_Appointment_Buddy.Services
             _logger = logger;
             _appSettings = appSettings.Value;
 
-            var _api1 = Environment.GetEnvironmentVariable("APPTBUDDY_APPT_EXTERNAL_DNS_OR_IP");
+            var _api1 = Environment.GetEnvironmentVariable("APPTBUDDY_PTINFO_EXTERNAL_DNS_OR_IP");
             if (!string.IsNullOrEmpty(_api1))
             {
                 _serviceUrls.AppointmentAPI = _api1;

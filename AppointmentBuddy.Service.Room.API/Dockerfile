@@ -4,13 +4,13 @@ ENV DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=false
 WORKDIR /app
 EXPOSE 80
 
-FROM microsoft/dotnet:3.1-sdk AS build
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
 WORKDIR /src
 COPY ["AppointmentBuddy.Service.Room.API/AppointmentBuddy.Service.Room.API.csproj", "AppointmentBuddy.Service.Room.API/"]
-RUN dotnet restore "GEMS2.Service.Room.API/GEMS2.Service.Room.API.csproj"
+RUN dotnet restore "AppointmentBuddy.Service.Room.API/AppointmentBuddy.Service.Room.API.csproj"
 COPY . .
 WORKDIR "/src/AppointmentBuddy.Service.Room.API"
-RUN dotnet build "GEMS2.Service.Room.API.csproj" -c Release -o /app
+RUN dotnet build "AppointmentBuddy.Service.Room.API.csproj" -c Release -o /app
 
 FROM build AS publish
 RUN dotnet publish "AppointmentBuddy.Service.Room.API.csproj" -c Release -o /app
