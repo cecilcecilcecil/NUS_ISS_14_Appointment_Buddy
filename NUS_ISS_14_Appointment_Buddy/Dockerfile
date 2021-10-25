@@ -28,7 +28,6 @@ RUN apk add --no-cache \
   ttf-droid \
   ttf-freefont \
   ttf-liberation \
-  ttf-ubuntu-font-family \
   icu-libs \
   tzdata \
   && apk add --no-cache --virtual .build-deps \
@@ -55,10 +54,10 @@ EXPOSE 80
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
 WORKDIR /src
-COPY ["NUS_ISS_14_Appointment_Buddy.csproj", ""]
-RUN dotnet restore "./NUS_ISS_14_Appointment_Buddy.csproj"
+COPY ["NUS_ISS_14_Appointment_Buddy/NUS_ISS_14_Appointment_Buddy.csproj", "NUS_ISS_14_Appointment_Buddy/"]
+RUN dotnet restore "NUS_ISS_14_Appointment_Buddy/NUS_ISS_14_Appointment_Buddy.csproj"
 COPY . .
-WORKDIR "/src/."
+WORKDIR "/src/NUS_ISS_14_Appointment_Buddy"
 RUN dotnet build "NUS_ISS_14_Appointment_Buddy.csproj" -c Release -o /app/build
 
 

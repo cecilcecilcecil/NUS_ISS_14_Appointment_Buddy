@@ -32,7 +32,7 @@ namespace NUS_ISS_14_Appointment_Buddy.Services
             _appSettings = appSettings.Value;
 
             //--Use values defined in the ENVIRONMENT variables when available
-            var _api = Environment.GetEnvironmentVariable("APPTBUDDY_EXTERNAL_DNS_OR_IP");
+            var _api = Environment.GetEnvironmentVariable("APPTBUDDY_IDTY_EXTERNAL_DNS_OR_IP");
             if (!string.IsNullOrEmpty(_api))
             {
                 _serviceUrls.IdentityAPI = _api;
