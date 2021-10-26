@@ -145,10 +145,6 @@ namespace NUS_ISS_14_Appointment_Buddy
             });
 
             services.AddHttpClientServices(Configuration);
-
-            services.AddDataProtection(opts => opts.ApplicationDiscriminator = Program.AppName)
-            .SetApplicationName(Program.AppName)
-            .DisableAutomaticKeyGeneration();
         }
 
         private static bool IsAjaxRequest(HttpRequest request)
