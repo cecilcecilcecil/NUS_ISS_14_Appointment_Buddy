@@ -1,13 +1,10 @@
 ﻿@using AppointmentBuddy.Core.Model
 @model IEnumerable<Services>
 
-<h2>All Services</h2>
+<h2 align="center">All Services</h2>
 <form method="post">
-    <div class="form-group">
-        <label for="id">Get Service by Description:</label><input class="form-control" name="Description" />
-    </div>
-    <div class="text-center panel-body">
-        <button type="submit" class="btn btn-sm btn-primary">Submit</button>
+    <div class="input-group mb-5">
+        <label for="id">Get Service by Description:</label><input class="input-group-text" name="Description" />&nbsp;&nbsp;<button type="submit" class="btn btn-sm btn-primary">Submit</button>
     </div>
 </form>
 
@@ -29,13 +26,13 @@
                         <td>@r.Id</td>
                         <td>@r.Description</td>
                         <td>
-                            <a asp-action="UpdateService" asp-route-id="@r.Id">
+                            <a asp-action="UpdateService" asp-route-description="@r.Description">
                                 <img src="/icon/edit.png" />
                             </a>
                         </td>
                         <td>
                             <form asp-action="DeleteService" method="post">
-                                <input type="hidden" value="@r.Id" name="ServiceId" />
+                                <input type="hidden" value="@r.Description" name="ServiceName" />
                                 <input type="image" src="/icon/close.png" />
                             </form>
                         </td>

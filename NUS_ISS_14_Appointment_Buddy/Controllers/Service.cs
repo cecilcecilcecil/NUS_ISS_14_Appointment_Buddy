@@ -69,13 +69,14 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> DeleteService(int ServiceId)
+        public async Task<IActionResult> DeleteService(String ServiceName)
         {
             using (var httpClient = new HttpClient())
             {
                 List<AppointmentBuddy.Core.Model.Services> ServiceList = new List<AppointmentBuddy.Core.Model.Services>();
+                int ID = 0;
 
-                using (var response = await httpClient.GetAsync("http://localhost:63742/api/Services/" + ServiceId))
+                using (var response = await httpClient.GetAsync("http://localhost:63742/api/Services/" + ServiceName))
                 {
                     if (response.StatusCode == System.Net.HttpStatusCode.OK)
                     {
@@ -87,7 +88,7 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
                     foreach (var r in ServiceList)
                     {
                         r.IsDeleted = true;
-
+                        ID = r.Id;
                     }
                 }
 
@@ -96,7 +97,7 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
                 var test = System.Text.Json.JsonSerializer.Serialize(ServiceList).Substring(1, lengthAft);
                 StringContent content = new StringContent(test, Encoding.UTF8, "application/json");
 
-                using (var response = await httpClient.PutAsync("http://localhost:63742/api/Services/" + ServiceId, content))
+                using (var response = await httpClient.PutAsync("http://localhost:63742/api/Services/" + ID, content))
                 {
                     string apiResponse = await response.Content.ReadAsStringAsync();
                     ViewBag.Result = "Success";
@@ -112,13 +113,13 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
             }
         }
 
-        public async Task<IActionResult> UpdateService(int Id)
+        public async Task<IActionResult> UpdateService(string Description)
         {
             List<AppointmentBuddy.Core.Model.Services> ServiceList = new List<AppointmentBuddy.Core.Model.Services>();
 
             using (var httpClient = new HttpClient())
             {
-                using (var response = await httpClient.GetAsync("http://localhost:63742/api/Services/" + Id))
+                using (var response = await httpClient.GetAsync("http://localhost:63742/api/Services/" + Description))
                 {
                     if (response.StatusCode == System.Net.HttpStatusCode.OK)
                     {
@@ -147,7 +148,7 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
                     ViewBag.Result = "Success";
                 }
 
-                using (var response = await httpClient.GetAsync("http://localhost:63742/api/Services/" + Service.Id))
+                using (var response = await httpClient.GetAsync("http://localhost:63742/api/Services/" + Service.Description))
                 {
                     string apiResponse = await response.Content.ReadAsStringAsync();
                     var apiResponseF = "[" + apiResponse + "]";
