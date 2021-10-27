@@ -1,45 +1,48 @@
 ﻿@using AppointmentBuddy.Core.Model
 @model CollectionDataModel
 
-<h2>Add a Specialist</h2>
+<h2 align="center">Add a Specialist</h2>
 <form asp-action="AddSpecialist" method="post">
-    <div class="form-group">
-        <label for="Name">Name:</label>
-        @Html.TextBoxFor(x => x.modelSpec.Name)
-    </div>
-    <div class="form-group">
-        <label for="Name">NRIC:</label>
-        @Html.TextBoxFor(x => x.modelSpec.NRIC)
-    </div>
-    <div class="form-group">
-        <label for="Name">Contact:</label>
-        @Html.TextBoxFor(x => x.modelSpec.Contact)
-    </div>
-    <div class="form-group">
-        <label for="Name">Available:</label>
-        @Html.DropDownListFor(x => x.modelSpec.Available, new SelectList(Model.Available, "Value", "Text"))
-    </div>
-    <div class="form-group">
-        <label for="Name">Services:</label>
-        @Html.DropDownListFor(x => x.modelSpec.Services, new SelectList(Model.Service, "Id", "Description"))
-        @Html.HiddenFor(m => m.Service)
-    </div>
-    <div class="form-group">
-        <label for="Name">Address:</label>
-        @Html.TextBoxFor(x => x.modelSpec.Address)
-    </div>
-    <div class="form-group">
-        <label for="Name">Email:</label>
-        @Html.TextBoxFor(x => x.modelSpec.Email)
-    </div>
-    <div class="text-center panel-body">
-        <button type="submit" class="btn btn-sm btn-primary">Add</button>   <a asp-action="Index" class="btn btn-sm btn-secondary">Back</a>
+    <div align="center">
+        <div class="col-md-4">
+            <label for="Name">Name:</label>
+            @Html.TextBoxFor(x => x.modelSpec.Name, new { @class = "input-group-text" })
+        </div>
+        <div class="col-md-4">
+            <label for="Name">NRIC:</label>
+            @Html.TextBoxFor(x => x.modelSpec.NRIC, new { @class = "input-group-text" })
+        </div>
+        <div class="col-md-4">
+            <label for="Name">Contact:</label>
+            @Html.TextBoxFor(x => x.modelSpec.Contact, new { @class = "input-group-text" })
+        </div>
+        <div class="col-md-4">
+            <label for="Name">Available:</label>
+            @Html.DropDownListFor(x => x.modelSpec.Available, new SelectList(Model.Available, "Value", "Text"), new { @class = "input-group-text" })
+        </div>
+        <div class="col-md-4">
+            <label for="Name">Services:</label>
+            @Html.DropDownListFor(x => x.modelSpec.Services, new SelectList(Model.Service, "Id", "Description"), new { @class = "input-group-text" })
+            @Html.HiddenFor(m => m.Service)
+        </div>
+        <div class="col-md-4">
+            <label for="Name">Address:</label>
+            @Html.TextBoxFor(x => x.modelSpec.Address, new { @class = "input-group-text" })
+        </div>
+        <div class="col-md-4">
+            <label for="Name">Email:</label>
+            @Html.TextBoxFor(x => x.modelSpec.Email, new { @class = "input-group-text" })
+        </div>
+        <br><br>
+        <div class="col-md-4">
+            <button type="submit" class="btn btn-sm btn-primary">Add</button>&nbsp;&nbsp;<a asp-action="Index" class="btn btn-sm btn-secondary">Back</a>
+        </div>
     </div>
 </form>
-
+<br><br>
 @if (Model.modelSpec != null)
 {
-    <h2>Specialist</h2>
+    <h2 align="center">Specialist</h2>
     <table class="table table-sm table-striped table-bordered m-2">
         <thead>
             <tr>
