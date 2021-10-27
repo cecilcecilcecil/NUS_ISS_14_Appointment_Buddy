@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System.Net.Http;
+using System.Globalization;
+using System.Linq;
+using AppointmentBuddy.Core.Common.Helper;
 
 namespace AppointmentBuddy.Service.Room.API.Infrastructure
 {
@@ -24,19 +27,57 @@ namespace AppointmentBuddy.Service.Room.API.Infrastructure
         {
             M.Room response;
 
-            //if (InternetZone)
-            //{
-            //    SetAuthenticationHeader(_apiClient);
-
-            //    var apiURL = ServiceEndpoint.CodeTables.ConfigurationsAPI(_serviceUrls.CodeTablesAPI_Configurations);
-            //    var _api_response = await _apiClient.GetStringAsync(apiURL);
-
-            //    response = !string.IsNullOrEmpty(_api_response) ? JsonConvert.DeserializeObject<IEnumerable<M.Appointment>>(_api_response) : null;
-            //}
-
             response = await _repository.GetRoomByRoomId(roomId);
 
             return response;
+        }
+        public async Task<M.PaginatedResults<M.Room>> GetAllRooms(string specialiesId, int page, int pageSize)
+        {
+            M.PaginatedResults<M.Room> response = null;
+
+            //var data = await _repository.GetAllRooms(specialiesId);
+
+            //if (specialiesId == null)
+            //{
+
+            //}
+            //else
+            //{
+            //    data = data.Where(t => t.SpecialiesId == specialiesId);
+            //}
+
+            //data = data.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+
+            //response = new M.PaginatedResults<M.Room>(page, pageSize, data.Count(), data);
+
+            return response;
+        }
+
+        public async Task<int> SaveRoom(M.Room room)
+        {
+            int success = Constants.ErrorCodes.Failure;
+
+            var dbRoom = await _repository.GetRoomByRoomId(room.RoomId);
+
+            if (dbRoom == null)
+            {
+                room.CreatedBy = room.LastUpdatedBy;
+                room.CreatedById = room.LastUpdatedById;
+                room.CreatedDate = DateTime.Now;
+                room.LastUpdatedDate = DateTime.Now;
+                room.VersionNo = 1;
+
+                success = await _repository.SaveRoom(room);
+            }
+            else
+            {
+                room.LastUpdatedDate = DateTime.Now;
+                room.VersionNo = dbRoom.VersionNo++;
+
+                success = await _repository.SaveRoom(room);
+            }
+
+            return success;
         }
     }
 }
