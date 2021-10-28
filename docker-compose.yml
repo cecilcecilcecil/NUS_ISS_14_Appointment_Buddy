@@ -31,8 +31,8 @@ services:
     build:
       context: .
       dockerfile: AppointmentBuddy.Service.Specialist.API/Dockerfile
-  # nus_iss_14_appointment_buddy:
-    # image: ${AB_DOCKER_REGISTRY-}nus_iss_14_appointment_buddy
-    # build:
-      # context: .
-      # dockerfile: NUS_ISS_14_Appointment_Buddy/Dockerfile
+  nus_iss_14_appointment_buddy:
+    image: ${AB_DOCKER_REGISTRY-}nus_iss_14_appointment_buddy
+    build:
+      context: .
+      dockerfile: NUS_ISS_14_Appointment_Buddy/Dockerfile
