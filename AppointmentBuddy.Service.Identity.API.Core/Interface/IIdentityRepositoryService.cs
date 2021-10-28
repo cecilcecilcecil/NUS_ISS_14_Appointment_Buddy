@@ -12,5 +12,6 @@ namespace AppointmentBuddy.Service.Identity.API.Core.Interface
         Task<M.UserRole> GetUserRoleByUserId(string userId);
         Task<M.Role> GetRoleByUserId(string userId);
         Task<IEnumerable<M.User>> GetAllPatients();
+        Task<int> SaveUser(M.User user);
     }
 }

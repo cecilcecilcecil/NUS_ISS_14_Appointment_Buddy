@@ -101,5 +101,25 @@ namespace NUS_ISS_14_Appointment_Buddy.Services
 
             return !string.IsNullOrEmpty(responseString) ? JsonConvert.DeserializeObject<IEnumerable<M.User>>(responseString) : null;
         }
+
+        public async Task<int> SaveUser(M.User user, string token)
+        {
+            int status = Constants.ErrorCodes.Failure;
+
+            var requestContent = new StringContent(JsonConvert.SerializeObject(user), System.Text.Encoding.UTF8, "application/json");
+
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Validator.CleanInput(token));
+
+            var apiURL = UrlConfig.Identity.SavePatientAPI(_serviceUrls.IdentityAPI_SaveUserAPI);
+
+            var response = await _httpClient.PostAsync(apiURL, requestContent);
+
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                status = int.Parse(response.Content.ReadAsStringAsync().Result);
+            }
+
+            return status;
+        }
     }
 }

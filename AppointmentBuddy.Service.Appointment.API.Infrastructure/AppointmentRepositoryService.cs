@@ -52,6 +52,14 @@ namespace AppointmentBuddy.Service.Appointment.API.Infrastructure
                 .ToListAsync();
         }
 
+        public async Task<IEnumerable<M.Appointment>> GetAllMyAppointments(string myId)
+        {
+            return await _context.Appointment.AsNoTracking()
+                .Where(x => !x.IsDeleted && x.UserId == myId)
+                .OrderBy(x => x.AppointmentDate)
+                .ToListAsync();
+        }
+
         public async Task<int> SaveAppointment(M.Appointment appt)
         {
             int success = Constants.ErrorCodes.Failure;

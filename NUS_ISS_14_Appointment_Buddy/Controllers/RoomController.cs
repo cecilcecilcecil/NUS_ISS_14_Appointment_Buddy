@@ -108,11 +108,11 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetRoomPage(int page, string dateFrom, string dateTo, string partialV)
+        public async Task<IActionResult> GetRoomPage(int page, string specialiesId, string partialV)
         {
             var pageSize = _appSettings.Value.PageSize;
 
-            var res = await _roomService.GetAllRooms(AccessToken, SpecialiesId, page, pageSize); ;
+            var res = await _roomService.GetAllRooms(AccessToken, specialiesId, page, pageSize); ;
 
             object vm = new object();
 

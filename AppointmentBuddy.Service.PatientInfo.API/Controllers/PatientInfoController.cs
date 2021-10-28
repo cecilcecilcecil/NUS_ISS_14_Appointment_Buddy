@@ -79,5 +79,23 @@ namespace AppointmentBuddy.Service.PatientInfo.API.Controllers
 
             return success;
         }
+
+        [Route("delete/{patId}")]
+        [HttpGet]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.NoContent)]
+        public async Task<ActionResult<int>> DeletePatientInfoById(string patId)
+        {
+            var success = Constants.ErrorCodes.Failure;
+
+            success = await _patientInfoService.DeletePatientInfoById(patId);
+
+            if (success == Constants.ErrorCodes.Failure)
+            {
+                return NoContent();
+            }
+
+            return success;
+        }
     }
 }

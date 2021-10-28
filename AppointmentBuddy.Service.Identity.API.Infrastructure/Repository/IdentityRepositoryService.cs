@@ -76,6 +76,16 @@ namespace AppointmentBuddy.Service.Identity.API.Infrastructure.Repository
             return role;
         }
 
+        public async Task<int> SaveUser(M.User patient)
+        {
+            int success = Constants.ErrorCodes.Failure;
+
+            _context.Add(patient);
+            success = await _context.SaveChangesAsync();
+
+            return success;
+        }
+
         public async Task<IEnumerable<M.User>> GetAllPatients()
         {
             return await _context.User.AsNoTracking().Where(x => x.UserTypeId == Constants.UserType.Patient).ToListAsync();

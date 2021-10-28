@@ -90,14 +90,13 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> DeleteSpecialist(string SpecialistName)
+        public async Task<IActionResult> DeleteSpecialist(int SpecialistId)
         {
             using (var httpClient = new HttpClient())
             {
                 List<AppointmentBuddy.Core.Model.Specialist> SpecialistList = new List<AppointmentBuddy.Core.Model.Specialist>();
-                int ID = 0;
 
-                using (var response = await httpClient.GetAsync("https://localhost:44341/api/Specialists/" + SpecialistName))
+                using (var response = await httpClient.GetAsync("https://localhost:44341/api/Specialists/" + SpecialistId))
                 {
                     if (response.StatusCode == System.Net.HttpStatusCode.OK)
                     {
@@ -108,7 +107,6 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
                     foreach (var r in SpecialistList)
                     {
                         r.IsDeleted = true;
-                        ID = r.Id;
                     }
                 }
 
@@ -117,9 +115,9 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
                 var test = System.Text.Json.JsonSerializer.Serialize(SpecialistList).Substring(1, lengthAft);
                 StringContent content = new StringContent(test, Encoding.UTF8, "application/json");
 
-                using (var responseD = await httpClient.PutAsync("https://localhost:44341/api/Specialists/" + ID, content))
+                using (var response = await httpClient.PutAsync("https://localhost:44341/api/Specialists/" + SpecialistId, content))
                 {
-                    string apiResponse = await responseD.Content.ReadAsStringAsync();
+                    string apiResponse = await response.Content.ReadAsStringAsync();
                     ViewBag.Result = "Success";
                 }
 
@@ -133,7 +131,7 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
             }
         }
 
-        public async Task<IActionResult> UpdateSpecialist(string name, CollectionDataModel model)
+        public async Task<IActionResult> UpdateSpecialist(int Id, CollectionDataModel model)
         {
             using (var httpClient = new HttpClient())
             {
@@ -143,7 +141,7 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
                     model.Service = JsonConvert.DeserializeObject<List<AppointmentBuddy.Core.Model.Service>>(apiResponse);
                 }
 
-                using (var response = await httpClient.GetAsync("https://localhost:44341/api/Specialists/" + name))
+                using (var response = await httpClient.GetAsync("https://localhost:44341/api/Specialists/" + Id))
                 {
                     List<AppointmentBuddy.Core.Model.Specialist> SpecialistList = new List<AppointmentBuddy.Core.Model.Specialist>();
 
@@ -172,16 +170,10 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
                     string apiResponse = await response.Content.ReadAsStringAsync();
                 }
 
-                using (var response = await httpClient.GetAsync("https://localhost:44341/api/Specialists/" + model.modelSpec.Name))
+                using (var response = await httpClient.GetAsync("https://localhost:44341/api/Specialists/" + model.modelSpec.Id))
                 {
                     string apiResponse = await response.Content.ReadAsStringAsync();
                     model.Specialist = JsonConvert.DeserializeObject<List<AppointmentBuddy.Core.Model.Specialist>>(apiResponse);
-                }
-
-                using (var response = await httpClient.GetAsync("http://localhost:63742/api/Services"))
-                {
-                    string apiResponse = await response.Content.ReadAsStringAsync();
-                    model.Service = JsonConvert.DeserializeObject<List<AppointmentBuddy.Core.Model.Service>>(apiResponse);
                 }
 
                 return View(model);

@@ -24,7 +24,7 @@ namespace AppointmentBuddy.Service.PatientInfo.API.Infrastructure
         public async Task<M.PatientInfo> GetPatientInfoById(string patId)
         {
             M.PatientInfo dataItem;
-            dataItem = await _context.PatientInfo.FirstOrDefaultAsync(s => s.PatientId == patId);
+            dataItem = await _context.PatientInfo.AsNoTracking().FirstOrDefaultAsync(s => s.PatientId == patId);
             return dataItem;
         }
 
@@ -45,6 +45,8 @@ namespace AppointmentBuddy.Service.PatientInfo.API.Infrastructure
             M.PatientInfo dataItem = await _context.PatientInfo.FirstOrDefaultAsync(s => s.PatientId == patId);
             dataItem.IsDeleted = true;
             _context.SaveChanges();
+
+            success = Constants.ErrorCodes.Success;
             return success;
         }
 

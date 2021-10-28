@@ -17,7 +17,7 @@
                     <li>@Html.ActionLink("Dashboard", "Index", "Home", null, new { id = "dashboardMenu" })</li>
                     <li><a href="javascript:void(0)" id="mobsetup">Administration</a></li>
                     <li class="quick-pad-right mobsetupcontent content">
-                        @Html.ActionLink("Appointments", "Index", "Appointment", null, new { id = "mobApptMenu" })
+                        @Html.ActionLink("Manage My Appointments", "Index", "Appointment", null, new { id = "mobApptMenu" })
                     </li>
                 </ul>
             </div>
@@ -33,7 +33,7 @@
     <div class="_content">
         <div class="mobile-master">
             <div class="icon-image">
-                <a href="@Url.Action("Index", "Home")"><img src="~/img/ablogo.PNG" alt="AB" /> </a>
+                <a href="@Url.Action("Index", "Admin")"> <img src="~/img/ablogo.PNG" alt="AB" /></a>
             </div>
             <h4></h4><h4></h4>
             <h4></h4><h4></h4>
@@ -56,7 +56,7 @@
             <div class="_content">
                 <div class="anc-container">
                     <a href="@Url.Action("Index", "Home")">
-                        <img src="~/img/ablogo.PNG" alt="AB" width="20" height="20"/>
+                        <img src="~/img/ablogo.PNG" alt="AB" width="250" height="40" />
                     </a>
                 </div>
             </div>
@@ -73,7 +73,7 @@
                                 </a>
                                 <div class="master-menu-sub itq-drops">
                                     <div class="_sub-menu">
-                                        @Html.ActionLink("Appointments", "Index", "Appointment", null, new { id = "mobApptMenu" })
+                                        @Html.ActionLink("Manage My Appointments", "Index", "Appointment", null, new { id = "apptMenu" })
                                     </div>
                                 </div>
                             </li>
