@@ -5,8 +5,25 @@
 @model NUS_ISS_14_Appointment_Buddy.Models.PatientInfo
 
 @{
+    string deathString = "";
+    string exitUrl = "";
+
     string curId = User.Claims.FirstOrDefault(c => c.Type == Constants.AppClaimTypes.Id).Value;
     ViewData["Title"] = "Add / Update Patient Infomation";
+
+    if (curId == Model.UserId)
+    {
+        exitUrl = Url.Action("Index", "Home");
+    }
+    else
+    {
+        exitUrl = Url.Action("Index", "PatientInfo");
+    }
+
+    if (Model.IsDeath)
+    {
+        deathString = Model.DeathDate.GetValueOrDefault().ToString("dd/MM/yyyy");
+    }
 }
 
 @using (Html.BeginForm("SavePatientInfoById", "PatientInfo", FormMethod.Post, new { @id = "PatientInfoForm" }))
@@ -77,7 +94,36 @@
                                                 @Html.TextBoxFor(x => x.ContactNumber, new { @class = "form-control" })
                                             </td>
                                         </tr>
+                                        @if (curId != Model.UserId)
+                                        {
+                                            <tr>
+                                                <td scope="col">Death Date:</td>
+                                                @if (Model.DeathDate == null)
+                                                {
+                                                    <td>
+                                                        N.A.
+                                                    </td>
+                                                }
+                                                else
+                                                {
+                                                    <td>
+                                                        @deathString
+                                                    </td>
+                                                }
+                                            </tr>
+                                            <tr>
+                                                <td scope="col">Set Death</td>
+                                                <td>
+                                                    <div class="custom-control-lg custom-control custom-checkbox" style="position:relative; left:-20px; top: -20px;">
+                                                        <input class="custom-control-input content checkboxForDelete" type="checkbox" id="DeathId" checked="@Model.IsDeath">
+                                                        <label class="custom-control-label custom-tnc-check" for="DeathId"></label>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        }
+                                        @Html.HiddenFor(x => x.IsDeath)
                                         @Html.HiddenFor(x => x.PatientId)
+                                        @Html.HiddenFor(x => x.UserId)
                                         @Html.HiddenFor(x => x.DeathDate)
                                     </tbody>
                                 </table>
@@ -145,6 +191,15 @@
             SaveAppointment();
         });
 
+        $('#DeathId').click(function () {
+            if (this.checked) {
+                $('#IsDeath').val('True');
+            }
+            else {
+                $('#IsDeath').val('False');
+            }
+        });
+
         $('#confirmDeleteBox').click(function () {
             document.getElementById('deletionBox').style.display = 'none';
             var savingModal = document.getElementById("savingInProgress");
@@ -176,11 +231,11 @@
         $('#closeBox').click(function () {
             document.getElementById('submitSuccessBox').style.display = "none";
 
-            window.location.href = '@Url.Action("Index", "PatientInfo")';
+            window.location.href = '@exitUrl';
         });
 
         $('.cancelBtn').click(function () {
-            window.location.href = '@Url.Action("Index", "PatientInfo")';
+            window.location.href = '@exitUrl';
         });
 
         $('#closeErrorBox').click(function () { document.getElementById('errorMsgBox').style.display = 'none'; });

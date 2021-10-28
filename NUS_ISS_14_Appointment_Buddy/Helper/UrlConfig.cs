@@ -19,6 +19,16 @@ namespace NUS_ISS_14_Appointment_Buddy.Helper
             public static string SaveAppointmentAPI(string api) => $"{BaseURI}/v{APIVersion}{api}";
         }
 
+        public static class Services
+        {
+            public static string BaseURI { get; set; }
+            public static string APIVersion { get; set; }
+
+            public static string ServiceAPI(string api, string svcId) => $"{BaseURI}/v{APIVersion}{api}/{svcId}";
+            public static string AllServiceAPI(string api, string parameter) => $"{BaseURI}/v{APIVersion}{api}?{parameter}";
+            public static string SaveServicesAPI(string api) => $"{BaseURI}/v{APIVersion}{api}";
+        }
+
         public static class PatientInfo
         {
             public static string BaseURI { get; set; }

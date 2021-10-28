@@ -50,6 +50,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Views\Service\" />
     <Folder Include="wwwroot\icon\" />
   </ItemGroup>
 

@@ -97,10 +97,16 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
                         BirthDate = patI.BirthDate,
                         ContactNumber = patI.ContactNumber,
                         DeathDate = patI.DeathDate,
+                        UserId = patI.UserId,
                         Gender = patI.Gender,
                         NRIC = patI.NRIC,
                         Title = patI.Title
                     };
+
+                    if (patI.DeathDate != null)
+                    {
+                        patItem.IsDeath = true;
+                    }
                 }
             }
             else
@@ -139,6 +145,11 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
                     NRIC = patI.NRIC,
                     Title = patI.Title
                 };
+
+                if (patI.DeathDate != null)
+                {
+                    patItem.IsDeath = true;
+                }
             }
 
             ViewBag.Titles = GetTitles();
@@ -209,34 +220,43 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
         public async Task<IActionResult> SavePatientInfoById(PatientInfo patInfo)
         {
             string msgVal = "";
+            string baseId = patInfo.UserId;
+            int successValue = Constants.ErrorCodes.Failure;
 
             if (!Validator.IsNRICValid(patInfo.NRIC))
             {
                 return Json(new { msgVal = msgVal, successVal = Constants.ErrorCodes.Failure });
             }
 
-            M.User patUser = new M.User
+            if (string.IsNullOrEmpty(patInfo.UserId))
             {
-                UserId = Guid.NewGuid().ToString(),
-                UserLogin = patInfo.NRIC,
-                Password = "abc",
-                UserTypeId = Constants.UserType.Patient,
-                Nric = patInfo.NRIC,
-                Name = patInfo.PatientName,
-                Email = "",
-                PhoneNo = "",
-                IsDeleted = false,
-                VersionNo = 1,
-                CreatedBy = UserId,
-                CreatedDate = DateTime.Now,
-                LastUpdatedBy = UserId,
-                LastUpdatedDate = DateTime.Now
-            };
+                M.User patUser = new M.User
+                {
+                    UserId = Guid.NewGuid().ToString(),
+                    UserLogin = patInfo.NRIC,
+                    Password = "abc",
+                    UserTypeId = Constants.UserType.Patient,
+                    Nric = patInfo.NRIC,
+                    Name = patInfo.PatientName,
+                    Email = "",
+                    PhoneNo = "",
+                    IsDeleted = false,
+                    VersionNo = 1,
+                    CreatedBy = UserId,
+                    CreatedDate = DateTime.Now,
+                    LastUpdatedBy = UserId,
+                    LastUpdatedDate = DateTime.Now
+                };
+
+                baseId = patUser.UserId;
+
+                successValue = await _identityService.SaveUser(patUser, AccessToken);
+            }
 
             M.PatientInfo corePatInfo = new M.PatientInfo
             {
                 PatientId = patInfo.PatientId,
-                UserId = patUser.UserId,
+                UserId = baseId,
                 Title = patInfo.Title,
                 NRIC = patInfo.NRIC,
                 PatientName = patInfo.PatientName,
@@ -247,9 +267,16 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
                 LastUpdatedById = UserId
             };
 
-            var successValue = await _patientInfoService.SavePatientInfo(corePatInfo, AccessToken);
+            if (patInfo.IsDeath)
+            {
+                corePatInfo.DeathDate = DateTime.Now;
+            }
+            else
+            {
+                corePatInfo.DeathDate = null;
+            }
 
-            successValue = await _identityService.SaveUser(patUser, AccessToken);
+            successValue = await _patientInfoService.SavePatientInfo(corePatInfo, AccessToken);
 
             if (successValue == Constants.ErrorCodes.Success)
             {

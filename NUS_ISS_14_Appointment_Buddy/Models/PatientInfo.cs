@@ -33,6 +33,7 @@ namespace NUS_ISS_14_Appointment_Buddy.Models
         [RegularExpression(Constants.RegularExpressions.IsSGPhone, ErrorMessage = Constants.ValidationMessages.PhoneFormatMessage)]
         public string ContactNumber { get; set; }
 
+        public bool IsDeath { get; set; }
         public bool IsDeleted { get; set; }
         public string CreatedById { get; set; }
         public string CreatedBy { get; set; }

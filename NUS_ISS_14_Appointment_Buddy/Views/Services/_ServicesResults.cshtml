@@ -1,5 +1,7 @@
 ﻿@using M = AppointmentBuddy.Core.Model
-@model NUS_ISS_14_Appointment_Buddy.Models.ResultViewModel<M.PatientInfo>
+@using AppointmentBuddy.Core.Common.Helper
+
+@model NUS_ISS_14_Appointment_Buddy.Models.ResultViewModel<M.Services>
 
 <div class="editQuan _goods">
     <div class="display">
@@ -8,35 +10,16 @@
                 <thead class="">
                     <tr>
                         <th scope="col">S/N</th>
-                        <th scope="col">Title</th>
-                        <th scope="col">Patient Name</th>
-                        <th scope="col">NRIC / FIN</th>
-                        <th scope="col">Gender</th>
-                        <th scope="col">Birth Date</th>
-                        <th scope="col">Contact Number</th>
-                        <th scope="col">Death Date</th>
+                        <th scope="col">Description</th>
                     </tr>
                 </thead>
                 <tbody>
                     @{int count = 1 + (10 * (Model.PaginationInfo.PageNumber - 1));}
-                    @foreach (var patInfo in Model.ListItems)
+                    @foreach (var svc in Model.ListItems)
                     {
                         <tr>
                             <td>@count</td>
-                            <td>@patInfo.Title</td>
-                            <td><a href="@Url.Action("PatientInfoDetail", "PatientInfo", new { patID = patInfo.PatientId })">@patInfo.PatientName</a></td>
-                            <td>@patInfo.NRIC</td>
-                            <td>@patInfo.Gender</td>
-                            <td>@patInfo.BirthDate.ToString("dd/MM/yyyy")</td>
-                            <td>@patInfo.ContactNumber</td>
-                            @if (patInfo.DeathDate != null)
-                            {
-                                <td>@patInfo.DeathDate.GetValueOrDefault().ToString("dd/MM/yyyy")</td>
-                            }
-                            else
-                            {
-                                <td>N.A.</td>
-                            }
+                            <td><a href="@Url.Action("CreateService", "Services", new { svcId = svc.ServicesId })">@svc.Description</a></td>
                         </tr>
                         count++;
                     }
@@ -54,13 +37,12 @@
             <li class="page-item @(i == Model.PaginationInfo.PageNumber ? "active" : "")">
                 @if (i != Model.PaginationInfo.PageNumber)
                 {
-                    <a asp-controller="PatientInfo"
-                       asp-action="GetPatientInfoPage"
+                    <a asp-controller="Services"
+                       asp-action="GetServicesPage"
+                       asp-route-desc="@ViewData["Description"]"
                        asp-route-page="@i"
-                       asp-route-nric="@ViewData["NRIC"]"
-                       asp-route-patName="@ViewData["PatientName"]"
-                       asp-route-partialV="_PatientInfoResults"
-                       data-target="pats"
+                       asp-route-partialV="_ServicesResults"
+                       data-target="appts"
                        class="paginationButton">
                         @i
                     </a>

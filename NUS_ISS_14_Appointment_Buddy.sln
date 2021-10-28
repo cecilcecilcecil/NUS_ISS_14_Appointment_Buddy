@@ -88,11 +88,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HSPSpecialist", "HSPSpecial
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services.API", "Services.API", "{036EF25D-E3B0-4C12-8BF2-79BC968B0BC1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppointmentBuddy.Service.Services.API", "AppointmentBuddy.Service.Services.API\AppointmentBuddy.Service.Services.API.csproj", "{A453155C-B216-44D7-A803-F20914F1B7D9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppointmentBuddy.Service.Services.API", "AppointmentBuddy.Service.Services.API\AppointmentBuddy.Service.Services.API.csproj", "{A453155C-B216-44D7-A803-F20914F1B7D9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppointmentBuddy.Service.Services.API.Core", "AppointmentBuddy.Service.Services.API.Core\AppointmentBuddy.Service.Services.API.Core.csproj", "{8F7F4DFA-9743-40B8-A5F4-0759001B47FF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppointmentBuddy.Service.Services.API.Core", "AppointmentBuddy.Service.Services.API.Core\AppointmentBuddy.Service.Services.API.Core.csproj", "{8F7F4DFA-9743-40B8-A5F4-0759001B47FF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppointmentBuddy.Service.Services.API.Infrastructure", "AppointmentBuddy.Service.Services.API.Infrastructure\AppointmentBuddy.Service.Services.API.Infrastructure.csproj", "{99103A11-5074-40DA-85A8-BEC35BF9D2A4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppointmentBuddy.Service.Services.API.Infrastructure", "AppointmentBuddy.Service.Services.API.Infrastructure\AppointmentBuddy.Service.Services.API.Infrastructure.csproj", "{99103A11-5074-40DA-85A8-BEC35BF9D2A4}"
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Appointment.DB", "Appointment.DB\Appointment.DB.sqlproj", "{56135356-F4B1-46B1-8486-41E9F6E90BF4}"
 EndProject
@@ -108,6 +108,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		docker-compose.override.yml = docker-compose.override.yml
 		docker-compose.yml = docker-compose.yml
 	EndProjectSection
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Services.DB", "Services.DB\Services.DB.sqlproj", "{A984AB67-1846-48ED-80CF-8E59EE14DBCC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -271,6 +273,12 @@ Global
 		{CF3838F2-C1EE-4DB3-8CA3-560A7A11C6BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CF3838F2-C1EE-4DB3-8CA3-560A7A11C6BD}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CF3838F2-C1EE-4DB3-8CA3-560A7A11C6BD}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{A984AB67-1846-48ED-80CF-8E59EE14DBCC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A984AB67-1846-48ED-80CF-8E59EE14DBCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A984AB67-1846-48ED-80CF-8E59EE14DBCC}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{A984AB67-1846-48ED-80CF-8E59EE14DBCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A984AB67-1846-48ED-80CF-8E59EE14DBCC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A984AB67-1846-48ED-80CF-8E59EE14DBCC}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -317,6 +325,7 @@ Global
 		{1AC684DB-2820-4AFA-BEFF-BE0F318293DD} = {1EF212AA-C925-4EFC-A43B-BA8ECF9826BC}
 		{D8BD6F99-5A13-4ACE-A35C-DC63BE4ED067} = {1EF212AA-C925-4EFC-A43B-BA8ECF9826BC}
 		{CF3838F2-C1EE-4DB3-8CA3-560A7A11C6BD} = {1EF212AA-C925-4EFC-A43B-BA8ECF9826BC}
+		{A984AB67-1846-48ED-80CF-8E59EE14DBCC} = {1EF212AA-C925-4EFC-A43B-BA8ECF9826BC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5B9C8BC4-B338-4D55-A524-91CADA4736BC}

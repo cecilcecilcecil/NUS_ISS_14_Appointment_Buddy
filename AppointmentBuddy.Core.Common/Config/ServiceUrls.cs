@@ -38,5 +38,14 @@ namespace AppointmentBuddy.Core.Common.Config
         public string RoomAPI_GetAllRooms { get; set; }
         public string RoomAPI_SaveRoom { get; set; }
 
+        public string ServicesAPI { get; set; }
+        public string ServicesAPIVersion { get; set; }
+        public string ServicesAPI_GetAllServices { get; set; }
+        public string ServicesAPI_GetServiceByServicesId { get; set; }
+        public string ServicesAPI_SaveService { get; set; }
+
+        public string SpecialistAPI { get; set; }
+        public string SpecialistAPIVersion { get; set; }
+
     }
 }

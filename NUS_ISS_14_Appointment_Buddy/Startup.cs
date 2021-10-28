@@ -223,6 +223,7 @@ namespace NUS_ISS_14_Appointment_Buddy
             services.AddHttpClient<IAppointmentService, AppointmentService>().AddHttpMessageHandler<StandardHeaderHandler>();
             services.AddHttpClient<IIdentityService, IdentityService>().AddHttpMessageHandler<StandardHeaderHandler>();
             services.AddHttpClient<IPatientInfoService, PatientInfoService>().AddHttpMessageHandler<StandardHeaderHandler>();
+            services.AddHttpClient<IServicesService, ServicesService>().AddHttpMessageHandler<StandardHeaderHandler>();
 
             return services;
         }
