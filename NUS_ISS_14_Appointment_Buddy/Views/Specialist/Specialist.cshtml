@@ -32,34 +32,34 @@
             {
                 @if (r.IsDeleted == false)
                 {
-                    <tr>
-                        <td>@r.Id</td>
-                        <td>@r.Name</td>
-                        <td>@r.NRIC</td>
-                        <td>@r.ServiceDescription</td>
-                        <td>@r.Contact</td>
-                        @if (r.Available == true)
-                        {
-                            <td>Yes</td>
-                        }
-                        else
-                        {
-                            <td>No</td>
-                        }
-                        <td>@r.Address</td>
-                        <td>@r.Email</td>
-                        <td>
-                            <a asp-action="UpdateSpecialist" asp-route-id="@r.Id">
-                                <img src="/icon/edit.png" />
-                            </a>
-                        </td>
-                        <td>
-                            <form asp-action="DeleteSpecialist" method="post">
-                                <input type="hidden" value="@r.Id" name="SpecialistId" />
-                                <input type="image" src="/icon/close.png" />
-                            </form>
-                        </td>
-                    </tr>
+            <tr>
+                <td>@r.Id</td>
+                <td>@r.Name</td>
+                <td>@r.NRIC</td>
+                <td>@r.ServiceDescription</td>
+                <td>@r.Contact</td>
+                @if (r.Available == true)
+                {
+                    <td>Yes</td>
+                }
+                else
+                {
+                    <td>No</td>
+                }
+                <td>@r.Address</td>
+                <td>@r.Email</td>
+                <td>
+                    <a asp-action="UpdateSpecialist" asp-route-name="@r.Name">
+                        <img src="/icon/edit.png" />
+                    </a>
+                </td>
+                <td>
+                    <form asp-action="DeleteSpecialist" method="post">
+                        <input type="hidden" value="@r.Name" name="SpecialistName" />
+                        <input type="image" src="/icon/close.png" />
+                    </form>
+                </td>
+            </tr>
                 }
             }
         </tbody>
