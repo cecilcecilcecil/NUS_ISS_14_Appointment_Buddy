@@ -3,8 +3,7 @@ phases:
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
-      - $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
-      - $(docker login --username AWS --password-stdin $AWS_DEFAULT_REGION.amazonaws.com)
+      - aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
   build:
     commands:
       - echo Build started on `date`
@@ -14,17 +13,17 @@ phases:
     commands:
       - echo Build completed on `date`
       - echo Pushing the Docker image...
-      # - docker tag appointmentbuddyserviceappointmentapi:latest $AWS_DEFAULT_REGION.amazonaws.com/appointment-buddy-appointment:latest
-      # - docker push $AWS_DEFAULT_REGION.amazonaws.com/appointment-buddy-appointment:latest
-      # - docker tag appointmentbuddyserviceidentityapi:latest $AWS_DEFAULT_REGION.amazonaws.com/appointment-buddy-identity:latest 
-      # - docker push $AWS_DEFAULT_REGION.amazonaws.com/appointment-buddy-identity:latest 
-      # - docker tag appointmentbuddyserviceroomapi:latest $AWS_DEFAULT_REGION.amazonaws.com/appointment-buddy-room:latest
-      # - docker push $AWS_DEFAULT_REGION.amazonaws.com/appointment-buddy-room:latest
-      # - docker tag appointmentbuddyservicepatientinfoapi:latest $AWS_DEFAULT_REGION.amazonaws.com/appointment-buddy-patientinfo:latest
-      # - docker push $AWS_DEFAULT_REGION.amazonaws.com/appointment-buddy-patientinfo:latest
-      # - docker tag appointmentbuddyserviceservicesapi:latest $AWS_DEFAULT_REGION.amazonaws.com/appointment-buddy-services:latest
-      # - docker push $AWS_DEFAULT_REGION.amazonaws.com/appointment-buddy-services:latest
-      # - docker tag appointmentbuddyservicespecialistapi:latest $AWS_DEFAULT_REGION.amazonaws.com/appointment-buddy-specialist:latest
-      # - docker push $AWS_DEFAULT_REGION.amazonaws.com/appointment-buddy-specialist:latest
-      - docker tag nus_iss_14_appointment_buddy:latest $AWS_DEFAULT_REGION.amazonaws.com/appointment-buddy-web:latest
-      - docker push $AWS_DEFAULT_REGION.amazonaws.com/appointment-buddy-web:latest
+      # - docker tag appointmentbuddyserviceappointmentapi:latest $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/appointment-buddy-appointment:latest
+      # - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/appointment-buddy-appointment:latest
+      # - docker tag appointmentbuddyserviceidentityapi:latest $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/appointment-buddy-identity:latest 
+      # - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/appointment-buddy-identity:latest 
+      # - docker tag appointmentbuddyserviceroomapi:latest $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/appointment-buddy-room:latest
+      # - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/appointment-buddy-room:latest
+      # - docker tag appointmentbuddyservicepatientinfoapi:latest $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/appointment-buddy-patientinfo:latest
+      # - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/appointment-buddy-patientinfo:latest
+      # - docker tag appointmentbuddyserviceservicesapi:latest $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/appointment-buddy-services:latest
+      # - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/appointment-buddy-services:latest
+      # - docker tag appointmentbuddyservicespecialistapi:latest $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/appointment-buddy-specialist:latest
+      # - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/appointment-buddy-specialist:latest
+      - docker tag nus_iss_14_appointment_buddy:latest $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/appointment-buddy-web:latest
+      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/appointment-buddy-web:latest
