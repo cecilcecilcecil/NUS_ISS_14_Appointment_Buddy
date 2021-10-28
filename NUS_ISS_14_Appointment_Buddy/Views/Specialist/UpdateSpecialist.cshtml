@@ -38,8 +38,12 @@
             @Html.Hidden(Html.NameFor(p => p.modelSpec.Id).ToString(), r.Id)
             <br><br>
             <div class="col-md-4">
-                 <button type="submit" class="btn btn-sm btn-primary">Update</button>&nbsp;&nbsp;<a asp-action="Index" class="btn btn-sm btn-secondary">Back</a>
+                <div class="autosave-container">
+                    <div class="autosave-wrapper">
+                        <button type="submit" class="btn btn-sm btn-primary">Update</button>&nbsp;&nbsp;<a asp-action="Index" class="btn btn-sm btn-secondary">Back</a>
+                    </div>
+                </div>
             </div>
         </div>
-        }
+     }
 </form>
