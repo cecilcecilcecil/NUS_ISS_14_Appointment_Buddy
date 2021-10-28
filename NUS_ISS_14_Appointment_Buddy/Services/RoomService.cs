@@ -1,4 +1,5 @@
 ﻿using AppointmentBuddy.Core.Common.Config;
+using AppointmentBuddy.Core.Common.Helper;
 using AppointmentBuddy.Core.Common.Http;
 using AppointmentBuddy.Core.Model;
 using Microsoft.Extensions.Logging;
@@ -32,8 +33,8 @@ namespace NUS_ISS_14_Appointment_Buddy.Services
                 _serviceUrls.RoomAPI = _api1;
             }
 
-            UrlConfig.Appointment.BaseURI = _serviceUrls.RoomAPI;
-            UrlConfig.Appointment.APIVersion = _serviceUrls.RoomAPIVersion;
+            UrlConfig.Room.BaseURI = _serviceUrls.RoomAPI;
+            UrlConfig.Room.APIVersion = _serviceUrls.RoomAPIVersion;
         }
 
         public async Task<M.Room>  GetRoomByRoomId(string roomId, string token)
@@ -46,6 +47,44 @@ namespace NUS_ISS_14_Appointment_Buddy.Services
 
             return !string.IsNullOrEmpty(responseString) ? JsonConvert.DeserializeObject<M.Room>(responseString) : null;
    
+        }
+
+        public async Task<M.PaginatedResults<M.Room>> GetAllRooms(string token, string specialtiesId, int pageIndex, int pageSize)
+        {
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+            var parameter = "pageIndex=" + pageIndex + "&pageSize=" + pageSize;
+
+            var apiURL = UrlConfig.Room.AllRoomAPI(_serviceUrls.RoomAPI_GetAllRooms, parameter);
+
+            if (!String.IsNullOrEmpty(specialtiesId))
+            {
+                apiURL = apiURL + "&specialtiesId=" + specialtiesId;
+            }
+
+            var responseString = await _httpClient.GetStringAsync(apiURL);
+
+            return !string.IsNullOrEmpty(responseString) ? JsonConvert.DeserializeObject<M.PaginatedResults<M.Room>>(responseString) : null;
+        }
+
+        public async Task<int> SaveRoom(M.Room room, string token)
+        {
+            int status = Constants.ErrorCodes.Failure;
+
+            var requestContent = new StringContent(JsonConvert.SerializeObject(room), System.Text.Encoding.UTF8, "application/json");
+
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Validator.CleanInput(token));
+
+            var apiURL = UrlConfig.Room.SaveRoomAPI(_serviceUrls.RoomAPI_SaveRoom);
+
+            var response = await _httpClient.PostAsync(apiURL, requestContent);
+
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                status = int.Parse(response.Content.ReadAsStringAsync().Result);
+            }
+
+            return status;
         }
     }
 }

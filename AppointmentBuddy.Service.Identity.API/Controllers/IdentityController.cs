@@ -1,4 +1,5 @@
 ﻿using AppointmentBuddy.Core.Common.Config;
+using AppointmentBuddy.Core.Common.Helper;
 using AppointmentBuddy.Service.Identity.API.Core.Interface;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -71,6 +72,29 @@ namespace AppointmentBuddy.Service.Identity.API.Controllers
             response = await _identityService.GetAllPatients();
 
             return response;
+        }
+
+        [Route("user/save")]
+        [HttpPost]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.NoContent)]
+        public async Task<ActionResult<int>> SaveUser([FromBody] M.User patient)
+        {
+            var success = Constants.ErrorCodes.Failure;
+
+            if (patient == null)
+            {
+                return BadRequest();
+            }
+
+            success = await _identityService.SaveUser(patient);
+
+            if (success == Constants.ErrorCodes.Failure)
+            {
+                return NoContent();
+            }
+
+            return success;
         }
     }
 }

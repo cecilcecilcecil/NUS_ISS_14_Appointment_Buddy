@@ -11,6 +11,11 @@ namespace AppointmentBuddy.Core.Model
             get; set;
         }
         [Column(TypeName = "varchar(50)")]
+        public string RoomName
+        {
+            get; set;
+        }
+        [Column(TypeName = "varchar(50)")]
         public string SpecialiesId
         {
             get; set;
@@ -20,8 +25,7 @@ namespace AppointmentBuddy.Core.Model
         {
             get; set;
         }
-        [Column(TypeName = "varchar(255)")]
-        public string Availabilities
+        public bool isAvailable
         {
             get; set;
         }
@@ -34,6 +38,10 @@ namespace AppointmentBuddy.Core.Model
             get; set;
         }
         [Column(TypeName = "varchar(255)")]
+        public string CreatedById
+        {
+            get; set;
+        }
         public string CreatedBy
         {
             get; set;
@@ -43,6 +51,10 @@ namespace AppointmentBuddy.Core.Model
             get; set;
         }
         [Column(TypeName = "varchar(255)")]
+        public string LastUpdatedById
+        {
+            get; set;
+        }
         public string LastUpdatedBy
         {
             get; set;

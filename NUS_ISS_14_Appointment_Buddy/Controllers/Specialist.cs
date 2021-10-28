@@ -26,7 +26,7 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
                         SpecialistList = JsonConvert.DeserializeObject<List<AppointmentBuddy.Core.Model.Specialist>>(apiResponse);
                     }
                 }
-                return View("Specialist",SpecialistList);
+                return View("Specialist", SpecialistList);
             }
             else
             {
@@ -43,7 +43,7 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
                             ViewBag.StatusCode = response.StatusCode;
                     }
                 }
-                return View("Specialist",SpecialistList);
+                return View("Specialist", SpecialistList);
             }
         }
 
@@ -67,7 +67,7 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
         {
             using (var httpClient = new HttpClient())
             {
-               // List<AppointmentBuddy.Core.Model.Specialist> SpecialistList = new List<AppointmentBuddy.Core.Model.Specialist>();
+                // List<AppointmentBuddy.Core.Model.Specialist> SpecialistList = new List<AppointmentBuddy.Core.Model.Specialist>();
 
                 StringContent content = new StringContent(System.Text.Json.JsonSerializer.Serialize(model.modelSpec), Encoding.UTF8, "application/json");
 
@@ -75,7 +75,7 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
                 {
                     string apiResponse = await response.Content.ReadAsStringAsync();
 
-                   // SpecialistList = JsonConvert.DeserializeObject<List<AppointmentBuddy.Core.Model.Specialist>>(apiResponse);
+                    // SpecialistList = JsonConvert.DeserializeObject<List<AppointmentBuddy.Core.Model.Specialist>>(apiResponse);
                     //return View(model);
                 }
 
@@ -90,13 +90,14 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> DeleteSpecialist(int SpecialistId)
+        public async Task<IActionResult> DeleteSpecialist(string SpecialistName)
         {
             using (var httpClient = new HttpClient())
             {
                 List<AppointmentBuddy.Core.Model.Specialist> SpecialistList = new List<AppointmentBuddy.Core.Model.Specialist>();
+                int ID = 0;
 
-                using (var response = await httpClient.GetAsync("https://localhost:44341/api/Specialists/" + SpecialistId))
+                using (var response = await httpClient.GetAsync("https://localhost:44341/api/Specialists/" + SpecialistName))
                 {
                     if (response.StatusCode == System.Net.HttpStatusCode.OK)
                     {
@@ -107,6 +108,7 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
                     foreach (var r in SpecialistList)
                     {
                         r.IsDeleted = true;
+                        ID = r.Id;
                     }
                 }
 
@@ -115,9 +117,9 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
                 var test = System.Text.Json.JsonSerializer.Serialize(SpecialistList).Substring(1, lengthAft);
                 StringContent content = new StringContent(test, Encoding.UTF8, "application/json");
 
-                using (var response = await httpClient.PutAsync("https://localhost:44341/api/Specialists/" + SpecialistId, content))
+                using (var responseD = await httpClient.PutAsync("https://localhost:44341/api/Specialists/" + ID, content))
                 {
-                    string apiResponse = await response.Content.ReadAsStringAsync();
+                    string apiResponse = await responseD.Content.ReadAsStringAsync();
                     ViewBag.Result = "Success";
                 }
 
@@ -131,7 +133,7 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
             }
         }
 
-        public async Task<IActionResult> UpdateSpecialist(int Id, CollectionDataModel model)
+        public async Task<IActionResult> UpdateSpecialist(string name, CollectionDataModel model)
         {
             using (var httpClient = new HttpClient())
             {
@@ -141,7 +143,7 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
                     model.Service = JsonConvert.DeserializeObject<List<AppointmentBuddy.Core.Model.Service>>(apiResponse);
                 }
 
-                using (var response = await httpClient.GetAsync("https://localhost:44341/api/Specialists/" + Id))
+                using (var response = await httpClient.GetAsync("https://localhost:44341/api/Specialists/" + name))
                 {
                     List<AppointmentBuddy.Core.Model.Specialist> SpecialistList = new List<AppointmentBuddy.Core.Model.Specialist>();
 
@@ -151,7 +153,7 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
                         model.Specialist = JsonConvert.DeserializeObject<List<AppointmentBuddy.Core.Model.Specialist>>(apiResponse);
                     }
                 }
-                
+
             }
             return View(model);
         }
@@ -170,10 +172,16 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
                     string apiResponse = await response.Content.ReadAsStringAsync();
                 }
 
-                using (var response = await httpClient.GetAsync("https://localhost:44341/api/Specialists/" + model.modelSpec.Id))
+                using (var response = await httpClient.GetAsync("https://localhost:44341/api/Specialists/" + model.modelSpec.Name))
                 {
                     string apiResponse = await response.Content.ReadAsStringAsync();
                     model.Specialist = JsonConvert.DeserializeObject<List<AppointmentBuddy.Core.Model.Specialist>>(apiResponse);
+                }
+
+                using (var response = await httpClient.GetAsync("http://localhost:63742/api/Services"))
+                {
+                    string apiResponse = await response.Content.ReadAsStringAsync();
+                    model.Service = JsonConvert.DeserializeObject<List<AppointmentBuddy.Core.Model.Service>>(apiResponse);
                 }
 
                 return View(model);

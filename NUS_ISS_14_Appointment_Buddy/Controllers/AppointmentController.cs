@@ -46,6 +46,22 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
             return View(apptRvm);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> ViewMyAppointments(string dateFrom, string dateTo)
+        {
+            ViewData["DateFrom"] = dateFrom;
+            ViewData["DateTo"] = dateTo;
+
+            var pageSize = _appSettings.Value.PageSize;
+            var page = 1;
+
+            M.PaginatedResults<M.Appointment> apptItems = await _appointmentService.GetAllMyAppointments(AccessToken, dateFrom, dateTo, UserId, page, pageSize);
+
+            var apptRvm = new ResultViewModel<M.Appointment>(apptItems.Data, apptItems.PageIndex, apptItems.PageSize, apptItems.Count);
+
+            return View("Index", apptRvm);
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Search(string dateFrom, string dateTo)
@@ -120,6 +136,34 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
         }
 
         [HttpGet]
+        public async Task<IActionResult> RescheduleAppointment(string apptId = "")
+        {
+            Appointment model;
+
+            if (string.IsNullOrEmpty(apptId))
+            {
+                return RedirectToAction("NoAuthorization", "Home");
+            }
+            else
+            {
+                var appt = await _appointmentService.GetAppointmentByAppointmentId(apptId, AccessToken);
+
+                model = new Appointment
+                {
+                    AppointmentId = appt.AppointmentId,
+                    AppointmentDate = appt.AppointmentDate.GetValueOrDefault().ToString("dd/MM/yyyy"),
+                    AppointmentTime = appt.AppointmentTime,
+                    Name = appt.Name,
+                    UserId = appt.UserId
+                };
+
+                ViewBag.AvailableAppointments = await GetAvailableAppointments(apptId);
+            }
+
+            return View("RescheduleAppointment", model);
+        }
+
+        [HttpGet]
         public async Task<IActionResult> GetAppointmentPage(int page, string dateFrom, string dateTo, string partialV)
         {
             var pageSize = _appSettings.Value.PageSize;
@@ -178,6 +222,97 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
             return Json(new { msgVal = msgVal, successVal = successValue });
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CancelAppointment(Appointment appt)
+        {
+            string msgVal = "";
+
+            bool apptDateValid = DateTime.TryParse(appt.AppointmentDate, out DateTime apptDate);
+
+            M.Appointment coreAppt = new M.Appointment
+            {
+                AppointmentDate = apptDate,
+                AppointmentId = appt.AppointmentId,
+                AppointmentTime = appt.AppointmentTime,
+                Name = null,
+                UserId = null,
+                LastUpdatedBy = UserName,
+                LastUpdatedById = UserId
+            };
+
+            var successValue = await _appointmentService.SaveAppointment(coreAppt, AccessToken);
+
+            if (successValue == Constants.ErrorCodes.Success)
+            {
+                msgVal = "";
+            }
+
+            else
+            {
+                if (successValue == Constants.ErrorCodes.ConcurrencyError)
+                {
+                    msgVal = Constants.ValidationMessages.Concurrency;
+                }
+
+                else
+                {
+                    msgVal = Constants.ValidationMessages.SystemUnavailable;
+                }
+            }
+
+            return Json(new { msgVal = msgVal, successVal = successValue });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> SetNewAppointment(Appointment appt)
+        {
+            string msgVal = "";
+
+            bool apptDateValid = DateTime.TryParse(appt.AppointmentDate, out DateTime apptDate);
+
+            M.Appointment coreAppt = new M.Appointment
+            {
+                AppointmentDate = apptDate,
+                AppointmentId = appt.AppointmentId,
+                AppointmentTime = appt.AppointmentTime,
+                Name = null,
+                UserId = null,
+                LastUpdatedBy = UserName,
+                LastUpdatedById = UserId
+            };
+
+            var successValue = await _appointmentService.SaveAppointment(coreAppt, AccessToken);
+
+            var newAppt = await _appointmentService.GetAppointmentByAppointmentId(appt.NewAppointmentId, AccessToken);
+
+            newAppt.UserId = UserId;
+            newAppt.Name = UserName;
+
+            successValue = await _appointmentService.SaveAppointment(newAppt, AccessToken);
+
+            if (successValue == Constants.ErrorCodes.Success)
+            {
+                msgVal = "";
+            }
+
+            else
+            {
+                if (successValue == Constants.ErrorCodes.ConcurrencyError)
+                {
+                    msgVal = Constants.ValidationMessages.Concurrency;
+                }
+
+                else
+                {
+                    msgVal = Constants.ValidationMessages.SystemUnavailable;
+                }
+            }
+
+            return Json(new { msgVal = msgVal, successVal = successValue });
+        }
+
         public async Task<List<SelectListItem>> GetFilteredPatients(DateTime date, string time, string apptId)
         {
             IEnumerable<M.User> patients = new List<M.User>();
@@ -212,6 +347,29 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
                         Value = pat.UserId
                     }
                 );
+            }
+
+            return selList;
+        }
+
+        public async Task<List<SelectListItem>> GetAvailableAppointments(string apptId)
+        {
+            var appts = await _appointmentService.GetAvailableAppointments(AccessToken);
+
+            List<SelectListItem> selList = new List<SelectListItem>();
+
+            foreach (var appt in appts)
+            {
+                if (appt.AppointmentId != apptId)
+                {
+                    selList.Add(
+                        new SelectListItem
+                        {
+                            Text = appt.AppointmentDate.GetValueOrDefault().ToString("dd/MM/yyyy") + " " + appt.AppointmentTime,
+                            Value = appt.AppointmentId
+                        }
+                    );
+                }
             }
 
             return selList;

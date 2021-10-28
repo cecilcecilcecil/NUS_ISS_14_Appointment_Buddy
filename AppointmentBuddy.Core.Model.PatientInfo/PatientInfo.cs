@@ -11,6 +11,7 @@ namespace AppointmentBuddy.Core.Model
         public string PatientId { get; set; }
         public string NRIC { get; set; }
         public string PatientName { get; set; }
+        public string UserId { get; set; }
         public DateTime BirthDate { get; set; }
         public DateTime? DeathDate { get; set; }
         public string Gender { get; set; }

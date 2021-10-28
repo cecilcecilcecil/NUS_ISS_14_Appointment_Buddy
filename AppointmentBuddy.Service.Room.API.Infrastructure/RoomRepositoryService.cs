@@ -1,7 +1,11 @@
-﻿using AppointmentBuddy.Infrastructure.Repository;
+﻿using AppointmentBuddy.Core.Common.Helper;
+using AppointmentBuddy.Infrastructure.Repository;
 using AppointmentBuddy.Service.Room.API.Core.Interface;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using M = AppointmentBuddy.Core.Model;
 
@@ -24,6 +28,41 @@ namespace AppointmentBuddy.Service.Room.API.Infrastructure
 
             dataItem = await _context.Room.FirstOrDefaultAsync(s => s.RoomId == roomId);
             return dataItem;
+        }
+
+        public async Task<IEnumerable<M.Room>> GetAllRooms(string specialiesId)
+        {
+            if (specialiesId == null)
+            {
+                return await _context.Room.AsNoTracking()
+                .Where(x => !x.IsDeleted)
+                .OrderBy(x => x.RoomName)
+                .ToListAsync();
+            }
+            return await _context.Room.AsNoTracking()
+                .Where(x => !x.IsDeleted && x.SpecialiesId == specialiesId)
+                .OrderBy(x => x.RoomName)
+                .ToListAsync();
+        }
+
+        public async Task<int> SaveRoom(M.Room room)
+        {
+            int success = Constants.ErrorCodes.Failure;
+
+            _context.Add(room);
+            success = await _context.SaveChangesAsync();
+
+            return success;
+        }
+
+        public async Task<int> UpdateRoom(M.Room room)
+        {
+            int success = Constants.ErrorCodes.Failure;
+
+            _context.Update(room);
+            success = await _context.SaveChangesAsync();
+
+            return success;
         }
     }
 }

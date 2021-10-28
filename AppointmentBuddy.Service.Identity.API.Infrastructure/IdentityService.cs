@@ -159,5 +159,19 @@ namespace AppointmentBuddy.Service.Identity.API.Infrastructure.Service
 
             return users;
         }
+
+        public async Task<int> SaveUser(M.User patient)
+        {
+            int success = Constants.ErrorCodes.Failure;
+
+            var dbPat = await _repository.GetUserByUserLogin(patient.Nric, patient.Password, patient.UserTypeId);
+
+            if (dbPat == null)
+            {
+                success = await _repository.SaveUser(patient);
+            }
+
+            return success;
+        }
     }
 }

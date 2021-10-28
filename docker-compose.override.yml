@@ -6,55 +6,54 @@ services:
       # - TZ=Asia/Singapore
       # - LC_ALL=en_SG
       # - ASPNETCORE_ENVIRONMENT=Development
-      # - APPTBUDDY_DB_CONNECTION_STRING="Server=nusapptbddy-14.cmfdlqdzkmss.ap-southeast-1.rds.amazonaws.com,1433;Database=Appointment;Trusted_Connection=False;User Id=admin;Password=nus14_passw0rd;MultipleActiveResultSets=true"
+      # - APPTBUDDY_DB_CONNECTION_STRING="Server=ab-db-001.cmfdlqdzkmss.ap-southeast-1.rds.amazonaws.com,1433;Database=Appointment;Trusted_Connection=False;User Id=admin;Password=nus14_passw0rd;MultipleActiveResultSets=true"
     # ports:
-      # - "6000:80"
+      # - "8001:80"
   # appointmentbuddy.service.identity.api:
     # environment:
       # - TZ=Asia/Singapore
       # - LC_ALL=en_SG
       # - ASPNETCORE_ENVIRONMENT=Development
-      # - APPTBUDDY_DB_CONNECTION_STRING="Server=nusapptbddy-14.cmfdlqdzkmss.ap-southeast-1.rds.amazonaws.com,1433;Database=Identity;Trusted_Connection=False;User Id=admin;Password=nus14_passw0rd;MultipleActiveResultSets=true"
-      # - ConnectionStrings:GEMS2REDIS=http://172.25.56.225:6379
+      # - APPTBUDDY_DB_CONNECTION_STRING="Server=ab-db-001.cmfdlqdzkmss.ap-southeast-1.rds.amazonaws.com,1433;Database=Identity;Trusted_Connection=False;User Id=admin;Password=nus14_passw0rd;MultipleActiveResultSets=true"
     # ports:
-      # - "6001:80"
+      # - "8002:80"
   # appointmentbuddy.service.patientinfo.api:
     # environment:
       # - TZ=Asia/Singapore
       # - LC_ALL=en_SG
       # - ASPNETCORE_ENVIRONMENT=Development
-      # - APPTBUDDY_DB_CONNECTION_STRING="Server=nusapptbddy-14.cmfdlqdzkmss.ap-southeast-1.rds.amazonaws.com,1433;Database=PatientInfo;Trusted_Connection=False;User Id=admin;Password=nus14_passw0rd;MultipleActiveResultSets=true"
+      # - APPTBUDDY_DB_CONNECTION_STRING="Server=ab-db-001.cmfdlqdzkmss.ap-southeast-1.rds.amazonaws.com,1433;Database=PatientInfo;Trusted_Connection=False;User Id=admin;Password=nus14_passw0rd;MultipleActiveResultSets=true"
     # ports:
-      # - "6002:80"
+      # - "8003:80"
   # appointmentbuddy.service.room.api:
     # environment:
       # - TZ=Asia/Singapore
       # - LC_ALL=en_SG
       # - ASPNETCORE_ENVIRONMENT=Development
-      # - APPTBUDDY_DB_CONNECTION_STRING="Server=nusapptbddy-14.cmfdlqdzkmss.ap-southeast-1.rds.amazonaws.com,1433;Database=Room;Trusted_Connection=False;User Id=admin;Password=nus14_passw0rd;MultipleActiveResultSets=true"
+      # - APPTBUDDY_DB_CONNECTION_STRING="Server=ab-db-001.cmfdlqdzkmss.ap-southeast-1.rds.amazonaws.com,1433;Database=Room;Trusted_Connection=False;User Id=admin;Password=nus14_passw0rd;MultipleActiveResultSets=true"
     # ports:
-      # - "6003:80"
-  # appointmentbuddy.service.specialist.api:
-    # environment:
-      # - TZ=Asia/Singapore
-      # - LC_ALL=en_SG
-      # - ASPNETCORE_ENVIRONMENT=Development
-      # - APPTBUDDY_DB_CONNECTION_STRING=Server=172.25.56.225;Database=GEMS2;User Id=sa;Password=P@ssw0rd
-    # ports:
-      # - "6004:80"
-  # appointmentbuddy.service.services.api:
-    # environment:
-      # - TZ=Asia/Singapore
-      # - LC_ALL=en_SG
-      # - ASPNETCORE_ENVIRONMENT=Development
-      # - APPTBUDDY_DB_CONNECTION_STRING=Server=172.25.56.225;Database=GEMS2;User Id=sa;Password=P@ssw0rd
-    # ports:
-      # - "6005:80"
-  nus_iss_14_appointment_buddy:
+      # - "8004:80"
+  appointmentbuddy.service.specialist.api:
     environment:
       - TZ=Asia/Singapore
-      - LANG=en_SG.UTF-8
-      - LC_ALL=en_SG.UTF-8
+      - LC_ALL=en_SG
       - ASPNETCORE_ENVIRONMENT=Development
+      - APPTBUDDY_DB_CONNECTION_STRING="Server=ab-db-001.cmfdlqdzkmss.ap-southeast-1.rds.amazonaws.com,1433;Database=Specialist;Trusted_Connection=False;User Id=admin;Password=nus14_passw0rd;MultipleActiveResultSets=true"
     ports:
-      - "6100:80"
+      - "8005:80"
+  appointmentbuddy.service.services.api:
+    environment:
+      - TZ=Asia/Singapore
+      - LC_ALL=en_SG
+      - ASPNETCORE_ENVIRONMENT=Development
+      - APPTBUDDY_DB_CONNECTION_STRING="Server=ab-db-001.cmfdlqdzkmss.ap-southeast-1.rds.amazonaws.com,1433;Database=Services;Trusted_Connection=False;User Id=admin;Password=nus14_passw0rd;MultipleActiveResultSets=true"
+    ports:
+      - "8006:80"
+  # nus_iss_14_appointment_buddy:
+    # environment:
+      # - TZ=Asia/Singapore
+      # - LANG=en_SG.UTF-8
+      # - LC_ALL=en_SG.UTF-8
+      # - ASPNETCORE_ENVIRONMENT=Development
+    # ports:
+      # - "8100:80"
