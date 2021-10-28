@@ -26,7 +26,7 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
                         SpecialistList = JsonConvert.DeserializeObject<List<AppointmentBuddy.Core.Model.Specialist>>(apiResponse);
                     }
                 }
-                return View("Specialist",SpecialistList);
+                return View("Specialist", SpecialistList);
             }
             else
             {
@@ -43,7 +43,7 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
                             ViewBag.StatusCode = response.StatusCode;
                     }
                 }
-                return View("Specialist",SpecialistList);
+                return View("Specialist", SpecialistList);
             }
         }
 
@@ -67,7 +67,7 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
         {
             using (var httpClient = new HttpClient())
             {
-               // List<AppointmentBuddy.Core.Model.Specialist> SpecialistList = new List<AppointmentBuddy.Core.Model.Specialist>();
+                // List<AppointmentBuddy.Core.Model.Specialist> SpecialistList = new List<AppointmentBuddy.Core.Model.Specialist>();
 
                 StringContent content = new StringContent(System.Text.Json.JsonSerializer.Serialize(model.modelSpec), Encoding.UTF8, "application/json");
 
@@ -75,7 +75,7 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
                 {
                     string apiResponse = await response.Content.ReadAsStringAsync();
 
-                   // SpecialistList = JsonConvert.DeserializeObject<List<AppointmentBuddy.Core.Model.Specialist>>(apiResponse);
+                    // SpecialistList = JsonConvert.DeserializeObject<List<AppointmentBuddy.Core.Model.Specialist>>(apiResponse);
                     //return View(model);
                 }
 
@@ -153,7 +153,7 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
                         model.Specialist = JsonConvert.DeserializeObject<List<AppointmentBuddy.Core.Model.Specialist>>(apiResponse);
                     }
                 }
-                
+
             }
             return View(model);
         }

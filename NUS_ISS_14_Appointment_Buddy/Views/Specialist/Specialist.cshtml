@@ -1,10 +1,14 @@
 ﻿@using AppointmentBuddy.Core.Model
 @model IEnumerable<Specialist>
 
-<h2 align="center">All Specialists</h2>
+<h2 align ="center">All Specialists</h2>
 <form method="post">
-    <div class="input-group mb-5">
-        <label for="id">Get Specialist by Name:</label><input class="input-group-text" name="Name" />&nbsp;&nbsp;<button type="submit" class="btn btn-sm btn-primary">Submit</button>
+    <div class="autosave-container">
+        <div class="autosave-wrapper">
+            <div class="input-group mb-5">
+                <label for="id">Get Specialist by Name:</label><input class="input-group-text" name="Name" />&nbsp;&nbsp;<button type="submit" class="btn btn-sm btn-primary">Submit</button>
+            </div>
+        </div>
     </div>
 </form>
 
@@ -28,39 +32,39 @@
             {
                 @if (r.IsDeleted == false)
                 {
-                    <tr>
-                        <td>@r.Id</td>
-                        <td>@r.Name</td>
-                        <td>@r.NRIC</td>
-                        <td>@r.ServiceDescription</td>
-                        <td>@r.Contact</td>
-                        @if (r.Available == true)
-                        {
-                            <td>Yes</td>
-                        }
-                        else
-                        {
-                            <td>No</td>
-                        }
-                        <td>@r.Address</td>
-                        <td>@r.Email</td>
-                        <td>
-                            <a asp-action="UpdateSpecialist" asp-route-name="@r.Name">
-                                <img src="/icon/edit.png" />
-                            </a>
-                        </td>
-                        <td>
-                            <form asp-action="DeleteSpecialist" method="post">
-                                <input type="hidden" value="@r.Name" name="SpecialistName" />
-                                <input type="image" src="/icon/close.png" />
-                            </form>
-                        </td>
-                    </tr>
+            <tr>
+                <td>@r.Id</td>
+                <td>@r.Name</td>
+                <td>@r.NRIC</td>
+                <td>@r.ServiceDescription</td>
+                <td>@r.Contact</td>
+                @if (r.Available == true)
+                {
+                    <td>Yes</td>
+                }
+                else
+                {
+                    <td>No</td>
+                }
+                <td>@r.Address</td>
+                <td>@r.Email</td>
+                <td>
+                    <a asp-action="UpdateSpecialist" asp-route-name="@r.Name">
+                        <img src="/icon/edit.png" />
+                    </a>
+                </td>
+                <td>
+                    <form asp-action="DeleteSpecialist" method="post">
+                        <input type="hidden" value="@r.Name" name="SpecialistName" />
+                        <input type="image" src="/icon/close.png" />
+                    </form>
+                </td>
+            </tr>
                 }
             }
         </tbody>
     </table>
 }
 <div class="form-group" align="center">
-    <a asp-action="AddSpecialist" class="btn btn-sm btn-primary">Add Specialist</a>
+     <a asp-action="AddSpecialist" class="btn btn-sm btn-primary">Add Specialist</a>
 </div>

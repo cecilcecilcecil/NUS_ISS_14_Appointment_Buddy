@@ -1,7 +1,7 @@
 ﻿@using AppointmentBuddy.Core.Model
 @model CollectionDataModel
 
-<h2 align="center">Add a Specialist</h2>
+<h2 align ="center">Add a Specialist</h2>
 <form asp-action="AddSpecialist" method="post">
     <div align="center">
         <div class="col-md-4">
@@ -34,15 +34,19 @@
             @Html.TextBoxFor(x => x.modelSpec.Email, new { @class = "input-group-text" })
         </div>
         <br><br>
-        <div class="col-md-4">
-            <button type="submit" class="btn btn-sm btn-primary">Add</button>&nbsp;&nbsp;<a asp-action="Index" class="btn btn-sm btn-secondary">Back</a>
-        </div>
+            <div class="col-md-4">
+                <div class="autosave-container">
+                    <div class="autosave-wrapper">
+                        <button type="submit" class="btn btn-sm btn-primary">Add</button><a asp-action="Index" class="btn btn-sm btn-secondary">Back</a>
+                    </div>
+                </div>
+            </div>
     </div>
 </form>
-<br><br>
+
 @if (Model.modelSpec != null)
 {
-    <h2 align="center">Specialist</h2>
+    <h2>Specialist</h2>
     <table class="table table-sm table-striped table-bordered m-2">
         <thead>
             <tr>
