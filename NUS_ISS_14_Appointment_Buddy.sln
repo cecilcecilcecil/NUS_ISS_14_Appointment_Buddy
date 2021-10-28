@@ -102,6 +102,13 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "PatientInfo.DB", "PatientIn
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Room.DB", "Room.DB\Room.DB.sqlproj", "{CF3838F2-C1EE-4DB3-8CA3-560A7A11C6BD}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{35D2F39B-3E11-45BA-9EF2-6408C21872C3}"
+	ProjectSection(SolutionItems) = preProject
+		buildspec.yml = buildspec.yml
+		docker-compose.override.yml = docker-compose.override.yml
+		docker-compose.yml = docker-compose.yml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
