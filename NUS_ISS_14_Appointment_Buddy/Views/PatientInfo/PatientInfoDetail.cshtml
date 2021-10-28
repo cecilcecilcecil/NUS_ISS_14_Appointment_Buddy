@@ -93,7 +93,10 @@
                                         <h4 class="autosave-msg"></h4>
                                         <div class="_nxt-prv">
                                             <button class="_transparent cancelBtn" id="cancelBtn">cancel</button>
-                                            <button class="_transparent" id="deleteBtn">delete</button>
+                                            @if (!string.IsNullOrEmpty(Model.NRIC))
+                                            {
+                                                <button class="_transparent" id="deleteBtn">delete</button>
+                                            }
                                             <button class="red-btn" id="saveBtn">save</button>
                                         </div>
                                     </div>
@@ -104,6 +107,7 @@
                 </div>
                 <partial name="_ErrorModal" />
                 <partial name="_ConfirmModal" />
+                <partial name="_DeleteModal" />
                 <partial name="_SubmitModal" />
                 <partial name="_SavingModal" />
             </div>
@@ -125,9 +129,44 @@
             document.getElementById('confirmationBox').style.display = 'block';
         });
 
+        $('#deleteBtn').click(function () {
+            this.blur();
+
+            $('#cfmDeleteMsg').text('Deleting Patient Info');
+            document.getElementById('deletionBox').style.display = 'block';
+        });
+
         $('#confirmBox').click(function () {
             document.getElementById('confirmationBox').style.display = 'none';
             SaveAppointment();
+        });
+
+        $('#confirmDeleteBox').click(function () {
+            document.getElementById('deletionBox').style.display = 'none';
+            var savingModal = document.getElementById("savingInProgress");
+            savingModal.style.display = "block";
+
+            $.ajax({
+                type: 'POST',
+                data: { '__RequestVerificationToken': $('input[name="__RequestVerificationToken"]').val() },
+                url: '@Url.Action("DeletePatientInfoById", "PatientInfo")?patId=@Model.PatientId',
+                success: function (result) {
+                    savingModal.style.display = "none";
+
+                    if (result.successVal == '@Constants.ErrorCodes.Success') {
+                        document.getElementById('submitSuccessBox').style.display = 'block';
+                    }
+                    else {
+                        $(window).scrollTop(0);
+                        document.getElementById("errorMsgValue").innerHTML = result.autosaveDate;
+                        document.getElementById("errorMsgBox").style.display = "block";
+                    }
+                },
+                error: function () {
+                    savingModal.style.display = "none";
+                    document.getElementById("errorMsgBox").style.display = "block";
+                }
+            });
         });
 
         $('#closeBox').click(function () {
@@ -142,6 +181,7 @@
 
         $('#closeErrorBox').click(function () { document.getElementById('errorMsgBox').style.display = 'none'; });
         $('#cancelBox').click(function () { document.getElementById('confirmationBox').style.display = 'none'; });
+        $('#cancelDeleteBox').click(function () { document.getElementById('deletionBox').style.display = 'none'; });
 
     });
 

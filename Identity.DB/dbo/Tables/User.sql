@@ -4,6 +4,7 @@
     [UserLogin]                 VARCHAR(255)    NULL, 
     [Password]                  VARCHAR(16)     NULL,
     [UserTypeId]                VARCHAR(50)     NULL, 
+    [Nric]                      VARCHAR(10)    NULL, 
     [Name]                      VARCHAR(255)    NULL, 
     [Email]                     VARCHAR(100)    NULL, 
     [PhoneNo]                   VARCHAR(25)     NULL, 

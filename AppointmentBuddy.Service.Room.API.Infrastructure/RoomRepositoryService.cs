@@ -1,6 +1,6 @@
 ﻿using AppointmentBuddy.Core.Common.Helper;
 using AppointmentBuddy.Infrastructure.Repository;
-using AppointmentBuddy.Service.Appointment.API.Core.Interface;
+using AppointmentBuddy.Service.Room.API.Core.Interface;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;

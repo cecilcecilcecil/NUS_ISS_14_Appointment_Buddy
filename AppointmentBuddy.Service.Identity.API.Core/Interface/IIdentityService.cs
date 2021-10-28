@@ -8,5 +8,6 @@ namespace AppointmentBuddy.Service.Identity.API.Core.Interface
     {
         Task<M.IdentityDto> Authenticate(string username, string password, string userTypeId);
         Task<IEnumerable<M.User>> GetAllPatients();
+        Task<int> SaveUser(M.User user);
     }
 }

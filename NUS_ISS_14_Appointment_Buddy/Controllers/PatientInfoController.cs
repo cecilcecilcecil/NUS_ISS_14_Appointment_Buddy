@@ -18,12 +18,14 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
     {
 
         private IPatientInfoService _patientInfoService;
+        private IIdentityService _identityService;
         private readonly IOptions<AppSettings> _appSettings;
         private readonly ILogger<PatientInfoController> _logger;
-        public PatientInfoController(IPatientInfoService patientInfoService, IOptions<AppSettings> appSettings,
+        public PatientInfoController(IPatientInfoService patientInfoService, IIdentityService identityService, IOptions<AppSettings> appSettings,
                     ILogger<PatientInfoController> logger) : base(logger)
         {
             _patientInfoService = patientInfoService;
+            _identityService = identityService;
             _appSettings = appSettings;
             _logger = logger;
         }
@@ -118,14 +120,13 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> DeletePatientInfoById(bool confirm, string patId)
+        public async Task<IActionResult> DeletePatientInfoById(string patId)
         {
             string msgVal = "";
-            var successValue =  0;
-            if (confirm)
-            {
-                successValue = await _patientInfoService.DeletePatientInfoById(patId, AccessToken);
-            }
+            var successValue = Constants.ErrorCodes.Failure;
+
+            successValue = await _patientInfoService.DeletePatientInfoById(patId, AccessToken);
+
             if (successValue == Constants.ErrorCodes.Success)
             {
                 msgVal = "";
@@ -181,9 +182,33 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
         {
             string msgVal = "";
 
+            if (!Validator.IsNRICValid(patInfo.NRIC))
+            {
+                return Json(new { msgVal = msgVal, successVal = Constants.ErrorCodes.Failure });
+            }
+
+            M.User patUser = new M.User
+            {
+                UserId = Guid.NewGuid().ToString(),
+                UserLogin = patInfo.NRIC,
+                Password = "abc",
+                UserTypeId = Constants.UserType.Patient,
+                Nric = patInfo.NRIC,
+                Name = patInfo.PatientName,
+                Email = "",
+                PhoneNo = "",
+                IsDeleted = false,
+                VersionNo = 1,
+                CreatedBy = UserId,
+                CreatedDate = DateTime.Now,
+                LastUpdatedBy = UserId,
+                LastUpdatedDate = DateTime.Now
+            };
+
             M.PatientInfo corePatInfo = new M.PatientInfo
             {
                 PatientId = patInfo.PatientId,
+                UserId = patUser.UserId,
                 Title = patInfo.Title,
                 NRIC = patInfo.NRIC,
                 PatientName = patInfo.PatientName,
@@ -195,6 +220,8 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
             };
 
             var successValue = await _patientInfoService.SavePatientInfo(corePatInfo, AccessToken);
+
+            successValue = await _identityService.SaveUser(patUser, AccessToken);
 
             if (successValue == Constants.ErrorCodes.Success)
             {
@@ -239,59 +266,5 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
             };
             return returnList;
         }
-
-
-        private static readonly int[] Multiples = { 2, 7, 6, 5, 4, 3, 2 };
-
-        public static bool IsNRICValid(string nric)
-        {
-            if (string.IsNullOrEmpty(nric))
-            {
-                return false;
-            }
-
-            //	check length must be 9 digits
-            if (nric.Length != 9)
-            {
-                return false;
-            }
-
-            int total = 0
-                , count = 0
-                , numericNric;
-            char first = nric[0]
-                , last = nric[nric.Length - 1];
-
-            // first chat always S, T, F, G
-            if (first != 'S' && first != 'T' && first != 'F' && first != 'G')
-            {
-                return false;
-            }
-
-            if (!int.TryParse(nric.Substring(1, nric.Length - 2), out numericNric))
-            {
-                return false;
-            }
-
-            while (numericNric != 0)
-            {
-                total += numericNric % 10 * Multiples[Multiples.Length - (1 + count++)];
-
-                numericNric /= 10;
-            }
-
-            char[] outputs;
-            if (first == 'S' || first == 'T')
-            {
-                outputs = new char[] { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'Z', 'J' };
-            }
-            else
-            {
-                outputs = new char[] { 'K', 'L', 'M', 'N', 'P', 'Q', 'R', 'T', 'U', 'W', 'X' };
-            }
-
-            return last == outputs[total % 11];
-        }
-
     }
 }

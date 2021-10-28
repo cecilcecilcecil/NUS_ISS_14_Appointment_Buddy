@@ -65,6 +65,33 @@ namespace AppointmentBuddy.Service.Appointment.API.Infrastructure
             return response;
         }
 
+        public async Task<M.PaginatedResults<M.Appointment>> GetAllMyAppointments(string dateFrom, string dateTo, string myId, int page, int pageSize)
+        {
+            M.PaginatedResults<M.Appointment> response;
+
+            var data = await _repository.GetAllMyAppointments(myId);
+
+            DateTime dtFrom;
+            if (!String.IsNullOrEmpty(dateFrom) && DateTime.TryParseExact(dateFrom, "ddMMyyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out dtFrom))
+            {
+                data = data.Where(t => t.AppointmentDate > dtFrom);
+            }
+
+            DateTime dtTo;
+            if (!String.IsNullOrEmpty(dateTo) && DateTime.TryParseExact(dateTo, "ddMMyyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out dtTo))
+            {
+                dtTo = dtTo.AddDays(1);
+                data = data.Where(t => t.AppointmentDate < dtTo);
+            }
+
+            data = data.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+
+            response = new M.PaginatedResults<M.Appointment>(page, pageSize, data.Count(), data);
+
+            return response;
+        }
+
+
         public async Task<int> SaveAppointment(M.Appointment appt)
         {
             int success = Constants.ErrorCodes.Failure;

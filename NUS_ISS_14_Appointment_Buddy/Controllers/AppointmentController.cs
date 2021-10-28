@@ -46,6 +46,22 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
             return View(apptRvm);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> ViewMyAppointments(string dateFrom, string dateTo)
+        {
+            ViewData["DateFrom"] = dateFrom;
+            ViewData["DateTo"] = dateTo;
+
+            var pageSize = _appSettings.Value.PageSize;
+            var page = 1;
+
+            M.PaginatedResults<M.Appointment> apptItems = await _appointmentService.GetAllMyAppointments(AccessToken, dateFrom, dateTo, UserId, page, pageSize);
+
+            var apptRvm = new ResultViewModel<M.Appointment>(apptItems.Data, apptItems.PageIndex, apptItems.PageSize, apptItems.Count);
+
+            return View("Index", apptRvm);
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Search(string dateFrom, string dateTo)
