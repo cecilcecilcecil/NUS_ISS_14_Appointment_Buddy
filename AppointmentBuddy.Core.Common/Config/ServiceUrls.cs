@@ -14,6 +14,7 @@ namespace AppointmentBuddy.Core.Common.Config
         public string AppointmentAPI_GetAllMyAppointments { get; set; }
         public string AppointmentAPI_SaveAppointment { get; set; }
         public string AppointmentAPI_GetFilteredAppointmentsByPatientIds { get; set; }
+        public string AppointmentAPI_GetAvailableAppointments { get; set; }
 
         public string PatientInfoAPI { get; set; }
         public string PatientInfoAPIVersion { get; set; }

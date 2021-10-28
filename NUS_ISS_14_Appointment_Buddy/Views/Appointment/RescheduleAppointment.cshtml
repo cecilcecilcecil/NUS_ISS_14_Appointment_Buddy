@@ -11,7 +11,7 @@
     <div class="_page-essentials">
         <div class="well">
             <div class="_content">
-                <h2>Update Appointment</h2>
+                <h2>Reschedule / Cancel Appointment</h2>
             </div>
         </div>
         <div class="_step-body">
@@ -20,29 +20,21 @@
                     <div class="bids-width">
                         <div class="row">
                             <div class="col-md-4">
-                                Appointment Date:
+                                Appointment Date and Time:
                             </div>
                             <div class="col-md-4">
-                                @Html.DisplayFor(x => x.AppointmentDate)
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                Appointment Time:
-                            </div>
-                            <div class="col-md-4">
-                                @Html.DisplayFor(x => x.AppointmentTime)
+                                @Html.DisplayFor(x => x.AppointmentDate) @Html.DisplayFor(x => x.AppointmentTime)
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-4">
-                                Assigned Patient:
+                                Available Appointments:
                             </div>
                             <div class="col-md-8">
                                 <div class="category-container">
-                                    <div class="_form-group _validity">
-                                        @Html.DropDownListFor(model => model.UserId, (IEnumerable<SelectListItem>)ViewBag.Patients, "Please Select Patient",
-                                        new { @class = "_category wide", id = "patientDrop" })
+                                    <div class="_form-group">
+                                        @Html.DropDownListFor(model => model.NewAppointmentId, (IEnumerable<SelectListItem>)ViewBag.AvailableAppointments, "Please Select Available Timeslot",
+                                        new { @class = "_category wide", id = "apptDrop" })
                                     </div>
                                 </div>
                             </div>
@@ -57,9 +49,8 @@
                                     <div class="autosave-wrapper">
                                         <h4 class="autosave-msg"></h4>
                                         <div class="_nxt-prv">
-                                            <button class="_transparent" id="deleteBtn">delete</button>
-                                            <button class="_transparent cancelBtn">cancel</button>
-                                            <button class="red-btn" id="assignBtn">assign</button>
+                                            <button class="_transparent" id="cancelBtn">cancel my appointment</button>
+                                            <button class="red-btn" id="reschBtn">reschedule</button>
                                         </div>
                                     </div>
                                 </div>
@@ -70,9 +61,11 @@
             </div>
             <partial name="_ErrorModal" />
             <partial name="_ConfirmModal" />
+            <partial name="_DeleteModal" />
             <partial name="_SubmitModal" />
             <partial name="_SavingModal" />
             @Html.HiddenFor(x => x.AppointmentId)
+            @Html.HiddenFor(x => x.NewAppointmentId)
             @Html.HiddenFor(x => x.AppointmentDate)
             @Html.HiddenFor(x => x.AppointmentTime)
             @Html.HiddenFor(x => x.UserId)
@@ -85,44 +78,72 @@
     $(document).ready(function () {
         $('#AppointmentForm').submit(function (e) { e.preventDefault(); });
 
-        $('#assignBtn').click(function () {
+        $('#reschBtn').click(function () {
             this.blur();
 
-            if ($('#apptDate').val() == '' || $('#apptTime').val() == '') {
-
-            }
-            else {
-                $('#cfmMsg').text('Assigning Patient');
-                document.getElementById('confirmationBox').style.display = 'block';
-            }
+            $('#cfmMsg').text('Rescheduling Appointment');
+            document.getElementById('confirmationBox').style.display = 'block';
         });
 
-        $('#patientDrop').change(function () {
-            $('#UserId').val(this.value);
-            $('#Name').val($("#patientDrop option:selected").text());
+        $('#apptDrop').change(function () {
+            $('#NewAppointmentId').val(this.value);
+        });
+
+        $('#cancelBtn').click(function () {
+            this.blur();
+
+            $('#cfmDeleteMsg').text('Cancelling Appointment');
+            document.getElementById('deletionBox').style.display = 'block';
+        });
+
+        $('#confirmDeleteBox').click(function () {
+            document.getElementById('deletionBox').style.display = 'none';
+            CancelAppointment();
         });
 
         $('#confirmBox').click(function () {
+            var formData = $('#AppointmentForm').serializeArray();
             document.getElementById('confirmationBox').style.display = 'none';
-            SaveAppointment();
+            var savingModal = document.getElementById("savingInProgress");
+            savingModal.style.display = "block";
+
+            $.ajax({
+                type: 'POST',
+                data: formData,
+                dataType: 'json',
+                url: '@Url.Action("SetNewAppointment", "Appointment")',
+                success: function (result) {
+                    savingModal.style.display = "none";
+
+                    if (result.successVal == '@Constants.ErrorCodes.Success') {
+                        document.getElementById('submitSuccessBox').style.display = 'block';
+                    }
+                    else {
+                        $(window).scrollTop(0);
+                        document.getElementById("errorMsgValue").innerHTML = result.autosaveDate;
+                        document.getElementById("errorMsgBox").style.display = "block";
+                    }
+                },
+                error: function () {
+                    savingModal.style.display = "none";
+                    document.getElementById("errorMsgBox").style.display = "block";
+                }
+            });
         });
 
         $('#closeBox').click(function () {
             document.getElementById('submitSuccessBox').style.display = "none";
 
-            window.location.href = '@Url.Action("Index", "Appointment")';
-        });
-
-        $('.cancelBtn').click(function () {
-            window.location.href = '@Url.Action("Index", "Appointment")';
+            window.location.href = '@Url.Action("ViewMyAppointments", "Appointment")';
         });
 
         $('#closeErrorBox').click(function () { document.getElementById('errorMsgBox').style.display = 'none'; });
         $('#cancelBox').click(function () { document.getElementById('confirmationBox').style.display = 'none'; });
+        $('#cancelDeleteBox').click(function () { document.getElementById('deletionBox').style.display = 'none'; });
 
     });
 
-    function SaveAppointment() {
+    function CancelAppointment() {
         var formData = $('#AppointmentForm').serializeArray();
 
         var savingModal = document.getElementById("savingInProgress");
@@ -132,7 +153,7 @@
             type: 'POST',
             data: formData,
             dataType: 'json',
-            url: '@Url.Action("SaveAppointment", "Appointment")',
+            url: '@Url.Action("CancelAppointment", "Appointment")',
             success: function (result) {
                 savingModal.style.display = "none";
 

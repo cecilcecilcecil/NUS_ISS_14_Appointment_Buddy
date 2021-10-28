@@ -10,6 +10,7 @@ namespace AppointmentBuddy.Service.Appointment.API.Core.Interface
 
         Task<List<string>> GetFilteredPatientIdsByDate(M.FilteredAppointment mf);
         Task<IEnumerable<M.Appointment>> GetAllAppointments();
+        Task<IEnumerable<M.Appointment>> GetAvailableAppointments();
         Task<IEnumerable<M.Appointment>> GetAllMyAppointments(string myId);
         Task<int> SaveAppointment(M.Appointment appt);
         Task<int> UpdateAppointment(M.Appointment appt);

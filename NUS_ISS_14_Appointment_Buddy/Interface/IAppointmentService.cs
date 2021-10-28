@@ -7,6 +7,7 @@ namespace NUS_ISS_14_Appointment_Buddy.Interface
     public interface IAppointmentService
     {
         Task<M.Appointment> GetAppointmentByAppointmentId(string apptId, string token);
+        Task<IEnumerable<M.Appointment>> GetAvailableAppointments(string token);
         Task<M.PaginatedResults<M.Appointment>> GetAllAppointments(string token, string dateFrom, string dateTo, int page, int pageSize);
         Task<M.PaginatedResults<M.Appointment>> GetAllMyAppointments(string token, string dateFrom, string dateTo, string userId, int page, int pageSize);
         Task<List<string>> GetFilteredAppointmentsByPatientIds(M.FilteredAppointment mf, string token);

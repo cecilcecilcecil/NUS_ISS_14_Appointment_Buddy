@@ -3,7 +3,6 @@
 @using System.Security.Claims
 
 @{
-    string curId = User.Claims.FirstOrDefault(c => c.Type == Constants.AppClaimTypes.Id).Value;
     ViewData["Title"] = "Home";
 }
 
@@ -31,7 +30,7 @@
                             <div class="quick-boxes">
                                 <div class="row">
                                     <div class="col-md-4 col-sm-4">
-                                        <a href="~/Appointment">
+                                        <a href="~/Appointment/ViewMyAppointments">
                                             <div class="_box" id="apptBox">
                                                 <img src="~/img/icon1.png" alt="icon1" />
                                                 <p>manage my appointments</p>

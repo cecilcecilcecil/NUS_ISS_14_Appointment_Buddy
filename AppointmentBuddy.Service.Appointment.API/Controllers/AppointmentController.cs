@@ -69,6 +69,17 @@ namespace AppointmentBuddy.Service.Appointment.API.Controllers
             return response;
         }
 
+        [Route("available")]
+        [HttpGet]
+        public async Task<IEnumerable<M.Appointment>> GetAvailableAppointments()
+        {
+            IEnumerable<M.Appointment> response;
+
+            response = await _appointmentService.GetAvailableAppointments();
+
+            return response;
+        }
+
         [Route("filtered")]
         [HttpPost]
         public async Task<List<string>> GetFilteredAppointmentsByPatientIds([FromBody] M.FilteredAppointment mf)

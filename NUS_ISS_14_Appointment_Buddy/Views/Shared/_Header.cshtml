@@ -17,7 +17,7 @@
                     <li>@Html.ActionLink("Dashboard", "Index", "Home", null, new { id = "dashboardMenu" })</li>
                     <li><a href="javascript:void(0)" id="mobsetup">Administration</a></li>
                     <li class="quick-pad-right mobsetupcontent content">
-                        @Html.ActionLink("Manage My Appointments", "Index", "Appointment", null, new { id = "mobApptMenu" })
+                        @Html.ActionLink("Manage My Appointments", "ViewMyAppointments", "Appointment", null, new { id = "mobApptMenu" })
                     </li>
                 </ul>
             </div>
@@ -69,11 +69,11 @@
                             <li>@Html.ActionLink("Dashboard", "Index", "Home", null, new { id = "webDashboardMenu" })</li>
                             <li class="_has-dropdown itq">
                                 <a href="javascript:void(0)" id="mainDrop">
-                                    Appoinments <i class="fas fa-caret-down"></i>
+                                    Appointments <i class="fas fa-caret-down"></i>
                                 </a>
                                 <div class="master-menu-sub itq-drops">
                                     <div class="_sub-menu">
-                                        @Html.ActionLink("Manage My Appointments", "Index", "Appointment", null, new { id = "apptMenu" })
+                                        @Html.ActionLink("Manage My Appointments", "ViewMyAppointments", "Appointment", null, new { id = "apptMenu" })
                                     </div>
                                 </div>
                             </li>

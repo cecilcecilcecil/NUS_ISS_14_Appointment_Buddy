@@ -92,6 +92,17 @@ namespace AppointmentBuddy.Service.Appointment.API.Infrastructure
         }
 
 
+        public async Task<IEnumerable<M.Appointment>> GetAvailableAppointments()
+        {
+            var response = await _repository.GetAvailableAppointments();
+
+            response = response.Where(x =>
+                x.AppointmentDate.GetValueOrDefault().Date == DateTime.Now.Date && TimeSpan.Parse(x.AppointmentTime) >= DateTime.Now.TimeOfDay
+                || x.AppointmentDate.GetValueOrDefault().Date >= DateTime.Now.Date);
+
+            return response;
+        }
+
         public async Task<int> SaveAppointment(M.Appointment appt)
         {
             int success = Constants.ErrorCodes.Failure;
