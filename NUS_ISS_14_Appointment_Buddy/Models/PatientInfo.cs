@@ -11,6 +11,7 @@ namespace NUS_ISS_14_Appointment_Buddy.Models
     public class PatientInfo
     {
         public string PatientId { get; set; }
+        public string UserId { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "NRIC is Required")]
         public string NRIC { get; set; }

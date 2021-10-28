@@ -46,6 +46,17 @@ namespace AppointmentBuddy.Service.PatientInfo.API.Controllers
             return response;
         }
 
+        [Route("patientinfo/byuser/{userId}")]
+        [HttpGet]
+        public async Task<M.PatientInfo> GetPatientInfoByUserId(string userId)
+        {
+            M.PatientInfo response;
+
+            response = await _patientInfoService.GetPatientInfoByUserId(userId);
+
+            return response;
+        }
+
         [Route("search")]
         [HttpGet]
         public async Task<M.PaginatedResults<M.PatientInfo>> GetPatientInfoBySearch([FromQuery] string nric = "", string patName = "", int pageIndex = 1, int pageSize = 10)

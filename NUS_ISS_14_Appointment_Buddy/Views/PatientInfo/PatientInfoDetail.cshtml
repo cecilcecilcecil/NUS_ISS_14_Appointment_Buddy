@@ -5,6 +5,7 @@
 @model NUS_ISS_14_Appointment_Buddy.Models.PatientInfo
 
 @{
+    string curId = User.Claims.FirstOrDefault(c => c.Type == Constants.AppClaimTypes.Id).Value;
     ViewData["Title"] = "Add / Update Patient Infomation";
 }
 
@@ -92,10 +93,13 @@
                                     <div class="autosave-wrapper">
                                         <h4 class="autosave-msg"></h4>
                                         <div class="_nxt-prv">
-                                            <button class="_transparent cancelBtn" id="cancelBtn">cancel</button>
-                                            @if (!string.IsNullOrEmpty(Model.NRIC))
+                                            @if (curId != Model.UserId)
                                             {
-                                                <button class="_transparent" id="deleteBtn">delete</button>
+                                                <button class="_transparent cancelBtn" id="cancelBtn">cancel</button>
+                                                @if (!string.IsNullOrEmpty(Model.NRIC))
+                                                {
+                                                    <button class="_transparent" id="deleteBtn">delete</button>
+                                                }
                                             }
                                             <button class="red-btn" id="saveBtn">save</button>
                                         </div>

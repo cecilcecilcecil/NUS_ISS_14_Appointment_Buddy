@@ -25,6 +25,7 @@ namespace NUS_ISS_14_Appointment_Buddy.Helper
             public static string APIVersion { get; set; }
 
             public static string PatientInfoAPI(string api, string patId) => $"{BaseURI}/v{APIVersion}{api}/{patId}";
+            public static string PatientInfoByUserAPI(string api, string userId) => $"{BaseURI}/v{APIVersion}{api}/{userId}";
             public static string SavePatientInfoAPI(string api) => $"{BaseURI}/v{APIVersion}{api}";
             public static string SearchPatientInfoAPI(string api, string parameter) => $"{BaseURI}/v{APIVersion}{api}?{parameter}";
         }

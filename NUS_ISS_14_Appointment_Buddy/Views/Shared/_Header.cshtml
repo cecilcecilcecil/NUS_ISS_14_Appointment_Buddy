@@ -2,6 +2,10 @@
 @using AppointmentBuddy.Core.Common.Helper
 @using System.Security.Claims
 
+@{ 
+    string curId = User.Claims.FirstOrDefault(c => c.Type == Constants.AppClaimTypes.Id).Value;
+}
+
 <div class="_sidenav">
     <div class="side-container">
         <div class="side-admin">
@@ -74,6 +78,16 @@
                                 <div class="master-menu-sub itq-drops">
                                     <div class="_sub-menu">
                                         @Html.ActionLink("Manage My Appointments", "ViewMyAppointments", "Appointment", null, new { id = "apptMenu" })
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="_has-dropdown itq">
+                                <a href="javascript:void(0)" id="mainDrop">
+                                    My Information <i class="fas fa-caret-down"></i>
+                                </a>
+                                <div class="master-menu-sub itq-drops">
+                                    <div class="_sub-menu">
+                                        @Html.ActionLink("Update My Information", "PatientInfoDetailByUserId", "PatientInfo", new { userId = curId }, new { id = "apptMenu" })
                                     </div>
                                 </div>
                             </li>

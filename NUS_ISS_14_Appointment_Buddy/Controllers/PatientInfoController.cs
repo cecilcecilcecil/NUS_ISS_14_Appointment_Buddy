@@ -118,6 +118,34 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
             return View(patItem);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> PatientInfoDetailByUserId(string userId)
+        {
+            PatientInfo patItem = new PatientInfo();
+
+            var patI = await _patientInfoService.GetPatientInfoByUserId(userId, AccessToken);
+
+            if (patI != null)
+            {
+                patItem = new PatientInfo
+                {
+                    PatientId = patI.PatientId,
+                    UserId = patI.UserId,
+                    PatientName = patI.PatientName,
+                    BirthDate = patI.BirthDate,
+                    ContactNumber = patI.ContactNumber,
+                    DeathDate = patI.DeathDate,
+                    Gender = patI.Gender,
+                    NRIC = patI.NRIC,
+                    Title = patI.Title
+                };
+            }
+
+            ViewBag.Titles = GetTitles();
+            ViewBag.Genders = GetGenders();
+
+            return View("PatientInfoDetail", patItem);
+        }
 
         [HttpPost]
         public async Task<IActionResult> DeletePatientInfoById(string patId)

@@ -52,6 +52,17 @@ namespace NUS_ISS_14_Appointment_Buddy.Services
             return !string.IsNullOrEmpty(responseString) ? JsonConvert.DeserializeObject<M.PatientInfo>(responseString) : null;
         }
 
+        public async Task<M.PatientInfo> GetPatientInfoByUserId(string userId, string token)
+        {
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+            var apiURL = UrlConfig.PatientInfo.PatientInfoByUserAPI(_serviceUrls.PatientInfoAPI_GetPatientInfoByUserId, userId);
+
+            var responseString = await _httpClient.GetStringAsync(apiURL);
+
+            return !string.IsNullOrEmpty(responseString) ? JsonConvert.DeserializeObject<M.PatientInfo>(responseString) : null;
+        }
+
         public async Task<int> SavePatientInfo(M.PatientInfo patInfo, string token)
         {
             int status = Constants.ErrorCodes.Failure;
