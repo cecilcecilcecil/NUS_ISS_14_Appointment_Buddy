@@ -3,11 +3,12 @@
 
 <h2>All Specialists</h2>
 <form method="post">
-    <div class="form-group">
-        <label for="id">Get Specialist by Name:</label><input class="form-control" name="Name" />
-    </div>
-    <div class="text-center panel-body">
-        <button type="submit" class="btn btn-sm btn-primary">Submit</button>
+    <div class="autosave-container">
+        <div class="autosave-wrapper">
+            <div class="input-group mb-5">
+                <label for="id">Get Specialist by Name:</label><input class="input-group-text" name="Name" />&nbsp;&nbsp;<button type="submit" class="btn btn-sm btn-primary">Submit</button>
+            </div>
+        </div>
     </div>
 </form>
 
@@ -65,5 +66,5 @@
     </table>
 }
 <div class="form-group" align="center">
-    <a asp-action="AddSpecialist" class="btn btn-sm btn-primary">Add Specialist</a>
+     <a asp-action="AddSpecialist" class="btn btn-sm btn-primary">Add Specialist</a>
 </div>
