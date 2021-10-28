@@ -25,12 +25,12 @@ services:
     image: ${AB_DOCKER_REGISTRY-}appointmentbuddyserviceservicesapi
     build:
       context: .
-      dockerfile: AppointmentBuddy.Service.Specialist.API/Dockerfile
+      dockerfile: AppointmentBuddy.Service.Services.API/Dockerfile
   appointmentbuddy.service.specialist.api:
     image: ${AB_DOCKER_REGISTRY-}appointmentbuddyservicespecialistapi
     build:
       context: .
-      dockerfile: AppointmentBuddy.Service.Services.API/Dockerfile
+      dockerfile: AppointmentBuddy.Service.Specialist.API/Dockerfile
   # nus_iss_14_appointment_buddy:
     # image: ${AB_DOCKER_REGISTRY-}nus_iss_14_appointment_buddy
     # build:

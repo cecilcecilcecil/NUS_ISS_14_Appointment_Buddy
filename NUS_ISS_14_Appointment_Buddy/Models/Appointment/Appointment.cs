@@ -26,5 +26,7 @@ namespace NUS_ISS_14_Appointment_Buddy.Models
         [MaxLength(5)]
         [RegularExpression(Constants.RegularExpressions.TimeInHHMM, ErrorMessage = Constants.ValidationMessages.TimeFormatMessage)]
         public string AppointmentTime { get; set; }
+
+        public string NewAppointmentId { get; set; }
     }
 }

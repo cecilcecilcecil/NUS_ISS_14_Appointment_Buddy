@@ -1,6 +1,11 @@
 ﻿@using M = AppointmentBuddy.Core.Model
+@using AppointmentBuddy.Core.Common.Helper
 
 @model NUS_ISS_14_Appointment_Buddy.Models.ResultViewModel<M.Appointment>
+
+@{ 
+    string curId = User.Claims.FirstOrDefault(c => c.Type == Constants.AppClaimTypes.Id).Value;
+}
 
 <div class="editQuan _goods">
     <div class="display">
@@ -25,7 +30,14 @@
                             <td>@count</td>
                             @if (!string.IsNullOrEmpty(appt.Name))
                             {
-                                <td><a href="@Url.ActionLink("UpdateAppointment", "Appointment", new { apptId = appt.AppointmentId })">@appt.Name</a></td>
+                                if (appt.UserId == curId)
+                                {
+                                    <td><a href="@Url.ActionLink("RescheduleAppointment", "Appointment", new { apptId = appt.AppointmentId })">@appt.Name</a></td>
+                                }
+                                else
+                                {
+                                    <td><a href="@Url.ActionLink("UpdateAppointment", "Appointment", new { apptId = appt.AppointmentId })">@appt.Name</a></td>
+                                }
                             }
                             else
                             {

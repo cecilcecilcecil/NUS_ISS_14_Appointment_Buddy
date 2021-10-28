@@ -1,21 +1,28 @@
 ﻿@using AppointmentBuddy.Core.Model
 @model IEnumerable<Services>
 
-<h2>Update Services</h2>
+<h2 align="center">Update Services</h2>
 <form asp-action="UpdateService" method="post">
-    <div class="form-group">
-        <label for="Name">Old Service Description:</label>
-        @foreach (var r in Model)
-        {
-            <label for="Name">@r.Description</label>
-            <input type="hidden" value="@r.Id" name="Id" />
-        }
-    </div>
-    <div class="form-group">
-        <label for="Name">New Service Description:</label>
-        <input class="form-control" name="Description" />
-    </div>
-    <div class="text-center panel-body">
-        <button type="submit" class="btn btn-sm btn-primary">Update</button>   <a asp-action="Index" class="btn btn-sm btn-secondary">Back</a>
+    <div align="center">
+        <div class="col-md-4">
+            <label for="Name">Old Service Description:</label>
+            @foreach (var r in Model)
+            {
+                <label for="Name">@r.Description</label>
+                <input type="hidden" value="@r.Id" name="Id" />
+            }
+        </div>
+        <div class="col-md-4">
+            <label for="Name">New Service Description:</label>
+            <input class="input-group-text" name="Description" />
+        </div>
+        <br><br>
+            <div class="col-md-4">
+                <div class="autosave-container">
+                    <div class="autosave-wrapper">
+                        <button type="submit" class="btn btn-sm btn-primary">Update</button>&nbsp;&nbsp;<a asp-action="Index" class="btn btn-sm btn-secondary">Back</a>
+                    </div>
+                </div>
+            </div>
     </div>
 </form>

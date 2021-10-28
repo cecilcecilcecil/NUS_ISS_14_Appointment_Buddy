@@ -3,6 +3,7 @@
 	[PatientId]			    VARCHAR (50)		NOT NULL,
     [NRIC]                  VARCHAR(15)         NOT NULL,
     [PatientName]           VARCHAR(255)        NOT NULL,
+    [UserId]                VARCHAR(50)         NULL,
     [BirthDate]   		    DATETIME            NULL,
     [DeathDate]   		    DATETIME            NULL,
     [Gender]                VARCHAR(2)          NULL,

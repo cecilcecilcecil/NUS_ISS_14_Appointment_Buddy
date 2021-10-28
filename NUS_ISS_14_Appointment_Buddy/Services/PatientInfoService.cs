@@ -34,7 +34,7 @@ namespace NUS_ISS_14_Appointment_Buddy.Services
             var _api1 = Environment.GetEnvironmentVariable("APPTBUDDY_PTINFO_EXTERNAL_DNS_OR_IP");
             if (!string.IsNullOrEmpty(_api1))
             {
-                _serviceUrls.AppointmentAPI = _api1;
+                _serviceUrls.PatientInfoAPI = _api1;
             }
 
             UrlConfig.PatientInfo.BaseURI = _serviceUrls.PatientInfoAPI;

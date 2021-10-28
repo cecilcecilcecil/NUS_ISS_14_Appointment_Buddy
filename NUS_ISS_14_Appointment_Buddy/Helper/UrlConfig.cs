@@ -14,6 +14,7 @@ namespace NUS_ISS_14_Appointment_Buddy.Helper
 
             public static string AppointmentAPI(string api, string apptId) => $"{BaseURI}/v{APIVersion}{api}/{apptId}";
             public static string AllAppointmentAPI(string api, string parameter) => $"{BaseURI}/v{APIVersion}{api}?{parameter}";
+            public static string GetAvailableAppointmentsAPI(string api) => $"{BaseURI}/v{APIVersion}{api}";
             public static string SearchAppointmentAPI(string api) => $"{BaseURI}/v{APIVersion}{api}";
             public static string SaveAppointmentAPI(string api) => $"{BaseURI}/v{APIVersion}{api}";
         }
@@ -35,6 +36,7 @@ namespace NUS_ISS_14_Appointment_Buddy.Helper
 
             public static string AuthenticateAPI(string api) => $"{BaseURI}/v{APIVersion}{api}";
             public static string PatientsAPI(string api) => $"{BaseURI}/v{APIVersion}{api}";
+            public static string SavePatientAPI(string api) => $"{BaseURI}/v{APIVersion}{api}";
         }
 
         public static class Room
@@ -48,7 +50,9 @@ namespace NUS_ISS_14_Appointment_Buddy.Helper
                 get; set;
             }
 
-            public static string RoomAPI(string api, string apptId) => $"{BaseURI}/v{APIVersion}{api}/{apptId}";
+            public static string RoomAPI(string api, string roomId) => $"{BaseURI}/v{APIVersion}{api}/{roomId}";
+            public static string AllRoomAPI(string api, string parameter) => $"{BaseURI}/v{APIVersion}{api}?{parameter}";
+            public static string SaveRoomAPI(string api) => $"{BaseURI}/v{APIVersion}{api}";
         }
     }
 }

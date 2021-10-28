@@ -5,6 +5,7 @@ INSERT INTO [dbo].[User]
            ,[UserLogin]
            ,[Password]
            ,[UserTypeId]
+           ,[Nric]
            ,[Name]
            ,[Email]
            ,[PhoneNo]
@@ -19,6 +20,7 @@ INSERT INTO [dbo].[User]
            ,'SuperAdmin'
            ,'abc'
            ,'F06EC0F3-D16F-4B9E-9261-05857F28B32D'
+           ,''
            ,'Super Admin 01'
            , 'see.see@ncs.com.sg'
            , '97282643'
@@ -61,6 +63,7 @@ INSERT INTO [dbo].[User]
            ,[UserLogin]
            ,[Password]
            ,[UserTypeId]
+           ,[Nric]
            ,[Name]
            ,[Email]
            ,[PhoneNo]
@@ -75,6 +78,7 @@ INSERT INTO [dbo].[User]
            ,'abjw'
            ,'abc'
            ,'005FB465-9E78-4FEE-BDD2-888C4890D462'
+           ,''
            ,'See Jun Wei'
            , 'see.see@ncs.com.sg'
            , '97282643'
@@ -117,6 +121,7 @@ INSERT INTO [dbo].[User]
            ,[UserLogin]
            ,[Password]
            ,[UserTypeId]
+           ,[Nric]
            ,[Name]
            ,[Email]
            ,[PhoneNo]
@@ -131,6 +136,7 @@ INSERT INTO [dbo].[User]
            ,'Patient01'
            ,'abc'
            ,'D939D14A-53B3-4479-A384-7C2278543A56'
+           ,'S5267800E'
            ,'Patient 01'
            , 'see.see@ncs.com.sg'
            , '97282643'

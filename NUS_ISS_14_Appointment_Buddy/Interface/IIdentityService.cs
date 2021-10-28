@@ -10,5 +10,6 @@ namespace NUS_ISS_14_Appointment_Buddy.Interface
     {
         Task<M.IdentityDto> Authenticate(string username, string password, string userTypeId);
         Task<IEnumerable<M.User>> GetAllPatients(string token);
+        Task<int> SaveUser(M.User user, string token);
     }
 }

@@ -16,6 +16,8 @@ namespace AppointmentBuddy.Core.Model
         public string Password { get; set; }
         [Column(TypeName = "varchar(50)")]
         public string UserTypeId { get; set; }
+        [Column(TypeName = "varchar(10)")]
+        public string Nric { get; set; }
         [Column(TypeName = "varchar(255)")]
         public string Name { get; set; }
         [Column(TypeName = "varchar(100)")]
