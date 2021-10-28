@@ -6,7 +6,6 @@ phases:
       - $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
       - $(docker login --username AWS --password-stdin $AWS_DEFAULT_REGION.amazonaws.com)
   build:
-  build:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...    
