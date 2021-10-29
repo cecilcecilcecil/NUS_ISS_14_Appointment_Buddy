@@ -35,5 +35,68 @@ namespace AppointmentBuddy.Service.Specialist.API.Controllers
         {
             return Ok(DateTime.Now.ToString());
         }
+
+        [Route("specialist/{specId}")]
+        [HttpGet]
+        public async Task<M.Specialist> GetSpecialistById(string specId)
+        {
+            M.Specialist response;
+
+            response = await _specialistService.GetSpecialistById(specId);
+
+            return response;
+        }
+
+        [Route("search")]
+        [HttpGet]
+        public async Task<M.PaginatedResults<M.Specialist>> GetSpecialistBySearch([FromQuery] string nric = "", string specName = "", int pageIndex = 1, int pageSize = 10)
+        {
+            M.PaginatedResults<M.Specialist> response;
+
+            response = await _specialistService.GetSpecialistBySearch(nric, specName, pageIndex, pageSize);
+
+            return response;
+        }
+
+        [Route("save")]
+        [HttpPost]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.NoContent)]
+        public async Task<ActionResult<int>> SaveSpecialist([FromBody] M.Specialist specInfo)
+        {
+            var success = Constants.ErrorCodes.Failure;
+
+            if (specInfo == null)
+            {
+                return BadRequest();
+            }
+
+            success = await _specialistService.SaveSpecialist(specInfo);
+
+            if (success == Constants.ErrorCodes.Failure)
+            {
+                return NoContent();
+            }
+
+            return success;
+        }
+
+        [Route("delete/{specId}")]
+        [HttpGet]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.NoContent)]
+        public async Task<ActionResult<int>> DeleteSpecialistById(string specId)
+        {
+            var success = Constants.ErrorCodes.Failure;
+
+            success = await _specialistService.DeleteSpecialistById(specId);
+
+            if (success == Constants.ErrorCodes.Failure)
+            {
+                return NoContent();
+            }
+
+            return success;
+        }
     }
 }

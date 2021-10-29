@@ -96,17 +96,30 @@
                                     </div>
                                 </div>
                             </li>
-                            <li class="_has-dropdown itq">
-                                <a href="javascript:void(0)">
-                                    Services and Specialist <i class="fas fa-caret-down"></i>
-                                </a>
-                                <div class="master-menu-sub itq-drops">
-                                    <div class="_sub-menu">
-                                        @Html.ActionLink("Manage Services", "Index", "Services", null, new { id = "scMenu" })
-                                        @Html.ActionLink("Manage Specialists", "Index", "Specialist", null, new { id = "spcMenu" })
+                            @if (IdentityHelper.HasRole((ClaimsIdentity)User.Identity, Constants.RoleType.Admin))
+                            {
+                                <li class="_has-dropdown itq">
+                                    <a href="javascript:void(0)">
+                                        Services and Specialist <i class="fas fa-caret-down"></i>
+                                    </a>
+                                    <div class="master-menu-sub itq-drops">
+                                        <div class="_sub-menu">
+                                            @Html.ActionLink("Manage Services", "Index", "Services", null, new { id = "scMenu" })
+                                            @Html.ActionLink("Manage Specialists", "Index", "Specialist", null, new { id = "spcMenu" })
+                                        </div>
                                     </div>
-                                </div>
-                            </li>
+                                </li>
+                                <li class="_has-dropdown itq">
+                                    <a href="javascript:void(0)">
+                                        Rooms <i class="fas fa-caret-down"></i>
+                                    </a>
+                                    <div class="master-menu-sub itq-drops">
+                                        <div class="_sub-menu">
+                                            @Html.ActionLink("Manage Rooms", "Index", "Room", null, new { id = "roomMenu" })
+                                        </div>
+                                    </div>
+                                </li>
+                            }
                         </ul>
                     </div>
                     <div class="master-right">

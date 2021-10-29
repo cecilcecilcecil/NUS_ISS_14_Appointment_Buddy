@@ -2,37 +2,22 @@
 @using AppointmentBuddy.Core.Common.Helper
 @using M = AppointmentBuddy.Core.Model
 @using System.Security.Claims
-@model NUS_ISS_14_Appointment_Buddy.Models.PatientInfo
+@model NUS_ISS_14_Appointment_Buddy.Models.Specialist
 
 @{
-    string deathString = "";
-    string exitUrl = "";
+    string exitUrl = Url.Action("Index", "Specialist");
 
     string curId = User.Claims.FirstOrDefault(c => c.Type == Constants.AppClaimTypes.Id).Value;
-    ViewData["Title"] = "Add / Update Patient Infomation";
-
-    if (curId == Model.UserId)
-    {
-        exitUrl = Url.Action("Index", "Home");
-    }
-    else
-    {
-        exitUrl = Url.Action("Index", "PatientInfo");
-    }
-
-    if (Model.IsDeath)
-    {
-        deathString = Model.DeathDate.GetValueOrDefault().ToString("dd/MM/yyyy");
-    }
+    ViewData["Title"] = "Add / Update Specialist Infomation";
 }
 
-@using (Html.BeginForm("SavePatientInfoById", "PatientInfo", FormMethod.Post, new { @id = "PatientInfoForm" }))
+@using (Html.BeginForm("SaveSpecialist", "Specialist", FormMethod.Post, new { @id = "SpecialistForm" }))
 {
     <div class="_page-essentials">
         @Html.AntiForgeryToken()
         <div class="well">
             <div class="_content">
-                <h2>Add / Update Patient Information</h2>
+                <h2>Add / Update Specialist Information</h2>
             </div>
         </div>
         <div class="_step-body">
@@ -44,16 +29,16 @@
                                 <table class="table" id="apptTable" style="overflow: auto !important; overflow-x: auto !important;">
                                     <tbody>
                                         <tr>
-                                            <td scope="col">Title:</td>
+                                            <td scope="col">Service:</td>
                                             <td>
-                                                @Html.DropDownListFor(x => x.Title, (IEnumerable<SelectListItem>)ViewBag.Titles, "Please select a title", new { @class = "_category wide", id = "titleDrop" })
+                                                @Html.DropDownListFor(x => x.ServicesId, (IEnumerable<SelectListItem>)ViewBag.Services, "Please select a service", new { @class = "_category wide", id = "svcDrop" })
                                             </td>
                                         </tr>
                                         <tr>
                                             <td scope="col">Name<span class="field-validation-error">*</span> :</td>
                                             <td>
-                                                @Html.TextBoxFor(x => x.PatientName, new { @class = "form-control" })
-                                                @Html.ValidationMessageFor(x => x.PatientName)
+                                                @Html.TextBoxFor(x => x.Name, new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(x => x.Name)
                                             </td>
                                         </tr>
                                         <tr>
@@ -64,66 +49,31 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td scope="col">Gender:</td>
+                                            <td scope="col">Contact Number:</td>
                                             <td>
-                                                @Html.DropDownListFor(x => x.Gender, (IEnumerable<SelectListItem>)ViewBag.Genders, "Please select a gender", new { @class = "_category wide", id = "genderDrop" })
+                                                @Html.TextBoxFor(x => x.ContactNo, new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(x => x.ContactNo)
                                             </td>
                                         </tr>
                                         <tr>
-                                            @{string bDate = Model.BirthDate != null ? Model.BirthDate.ToString("dd/MM/yyyy") : null;}
-                                            <td scope="col">Birth Date:</td>
+                                            <td scope="col">Email:</td>
                                             <td>
-                                                <div class="row">
-                                                    <div class="col-md-10">
-                                                        <div class="_form-group _calendar">
-                                                            <div class="input-group mb-5">
-                                                                <input id="BirthDate" data-toggle="datepicker" type="text" class="form-control" placeholder="dd/mm/yyyy" asp-for="BirthDate" value="@bDate" autocomplete="off" maxlength="10">
-                                                                <div class="input-group-append">
-                                                                    <span class="input-group-text" id="BirthDateIcon"><i class="far fa-calendar-alt"></i></span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                @Html.TextBoxFor(x => x.EmailLocalPart, new { @class = "form-control" }) @@ @Html.TextBoxFor(x => x.EmailDomain, new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(x => x.EmailLocalPart)
+                                                @Html.ValidationMessageFor(x => x.EmailDomain)
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td scope="col">Availability</td>
+                                            <td>
+                                                <div class="custom-control-lg custom-control custom-checkbox" style="position:relative; left:-20px; top: -20px;">
+                                                    <input class="custom-control-input content checkboxForDelete" type="checkbox" id="AvailId" checked="@Model.Availability">
+                                                    <label class="custom-control-label custom-tnc-check" for="AvailId"></label>
                                                 </div>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td scope="col">Contact Number:</td>
-                                            <td>
-                                                @Html.TextBoxFor(x => x.ContactNumber, new { @class = "form-control" })
-                                            </td>
-                                        </tr>
-                                        @if (curId != Model.UserId)
-                                        {
-                                            <tr>
-                                                <td scope="col">Death Date:</td>
-                                                @if (Model.DeathDate == null)
-                                                {
-                                                    <td>
-                                                        N.A.
-                                                    </td>
-                                                }
-                                                else
-                                                {
-                                                    <td>
-                                                        @deathString
-                                                    </td>
-                                                }
-                                            </tr>
-                                            <tr>
-                                                <td scope="col">Set Death</td>
-                                                <td>
-                                                    <div class="custom-control-lg custom-control custom-checkbox" style="position:relative; left:-20px; top: -20px;">
-                                                        <input class="custom-control-input content checkboxForDelete" type="checkbox" id="DeathId" checked="@Model.IsDeath">
-                                                        <label class="custom-control-label custom-tnc-check" for="DeathId"></label>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        }
-                                        @Html.HiddenFor(x => x.IsDeath)
-                                        @Html.HiddenFor(x => x.PatientId)
-                                        @Html.HiddenFor(x => x.UserId)
-                                        @Html.HiddenFor(x => x.DeathDate)
+                                        @Html.HiddenFor(x => x.SpecialistId)
+                                        @Html.HiddenFor(x => x.Availability)
                                     </tbody>
                                 </table>
                             </div>
@@ -138,13 +88,10 @@
                                     <div class="autosave-wrapper">
                                         <h4 class="autosave-msg"></h4>
                                         <div class="_nxt-prv">
-                                            @if (curId != Model.UserId)
+                                            <button class="_transparent cancelBtn" id="cancelBtn">cancel</button>
+                                            @if (!string.IsNullOrEmpty(Model.NRIC))
                                             {
-                                                <button class="_transparent cancelBtn" id="cancelBtn">cancel</button>
-                                                @if (!string.IsNullOrEmpty(Model.NRIC))
-                                                {
-                                                    <button class="_transparent" id="deleteBtn">delete</button>
-                                                }
+                                                <button class="_transparent" id="deleteBtn">delete</button>
                                             }
                                             <button class="red-btn" id="saveBtn">save</button>
                                         </div>
@@ -166,36 +113,35 @@
 
 <script type="text/javascript" nonce="@ViewData["Nonce"]">
     $(document).ready(function () {
-        $('#BirthDate').keypress(function (e) { return isDate(this, e); });
-        $('#ContactNumber').keypress(function (e) { return isPhoneNumber(e); });
+        $('#ContactNo').keypress(function (e) { return isPhoneNumber(e); });
 
-        $('#PatientInfoForm').submit(function (e) { e.preventDefault(); });
+        $('#SpecialistForm').submit(function (e) { e.preventDefault(); });
 
         $('#saveBtn').click(function () {
             this.blur();
 
-            $('#cfmMsg').text('Saving Patient Info');
+            $('#cfmMsg').text('Saving Specialist');
             document.getElementById('confirmationBox').style.display = 'block';
         });
 
         $('#deleteBtn').click(function () {
             this.blur();
 
-            $('#cfmDeleteMsg').text('Deleting Patient Info');
+            $('#cfmDeleteMsg').text('Deleting Specialist');
             document.getElementById('deletionBox').style.display = 'block';
         });
 
         $('#confirmBox').click(function () {
             document.getElementById('confirmationBox').style.display = 'none';
-            SavePatientInfo();
+            SaveSpecialist();
         });
 
-        $('#DeathId').click(function () {
+        $('#AvailId').click(function () {
             if (this.checked) {
-                $('#IsDeath').val('True');
+                $('#Availability').val('True');
             }
             else {
-                $('#IsDeath').val('False');
+                $('#Availability').val('False');
             }
         });
 
@@ -207,7 +153,7 @@
             $.ajax({
                 type: 'POST',
                 data: { '__RequestVerificationToken': $('input[name="__RequestVerificationToken"]').val() },
-                url: '@Url.Action("DeletePatientInfoById", "PatientInfo")?patId=@Model.PatientId',
+                url: '@Url.Action("DeleteSpecialistById", "Specialist")?specId=@Model.SpecialistId',
                 success: function (result) {
                     savingModal.style.display = "none";
 
@@ -243,8 +189,8 @@
 
     });
 
-    function SavePatientInfo() {
-        var formData = $('#PatientInfoForm').serializeArray();
+    function SaveSpecialist() {
+        var formData = $('#SpecialistForm').serializeArray();
 
         var savingModal = document.getElementById("savingInProgress");
         savingModal.style.display = "block";
@@ -253,7 +199,7 @@
             type: 'POST',
             data: formData,
             dataType: 'json',
-            url: '@Url.Action("SavePatientInfoById", "PatientInfo")',
+            url: '@Url.Action("SaveSpecialist", "Specialist")',
             success: function (result) {
                 savingModal.style.display = "none";
 

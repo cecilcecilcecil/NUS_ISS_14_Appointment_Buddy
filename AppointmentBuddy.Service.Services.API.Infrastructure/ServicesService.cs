@@ -47,6 +47,13 @@ namespace AppointmentBuddy.Service.Services.API.Infrastructure
             return response;
         }
 
+        public async Task<IEnumerable<M.Services>> GetAllNonPageServices()
+        {
+            var data = await _repository.GetAllServices();
+
+            return data;
+        }
+
         public async Task<int> SaveService(M.Services svc)
         {
             int success = Constants.ErrorCodes.Failure;

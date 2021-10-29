@@ -6,6 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Views\Service\**" />
+    <Content Remove="Views\Service\**" />
+    <EmbeddedResource Remove="Views\Service\**" />
+    <None Remove="Views\Service\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Remove="bundleconfig.json" />
   </ItemGroup>
 
@@ -50,7 +57,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\Service\" />
     <Folder Include="wwwroot\icon\" />
   </ItemGroup>
 

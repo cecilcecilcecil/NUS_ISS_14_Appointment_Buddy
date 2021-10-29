@@ -38,22 +38,46 @@
                                         </a>
                                     </div>
                                     <div class="col-md-4 col-sm-4">
-                                        <a href="~/Specialist">
-                                            <div class="_box" id="specBox">
+                                        <a href="~/PatientInfo">
+                                            <div class="_box" id="apptBox">
                                                 <img src="~/img/icon1.png" alt="icon1" />
-                                                <p>manage specialist</p>
+                                                <p>manage patient info</p>
                                             </div>
                                         </a>
                                     </div>
-                                    <div class="col-md-4 col-sm-4">
-                                        <a href="~/Services">
-                                            <div class="_box" id="svcBox">
-                                                <img src="~/img/icon1.png" alt="icon1" />
-                                                <p>manage services</p>
-                                            </div>
-                                        </a>
-                                    </div>
+                                    @if (IdentityHelper.HasRole((ClaimsIdentity)User.Identity, Constants.RoleType.Admin))
+                                    {
+                                        <div class="col-md-4 col-sm-4">
+                                            <a href="~/Specialist">
+                                                <div class="_box" id="specBox">
+                                                    <img src="~/img/icon1.png" alt="icon1" />
+                                                    <p>manage specialists</p>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    }
                                 </div>
+                                @if (IdentityHelper.HasRole((ClaimsIdentity)User.Identity, Constants.RoleType.Admin))
+                                {
+                                    <div class="row">
+                                        <div class="col-md-4 col-sm-4">
+                                            <a href="~/Appointment">
+                                                <div class="_box" id="apptBox">
+                                                    <img src="~/img/icon1.png" alt="icon1" />
+                                                    <p>manage rooms</p>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <div class="col-md-4 col-sm-4">
+                                            <a href="~/Services">
+                                                <div class="_box" id="svcBox">
+                                                    <img src="~/img/icon1.png" alt="icon1" />
+                                                    <p>manage services</p>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                }
                             </div>
                         </div>
                     </div>

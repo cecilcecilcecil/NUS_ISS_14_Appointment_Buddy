@@ -20,5 +20,54 @@ namespace AppointmentBuddy.Service.Specialist.API.Infrastructure
             _context = context;
             _logger = logger;
         }
+
+        public async Task<M.Specialist> GetSpecialistById(string specId)
+        {
+            M.Specialist dataItem;
+            dataItem = await _context.Specialist.AsNoTracking().FirstOrDefaultAsync(s => s.SpecialistId == specId);
+            return dataItem;
+        }
+
+        public async Task<IEnumerable<M.Specialist>> GetSpecialistBySearch(string nric, string specName)
+        {
+            if (string.IsNullOrEmpty(nric))
+            {
+                return await _context.Specialist.Where(x => x.Name.Contains(specName) && !x.IsDeleted).ToListAsync();
+            }
+
+            return await _context.Specialist.Where(x => x.Nric == nric && x.Name.Contains(specName) && !x.IsDeleted).ToListAsync();
+        }
+
+
+        public async Task<int> DeleteSpecialistById(string specId)
+        {
+            int success = Constants.ErrorCodes.Failure;
+            M.Specialist dataItem = await _context.Specialist.FirstOrDefaultAsync(s => s.SpecialistId == specId);
+            dataItem.IsDeleted = true;
+            _context.SaveChanges();
+
+            success = Constants.ErrorCodes.Success;
+            return success;
+        }
+
+        public async Task<int> SaveSpecialist(M.Specialist patInfo)
+        {
+            int success = Constants.ErrorCodes.Failure;
+
+            _context.Add(patInfo);
+            success = await _context.SaveChangesAsync();
+
+            return success;
+        }
+
+        public async Task<int> UpdateSpecialist(M.Specialist patInfo)
+        {
+            int success = Constants.ErrorCodes.Failure;
+
+            _context.Update(patInfo);
+            success = await _context.SaveChangesAsync();
+
+            return success;
+        }
     }
 }

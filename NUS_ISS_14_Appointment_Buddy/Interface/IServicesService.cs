@@ -10,6 +10,7 @@ namespace NUS_ISS_14_Appointment_Buddy.Interface
     {
         Task<M.Services> GetServiceByServicesId(string svcId, string token);
         Task<M.PaginatedResults<M.Services>> GetAllServices(string token, string desc, int page, int pageSize);
+        Task<IEnumerable<M.Services>> GetAllNonPageServices(string token);
         Task<int> SaveService(M.Services svc, string token);
     }
 }

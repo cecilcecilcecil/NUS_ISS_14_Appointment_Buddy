@@ -53,6 +53,17 @@ namespace NUS_ISS_14_Appointment_Buddy.Services
             return !string.IsNullOrEmpty(responseString) ? JsonConvert.DeserializeObject<M.Services>(responseString) : null;
         }
 
+        public async Task<IEnumerable<M.Services>> GetAllNonPageServices(string token)
+        {
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+            var apiURL = UrlConfig.Services.GetAllNonPageServicesAPI(_serviceUrls.ServicesAPI_GetAllNonPageServices);
+
+            var responseString = await _httpClient.GetStringAsync(apiURL);
+
+            return !string.IsNullOrEmpty(responseString) ? JsonConvert.DeserializeObject<IEnumerable<M.Services>>(responseString) : null;
+        }
+
         public async Task<M.PaginatedResults<M.Services>> GetAllServices(string token, string desc, int pageIndex, int pageSize)
         {
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);

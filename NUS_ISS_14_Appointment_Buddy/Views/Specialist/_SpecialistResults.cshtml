@@ -1,7 +1,5 @@
 ﻿@using M = AppointmentBuddy.Core.Model
-@using AppointmentBuddy.Core.Common.Helper
-
-@model NUS_ISS_14_Appointment_Buddy.Models.ResultViewModel<M.Services>
+@model NUS_ISS_14_Appointment_Buddy.Models.ResultViewModel<M.Specialist>
 
 <div class="editQuan _goods">
     <div class="display">
@@ -10,16 +8,24 @@
                 <thead class="">
                     <tr>
                         <th scope="col">S/N</th>
-                        <th scope="col">Description</th>
+                        <th scope="col">NRIC</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Contact Number</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Availability</th>
                     </tr>
                 </thead>
                 <tbody>
                     @{int count = 1 + (10 * (Model.PaginationInfo.PageNumber - 1));}
-                    @foreach (var svc in Model.ListItems)
+                    @foreach (var specInfo in Model.ListItems)
                     {
                         <tr>
                             <td>@count</td>
-                            <td><a href="@Url.Action("CreateService", "Services", new { svcId = svc.ServicesId })">@svc.Description</a></td>
+                            <td>@specInfo.Nric</td>
+                            <td><a href="@Url.Action("SpecialistDetail", "Specialist", new { specId = specInfo.SpecialistId })">@specInfo.Name</a></td>
+                            <td>@specInfo.ContactNo</td>
+                            <td>@specInfo.EmailLocalPart@@@specInfo.EmailDomain</td>
+                            <td>@(specInfo.Availability ? "Yes" : "No")</td>
                         </tr>
                         count++;
                     }
@@ -37,12 +43,13 @@
             <li class="page-item @(i == Model.PaginationInfo.PageNumber ? "active" : "")">
                 @if (i != Model.PaginationInfo.PageNumber)
                 {
-                    <a asp-controller="Services"
-                       asp-action="GetServicesPage"
-                       asp-route-desc="@ViewData["Description"]"
+                    <a asp-controller="Specialist"
+                       asp-action="GetSpecialistPage"
                        asp-route-page="@i"
-                       asp-route-partialV="_ServicesResults"
-                       data-target="svcs"
+                       asp-route-nric="@ViewData["NRIC"]"
+                       asp-route-specName="@ViewData["SpecialistName"]"
+                       asp-route-partialV="_SpecialistResults"
+                       data-target="specs"
                        class="paginationButton">
                         @i
                     </a>

@@ -3,10 +3,10 @@
 @using M = AppointmentBuddy.Core.Model
 @using System.Security.Claims
 
-@model NUS_ISS_14_Appointment_Buddy.Models.ResultViewModel<M.Services>
+@model NUS_ISS_14_Appointment_Buddy.Models.ResultViewModel<M.Specialist>
 
 @{
-    ViewData["Title"] = "Manage Services";
+    ViewData["Title"] = "Specialist Infomation";
 }
 
 <div class="_page-essentials">
@@ -16,12 +16,16 @@
             <div class="_search-and-filter-content">
                 <div class="row ken-flex">
                     <div class="col-lg-4 col-md-6 col-sm-12">
-                        <h3>Description:</h3>
+                        <h3>NRIC:</h3>
                         <div class="input-group mb-5">
-                            <input value="@ViewData["Description"]" class="form-control" id="Desc" />
+                            <input value="@ViewData["NRIC"]" class="form-control" id="NRIC" />
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6 col-sm-12">
+                        <h3>Specialist Name:</h3>
+                        <div class="input-group mb-5">
+                            <input value="@ViewData["SpecialistName"]" class="form-control" id="SpecialistName" />
+                        </div>
                     </div>
                     <div class="col-lg-4 col-md-12 col-sm-12">
                     </div>
@@ -31,7 +35,7 @@
                     @if (IdentityHelper.HasRole((ClaimsIdentity)User.Identity, Constants.RoleType.Admin))
                     {
                         <div class="col-lg-4 col-md-12 col-sm-12">
-                            <button class="red-btn" id="createButton">Add New Service</button>
+                            <button class="red-btn" id="addButton">Add New Specialist</button>
                         </div>
                     }
                     <div class="col-lg-4 col-md-12 col-sm-12">
@@ -40,8 +44,8 @@
                     </div>
                 </div>
             </div>
-            <div class="_project-content" id="svcs">
-                @await Html.PartialAsync("_ServicesResults", Model)
+            <div class="_project-content" id="specs">
+                @await Html.PartialAsync("_SpecialistResults", Model)
             </div>
         </div>
     </div>
@@ -50,9 +54,10 @@
 <script nonce="@ViewData["Nonce"]">
     $(function () {
         $("#applyButton").click(function (e) {
+
             e.preventDefault();
 
-            $.post('@Url.Action("Search")', { desc: $('#Desc').val(), '__RequestVerificationToken': $('input[name="__RequestVerificationToken"]').val() }, function (data) {
+            $.post('@Url.Action("Search")', { nric: $('#NRIC').val(), specName: $('#SpecialistName').val(), '__RequestVerificationToken': $('input[name="__RequestVerificationToken"]').val() }, function (data) {
                 window.location = data.redirectUrl;
             });
 
@@ -60,16 +65,17 @@
 
         $("#resetButton").click(function (e) {
             e.preventDefault();
-            $('#Description').val('');
+            $('#NRIC').val('');
+            $('#SpecialistName').val('');
         });
 
-        $("#createButton").click(function (e) {
-            e.preventDefault();
+        $("#addButton").click(function (e) {
+        e.preventDefault();
 
             $.ajax({
                 type: 'GET',
                 dataType: 'json',
-                url: '@Url.Action("LinkToAddServices", "Services")',
+                url: '@Url.Action("LinkToAddSpecialist", "Specialist")',
                 success: function (result) {
                     window.location.href = result.redirectUrl;
                 }

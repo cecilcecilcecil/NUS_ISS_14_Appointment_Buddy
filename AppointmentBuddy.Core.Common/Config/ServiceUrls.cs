@@ -42,10 +42,15 @@ namespace AppointmentBuddy.Core.Common.Config
         public string ServicesAPIVersion { get; set; }
         public string ServicesAPI_GetAllServices { get; set; }
         public string ServicesAPI_GetServiceByServicesId { get; set; }
+        public string ServicesAPI_GetAllNonPageServices { get; set; }
         public string ServicesAPI_SaveService { get; set; }
 
         public string SpecialistAPI { get; set; }
         public string SpecialistAPIVersion { get; set; }
+        public string SpecialistAPI_GetSpecialistById { get; set; }
+        public string SpecialistAPI_GetSpecialistBySearch { get; set; }
+        public string SpecialistAPI_DeleteSpecialistById { get; set; }
+        public string SpecialistAPI_SaveSpecialist { get; set; }
 
     }
 }

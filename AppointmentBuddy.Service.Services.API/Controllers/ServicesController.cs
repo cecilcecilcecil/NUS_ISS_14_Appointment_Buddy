@@ -58,6 +58,17 @@ namespace AppointmentBuddy.Service.Services.API.Controllers
             return response;
         }
 
+        [Route("nopage")]
+        [HttpGet]
+        public async Task<IEnumerable<M.Services>> GetAllNonPageServices()
+        {
+            IEnumerable<M.Services> response;
+
+            response = await _servicesService.GetAllNonPageServices();
+
+            return response;
+        }
+
         [Route("save")]
         [HttpPost]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
