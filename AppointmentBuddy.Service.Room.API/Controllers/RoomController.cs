@@ -47,6 +47,17 @@ namespace AppointmentBuddy.Service.Specialist.API.Controllers
             return response;
         }
 
+        [Route("byservice/{serviceId}")]
+        [HttpGet]
+        public async Task<IEnumerable<M.Room>> GetRoomByServiceId(string serviceId)
+        {
+            IEnumerable<M.Room> response;
+
+            response = await _roomService.GetRoomByServiceId(serviceId);
+
+            return response;
+        }
+
         [Route("all")]
         [HttpGet]
         public async Task<M.PaginatedResults<M.Room>> GetAllRooms([FromQuery] string desc = "", int pageIndex = 1, int pageSize = 10)

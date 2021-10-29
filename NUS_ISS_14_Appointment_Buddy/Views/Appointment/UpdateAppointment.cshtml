@@ -39,12 +39,63 @@
                                 Assigned Patient:
                             </div>
                             <div class="col-md-8">
-                                <div class="category-container">
-                                    <div class="_form-group _validity">
-                                        @Html.DropDownListFor(model => model.UserId, (IEnumerable<SelectListItem>)ViewBag.Patients, "Please Select Patient",
-                                        new { @class = "_category wide", id = "patientDrop" })
-                                    </div>
+                                <div class="_form-group">
+                                    @Html.DropDownListFor(model => model.UserId, (IEnumerable<SelectListItem>)ViewBag.Patients, "Please Select Patient",
+                                    new { @class = "_category wide", id = "patientDrop" })
                                 </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                Service:
+                            </div>
+                            <div class="col-md-8">
+                                <div class="_form-group">
+                                    @Html.DropDownListFor(model => model.ServiceId, (IEnumerable<SelectListItem>)ViewBag.Services, "Please Select Service",
+                                    new { @class = "_category wide", id = "svcDrop" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                Specialist:
+                            </div>
+                            <div class="col-md-8">
+                                @if (string.IsNullOrEmpty(Model.SpecialistId))
+                                {
+                                    <div class="_form-group">
+                                        @Html.DropDownListFor(model => model.SpecialistId, (IEnumerable<SelectListItem>)ViewBag.Specialists, "Please Select Specialist",
+                                        new { @class = "_category wide text-bg-readonly", id = "specDrop", @disabled = "disabled" })
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="_form-group">
+                                        @Html.DropDownListFor(model => model.SpecialistId, (IEnumerable<SelectListItem>)ViewBag.Specialists, "Please Select Specialist",
+                                        new { @class = "_category wide", id = "specDrop" })
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                Room:
+                            </div>
+                            <div class="col-md-8">
+                                @if (string.IsNullOrEmpty(Model.RoomId))
+                                {
+                                    <div class="_form-group">
+                                        @Html.DropDownListFor(model => model.RoomId, (IEnumerable<SelectListItem>)ViewBag.Rooms, "Please Select Room",
+                                        new { @class = "_category wide text-bg-readonly", id = "roomDrop", @disabled = "disabled" })
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="_form-group">
+                                        @Html.DropDownListFor(model => model.RoomId, (IEnumerable<SelectListItem>)ViewBag.Rooms, "Please Select Room",
+                                        new { @class = "_category wide", id = "roomDrop" })
+                                    </div>
+                                }
                             </div>
                         </div>
                     </div>
@@ -94,6 +145,36 @@
             else {
                 $('#cfmMsg').text('Assigning Patient');
                 document.getElementById('confirmationBox').style.display = 'block';
+            }
+        });
+
+        $('#svcDrop').change(function () {
+
+            var list = $('#specDrop');
+            var rmList = $('#roomDrop');
+
+            if ($(this).val() != '') {
+                $.getJSON('@Url.Action("GetSpecialistByServiceId", "Appointment")', { serviceId: $(this).val() }, function (data) {
+                    list.find('option').remove();
+                    $(data).each(function (index, dataitem) { list.append('<option value="' + dataitem.value + '">' + dataitem.text + '</option>'); });
+                    list.val(''); list.prop('disabled', false); list.removeClass('text-bg-readonly');
+                    list.niceSelect('update');
+                });
+
+                $.getJSON('@Url.Action("GetRoomByServiceId", "Appointment")', { serviceId: $(this).val() }, function (data) {
+                    rmList.find('option').remove();
+                    $(data).each(function (index, dataitem) { rmList.append('<option value="' + dataitem.value + '">' + dataitem.text + '</option>'); });
+                    rmList.val(''); rmList.prop('disabled', false); rmList.removeClass('text-bg-readonly');
+                    rmList.niceSelect('update');
+                });
+            }
+
+            else {
+                list.find('option').remove(); list.append('<option value="">' + 'Please select service' + '</option>');
+                list.val(''); list.prop('disabled', true); list.addClass('text-bg-readonly'); list.niceSelect('update');
+
+                rmList.find('option').remove(); list.append('<option value="">' + 'Please select room' + '</option>');
+                rmList.val(''); rmList.prop('disabled', true); rmList.addClass('text-bg-readonly'); rmList.niceSelect('update');
             }
         });
 

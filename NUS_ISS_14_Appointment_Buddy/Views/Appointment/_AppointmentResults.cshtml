@@ -18,6 +18,9 @@
                         <th scope="col">Appointment Date</th>
                         <th scope="col">Appointment Start Time</th>
                         <th scope="col">Appointment End Time</th>
+                        <th scope="col">Service</th>
+                        <th scope="col">Specialist</th>
+                        <th scope="col">Room</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -49,6 +52,18 @@
                             <td>@appt.AppointmentDate.GetValueOrDefault().ToString("dd/MM/yyyy")</td>
                             <td>@appt.AppointmentTime</td>
                             <td>@endTime.ToString("%h"):@endTime.ToString("mm")</td>
+                            @if (!string.IsNullOrEmpty(appt.ServiceId))
+                            {
+                                <td>@appt.ServiceName</td>
+                                <td>@appt.SpecialistName</td>
+                                <td>@appt.RoomName</td>
+                            }
+                            else
+                            {
+                                <td>N.A.</td>
+                                <td>N.A.</td>
+                                <td>N.A.</td>
+                            }
                         </tr>
                         count++;
                     }

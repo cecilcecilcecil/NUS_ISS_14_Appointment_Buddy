@@ -69,6 +69,17 @@ namespace AppointmentBuddy.Service.Appointment.API.Controllers
             return response;
         }
 
+        [Route("daterange")]
+        [HttpGet]
+        public async Task<IEnumerable<M.Appointment>> GetAllAppointmentsByDateRange([FromQuery] string dateFrom = "", string dateTo = "")
+        {
+            IEnumerable<M.Appointment> response;
+
+            response = await _appointmentService.GetAllAppointmentsByDateRange(dateFrom, dateTo);
+
+            return response;
+        }
+
         [Route("available")]
         [HttpGet]
         public async Task<IEnumerable<M.Appointment>> GetAvailableAppointments()

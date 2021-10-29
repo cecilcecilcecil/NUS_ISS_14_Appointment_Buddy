@@ -52,6 +52,17 @@ namespace NUS_ISS_14_Appointment_Buddy.Services
             return !string.IsNullOrEmpty(responseString) ? JsonConvert.DeserializeObject<M.Specialist>(responseString) : null;
         }
 
+        public async Task<IEnumerable<M.Specialist>> GetSpecialistByServiceId(string serviceId, string token)
+        {
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+            var apiURL = UrlConfig.Specialist.SpecialistByServiceAPI(_serviceUrls.SpecialistAPI_GetSpecialistByServiceId, serviceId);
+
+            var responseString = await _httpClient.GetStringAsync(apiURL);
+
+            return !string.IsNullOrEmpty(responseString) ? JsonConvert.DeserializeObject<IEnumerable<M.Specialist>>(responseString) : null;
+        }
+
         public async Task<int> SaveSpecialist(M.Specialist spec, string token)
         {
             int status = Constants.ErrorCodes.Failure;

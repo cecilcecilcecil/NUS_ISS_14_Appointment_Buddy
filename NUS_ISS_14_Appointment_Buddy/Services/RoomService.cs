@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 using NUS_ISS_14_Appointment_Buddy.Helper;
 using NUS_ISS_14_Appointment_Buddy.Interface;
 using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
@@ -47,6 +48,18 @@ namespace NUS_ISS_14_Appointment_Buddy.Services
 
             return !string.IsNullOrEmpty(responseString) ? JsonConvert.DeserializeObject<M.Room>(responseString) : null;
    
+        }
+
+        public async Task<IEnumerable<M.Room>> GetRoomByServiceId(string serviceId, string token)
+        {
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+            var apiURL = UrlConfig.Room.RoomByServiceAPI(_serviceUrls.RoomAPI_GetRoomByServiceId, serviceId);
+
+            var responseString = await _httpClient.GetStringAsync(apiURL);
+
+            return !string.IsNullOrEmpty(responseString) ? JsonConvert.DeserializeObject<IEnumerable<M.Room>>(responseString) : null;
+
         }
 
         public async Task<M.PaginatedResults<M.Room>> GetAllRooms(string token, string desc, int pageIndex, int pageSize)

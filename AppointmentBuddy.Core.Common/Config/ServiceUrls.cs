@@ -15,6 +15,7 @@ namespace AppointmentBuddy.Core.Common.Config
         public string AppointmentAPI_SaveAppointment { get; set; }
         public string AppointmentAPI_GetFilteredAppointmentsByPatientIds { get; set; }
         public string AppointmentAPI_GetAvailableAppointments { get; set; }
+        public string AppointmentAPI_GetAllAppointmentsByDateRange { get; set; }
 
         public string PatientInfoAPI { get; set; }
         public string PatientInfoAPIVersion { get; set; }
@@ -35,6 +36,7 @@ namespace AppointmentBuddy.Core.Common.Config
         public string RoomAPI { get; set; }
         public string RoomAPIVersion { get; set; }
         public string RoomAPI_GetRoomByRoomId { get; set; }
+        public string RoomAPI_GetRoomByServiceId { get; set; }
         public string RoomAPI_GetAllRooms { get; set; }
         public string RoomAPI_SaveRoom { get; set; }
 
@@ -48,6 +50,7 @@ namespace AppointmentBuddy.Core.Common.Config
         public string SpecialistAPI { get; set; }
         public string SpecialistAPIVersion { get; set; }
         public string SpecialistAPI_GetSpecialistById { get; set; }
+        public string SpecialistAPI_GetSpecialistByServiceId { get; set; }
         public string SpecialistAPI_GetSpecialistBySearch { get; set; }
         public string SpecialistAPI_DeleteSpecialistById { get; set; }
         public string SpecialistAPI_SaveSpecialist { get; set; }

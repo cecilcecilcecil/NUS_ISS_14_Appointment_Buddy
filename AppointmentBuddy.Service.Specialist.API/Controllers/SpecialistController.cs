@@ -47,6 +47,17 @@ namespace AppointmentBuddy.Service.Specialist.API.Controllers
             return response;
         }
 
+        [Route("byservice/{serviceId}")]
+        [HttpGet]
+        public async Task<IEnumerable<M.Specialist>> GetSpecialistByServiceId(string serviceId)
+        {
+            IEnumerable<M.Specialist> response;
+
+            response = await _specialistService.GetSpecialistByServiceId(serviceId);
+
+            return response;
+        }
+
         [Route("search")]
         [HttpGet]
         public async Task<M.PaginatedResults<M.Specialist>> GetSpecialistBySearch([FromQuery] string nric = "", string specName = "", int pageIndex = 1, int pageSize = 10)

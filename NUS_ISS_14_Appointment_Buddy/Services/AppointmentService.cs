@@ -84,6 +84,17 @@ namespace NUS_ISS_14_Appointment_Buddy.Services
             return !string.IsNullOrEmpty(responseString) ? JsonConvert.DeserializeObject<IEnumerable<M.Appointment>>(responseString) : null;
         }
 
+        public async Task<IEnumerable<M.Appointment>> GetAllAppointmentsByDateRange(string token, string dateFrom, string dateTo)
+        {
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+            var apiURL = UrlConfig.Appointment.GetAllAppointmentsByDateRangeAPI(_serviceUrls.AppointmentAPI_GetAllAppointmentsByDateRange, dateFrom.Replace("/", ""), dateTo.Replace("/", ""));
+
+            var responseString = await _httpClient.GetStringAsync(apiURL);
+
+            return !string.IsNullOrEmpty(responseString) ? JsonConvert.DeserializeObject<IEnumerable<M.Appointment>>(responseString) : null;
+        }
+
         public async Task<M.PaginatedResults<M.Appointment>> GetAllAppointments(string token, string dateFrom, string dateTo, int pageIndex, int pageSize)
         {
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);

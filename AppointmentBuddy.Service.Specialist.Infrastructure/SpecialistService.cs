@@ -32,6 +32,15 @@ namespace AppointmentBuddy.Service.Specialist.API.Infrastructure
             return response;
         }
 
+        public async Task<IEnumerable<M.Specialist>> GetSpecialistByServiceId(string serviceId)
+        {
+            IEnumerable<M.Specialist> response;
+
+            response = await _repository.GetSpecialistByServiceId(serviceId);
+
+            return response;
+        }
+
         public async Task<M.PaginatedResults<M.Specialist>> GetSpecialistBySearch(string nric, string specName, int page, int pageSize)
         {
             M.PaginatedResults<M.Specialist> response;

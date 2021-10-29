@@ -91,7 +91,6 @@ namespace AppointmentBuddy.Service.Appointment.API.Infrastructure
             return response;
         }
 
-
         public async Task<IEnumerable<M.Appointment>> GetAvailableAppointments()
         {
             var response = await _repository.GetAvailableAppointments();
@@ -101,6 +100,26 @@ namespace AppointmentBuddy.Service.Appointment.API.Infrastructure
                 || x.AppointmentDate.GetValueOrDefault().Date >= DateTime.Now.Date);
 
             return response;
+        }
+
+        public async Task<IEnumerable<M.Appointment>> GetAllAppointmentsByDateRange(string dateFrom, string dateTo)
+        {
+            var data = await _repository.GetAllAppointments();
+
+            DateTime dtFrom;
+            if (!String.IsNullOrEmpty(dateFrom) && DateTime.TryParseExact(dateFrom, "ddMMyyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out dtFrom))
+            {
+                data = data.Where(t => t.AppointmentDate > dtFrom);
+            }
+
+            DateTime dtTo;
+            if (!String.IsNullOrEmpty(dateTo) && DateTime.TryParseExact(dateTo, "ddMMyyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out dtTo))
+            {
+                dtTo = dtTo.AddDays(1);
+                data = data.Where(t => t.AppointmentDate < dtTo);
+            }
+
+            return data;
         }
 
         public async Task<int> SaveAppointment(M.Appointment appt)

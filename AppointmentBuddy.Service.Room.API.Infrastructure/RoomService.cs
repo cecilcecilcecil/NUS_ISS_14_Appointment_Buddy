@@ -31,6 +31,16 @@ namespace AppointmentBuddy.Service.Room.API.Infrastructure
 
             return response;
         }
+
+        public async Task<IEnumerable<M.Room>> GetRoomByServiceId(string serviceId)
+        {
+            IEnumerable<M.Room> response;
+
+            response = await _repository.GetRoomByServiceId(serviceId);
+
+            return response;
+        }
+
         public async Task<M.PaginatedResults<M.Room>> GetAllRooms(string desc, int page, int pageSize)
         {
             M.PaginatedResults<M.Room> response = null;

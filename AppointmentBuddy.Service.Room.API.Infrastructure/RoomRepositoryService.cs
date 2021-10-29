@@ -30,6 +30,14 @@ namespace AppointmentBuddy.Service.Room.API.Infrastructure
             return dataItem;
         }
 
+        public async Task<IEnumerable<M.Room>> GetRoomByServiceId(string serviceId)
+        {
+            IEnumerable<M.Room> dataItem;
+
+            dataItem = await _context.Room.AsNoTracking().Where(s => s.SpecialiesId == serviceId).ToListAsync();
+            return dataItem;
+        }
+
         public async Task<IEnumerable<M.Room>> GetAllRooms(string desc)
         {
             if (string.IsNullOrEmpty(desc))

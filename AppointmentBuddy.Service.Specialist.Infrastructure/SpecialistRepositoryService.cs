@@ -28,6 +28,13 @@ namespace AppointmentBuddy.Service.Specialist.API.Infrastructure
             return dataItem;
         }
 
+        public async Task<IEnumerable<M.Specialist>> GetSpecialistByServiceId(string serviceId)
+        {
+            IEnumerable<M.Specialist> dataItem;
+            dataItem = await _context.Specialist.AsNoTracking().Where(s => s.ServicesId == serviceId).ToListAsync();
+            return dataItem;
+        }
+
         public async Task<IEnumerable<M.Specialist>> GetSpecialistBySearch(string nric, string specName)
         {
             if (string.IsNullOrEmpty(nric))
