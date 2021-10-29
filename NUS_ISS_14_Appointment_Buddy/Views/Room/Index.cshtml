@@ -1,1 +1,79 @@
-﻿
+﻿@using NUS_ISS_14_Appointment_Buddy.Helper
+@using AppointmentBuddy.Core.Common.Helper
+@using M = AppointmentBuddy.Core.Model
+@using System.Security.Claims
+
+@model NUS_ISS_14_Appointment_Buddy.Models.ResultViewModel<M.Room>
+
+@{
+    ViewData["Title"] = "Manage Rooms";
+}
+
+<div class="_page-essentials">
+    @Html.AntiForgeryToken()
+    <div class="_my-tender-body">
+        <div class="_content">
+            <div class="_search-and-filter-content">
+                <div class="row ken-flex">
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                        <h3>Description:</h3>
+                        <div class="input-group mb-5">
+                            <input value="@ViewData["Description"]" class="form-control" id="Desc" />
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                    </div>
+                    <div class="col-lg-4 col-md-12 col-sm-12">
+                    </div>
+                </div>
+                <br />
+                <div class="row ken-flex">
+                    @if (IdentityHelper.HasRole((ClaimsIdentity)User.Identity, Constants.RoleType.Admin))
+                    {
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <button class="red-btn" id="createButton">Add New Room</button>
+                        </div>
+                    }
+                    <div class="col-lg-4 col-md-12 col-sm-12">
+                        <button class="white-btn" id="resetButton">Reset</button>
+                        <button class="red-btn" id="applyButton">Apply</button>
+                    </div>
+                </div>
+            </div>
+            <div class="_project-content" id="rooms">
+                @await Html.PartialAsync("_RoomResults", Model)
+            </div>
+        </div>
+    </div>
+</div>
+
+<script nonce="@ViewData["Nonce"]">
+    $(function () {
+        $("#applyButton").click(function (e) {
+            e.preventDefault();
+
+            $.post('@Url.Action("Search")', { desc: $('#Desc').val(), '__RequestVerificationToken': $('input[name="__RequestVerificationToken"]').val() }, function (data) {
+                window.location = data.redirectUrl;
+            });
+
+        });
+
+        $("#resetButton").click(function (e) {
+            e.preventDefault();
+            $('#Description').val('');
+        });
+
+        $("#createButton").click(function (e) {
+            e.preventDefault();
+
+            $.ajax({
+                type: 'GET',
+                dataType: 'json',
+                url: '@Url.Action("LinkToAddRoom", "Room")',
+                success: function (result) {
+                    window.location.href = result.redirectUrl;
+                }
+            })
+        });
+    });
+</script>

@@ -39,10 +39,10 @@ namespace AppointmentBuddy.Service.PatientInfo.API.Infrastructure
         {
             if (string.IsNullOrEmpty(nric))
             {
-                return await _context.PatientInfo.Where(x => x.PatientName.Contains(patName) && !x.IsDeleted).ToListAsync();
+                return await _context.PatientInfo.Where(x => x.PatientName.Contains(patName) && !x.IsDeleted).OrderBy(x => x.PatientName).ToListAsync();
             }
 
-            return await _context.PatientInfo.Where(x => x.NRIC == nric && x.PatientName.Contains(patName) && !x.IsDeleted).ToListAsync();
+            return await _context.PatientInfo.Where(x => x.NRIC == nric && x.PatientName.Contains(patName) && !x.IsDeleted).OrderBy(x => x.PatientName).ToListAsync();
         }
 
 

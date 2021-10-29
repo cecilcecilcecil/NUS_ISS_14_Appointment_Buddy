@@ -49,7 +49,7 @@ namespace NUS_ISS_14_Appointment_Buddy.Services
    
         }
 
-        public async Task<M.PaginatedResults<M.Room>> GetAllRooms(string token, string specialtiesId, int pageIndex, int pageSize)
+        public async Task<M.PaginatedResults<M.Room>> GetAllRooms(string token, string desc, int pageIndex, int pageSize)
         {
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
@@ -57,9 +57,9 @@ namespace NUS_ISS_14_Appointment_Buddy.Services
 
             var apiURL = UrlConfig.Room.AllRoomAPI(_serviceUrls.RoomAPI_GetAllRooms, parameter);
 
-            if (!String.IsNullOrEmpty(specialtiesId))
+            if (!String.IsNullOrEmpty(desc))
             {
-                apiURL = apiURL + "&specialtiesId=" + specialtiesId;
+                apiURL = apiURL + "&desc=" + desc;
             }
 
             var responseString = await _httpClient.GetStringAsync(apiURL);

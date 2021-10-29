@@ -32,10 +32,10 @@ namespace AppointmentBuddy.Service.Specialist.API.Infrastructure
         {
             if (string.IsNullOrEmpty(nric))
             {
-                return await _context.Specialist.Where(x => x.Name.Contains(specName) && !x.IsDeleted).ToListAsync();
+                return await _context.Specialist.Where(x => x.Name.Contains(specName) && !x.IsDeleted).OrderBy(x => x.Name).ToListAsync();
             }
 
-            return await _context.Specialist.Where(x => x.Nric == nric && x.Name.Contains(specName) && !x.IsDeleted).ToListAsync();
+            return await _context.Specialist.Where(x => x.Nric == nric && x.Name.Contains(specName) && !x.IsDeleted).OrderBy(x => x.Name).ToListAsync();
         }
 
 

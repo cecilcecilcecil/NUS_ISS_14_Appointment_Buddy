@@ -36,5 +36,8 @@ namespace AppointmentBuddy.Core.Model
         [Column(TypeName = "varchar(255)")]
         public string LastUpdatedBy { get; set; }
         public DateTime? LastUpdatedDate { get; set; }
+
+        [NotMapped]
+        public string ServicesName { get; set; }
     }
 }

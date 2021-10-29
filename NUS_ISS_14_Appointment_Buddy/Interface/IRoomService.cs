@@ -10,7 +10,7 @@ namespace NUS_ISS_14_Appointment_Buddy.Interface
     public interface IRoomService
     {
         Task<M.Room> GetRoomByRoomId(string roomId, string token);
-        Task<M.PaginatedResults<M.Room>> GetAllRooms(string token, string specialtiesId, int page, int pageSize);
+        Task<M.PaginatedResults<M.Room>> GetAllRooms(string token, string desc, int page, int pageSize);
 
 
         Task<int> SaveRoom(M.Room room, string token);

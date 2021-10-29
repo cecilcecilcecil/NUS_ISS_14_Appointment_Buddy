@@ -40,7 +40,14 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
             var pageSize = _appSettings.Value.PageSize;
             var page = 1;
 
+            var allSvcs = await _servicesService.GetAllNonPageServices(AccessToken);
+
             M.PaginatedResults<M.Specialist> patItems = await _specialistService.GetSpecialistBySearch(AccessToken, nric, specName, page, pageSize);
+
+            foreach (var pat in patItems.Data)
+            {
+                pat.ServicesName = allSvcs.FirstOrDefault(x => x.ServicesId == pat.ServicesId).Description;
+            }
 
             var patRvm = new ResultViewModel<M.Specialist>(patItems.Data, patItems.PageIndex, patItems.PageSize, patItems.Count);
 

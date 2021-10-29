@@ -26,13 +26,13 @@ namespace AppointmentBuddy.Service.Room.API.Infrastructure
         {
             M.Room dataItem;
 
-            dataItem = await _context.Room.FirstOrDefaultAsync(s => s.RoomId == roomId);
+            dataItem = await _context.Room.AsNoTracking().FirstOrDefaultAsync(s => s.RoomId == roomId);
             return dataItem;
         }
 
-        public async Task<IEnumerable<M.Room>> GetAllRooms(string specialiesId)
+        public async Task<IEnumerable<M.Room>> GetAllRooms(string desc)
         {
-            if (specialiesId == null)
+            if (string.IsNullOrEmpty(desc))
             {
                 return await _context.Room.AsNoTracking()
                 .Where(x => !x.IsDeleted)
@@ -40,7 +40,7 @@ namespace AppointmentBuddy.Service.Room.API.Infrastructure
                 .ToListAsync();
             }
             return await _context.Room.AsNoTracking()
-                .Where(x => !x.IsDeleted && x.SpecialiesId == specialiesId)
+                .Where(x => !x.IsDeleted && x.RoomName.Contains(desc))
                 .OrderBy(x => x.RoomName)
                 .ToListAsync();
         }

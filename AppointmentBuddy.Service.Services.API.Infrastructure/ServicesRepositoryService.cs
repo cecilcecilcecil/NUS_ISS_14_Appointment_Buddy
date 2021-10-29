@@ -31,7 +31,7 @@ namespace AppointmentBuddy.Service.Services.API.Infrastructure
         {
             return await _context.Services.AsNoTracking()
                 .Where(x => !x.IsDeleted)
-                .OrderBy(x => x.CreatedDate)
+                .OrderBy(x => x.Description)
                 .ToListAsync();
         }
 

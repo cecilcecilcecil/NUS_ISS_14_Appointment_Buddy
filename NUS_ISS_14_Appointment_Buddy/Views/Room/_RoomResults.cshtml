@@ -1,5 +1,7 @@
 ﻿@using M = AppointmentBuddy.Core.Model
-@model NUS_ISS_14_Appointment_Buddy.Models.ResultViewModel<M.Specialist>
+@using AppointmentBuddy.Core.Common.Helper
+
+@model NUS_ISS_14_Appointment_Buddy.Models.ResultViewModel<M.Room>
 
 <div class="editQuan _goods">
     <div class="display">
@@ -9,25 +11,17 @@
                     <tr>
                         <th scope="col">S/N</th>
                         <th scope="col">Service</th>
-                        <th scope="col">NRIC</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Contact Number</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Availability</th>
+                        <th scope="col">Description</th>
                     </tr>
                 </thead>
                 <tbody>
                     @{int count = 1 + (10 * (Model.PaginationInfo.PageNumber - 1));}
-                    @foreach (var specInfo in Model.ListItems)
+                    @foreach (var rm in Model.ListItems)
                     {
                         <tr>
                             <td>@count</td>
-                            <td>@specInfo.ServicesName</td>
-                            <td>@specInfo.Nric</td>
-                            <td><a href="@Url.Action("SpecialistDetail", "Specialist", new { specId = specInfo.SpecialistId })">@specInfo.Name</a></td>
-                            <td>@specInfo.ContactNo</td>
-                            <td>@specInfo.EmailLocalPart@@@specInfo.EmailDomain</td>
-                            <td>@(specInfo.Availability ? "Yes" : "No")</td>
+                            <td>@rm.ServicesName</td>
+                            <td><a href="@Url.Action("AddRoom", "Room", new { rmId = rm.RoomId })">@rm.RoomName</a></td>
                         </tr>
                         count++;
                     }
@@ -45,13 +39,12 @@
             <li class="page-item @(i == Model.PaginationInfo.PageNumber ? "active" : "")">
                 @if (i != Model.PaginationInfo.PageNumber)
                 {
-                    <a asp-controller="Specialist"
-                       asp-action="GetSpecialistPage"
+                    <a asp-controller="Room"
+                       asp-action="GetRoomPage"
+                       asp-route-desc="@ViewData["Description"]"
                        asp-route-page="@i"
-                       asp-route-nric="@ViewData["NRIC"]"
-                       asp-route-specName="@ViewData["SpecialistName"]"
-                       asp-route-partialV="_SpecialistResults"
-                       data-target="specs"
+                       asp-route-partialV="_RoomResults"
+                       data-target="rooms"
                        class="paginationButton">
                         @i
                     </a>
