@@ -17,25 +17,35 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
     public class RoomController : BaseController
     {
         private IRoomService _roomService;
+        private IServicesService _servicesService;
         private readonly IOptions<AppSettings> _appSettings;
         private readonly ILogger<RoomController> _logger;
 
-        public RoomController(IRoomService roomService, IOptions<AppSettings> appSettings,
+        public RoomController(IRoomService roomService, IServicesService servicesService, IOptions<AppSettings> appSettings,
             ILogger<RoomController> logger) : base(logger)
         {
             _roomService = roomService;
+            _servicesService = servicesService;
             _appSettings = appSettings;
             _logger = logger;
         }
 
         [HttpGet]
-        public async Task<IActionResult> Index(string specialiesId)
+        public async Task<IActionResult> Index(string desc)
         {
+            ViewData["Description"] = desc;
+
+            var allSvcs = await _servicesService.GetAllNonPageServices(AccessToken);
 
             var pageSize = _appSettings.Value.PageSize;
             var page = 1;
 
-            M.PaginatedResults<M.Room> roomItems = await _roomService.GetAllRooms(AccessToken, specialiesId, page, pageSize);
+            M.PaginatedResults<M.Room> roomItems = await _roomService.GetAllRooms(AccessToken, desc, page, pageSize);
+
+            foreach (var rm in roomItems.Data)
+            {
+                rm.ServicesName = allSvcs.FirstOrDefault(x => x.ServicesId == rm.SpecialiesId).Description;
+            }
 
             var roomRvm = new ResultViewModel<M.Room>(roomItems.Data, roomItems.PageIndex, roomItems.PageSize, roomItems.Count);
 
@@ -44,11 +54,11 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Search(string specialiesId)
+        public IActionResult Search(string desc)
         {
             return Json(new
             {
-                redirectUrl = Url.Action("Index", new { specialiesId = specialiesId})
+                redirectUrl = Url.Action("Index", new { desc = desc })
             }); 
         }
 
@@ -59,17 +69,18 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> AddRoom(string roomId = "")
+        public async Task<IActionResult> AddRoom(string rmId = "")
         {
             Room model;
 
-            if (!string.IsNullOrEmpty(roomId))
+            if (!string.IsNullOrEmpty(rmId))
             {
-                var room = await _roomService.GetRoomByRoomId(roomId, AccessToken);
+                var room = await _roomService.GetRoomByRoomId(rmId, AccessToken);
 
                 model = new Room
                 {
                     RoomId = room.RoomId,
+                    RoomName = room.RoomName,
                     SpecialiesId = room.SpecialiesId
                 };
             }
@@ -81,30 +92,9 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
                 };
             }
 
+            ViewBag.Services = await GetServices();
+
             return View("AddRoom", model);
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> UpdateRoom(string roomId = "")
-        {
-            Room model;
-
-            if (string.IsNullOrEmpty(roomId))
-            {
-                return RedirectToAction("NoAuthorization", "Home");
-            }
-            else
-            {
-                var room = await _roomService.GetRoomByRoomId(roomId, AccessToken);
-
-                model = new Room
-                {
-                    RoomId = room.RoomId,
-                    SpecialiesId = room.SpecialiesId
-                };
-            }
-
-            return View("UpdateRoom", model);
         }
 
         [HttpGet]
@@ -132,6 +122,8 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
 
             M.Room coreRoom = new M.Room
             {
+                RoomId = room.RoomId,
+                RoomName = room.RoomName,
                 SpecialiesId = room.SpecialiesId,
                 LastUpdatedBy = UserName,
                 LastUpdatedById = UserId
@@ -160,5 +152,24 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
             return Json(new { msgVal = msgVal, successVal = successValue });
         }
 
+        public async Task<List<SelectListItem>> GetServices()
+        {
+            var returnList = new List<SelectListItem>();
+
+            var services = await _servicesService.GetAllNonPageServices(AccessToken);
+
+            foreach (var svc in services)
+            {
+                returnList.Add(
+                    new SelectListItem
+                    {
+                        Text = svc.Description,
+                        Value = svc.ServicesId
+                    }
+                );
+            }
+
+            return returnList;
+        }
     }
 }

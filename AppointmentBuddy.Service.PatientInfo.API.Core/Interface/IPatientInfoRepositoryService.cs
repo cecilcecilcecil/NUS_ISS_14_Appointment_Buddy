@@ -9,6 +9,7 @@ namespace AppointmentBuddy.Service.PatientInfo.API.Core.Interface
     public interface IPatientInfoRepositoryService
     {
         Task<M.PatientInfo> GetPatientInfoById(string patId);
+        Task<M.PatientInfo> GetPatientInfoByUserId(string userId);
         Task<IEnumerable<M.PatientInfo>> GetPatientInfoBySearch(string nric, string patName);
         Task<int> SavePatientInfo(M.PatientInfo patInfo);
         Task<int> UpdatePatientInfo(M.PatientInfo patInfo);

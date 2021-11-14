@@ -25,7 +25,7 @@ namespace AppointmentBuddy.Core.Model
         {
             get; set;
         }
-        public bool isAvailable
+        public bool IsAvailable
         {
             get; set;
         }
@@ -63,5 +63,8 @@ namespace AppointmentBuddy.Core.Model
         {
             get; set;
         }
+
+        [NotMapped]
+        public string ServicesName { get; set; }
     }
 }

@@ -88,6 +88,9 @@ namespace AppointmentBuddy.Core.Common.Helper
             public const string PhoneFormatMessage = "Please enter a valid Singapore number.";
             public const string Concurrency = "The record may be modified elsewhere, please refresh and try again.";
             public const string SystemUnavailable = "System unavailable, please refresh or try again later.";
+
+            public const string EmailFormatMessage = "Please enter a valid email address.";
+            public const string EmailDomainFormatMessage = "Please enter a valid email domain.";
         }
     }
 }

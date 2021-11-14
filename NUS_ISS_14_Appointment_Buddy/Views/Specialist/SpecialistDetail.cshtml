@@ -1,0 +1,221 @@
+﻿@using NUS_ISS_14_Appointment_Buddy.Helper
+@using AppointmentBuddy.Core.Common.Helper
+@using M = AppointmentBuddy.Core.Model
+@using System.Security.Claims
+@model NUS_ISS_14_Appointment_Buddy.Models.Specialist
+
+@{
+    string exitUrl = Url.Action("Index", "Specialist");
+
+    string curId = User.Claims.FirstOrDefault(c => c.Type == Constants.AppClaimTypes.Id).Value;
+    ViewData["Title"] = "Add / Update Specialist Infomation";
+}
+
+@using (Html.BeginForm("SaveSpecialist", "Specialist", FormMethod.Post, new { @id = "SpecialistForm" }))
+{
+    <div class="_page-essentials">
+        @Html.AntiForgeryToken()
+        <div class="well">
+            <div class="_content">
+                <h2>Add / Update Specialist Information</h2>
+            </div>
+        </div>
+        <div class="_step-body">
+            <div class="_content">
+                <div class="_project-content">
+                    <div class="editQuan _goods">
+                        <div class="display">
+                            <div class="based-table view-goods _edit">
+                                <table class="table" id="apptTable" style="overflow: auto !important; overflow-x: auto !important;">
+                                    <tbody>
+                                        <tr>
+                                            <td scope="col">Service:</td>
+                                            <td>
+                                                @Html.DropDownListFor(x => x.ServicesId, (IEnumerable<SelectListItem>)ViewBag.Services, "Please select a service", new { @class = "_category wide", id = "svcDrop" })
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td scope="col">Name<span class="field-validation-error">*</span> :</td>
+                                            <td>
+                                                @Html.TextBoxFor(x => x.Name, new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(x => x.Name)
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td scope="col">NRIC<span class="field-validation-error">*</span> :</td>
+                                            <td>
+                                                @Html.TextBoxFor(x => x.NRIC, new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(x => x.NRIC)
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td scope="col">Contact Number:</td>
+                                            <td>
+                                                @Html.TextBoxFor(x => x.ContactNo, new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(x => x.ContactNo)
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td scope="col">Email:</td>
+                                            <td>
+                                                @Html.TextBoxFor(x => x.EmailLocalPart, new { @class = "form-control" }) @@ @Html.TextBoxFor(x => x.EmailDomain, new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(x => x.EmailLocalPart)
+                                                @Html.ValidationMessageFor(x => x.EmailDomain)
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td scope="col">Availability</td>
+                                            <td>
+                                                <div class="custom-control-lg custom-control custom-checkbox" style="position:relative; left:-20px; top: -20px;">
+                                                    <input class="custom-control-input content checkboxForDelete" type="checkbox" id="AvailId" checked="@Model.Availability">
+                                                    <label class="custom-control-label custom-tnc-check" for="AvailId"></label>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        @Html.HiddenFor(x => x.SpecialistId)
+                                        @Html.HiddenFor(x => x.Availability)
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="_project-content">
+                    <div class="bids-width _contact-details">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="autosave-container">
+                                    <div class="autosave-wrapper">
+                                        <h4 class="autosave-msg"></h4>
+                                        <div class="_nxt-prv">
+                                            <button class="_transparent cancelBtn" id="cancelBtn">cancel</button>
+                                            @if (!string.IsNullOrEmpty(Model.NRIC))
+                                            {
+                                                <button class="_transparent" id="deleteBtn">delete</button>
+                                            }
+                                            <button class="red-btn" id="saveBtn">save</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <partial name="_ErrorModal" />
+                <partial name="_ConfirmModal" />
+                <partial name="_DeleteModal" />
+                <partial name="_SubmitModal" />
+                <partial name="_SavingModal" />
+            </div>
+        </div>
+    </div>
+}
+
+<script type="text/javascript" nonce="@ViewData["Nonce"]">
+    $(document).ready(function () {
+        $('#ContactNo').keypress(function (e) { return isPhoneNumber(e); });
+
+        $('#SpecialistForm').submit(function (e) { e.preventDefault(); });
+
+        $('#saveBtn').click(function () {
+            this.blur();
+
+            $('#cfmMsg').text('Saving Specialist');
+            document.getElementById('confirmationBox').style.display = 'block';
+        });
+
+        $('#deleteBtn').click(function () {
+            this.blur();
+
+            $('#cfmDeleteMsg').text('Deleting Specialist');
+            document.getElementById('deletionBox').style.display = 'block';
+        });
+
+        $('#confirmBox').click(function () {
+            document.getElementById('confirmationBox').style.display = 'none';
+            SaveSpecialist();
+        });
+
+        $('#AvailId').click(function () {
+            if (this.checked) {
+                $('#Availability').val('True');
+            }
+            else {
+                $('#Availability').val('False');
+            }
+        });
+
+        $('#confirmDeleteBox').click(function () {
+            document.getElementById('deletionBox').style.display = 'none';
+            var savingModal = document.getElementById("savingInProgress");
+            savingModal.style.display = "block";
+
+            $.ajax({
+                type: 'POST',
+                data: { '__RequestVerificationToken': $('input[name="__RequestVerificationToken"]').val() },
+                url: '@Url.Action("DeleteSpecialistById", "Specialist")?specId=@Model.SpecialistId',
+                success: function (result) {
+                    savingModal.style.display = "none";
+
+                    if (result.successVal == '@Constants.ErrorCodes.Success') {
+                        document.getElementById('submitSuccessBox').style.display = 'block';
+                    }
+                    else {
+                        $(window).scrollTop(0);
+                        document.getElementById("errorMsgValue").innerHTML = result.autosaveDate;
+                        document.getElementById("errorMsgBox").style.display = "block";
+                    }
+                },
+                error: function () {
+                    savingModal.style.display = "none";
+                    document.getElementById("errorMsgBox").style.display = "block";
+                }
+            });
+        });
+
+        $('#closeBox').click(function () {
+            document.getElementById('submitSuccessBox').style.display = "none";
+
+            window.location.href = '@exitUrl';
+        });
+
+        $('.cancelBtn').click(function () {
+            window.location.href = '@exitUrl';
+        });
+
+        $('#closeErrorBox').click(function () { document.getElementById('errorMsgBox').style.display = 'none'; });
+        $('#cancelBox').click(function () { document.getElementById('confirmationBox').style.display = 'none'; });
+        $('#cancelDeleteBox').click(function () { document.getElementById('deletionBox').style.display = 'none'; });
+
+    });
+
+    function SaveSpecialist() {
+        var formData = $('#SpecialistForm').serializeArray();
+
+        var savingModal = document.getElementById("savingInProgress");
+        savingModal.style.display = "block";
+
+        $.ajax({
+            type: 'POST',
+            data: formData,
+            dataType: 'json',
+            url: '@Url.Action("SaveSpecialist", "Specialist")',
+            success: function (result) {
+                savingModal.style.display = "none";
+
+                if (result.successVal == '@Constants.ErrorCodes.Success') {
+                    document.getElementById('submitSuccessBox').style.display = 'block';
+                }
+                else {
+                    $(window).scrollTop(0);
+                    document.getElementById("errorMsgValue").innerHTML = result.autosaveDate;
+                    document.getElementById("errorMsgBox").style.display = "block";
+                }
+            },
+            error: function () {
+                savingModal.style.display = "none";
+                document.getElementById("errorMsgBox").style.display = "block";
+            }
+        });
+    }
+</script>

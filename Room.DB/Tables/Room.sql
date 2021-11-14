@@ -4,7 +4,7 @@
     [RoomName]              VARCHAR (50)        NULL, 
     [SpecialiesId]          VARCHAR (50)        NULL, 
     [ServicesId]            VARCHAR (50)        NULL, 
-    [isAvailable]           BIT                 NULL,
+    [IsAvailable]           BIT                 NULL,
     [IsDeleted]			    BIT                 NULL, 
     [VersionNo]			    INT                 NULL        DEFAULT 1, 
     [CreatedById]		    VARCHAR(50)         NULL, 

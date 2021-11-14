@@ -14,6 +14,7 @@
                         <th scope="col">Gender</th>
                         <th scope="col">Birth Date</th>
                         <th scope="col">Contact Number</th>
+                        <th scope="col">Death Date</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -28,6 +29,14 @@
                             <td>@patInfo.Gender</td>
                             <td>@patInfo.BirthDate.ToString("dd/MM/yyyy")</td>
                             <td>@patInfo.ContactNumber</td>
+                            @if (patInfo.DeathDate != null)
+                            {
+                                <td>@patInfo.DeathDate.GetValueOrDefault().ToString("dd/MM/yyyy")</td>
+                            }
+                            else
+                            {
+                                <td>N.A.</td>
+                            }
                         </tr>
                         count++;
                     }

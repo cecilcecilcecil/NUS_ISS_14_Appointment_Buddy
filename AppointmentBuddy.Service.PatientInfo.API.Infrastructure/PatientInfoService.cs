@@ -32,6 +32,15 @@ namespace AppointmentBuddy.Service.PatientInfo.API.Infrastructure
             return response;
         }
 
+        public async Task<M.PatientInfo> GetPatientInfoByUserId(string userId)
+        {
+            M.PatientInfo response;
+
+            response = await _repository.GetPatientInfoByUserId(userId);
+
+            return response;
+        }
+
         public async Task<M.PaginatedResults<M.PatientInfo>> GetPatientInfoBySearch(string nric, string patName, int page, int pageSize)
         {
             M.PaginatedResults<M.PatientInfo> response;

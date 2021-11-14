@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AppointmentBuddy.Core.Common\AppointmentBuddy.Core.Common.csproj" />
+    <ProjectReference Include="..\AppointmentBuddy.Core.Model.HSPSpecialist\AppointmentBuddy.Core.Model.HSPSpecialist.csproj" />
     <ProjectReference Include="..\AppointmentBuddy.Infrastructure.Repository\AppointmentBuddy.Infrastructure.Repository.csproj" />
     <ProjectReference Include="..\AppointmentBuddy.Service.Specialist.API.Core\AppointmentBuddy.Service.Specialist.API.Core.csproj" />
   </ItemGroup>

@@ -31,24 +31,25 @@ namespace AppointmentBuddy.Service.Room.API.Infrastructure
 
             return response;
         }
-        public async Task<M.PaginatedResults<M.Room>> GetAllRooms(string specialiesId, int page, int pageSize)
+
+        public async Task<IEnumerable<M.Room>> GetRoomByServiceId(string serviceId)
+        {
+            IEnumerable<M.Room> response;
+
+            response = await _repository.GetRoomByServiceId(serviceId);
+
+            return response;
+        }
+
+        public async Task<M.PaginatedResults<M.Room>> GetAllRooms(string desc, int page, int pageSize)
         {
             M.PaginatedResults<M.Room> response = null;
 
-            //var data = await _repository.GetAllRooms(specialiesId);
+            var data = await _repository.GetAllRooms(desc);
 
-            //if (specialiesId == null)
-            //{
+            data = data.Skip((page - 1) * pageSize).Take(pageSize).ToList();
 
-            //}
-            //else
-            //{
-            //    data = data.Where(t => t.SpecialiesId == specialiesId);
-            //}
-
-            //data = data.Skip((page - 1) * pageSize).Take(pageSize).ToList();
-
-            //response = new M.PaginatedResults<M.Room>(page, pageSize, data.Count(), data);
+            response = new M.PaginatedResults<M.Room>(page, pageSize, data.Count(), data);
 
             return response;
         }
@@ -74,7 +75,7 @@ namespace AppointmentBuddy.Service.Room.API.Infrastructure
                 room.LastUpdatedDate = DateTime.Now;
                 room.VersionNo = dbRoom.VersionNo++;
 
-                success = await _repository.SaveRoom(room);
+                success = await _repository.UpdateRoom(room);
             }
 
             return success;

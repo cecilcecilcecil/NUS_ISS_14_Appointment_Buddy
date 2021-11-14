@@ -17,14 +17,24 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
     public class AppointmentController : BaseController
     {
         private IAppointmentService _appointmentService;
+        private IServicesService _servicesService;
         private IIdentityService _identityService;
+        private IRoomService _roomService;
+        private ISpecialistService _specialistService;
+
         private readonly IOptions<AppSettings> _appSettings;
         private readonly ILogger<AppointmentController> _logger;
+        private const string XlsxContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
 
-        public AppointmentController(IAppointmentService appointmentService, IIdentityService identityService, IOptions<AppSettings> appSettings, 
+        public AppointmentController(IAppointmentService appointmentService, IIdentityService identityService, IRoomService roomService, IServicesService servicesService,
+            ISpecialistService specialistService,
+            IOptions<AppSettings> appSettings, 
             ILogger<AppointmentController> logger) : base(logger)
         {
             _appointmentService = appointmentService;
+            _servicesService = servicesService;
+            _roomService = roomService;
+            _specialistService = specialistService;
             _identityService = identityService;
             _appSettings = appSettings;
             _logger = logger;
@@ -40,6 +50,16 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
             var page = 1;
 
             M.PaginatedResults<M.Appointment> apptItems = await _appointmentService.GetAllAppointments(AccessToken, dateFrom, dateTo, page, pageSize);
+
+            foreach (var appt in apptItems.Data)
+            {
+                if (!string.IsNullOrEmpty(appt.ServiceId))
+                {
+                    appt.ServiceName = (await _servicesService.GetServiceByServicesId(appt.ServiceId, AccessToken)).Description;
+                    appt.RoomName = (await _roomService.GetRoomByRoomId(appt.RoomId, AccessToken)).RoomName;
+                    appt.SpecialistName = (await _specialistService.GetSpecialistById(appt.SpecialistId, AccessToken)).Name;
+                }
+            }
 
             var apptRvm = new ResultViewModel<M.Appointment>(apptItems.Data, apptItems.PageIndex, apptItems.PageSize, apptItems.Count);
 
@@ -57,6 +77,15 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
 
             M.PaginatedResults<M.Appointment> apptItems = await _appointmentService.GetAllMyAppointments(AccessToken, dateFrom, dateTo, UserId, page, pageSize);
 
+            foreach (var appt in apptItems.Data)
+            {
+                if (!string.IsNullOrEmpty(appt.ServiceId))
+                {
+                    appt.ServiceName = (await _servicesService.GetServiceByServicesId(appt.ServiceId, AccessToken)).Description;
+                    appt.RoomName = (await _roomService.GetRoomByRoomId(appt.RoomId, AccessToken)).RoomName;
+                    appt.SpecialistName = (await _specialistService.GetSpecialistById(appt.SpecialistId, AccessToken)).Name;
+                }
+            }
             var apptRvm = new ResultViewModel<M.Appointment>(apptItems.Data, apptItems.PageIndex, apptItems.PageSize, apptItems.Count);
 
             return View("Index", apptRvm);
@@ -125,11 +154,26 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
                     AppointmentId = appt.AppointmentId,
                     AppointmentDate = appt.AppointmentDate.GetValueOrDefault().ToString("dd/MM/yyyy"),
                     AppointmentTime = appt.AppointmentTime,
+                    ServiceId = appt.ServiceId,
+                    SpecialistId = appt.SpecialistId,
+                    RoomId = appt.RoomId,
                     Name = appt.Name,
                     UserId = appt.UserId
                 };
 
                 ViewBag.Patients = await GetFilteredPatients(appt.AppointmentDate.GetValueOrDefault(), appt.AppointmentTime, appt.AppointmentId);
+                ViewBag.Services = await GetServices();
+
+                if (!string.IsNullOrEmpty(appt.ServiceId))
+                {
+                    ViewBag.Specialists = await GetSpecialistSelectListItem(appt.ServiceId);
+                    ViewBag.Rooms = await GetRoomSelectListItem(appt.ServiceId);
+                }
+                else
+                {
+                    ViewBag.Specialists = new List<SelectListItem>();
+                    ViewBag.Rooms = new List<SelectListItem>();
+                }
             }
 
             return View("UpdateAppointment", model);
@@ -193,6 +237,9 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
                 AppointmentDate = apptDate,
                 AppointmentId = appt.AppointmentId,
                 AppointmentTime = appt.AppointmentTime,
+                ServiceId = appt.ServiceId,
+                SpecialistId = appt.SpecialistId,
+                RoomId = appt.RoomId,
                 Name = appt.Name,
                 UserId = appt.UserId,
                 LastUpdatedBy = UserName,
@@ -373,6 +420,74 @@ namespace NUS_ISS_14_Appointment_Buddy.Controllers
             }
 
             return selList;
+        }
+
+        public async Task<List<SelectListItem>> GetServices()
+        {
+            var returnList = new List<SelectListItem>();
+
+            var services = await _servicesService.GetAllNonPageServices(AccessToken);
+
+            foreach (var svc in services)
+            {
+                returnList.Add(
+                    new SelectListItem
+                    {
+                        Text = svc.Description,
+                        Value = svc.ServicesId
+                    }
+                );
+            }
+
+            return returnList;
+        }
+
+        public async Task<JsonResult> GetSpecialistByServiceId(string serviceId)
+        {
+            var returnList = await GetSpecialistSelectListItem(serviceId);
+
+            return Json(returnList);
+        }
+
+        public async Task<List<SelectListItem>> GetSpecialistSelectListItem(string serviceId)
+        {
+            var returnList = new List<SelectListItem> { new SelectListItem { Text = "Please select service", Value = "" } };
+
+            var resultList = await _specialistService.GetSpecialistByServiceId(serviceId, AccessToken);
+
+            if (resultList != null && resultList.Count() > 0)
+            {
+                foreach (var subcategoryItem in resultList.OrderBy(item => item.Name))
+                {
+                    returnList.Add(new SelectListItem() { Text = subcategoryItem.Name, Value = subcategoryItem.SpecialistId });
+                }
+            }
+
+            return returnList;
+        }
+
+        public async Task<JsonResult> GetRoomByServiceId(string serviceId)
+        {
+            var returnList = await GetRoomSelectListItem(serviceId);
+
+            return Json(returnList);
+        }
+
+        public async Task<List<SelectListItem>> GetRoomSelectListItem(string serviceId)
+        {
+            var returnList = new List<SelectListItem> { new SelectListItem { Text = "Please select room", Value = "" } };
+
+            var resultList = await _roomService.GetRoomByServiceId(serviceId, AccessToken);
+
+            if (resultList != null && resultList.Count() > 0)
+            {
+                foreach (var subcategoryItem in resultList.OrderBy(item => item.RoomName))
+                {
+                    returnList.Add(new SelectListItem() { Text = subcategoryItem.RoomName, Value = subcategoryItem.RoomId });
+                }
+            }
+
+            return returnList;
         }
     }
 }

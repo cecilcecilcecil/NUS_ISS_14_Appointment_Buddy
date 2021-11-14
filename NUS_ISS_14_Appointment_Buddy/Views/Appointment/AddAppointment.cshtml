@@ -76,6 +76,9 @@
             <partial name="_SubmitModal" />
             <partial name="_SavingModal" />
             @Html.HiddenFor(x => x.AppointmentId)
+            @Html.HiddenFor(x => x.SpecialistId)
+            @Html.HiddenFor(x => x.RoomId)
+            @Html.HiddenFor(x => x.ServiceId)
         </div>
     </div>
 }

@@ -1,0 +1,135 @@
+﻿@using AppointmentBuddy.Core.Common.Helper
+@model NUS_ISS_14_Appointment_Buddy.Models.Room
+
+@{
+    ViewData["Title"] = "Create New Room";
+}
+@using (Html.BeginForm("SaveRoom", "Room", FormMethod.Post, new { @id = "RoomForm" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="_page-essentials">
+        <div class="well">
+            <div class="_content">
+                <h2>Create New Room</h2>
+            </div>
+        </div>
+        <div class="_step-body">
+            <div class="_content">
+                <div class="_project-content">
+                    <div class="bids-width">
+                        <div class="row">
+                            <div class="col-md-4">
+                                Service
+                            </div>
+                            <div class="col-md-8">
+                                @Html.DropDownListFor(x => x.SpecialiesId, (IEnumerable<SelectListItem>)ViewBag.Services, "Please select a service", new { @class = "_category wide", id = "svcDrop" })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                Room Name:
+                            </div>
+                            <div class="col-md-8">
+                                <div class="_form-group">
+                                    <div class="time-container">
+                                        <div class="input-holder">
+                                            @Html.TextAreaFor(model => model.RoomName, new { @class = "apply-textarea form-control textarea-override-padding" })
+                                        </div>
+                                        <div class="quick-sitetime-gap">
+                                            <div class="quick-small-gap">@Html.ValidationMessageFor(model => model.RoomName)</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="_project-content">
+                    <div class="bids-width _contact-details">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="autosave-container">
+                                    <div class="autosave-wrapper">
+                                        <h4 class="autosave-msg"></h4>
+                                        <div class="_nxt-prv">
+                                            <button class="_transparent cancelBtn">cancel</button>
+                                            <button class="red-btn" id="saveBtn">save</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <partial name="_ErrorModal" />
+            <partial name="_ConfirmModal" />
+            <partial name="_SubmitModal" />
+            <partial name="_SavingModal" />
+            @Html.HiddenFor(x => x.RoomId)
+        </div>
+    </div>
+}
+
+<script type="text/javascript" nonce="@ViewData["Nonce"]">
+    $(document).ready(function () {
+        $('#RoomForm').submit(function (e) { e.preventDefault(); });
+
+        $('#saveBtn').click(function () {
+            this.blur();
+
+            $('#cfmMsg').text('Saving Room');
+            document.getElementById('confirmationBox').style.display = 'block';
+        });
+
+        $('#confirmBox').click(function () {
+            document.getElementById('confirmationBox').style.display = 'none';
+            SaveService();
+        });
+
+        $('#closeBox').click(function () {
+            document.getElementById('submitSuccessBox').style.display = "none";
+
+            window.location.href = '@Url.Action("Index", "Room")';
+        });
+
+        $('.cancelBtn').click(function () {
+            window.location.href = '@Url.Action("Index", "Room")';
+        });
+
+        $('#closeErrorBox').click(function () { document.getElementById('errorMsgBox').style.display = 'none'; });
+        $('#cancelBox').click(function () { document.getElementById('confirmationBox').style.display = 'none'; });
+
+    });
+
+    function SaveService() {
+        var formData = $('#RoomForm').serializeArray();
+
+        var savingModal = document.getElementById("savingInProgress");
+        savingModal.style.display = "block";
+
+        $.ajax({
+            type: 'POST',
+            data: formData,
+            dataType: 'json',
+            url: '@Url.Action("SaveRoom", "Room")',
+            success: function (result) {
+                savingModal.style.display = "none";
+
+                if (result.successVal == '@Constants.ErrorCodes.Success') {
+                    document.getElementById('submitSuccessBox').style.display = 'block';
+                }
+                else {
+                    $(window).scrollTop(0);
+                    document.getElementById("errorMsgValue").innerHTML = result.autosaveDate;
+                    document.getElementById("errorMsgBox").style.display = "block";
+                }
+            },
+            error: function () {
+                savingModal.style.display = "none";
+                document.getElementById("errorMsgBox").style.display = "block";
+            }
+        });
+    }
+</script>
+

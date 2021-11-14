@@ -2,6 +2,7 @@
 (
 	[AppointmentId]			VARCHAR(50)		    NOT NULL,
     [UserId]                VARCHAR(50)         NULL,
+    [ServiceId]             VARCHAR(50)         NULL,
     [Name]                  VARCHAR(255)        NULL,
     [SpecialistId]          VARCHAR(50)         NULL,
     [RoomId]                VARCHAR(50)         NULL,

@@ -28,14 +28,21 @@ namespace AppointmentBuddy.Service.PatientInfo.API.Infrastructure
             return dataItem;
         }
 
+        public async Task<M.PatientInfo> GetPatientInfoByUserId(string userId)
+        {
+            M.PatientInfo dataItem;
+            dataItem = await _context.PatientInfo.AsNoTracking().FirstOrDefaultAsync(s => s.UserId == userId);
+            return dataItem;
+        }
+
         public async Task<IEnumerable<M.PatientInfo>> GetPatientInfoBySearch(string nric, string patName)
         {
             if (string.IsNullOrEmpty(nric))
             {
-                return await _context.PatientInfo.Where(x => x.PatientName.Contains(patName) && !x.IsDeleted).ToListAsync();
+                return await _context.PatientInfo.Where(x => x.PatientName.Contains(patName) && !x.IsDeleted).OrderBy(x => x.PatientName).ToListAsync();
             }
 
-            return await _context.PatientInfo.Where(x => x.NRIC == nric && x.PatientName.Contains(patName) && !x.IsDeleted).ToListAsync();
+            return await _context.PatientInfo.Where(x => x.NRIC == nric && x.PatientName.Contains(patName) && !x.IsDeleted).OrderBy(x => x.PatientName).ToListAsync();
         }
 
 

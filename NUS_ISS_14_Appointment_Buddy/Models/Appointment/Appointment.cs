@@ -13,6 +13,9 @@ namespace NUS_ISS_14_Appointment_Buddy.Models
         [Required]
         public string AppointmentId { get; set; }
         public string UserId { get; set; }
+        public string ServiceId { get; set; }
+        public string SpecialistId { get; set; }
+        public string RoomId { get; set; }
         public string Name { get; set; }
 
         [DisplayName("Appointment Date")]

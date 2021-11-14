@@ -11,6 +11,8 @@ namespace AppointmentBuddy.Infrastructure.Repository
 
         public DbSet<M.Appointment> Appointment { get; set; }
         public DbSet<M.PatientInfo> PatientInfo { get; set; }
+        public DbSet<M.Services> Services { get; set; }
+        public DbSet<M.Specialist> Specialist { get; set; }
         public DbSet<M.Room> Room { get; set; }
         public DbSet<M.Role> Role { get; set; }
         public DbSet<M.User> User { get; set; }

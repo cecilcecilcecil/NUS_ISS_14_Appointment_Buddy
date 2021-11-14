@@ -69,6 +69,7 @@
   <ItemGroup>
     <None Include="dbo\PredefinedData\01_AB_Role.sql" />
     <None Include="dbo\PredefinedData\02_AB_UserWithRole.sql" />
+    <None Include="Snapshots\Identity.DB.dacpac" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="dbo\Script.PostDeployment1.sql" />
