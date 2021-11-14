@@ -115,6 +115,32 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Specialist.DB", "Specialist
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RobotFramework", "RobotFramework", "{DF68C2F2-2200-4BF0-A62E-5B3CE95282BC}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Helper", "Helper", "{1E2685ED-A9C9-456B-876D-88BE16FDCACF}"
+	ProjectSection(SolutionItems) = preProject
+		common.robot = common.robot
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Logs", "Logs", "{82B03AB7-EF66-4D01-A48B-59EA5C58994C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Reports", "Reports", "{3A4FDCE7-9141-4D97-A99E-F4BAFE511823}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{92E2DC32-435C-4D1E-B1DA-A4CC1D443C6A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PatientInfo", "PatientInfo", "{EE346E96-3EBF-4C61-A78C-926977143A7E}"
+	ProjectSection(SolutionItems) = preProject
+		PatientInfo_Common.robot = PatientInfo_Common.robot
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BatchFiles", "BatchFiles", "{0D5AEE35-01BD-482F-A26A-E7843883BC42}"
+	ProjectSection(SolutionItems) = preProject
+		RobotFramework\Scripts\PatientInfo\BatchFiles\PatientInfo.bat = RobotFramework\Scripts\PatientInfo\BatchFiles\PatientInfo.bat
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{6F8ABB2C-75E8-4FC1-B270-826EFB63594C}"
+	ProjectSection(SolutionItems) = preProject
+		RobotFramework\Scripts\PatientInfo\Tests\CreatePatientInfo.robot = RobotFramework\Scripts\PatientInfo\Tests\CreatePatientInfo.robot
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -338,6 +364,13 @@ Global
 		{A984AB67-1846-48ED-80CF-8E59EE14DBCC} = {1EF212AA-C925-4EFC-A43B-BA8ECF9826BC}
 		{81FD5C5D-8130-42DA-AEED-04873D1A53B7} = {1EF212AA-C925-4EFC-A43B-BA8ECF9826BC}
 		{DF68C2F2-2200-4BF0-A62E-5B3CE95282BC} = {48D842D7-A903-4356-B0B0-ADF8F12972C4}
+		{1E2685ED-A9C9-456B-876D-88BE16FDCACF} = {DF68C2F2-2200-4BF0-A62E-5B3CE95282BC}
+		{82B03AB7-EF66-4D01-A48B-59EA5C58994C} = {DF68C2F2-2200-4BF0-A62E-5B3CE95282BC}
+		{3A4FDCE7-9141-4D97-A99E-F4BAFE511823} = {DF68C2F2-2200-4BF0-A62E-5B3CE95282BC}
+		{92E2DC32-435C-4D1E-B1DA-A4CC1D443C6A} = {DF68C2F2-2200-4BF0-A62E-5B3CE95282BC}
+		{EE346E96-3EBF-4C61-A78C-926977143A7E} = {92E2DC32-435C-4D1E-B1DA-A4CC1D443C6A}
+		{0D5AEE35-01BD-482F-A26A-E7843883BC42} = {EE346E96-3EBF-4C61-A78C-926977143A7E}
+		{6F8ABB2C-75E8-4FC1-B270-826EFB63594C} = {EE346E96-3EBF-4C61-A78C-926977143A7E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5B9C8BC4-B338-4D55-A524-91CADA4736BC}

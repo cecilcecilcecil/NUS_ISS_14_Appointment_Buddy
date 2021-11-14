@@ -62,4 +62,7 @@
   <ItemGroup>
     <Build Include="Tables\PatientInfo.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Snapshots\PatientInfo.DB.dacpac" />
+  </ItemGroup>
 </Project>

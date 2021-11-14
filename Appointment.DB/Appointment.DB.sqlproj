@@ -63,4 +63,7 @@
   <ItemGroup>
     <Build Include="dbo\Tables\Appointment.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Snapshots\Appointment.DB.dacpac" />
+  </ItemGroup>
 </Project>

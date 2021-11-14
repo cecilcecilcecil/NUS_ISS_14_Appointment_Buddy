@@ -62,4 +62,7 @@
   <ItemGroup>
     <Build Include="Tables\Room.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Snapshots\Room.DB.dacpac" />
+  </ItemGroup>
 </Project>
