@@ -88,7 +88,9 @@ namespace NUS_ISS_14_Appointment_Buddy.Services
         {
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
-            var apiURL = UrlConfig.Appointment.GetAllAppointmentsByDateRangeAPI(_serviceUrls.AppointmentAPI_GetAllAppointmentsByDateRange, dateFrom.Replace("/", ""), dateTo.Replace("/", ""));
+            var apiURL = UrlConfig.Appointment.GetAllAppointmentsByDateRangeAPI(_serviceUrls.AppointmentAPI_GetAllAppointmentsByDateRange, 
+                !string.IsNullOrEmpty(dateFrom) ? dateFrom.Replace("/", "") : "",
+                !string.IsNullOrEmpty(dateTo) ? dateTo.Replace("/", "") : "");
 
             var responseString = await _httpClient.GetStringAsync(apiURL);
 

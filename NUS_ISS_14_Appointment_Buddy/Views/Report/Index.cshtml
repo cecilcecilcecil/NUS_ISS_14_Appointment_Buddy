@@ -32,7 +32,7 @@
                 <br />
                 <div class="row ken-flex">
                     <div class="col-lg-4 col-md-12 col-sm-12">
-                        <button class="white-btn" id="generateButton">Generate</button>
+                        <button class="red-btn" id="generateButton">Generate</button>
                     </div>
                 </div>
             </div>
@@ -45,7 +45,7 @@
         $("#generateButton").click(function (e) {
             $(this).blur();
             e.preventDefault();
-            window.location = '@Url.Action("DownloadReport", "Appointment")?dateFrom=' + $('#DateFrom').val() + '&dateTo=' + $('#DateTo').val();
+            window.location = '@Url.Action("DownloadReport", "Report")?dateFrom=' + $('#DateFrom').val() + '&dateTo=' + $('#DateTo').val();
         });
     });
 </script>

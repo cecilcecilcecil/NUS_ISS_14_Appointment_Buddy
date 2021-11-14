@@ -57,8 +57,9 @@
   <ItemGroup>
     <Folder Include="Properties" />
     <Folder Include="Snapshots" />
+    <Folder Include="Tables" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Snapshots\Specialist.DB.dacpac" />
+    <Build Include="Tables\Specialist.sql" />
   </ItemGroup>
 </Project>
