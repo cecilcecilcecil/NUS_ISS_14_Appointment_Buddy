@@ -1,26 +1,26 @@
 version: '3.4'
 
 services:
-  appointmentbuddy.service.appointment.api:
-    image: ${AB_DOCKER_REGISTRY-}appointmentbuddyserviceappointmentapi
-    build:
-      context: .
-      dockerfile: AppointmentBuddy.Service.Appointment.API/Dockerfile
-  appointmentbuddy.service.identity.api:
-    image: ${AB_DOCKER_REGISTRY-}appointmentbuddyserviceidentityapi
-    build:
-      context: .
-      dockerfile: AppointmentBuddy.Service.Identity.API/Dockerfile
-  appointmentbuddy.service.patientinfo.api:
-    image: ${AB_DOCKER_REGISTRY-}appointmentbuddyservicepatientinfoapi
-    build:
-      context: .
-      dockerfile: AppointmentBuddy.Service.PatientInfo.API/Dockerfile
-  appointmentbuddy.service.room.api:
-    image: ${AB_DOCKER_REGISTRY-}appointmentbuddyserviceroomapi
-    build:
-      context: .
-      dockerfile: AppointmentBuddy.Service.Room.API/Dockerfile
+  # appointmentbuddy.service.appointment.api:
+    # image: ${AB_DOCKER_REGISTRY-}appointmentbuddyserviceappointmentapi
+    # build:
+      # context: .
+      # dockerfile: AppointmentBuddy.Service.Appointment.API/Dockerfile
+  # appointmentbuddy.service.identity.api:
+    # image: ${AB_DOCKER_REGISTRY-}appointmentbuddyserviceidentityapi
+    # build:
+      # context: .
+      # dockerfile: AppointmentBuddy.Service.Identity.API/Dockerfile
+  # appointmentbuddy.service.patientinfo.api:
+    # image: ${AB_DOCKER_REGISTRY-}appointmentbuddyservicepatientinfoapi
+    # build:
+      # context: .
+      # dockerfile: AppointmentBuddy.Service.PatientInfo.API/Dockerfile
+  # appointmentbuddy.service.room.api:
+    # image: ${AB_DOCKER_REGISTRY-}appointmentbuddyserviceroomapi
+    # build:
+      # context: .
+      # dockerfile: AppointmentBuddy.Service.Room.API/Dockerfile
   # appointmentbuddy.service.services.api:
     # image: ${AB_DOCKER_REGISTRY-}appointmentbuddyserviceservicesapi
     # build:
@@ -31,8 +31,8 @@ services:
     # build:
       # context: .
       # dockerfile: AppointmentBuddy.Service.Specialist.API/Dockerfile
-  # nus_iss_14_appointment_buddy:
-    # image: ${AB_DOCKER_REGISTRY-}nus_iss_14_appointment_buddy
-    # build:
-      # context: .
-      # dockerfile: NUS_ISS_14_Appointment_Buddy/Dockerfile
+  nus_iss_14_appointment_buddy:
+    image: ${AB_DOCKER_REGISTRY-}nus_iss_14_appointment_buddy
+    build:
+      context: .
+      dockerfile: NUS_ISS_14_Appointment_Buddy/Dockerfile
